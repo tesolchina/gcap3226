@@ -105,7 +105,7 @@ Be supportive, pedagogical, and ask probing questions to help students think dee
     e.preventDefault();
     
     if (!studentName.trim() || !mainIssue.trim()) {
-      toast.error("Please provide your name and main issue");
+      toast.error("Please provide your nickname and main issue");
       return;
     }
 
@@ -305,18 +305,44 @@ Be supportive, pedagogical, and ask probing questions to help students think dee
         
         {!showChat ? (
           <form onSubmit={startNewConsultation} className="space-y-4">
+            {/* Privacy Warning */}
+            <Card className="p-4 bg-yellow-50 dark:bg-yellow-900/20 border-yellow-200 dark:border-yellow-800">
+              <div className="flex gap-2 items-start">
+                <Info className="h-5 w-5 text-yellow-600 dark:text-yellow-500 flex-shrink-0 mt-0.5" />
+                <div className="text-sm space-y-1">
+                  <p className="font-semibold text-yellow-800 dark:text-yellow-200">Privacy Notice</p>
+                  <p className="text-yellow-700 dark:text-yellow-300">
+                    • Use a <strong>nickname or pseudonym</strong> - do not use your full name
+                  </p>
+                  <p className="text-yellow-700 dark:text-yellow-300">
+                    • Do not share confidential or personal information
+                  </p>
+                  <p className="text-yellow-700 dark:text-yellow-300">
+                    • Consultation sessions are visible to the course team
+                  </p>
+                </div>
+              </div>
+            </Card>
+
             <div>
-              <label className="text-sm font-medium mb-2 block">Your Name</label>
+              <label className="text-sm font-medium mb-2 block">
+                Your Nickname <span className="text-red-500">*</span>
+              </label>
               <Input
-                placeholder="Enter your name"
+                placeholder="Enter a nickname (not your real name)"
                 value={studentName}
                 onChange={(e) => setStudentName(e.target.value)}
                 disabled={isLoading}
               />
+              <p className="text-xs text-muted-foreground mt-1">
+                For privacy, please use a nickname instead of your full name
+              </p>
             </div>
             
             <div>
-              <label className="text-sm font-medium mb-2 block">Main Issue or Concern</label>
+              <label className="text-sm font-medium mb-2 block">
+                Main Issue or Concern <span className="text-red-500">*</span>
+              </label>
               <Input
                 placeholder="What do you need help with?"
                 value={mainIssue}
@@ -328,7 +354,7 @@ Be supportive, pedagogical, and ask probing questions to help students think dee
             <div>
               <label className="text-sm font-medium mb-2 block">Additional Details (Optional)</label>
               <Textarea
-                placeholder="Provide more context..."
+                placeholder="Provide more context (avoid sharing personal/confidential information)..."
                 value={additionalDetails}
                 onChange={(e) => setAdditionalDetails(e.target.value)}
                 rows={3}
