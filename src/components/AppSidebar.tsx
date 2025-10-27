@@ -43,8 +43,8 @@ export function AppSidebar() {
                       end
                       className={({ isActive }) =>
                         isActive
-                          ? "bg-primary text-primary-foreground hover:bg-primary/90"
-                          : "hover:bg-accent"
+                          ? "flex items-center gap-3 w-full bg-primary text-primary-foreground hover:bg-primary/90 font-medium"
+                          : "flex items-center gap-3 w-full text-sidebar-foreground hover:bg-accent hover:text-accent-foreground"
                       }
                     >
                       <item.icon className="h-4 w-4" />
