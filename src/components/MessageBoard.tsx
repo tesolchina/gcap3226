@@ -5,7 +5,9 @@ import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input";
 import { Card } from "@/components/ui/card";
 import { toast } from "sonner";
-import { MessageSquare, User } from "lucide-react";
+import { MessageSquare, User, LogIn } from "lucide-react";
+import { useAuth } from "@/contexts/AuthContext";
+import { Link } from "react-router-dom";
 
 interface Message {
   id: string;
@@ -21,10 +23,10 @@ interface MessageBoardProps {
 }
 
 export function MessageBoard({ teamId, tabName }: MessageBoardProps) {
+  const { user, isTeacher, loading } = useAuth();
   const [messages, setMessages] = useState<Message[]>([]);
   const [authorName, setAuthorName] = useState("");
   const [content, setContent] = useState("");
-  const [isTeacher, setIsTeacher] = useState(false);
 
   useEffect(() => {
     fetchMessages();
@@ -66,6 +68,11 @@ export function MessageBoard({ teamId, tabName }: MessageBoardProps) {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
+    if (!user) {
+      toast.error("Please sign in to post messages");
+      return;
+    }
+    
     if (!authorName.trim() || !content.trim()) {
       toast.error("Please fill in all fields");
       return;
@@ -77,6 +84,7 @@ export function MessageBoard({ teamId, tabName }: MessageBoardProps) {
       author_name: authorName,
       content,
       is_teacher: isTeacher,
+      user_id: user.id,
     });
 
     if (error) {
@@ -90,35 +98,43 @@ export function MessageBoard({ teamId, tabName }: MessageBoardProps) {
   return (
     <div className="space-y-6">
       <Card className="p-6 bg-gradient-to-br from-background to-accent/20">
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <div className="flex gap-4">
-            <Input
-              placeholder="Your name"
-              value={authorName}
-              onChange={(e) => setAuthorName(e.target.value)}
-              className="flex-1"
-            />
-            <label className="flex items-center gap-2 cursor-pointer">
-              <input
-                type="checkbox"
-                checked={isTeacher}
-                onChange={(e) => setIsTeacher(e.target.checked)}
-                className="w-4 h-4 text-primary"
-              />
-              <span className="text-sm">Teacher</span>
-            </label>
+        {!user ? (
+          <div className="text-center py-8">
+            <p className="text-muted-foreground mb-4">Sign in to post messages</p>
+            <Button asChild>
+              <Link to="/auth">
+                <LogIn className="mr-2 h-4 w-4" />
+                Sign In
+              </Link>
+            </Button>
           </div>
-          <Textarea
-            placeholder="Write your message..."
-            value={content}
-            onChange={(e) => setContent(e.target.value)}
-            rows={3}
-          />
-          <Button type="submit" className="w-full bg-primary hover:bg-primary/90">
-            <MessageSquare className="mr-2 h-4 w-4" />
-            Post Message
-          </Button>
-        </form>
+        ) : (
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <div className="flex items-center gap-2 mb-2">
+              <Input
+                placeholder="Your name"
+                value={authorName}
+                onChange={(e) => setAuthorName(e.target.value)}
+                className="flex-1"
+              />
+              {isTeacher && (
+                <span className="text-xs bg-primary text-white px-3 py-1.5 rounded-full">
+                  Teacher
+                </span>
+              )}
+            </div>
+            <Textarea
+              placeholder="Write your message..."
+              value={content}
+              onChange={(e) => setContent(e.target.value)}
+              rows={3}
+            />
+            <Button type="submit" className="w-full bg-primary hover:bg-primary/90" disabled={loading}>
+              <MessageSquare className="mr-2 h-4 w-4" />
+              Post Message
+            </Button>
+          </form>
+        )}
       </Card>
 
       <div className="space-y-4">
