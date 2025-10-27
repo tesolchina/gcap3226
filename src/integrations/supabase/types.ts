@@ -14,6 +14,79 @@ export type Database = {
   }
   public: {
     Tables: {
+      chat_messages: {
+        Row: {
+          content: string
+          created_at: string | null
+          id: string
+          role: string
+          session_id: string
+        }
+        Insert: {
+          content: string
+          created_at?: string | null
+          id?: string
+          role: string
+          session_id: string
+        }
+        Update: {
+          content?: string
+          created_at?: string | null
+          id?: string
+          role?: string
+          session_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "chat_messages_session_id_fkey"
+            columns: ["session_id"]
+            isOneToOne: false
+            referencedRelation: "chat_sessions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      chat_sessions: {
+        Row: {
+          additional_details: string | null
+          created_at: string | null
+          id: string
+          is_visible: boolean | null
+          main_issue: string
+          student_name: string
+          tab_name: string
+          team_id: number | null
+        }
+        Insert: {
+          additional_details?: string | null
+          created_at?: string | null
+          id?: string
+          is_visible?: boolean | null
+          main_issue: string
+          student_name: string
+          tab_name: string
+          team_id?: number | null
+        }
+        Update: {
+          additional_details?: string | null
+          created_at?: string | null
+          id?: string
+          is_visible?: boolean | null
+          main_issue?: string
+          student_name?: string
+          tab_name?: string
+          team_id?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "chat_sessions_team_id_fkey"
+            columns: ["team_id"]
+            isOneToOne: false
+            referencedRelation: "teams"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       comments: {
         Row: {
           author_name: string

@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card } from "@/components/ui/card";
-import { MessageBoard } from "@/components/MessageBoard";
+import { AIConsultationCorner } from "@/components/AIConsultationCorner";
 import { Loader2, FileText, Database, Calculator, Lightbulb, Target } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 
@@ -219,17 +219,13 @@ const TeamPage = () => {
 
               <Separator className="my-8" />
 
-              {/* Message Board - Bottom Section (Smaller) */}
+              {/* AI Consultation Corner - Bottom Section */}
               <div className="mt-8">
-                <Card className="p-6 bg-gradient-to-br from-card to-accent/10">
-                  <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
-                    💬 Team Message Board
-                  </h3>
-                  <p className="text-sm text-muted-foreground mb-4">
-                    Collaborate with your team members and teachers
-                  </p>
-                  <MessageBoard teamId={team.id} tabName={tab.value} />
-                </Card>
+                <AIConsultationCorner 
+                  teamId={team.id} 
+                  tabName={tab.value}
+                  teamName={team.name}
+                />
               </div>
 
             </TabsContent>
