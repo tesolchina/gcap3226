@@ -67,7 +67,7 @@ const TeamPage = () => {
       <div className="max-w-7xl mx-auto space-y-8">
         {/* Team Header */}
         <div className="text-center space-y-4">
-          <h1 className="text-4xl font-bold bg-gradient-to-r from-primary to-primary-light bg-clip-text text-transparent">
+          <h1 className="text-4xl font-bold text-primary">
             {team.name}
           </h1>
           <p className="text-lg text-muted-foreground">{team.description}</p>

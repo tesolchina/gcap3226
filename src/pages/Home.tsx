@@ -24,7 +24,7 @@ const Home = () => {
       <div className="max-w-6xl mx-auto space-y-8">
         {/* Header */}
         <div className="text-center space-y-4">
-          <h1 className="text-5xl font-bold bg-gradient-to-r from-primary to-primary-light bg-clip-text text-transparent">
+          <h1 className="text-5xl font-bold text-primary">
             GCAP 3056 Course Portal
           </h1>
           <p className="text-xl text-muted-foreground">
