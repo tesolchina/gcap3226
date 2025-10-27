@@ -39,6 +39,7 @@ export function AIConsultationCorner({ teamId, tabName, teamName }: AIConsultati
   const [studentName, setStudentName] = useState("");
   const [mainIssue, setMainIssue] = useState("");
   const [additionalDetails, setAdditionalDetails] = useState("");
+  const [secretCode, setSecretCode] = useState("");
   const [currentSessionId, setCurrentSessionId] = useState<string | null>(null);
   const [messages, setMessages] = useState<Message[]>([]);
   const [inputMessage, setInputMessage] = useState("");
@@ -106,6 +107,11 @@ Be supportive, pedagogical, and ask probing questions to help students think dee
     
     if (!studentName.trim() || !mainIssue.trim()) {
       toast.error("Please provide your nickname and main issue");
+      return;
+    }
+
+    if (secretCode !== "6223") {
+      toast.error("Invalid secret code. Please enter the correct code provided by your instructor.");
       return;
     }
 
@@ -323,6 +329,22 @@ Be supportive, pedagogical, and ask probing questions to help students think dee
                 </div>
               </div>
             </Card>
+
+            <div>
+              <label className="text-sm font-medium mb-2 block">
+                Secret Code <span className="text-red-500">*</span>
+              </label>
+              <Input
+                type="password"
+                placeholder="Enter the code provided by your instructor"
+                value={secretCode}
+                onChange={(e) => setSecretCode(e.target.value)}
+                disabled={isLoading}
+              />
+              <p className="text-xs text-muted-foreground mt-1">
+                This code was provided to you in class
+              </p>
+            </div>
 
             <div>
               <label className="text-sm font-medium mb-2 block">
