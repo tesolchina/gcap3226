@@ -5,8 +5,9 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Card } from "@/components/ui/card";
 import { toast } from "sonner";
-import { MessageSquare, Send, ChevronDown, ChevronUp, Sparkles } from "lucide-react";
+import { MessageSquare, Send, ChevronDown, ChevronUp, Sparkles, Info } from "lucide-react";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
+import ReactMarkdown from "react-markdown";
 
 interface Message {
   role: 'user' | 'assistant';
@@ -19,6 +20,13 @@ interface ChatSession {
   main_issue: string;
   created_at: string;
   is_visible: boolean;
+}
+
+interface SessionMessage {
+  id: string;
+  role: string;
+  content: string;
+  created_at: string;
 }
 
 interface AIConsultationCornerProps {
@@ -38,7 +46,20 @@ export function AIConsultationCorner({ teamId, tabName, teamName }: AIConsultati
   const [showChat, setShowChat] = useState(false);
   const [sessions, setSessions] = useState<ChatSession[]>([]);
   const [expandedSessions, setExpandedSessions] = useState<Set<string>>(new Set());
+  const [sessionMessages, setSessionMessages] = useState<Record<string, SessionMessage[]>>({});
+  const [showSystemPrompt, setShowSystemPrompt] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+
+  const systemPrompt = `You are an AI teaching assistant for GCAP 3056 - "Empowering Citizens Through Data: Participatory Policy Analysis for Hong Kong". 
+
+Your role is to help students with their ${teamName} by:
+1. Guiding them through data analysis and policy research
+2. Providing feedback on their methodology and approach
+3. Suggesting resources and relevant case studies
+4. Helping them understand data governance concepts
+5. Encouraging critical thinking about Hong Kong's public policy challenges
+
+Be supportive, pedagogical, and ask probing questions to help students think deeply about their projects. Keep responses concise and focused on actionable guidance. Reference relevant UN SDGs and Hong Kong context when appropriate.`;
 
   useEffect(() => {
     fetchSessions();
@@ -226,17 +247,19 @@ export function AIConsultationCorner({ teamId, tabName, teamName }: AIConsultati
     await getAIResponse(updatedMessages, currentSessionId);
   };
 
-  const toggleSession = (sessionId: string) => {
-    setExpandedSessions(prev => {
-      const newSet = new Set(prev);
-      if (newSet.has(sessionId)) {
-        newSet.delete(sessionId);
-      } else {
-        newSet.add(sessionId);
-        loadSessionMessages(sessionId);
+  const toggleSession = async (sessionId: string) => {
+    const newExpandedSessions = new Set(expandedSessions);
+    
+    if (newExpandedSessions.has(sessionId)) {
+      newExpandedSessions.delete(sessionId);
+    } else {
+      newExpandedSessions.add(sessionId);
+      if (!sessionMessages[sessionId]) {
+        await loadSessionMessages(sessionId);
       }
-      return newSet;
-    });
+    }
+    
+    setExpandedSessions(newExpandedSessions);
   };
 
   const loadSessionMessages = async (sessionId: string) => {
@@ -247,17 +270,38 @@ export function AIConsultationCorner({ teamId, tabName, teamName }: AIConsultati
       .order("created_at", { ascending: true });
 
     if (!error && data) {
-      // Store in a map or state for display
+      setSessionMessages(prev => ({ ...prev, [sessionId]: data }));
     }
   };
 
   return (
     <div className="space-y-6">
       <Card className="p-6 bg-gradient-to-br from-primary/5 to-accent/20">
-        <div className="flex items-center gap-3 mb-4">
-          <Sparkles className="h-6 w-6 text-primary" />
-          <h3 className="text-2xl font-bold">AI Consultation Corner</h3>
+        <div className="flex items-center justify-between mb-4">
+          <div className="flex items-center gap-3">
+            <Sparkles className="h-6 w-6 text-primary" />
+            <h3 className="text-2xl font-bold">AI Consultation Corner</h3>
+          </div>
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={() => setShowSystemPrompt(!showSystemPrompt)}
+            className="flex items-center gap-2"
+          >
+            <Info className="h-4 w-4" />
+            {showSystemPrompt ? "Hide" : "Show"} System Prompt
+          </Button>
         </div>
+
+        {/* System Prompt Display */}
+        {showSystemPrompt && (
+          <Card className="p-4 mb-4 bg-muted/50">
+            <h4 className="font-semibold mb-2 text-sm">AI System Prompt:</h4>
+            <div className="text-xs text-muted-foreground whitespace-pre-wrap font-mono">
+              {systemPrompt}
+            </div>
+          </Card>
+        )}
         
         {!showChat ? (
           <form onSubmit={startNewConsultation} className="space-y-4">
@@ -316,7 +360,9 @@ export function AIConsultationCorner({ teamId, tabName, teamName }: AIConsultati
                   <div className="text-xs font-semibold mb-1 text-primary">
                     {msg.role === 'user' ? studentName : 'AI Assistant'}
                   </div>
-                  <p className="text-sm whitespace-pre-wrap">{msg.content}</p>
+                  <div className="text-sm prose prose-sm max-w-none dark:prose-invert">
+                    <ReactMarkdown>{msg.content}</ReactMarkdown>
+                  </div>
                 </div>
               ))}
               <div ref={messagesEndRef} />
@@ -353,7 +399,7 @@ export function AIConsultationCorner({ teamId, tabName, teamName }: AIConsultati
         )}
       </Card>
 
-      {/* Previous Sessions */}
+      {/* Previous Sessions with Full Chat History */}
       {sessions.length > 0 && (
         <Card className="p-6">
           <h4 className="font-semibold mb-4">Previous Consultations</h4>
@@ -382,10 +428,27 @@ export function AIConsultationCorner({ teamId, tabName, teamName }: AIConsultati
                   </div>
                 </CollapsibleTrigger>
                 <CollapsibleContent className="pt-2">
-                  <div className="text-sm text-muted-foreground p-3 bg-muted/30 rounded">
-                    Session ID: {session.id.slice(0, 8)}...
-                    <br />
-                    <em>Full chat history can be retrieved from database</em>
+                  <div className="space-y-2 p-3 bg-muted/30 rounded max-h-[400px] overflow-y-auto">
+                    {sessionMessages[session.id]?.map((msg) => (
+                      <div
+                        key={msg.id}
+                        className={`p-3 rounded ${
+                          msg.role === 'user'
+                            ? 'bg-primary/10 ml-4'
+                            : 'bg-secondary/50 mr-4'
+                        }`}
+                      >
+                        <div className="text-xs font-semibold mb-1 text-primary">
+                          {msg.role === 'user' ? session.student_name : 'AI Assistant'}
+                        </div>
+                        <div className="text-sm prose prose-sm max-w-none dark:prose-invert">
+                          <ReactMarkdown>{msg.content}</ReactMarkdown>
+                        </div>
+                        <div className="text-xs text-muted-foreground mt-1">
+                          {new Date(msg.created_at).toLocaleString()}
+                        </div>
+                      </div>
+                    ))}
                   </div>
                 </CollapsibleContent>
               </Collapsible>
