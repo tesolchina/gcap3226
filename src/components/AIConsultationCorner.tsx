@@ -51,7 +51,7 @@ export function AIConsultationCorner({ teamId, tabName, teamName }: AIConsultati
   const [showSystemPrompt, setShowSystemPrompt] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
-  const systemPrompt = `You are an AI teaching assistant for GCAP 3056 - "Empowering Citizens Through Data: Participatory Policy Analysis for Hong Kong". 
+  const systemPrompt = `You are an AI teaching assistant for GCAP 3226 - "Empowering Citizens Through Data: Participatory Policy Analysis for Hong Kong". 
 
 Your role is to help students with their ${teamName} by:
 1. Guiding them through data analysis and policy research
