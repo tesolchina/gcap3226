@@ -62,35 +62,40 @@ const Home = () => {
               {
                 title: "Team 1: Flu Shot Campaign",
                 desc: "Mathematical Models and Data Governance for School Vaccination Decision-Making",
+                slug: "flu-shot",
               },
               {
                 title: "Team 2: Bus Route Coordination",
                 desc: "Analysis of coordination opportunities between overlapping bus routes",
+                slug: "bus-route",
               },
               {
                 title: "Team 3: Typhoon Signal Analysis",
                 desc: "Data-Driven Signal 8 Accuracy Assessment with Real-Time Wind Analysis",
+                slug: "typhoon-signals",
               },
               {
                 title: "Team 4: Food Waste Management",
                 desc: "Municipal Solid Waste Charging Scheme Analysis",
+                slug: "food-waste",
               },
               {
                 title: "Team 5: Green Community Recycling",
                 desc: "Resource Allocation and App Usage Data Visualization",
+                slug: "green-recycling",
               },
               {
                 title: "Team 6: Bus Stop Merge",
                 desc: "Real-Time API Data Analysis and Bus Stop Placement Optimization",
+                slug: "bus-stop-merge",
               },
             ].map((team, idx) => (
-              <Card
-                key={idx}
-                className="p-6 hover:shadow-xl transition-all hover:scale-102 cursor-pointer bg-gradient-to-br from-card to-accent/20"
-              >
-                <h3 className="text-lg font-semibold text-primary mb-2">{team.title}</h3>
-                <p className="text-sm text-muted-foreground">{team.desc}</p>
-              </Card>
+              <a key={idx} href={`/team/${team.slug}`}>
+                <Card className="p-6 hover:shadow-xl transition-all hover:scale-102 cursor-pointer bg-gradient-to-br from-card to-accent/20">
+                  <h3 className="text-lg font-semibold text-primary mb-2">{team.title}</h3>
+                  <p className="text-sm text-muted-foreground">{team.desc}</p>
+                </Card>
+              </a>
             ))}
           </div>
         </div>
