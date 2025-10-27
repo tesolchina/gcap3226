@@ -94,82 +94,235 @@ const TeamPage = () => {
                 {/* Left Column - Primary Content */}
                 <div className="lg:col-span-2 space-y-6">
                   
-                  {/* Overview Section */}
-                  <Card className="p-6 bg-gradient-to-br from-card to-accent/20">
-                    <div className="flex items-center gap-3 mb-4">
-                      <tab.icon className="h-6 w-6 text-primary" />
-                      <h2 className="text-2xl font-bold">{tab.name}</h2>
-                    </div>
-                    <p className="text-muted-foreground leading-relaxed">
-                      This section focuses on the {tab.name.toLowerCase()} aspect of the project. 
-                      Students and teachers can collaborate, share insights, and document their research findings here.
-                    </p>
-                  </Card>
-
-                  {/* Research Context */}
-                  <Card className="p-6">
-                    <h3 className="text-xl font-semibold mb-4 flex items-center gap-2">
-                      <FileText className="h-5 w-5 text-primary" />
-                      Research Context
-                    </h3>
-                    <div className="space-y-3 text-muted-foreground">
-                      <p>Background information and context for this research phase.</p>
-                      <div className="bg-accent/30 p-4 rounded-lg">
-                        <p className="text-sm italic">
-                          Content will be added here as the research progresses.
+                  {tab.value === "introduction" ? (
+                    <>
+                      {/* Government Decisions to Review */}
+                      <Card className="p-6 bg-gradient-to-br from-card to-accent/20">
+                        <div className="flex items-center gap-3 mb-4">
+                          <Target className="h-6 w-6 text-primary" />
+                          <h2 className="text-2xl font-bold">Government Decisions to Review</h2>
+                        </div>
+                        <p className="text-muted-foreground leading-relaxed mb-4">
+                          This project examines critical government decisions and policies in Hong Kong that impact citizens' daily lives. 
+                          We analyze the rationale, implementation, and outcomes of these decisions through data-driven approaches.
                         </p>
-                      </div>
-                    </div>
-                  </Card>
+                        <div className="space-y-3">
+                          <div className="bg-accent/30 p-4 rounded-lg">
+                            <p className="font-medium mb-2">Key Policy Areas Under Review:</p>
+                            <ul className="text-sm text-muted-foreground space-y-2">
+                              <li>• Recent policy changes and their immediate impacts</li>
+                              <li>• Resource allocation decisions</li>
+                              <li>• Public service delivery and efficiency</li>
+                              <li>• Community welfare and development initiatives</li>
+                            </ul>
+                          </div>
+                        </div>
+                      </Card>
 
-                  {/* Key Findings */}
-                  <Card className="p-6">
-                    <h3 className="text-xl font-semibold mb-4 flex items-center gap-2">
-                      <Lightbulb className="h-5 w-5 text-primary" />
-                      Key Findings & Insights
-                    </h3>
-                    <div className="space-y-3">
-                      <div className="bg-gradient-to-r from-primary/10 to-accent/20 p-4 rounded-lg border-l-4 border-primary">
-                        <p className="font-medium mb-2">Important Discovery</p>
-                        <p className="text-sm text-muted-foreground">
-                          Document your key findings and insights here.
+                      {/* Issue Framework */}
+                      <Card className="p-6">
+                        <h3 className="text-xl font-semibold mb-4 flex items-center gap-2">
+                          <FileText className="h-5 w-5 text-primary" />
+                          Issue Framework
+                        </h3>
+                        <div className="space-y-4">
+                          <div>
+                            <h4 className="font-semibold text-primary mb-2">1. Problem Definition</h4>
+                            <p className="text-sm text-muted-foreground ml-4">
+                              Clear articulation of the policy challenge and its scope
+                            </p>
+                          </div>
+                          <div>
+                            <h4 className="font-semibold text-primary mb-2">2. Stakeholder Analysis</h4>
+                            <div className="ml-4 space-y-1 text-sm text-muted-foreground">
+                              <p>• Affected communities and populations</p>
+                              <p>• Government agencies involved</p>
+                              <p>• Private sector interests</p>
+                            </div>
+                          </div>
+                          <div>
+                            <h4 className="font-semibold text-primary mb-2">3. Current State Assessment</h4>
+                            <div className="ml-4 space-y-1 text-sm text-muted-foreground">
+                              <p>• Existing conditions and metrics</p>
+                              <p>• Historical context and trends</p>
+                              <p>• Data availability and quality</p>
+                            </div>
+                          </div>
+                          <div>
+                            <h4 className="font-semibold text-primary mb-2">4. Policy Alternatives</h4>
+                            <p className="text-sm text-muted-foreground ml-4">
+                              Exploration of different approaches and interventions
+                            </p>
+                          </div>
+                        </div>
+                      </Card>
+
+                      {/* Expected Outcomes & Significance */}
+                      <Card className="p-6 bg-gradient-to-br from-primary/10 to-accent/20">
+                        <h3 className="text-xl font-semibold mb-4 flex items-center gap-2">
+                          <Lightbulb className="h-5 w-5 text-primary" />
+                          Expected Outcomes & Significance
+                        </h3>
+                        <div className="space-y-4">
+                          <div>
+                            <h4 className="font-medium mb-2">Project Deliverables</h4>
+                            <ul className="text-sm text-muted-foreground space-y-2 ml-4">
+                              <li>• Comprehensive data analysis and visualization</li>
+                              <li>• Evidence-based policy recommendations</li>
+                              <li>• Quantitative models for impact assessment</li>
+                              <li>• Public-facing advocacy materials</li>
+                            </ul>
+                          </div>
+                          <div>
+                            <h4 className="font-medium mb-2">Significance</h4>
+                            <p className="text-sm text-muted-foreground">
+                              This research contributes to participatory governance by empowering citizens with data literacy 
+                              and analytical tools. By examining government decisions through mathematical and empirical lenses, 
+                              we promote transparency, accountability, and evidence-based policymaking in Hong Kong.
+                            </p>
+                          </div>
+                          <div className="bg-accent/40 p-4 rounded-lg">
+                            <p className="text-sm font-medium mb-2">Impact Goals:</p>
+                            <ul className="text-sm text-muted-foreground space-y-1">
+                              <li>• Inform public discourse with data-driven insights</li>
+                              <li>• Support community advocacy efforts</li>
+                              <li>• Contribute to policy improvement processes</li>
+                            </ul>
+                          </div>
+                        </div>
+                      </Card>
+
+                      {/* Background Resources */}
+                      <Card className="p-6">
+                        <h3 className="text-xl font-semibold mb-4 flex items-center gap-2">
+                          <Database className="h-5 w-5 text-primary" />
+                          Background Information & Resources
+                        </h3>
+                        <p className="text-muted-foreground mb-4">
+                          Essential resources for understanding the policy context and data landscape:
                         </p>
-                      </div>
-                    </div>
-                  </Card>
+                        <div className="space-y-3">
+                          <a 
+                            href="https://data.gov.hk" 
+                            target="_blank" 
+                            rel="noopener noreferrer"
+                            className="block p-4 bg-accent/30 rounded-lg hover:bg-accent/50 transition-colors"
+                          >
+                            <p className="font-medium text-primary">Hong Kong Open Data Portal</p>
+                            <p className="text-sm text-muted-foreground mt-1">
+                              Central repository for government datasets and public information
+                            </p>
+                            <p className="text-xs text-muted-foreground mt-2">🔗 data.gov.hk</p>
+                          </a>
+                          
+                          <a 
+                            href="https://www.censtatd.gov.hk" 
+                            target="_blank" 
+                            rel="noopener noreferrer"
+                            className="block p-4 bg-accent/30 rounded-lg hover:bg-accent/50 transition-colors"
+                          >
+                            <p className="font-medium text-primary">Census and Statistics Department</p>
+                            <p className="text-sm text-muted-foreground mt-1">
+                              Official statistics on Hong Kong's economy, population, and social indicators
+                            </p>
+                            <p className="text-xs text-muted-foreground mt-2">🔗 censtatd.gov.hk</p>
+                          </a>
+                          
+                          <a 
+                            href="https://www.legco.gov.hk" 
+                            target="_blank" 
+                            rel="noopener noreferrer"
+                            className="block p-4 bg-accent/30 rounded-lg hover:bg-accent/50 transition-colors"
+                          >
+                            <p className="font-medium text-primary">Legislative Council</p>
+                            <p className="text-sm text-muted-foreground mt-1">
+                              Policy documents, debates, and legislative materials
+                            </p>
+                            <p className="text-xs text-muted-foreground mt-2">🔗 legco.gov.hk</p>
+                          </a>
+                        </div>
+                      </Card>
+                    </>
+                  ) : (
+                    <>
+                      {/* Generic content for other tabs */}
+                      <Card className="p-6 bg-gradient-to-br from-card to-accent/20">
+                        <div className="flex items-center gap-3 mb-4">
+                          <tab.icon className="h-6 w-6 text-primary" />
+                          <h2 className="text-2xl font-bold">{tab.name}</h2>
+                        </div>
+                        <p className="text-muted-foreground leading-relaxed">
+                          This section focuses on the {tab.name.toLowerCase()} aspect of the project. 
+                          Students and teachers can collaborate, share insights, and document their research findings here.
+                        </p>
+                      </Card>
 
-                  {/* Analysis & Discussion */}
-                  <Card className="p-6">
-                    <h3 className="text-xl font-semibold mb-4 flex items-center gap-2">
-                      <Calculator className="h-5 w-5 text-primary" />
-                      Analysis & Discussion
-                    </h3>
-                    <div className="prose prose-sm max-w-none">
-                      <p className="text-muted-foreground">
-                        Detailed analysis and discussion points will be documented here.
-                        Include mathematical models, data visualizations, and analytical frameworks.
-                      </p>
-                    </div>
-                  </Card>
+                      {/* Research Context */}
+                      <Card className="p-6">
+                        <h3 className="text-xl font-semibold mb-4 flex items-center gap-2">
+                          <FileText className="h-5 w-5 text-primary" />
+                          Research Context
+                        </h3>
+                        <div className="space-y-3 text-muted-foreground">
+                          <p>Background information and context for this research phase.</p>
+                          <div className="bg-accent/30 p-4 rounded-lg">
+                            <p className="text-sm italic">
+                              Content will be added here as the research progresses.
+                            </p>
+                          </div>
+                        </div>
+                      </Card>
 
-                  {/* Public Information & Government Data */}
-                  <Card className="p-6 bg-gradient-to-br from-accent/20 to-card">
-                    <h3 className="text-xl font-semibold mb-4 flex items-center gap-2">
-                      <Database className="h-5 w-5 text-primary" />
-                      Public Information & Government Data
-                    </h3>
-                    <p className="text-muted-foreground mb-4">
-                      Relevant government data and public information for this research phase.
-                    </p>
-                    <div className="bg-muted/50 p-4 rounded-lg space-y-2">
-                      <p className="text-sm font-medium">Data Sources:</p>
-                      <ul className="text-sm text-muted-foreground space-y-1">
-                        <li>• Government open data portals</li>
-                        <li>• Public policy documents</li>
-                        <li>• Statistical databases</li>
-                      </ul>
-                    </div>
-                  </Card>
+                      {/* Key Findings */}
+                      <Card className="p-6">
+                        <h3 className="text-xl font-semibold mb-4 flex items-center gap-2">
+                          <Lightbulb className="h-5 w-5 text-primary" />
+                          Key Findings & Insights
+                        </h3>
+                        <div className="space-y-3">
+                          <div className="bg-gradient-to-r from-primary/10 to-accent/20 p-4 rounded-lg border-l-4 border-primary">
+                            <p className="font-medium mb-2">Important Discovery</p>
+                            <p className="text-sm text-muted-foreground">
+                              Document your key findings and insights here.
+                            </p>
+                          </div>
+                        </div>
+                      </Card>
+
+                      {/* Analysis & Discussion */}
+                      <Card className="p-6">
+                        <h3 className="text-xl font-semibold mb-4 flex items-center gap-2">
+                          <Calculator className="h-5 w-5 text-primary" />
+                          Analysis & Discussion
+                        </h3>
+                        <div className="prose prose-sm max-w-none">
+                          <p className="text-muted-foreground">
+                            Detailed analysis and discussion points will be documented here.
+                            Include mathematical models, data visualizations, and analytical frameworks.
+                          </p>
+                        </div>
+                      </Card>
+
+                      {/* Public Information & Government Data */}
+                      <Card className="p-6 bg-gradient-to-br from-accent/20 to-card">
+                        <h3 className="text-xl font-semibold mb-4 flex items-center gap-2">
+                          <Database className="h-5 w-5 text-primary" />
+                          Public Information & Government Data
+                        </h3>
+                        <p className="text-muted-foreground mb-4">
+                          Relevant government data and public information for this research phase.
+                        </p>
+                        <div className="bg-muted/50 p-4 rounded-lg space-y-2">
+                          <p className="text-sm font-medium">Data Sources:</p>
+                          <ul className="text-sm text-muted-foreground space-y-1">
+                            <li>• Government open data portals</li>
+                            <li>• Public policy documents</li>
+                            <li>• Statistical databases</li>
+                          </ul>
+                        </div>
+                      </Card>
+                    </>
+                  )}
                 </div>
 
                 {/* Right Column - Collaboration Tools */}
