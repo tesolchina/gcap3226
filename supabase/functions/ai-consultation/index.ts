@@ -12,10 +12,10 @@ serve(async (req) => {
 
   try {
     const { messages, sessionId, teamName } = await req.json();
-    const LOVABLE_API_KEY = Deno.env.get('LOVABLE_API_KEY');
+    const OPENROUTER_API_KEY = Deno.env.get('OPENROUTER_API_KEY');
     
-    if (!LOVABLE_API_KEY) {
-      throw new Error('LOVABLE_API_KEY is not configured');
+    if (!OPENROUTER_API_KEY) {
+      throw new Error('OPENROUTER_API_KEY is not configured');
     }
 
     // System prompt tailored for course consultation
@@ -30,14 +30,18 @@ Your role is to help students with their ${teamName || 'project'} by:
 
 Be supportive, pedagogical, and ask probing questions to help students think deeply about their projects. Keep responses concise and focused on actionable guidance. Reference relevant UN SDGs and Hong Kong context when appropriate.`;
 
-    const response = await fetch('https://ai.gateway.lovable.dev/v1/chat/completions', {
+    console.log('Calling OpenRouter API with model: google/gemini-2.5-flash');
+
+    const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
       method: 'POST',
       headers: {
-        'Authorization': `Bearer ${LOVABLE_API_KEY}`,
+        'Authorization': `Bearer ${OPENROUTER_API_KEY}`,
+        'HTTP-Referer': 'https://lovable.dev',
+        'X-Title': 'GCAP 3056 Course Portal',
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        model: 'google/gemini-2.5-flash',
+        model: 'google/gemini-2.5-flash', // Cost-effective and fast
         messages: [
           { role: 'system', content: systemPrompt },
           ...messages
@@ -47,6 +51,9 @@ Be supportive, pedagogical, and ask probing questions to help students think dee
     });
 
     if (!response.ok) {
+      const errorText = await response.text();
+      console.error('OpenRouter API error:', response.status, errorText);
+      
       if (response.status === 429) {
         return new Response(
           JSON.stringify({ error: 'Rate limit exceeded. Please try again later.' }),
@@ -55,13 +62,11 @@ Be supportive, pedagogical, and ask probing questions to help students think dee
       }
       if (response.status === 402) {
         return new Response(
-          JSON.stringify({ error: 'AI credits exhausted. Please contact your administrator.' }),
+          JSON.stringify({ error: 'Insufficient credits. Please add funds to your OpenRouter account.' }),
           { status: 402, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
         );
       }
-      const errorText = await response.text();
-      console.error('AI gateway error:', response.status, errorText);
-      throw new Error('AI gateway error');
+      throw new Error(`OpenRouter API error: ${response.status}`);
     }
 
     return new Response(response.body, {
