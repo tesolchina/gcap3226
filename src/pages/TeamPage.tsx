@@ -147,10 +147,10 @@ const TeamPage = () => {
             <TabsContent key={tab.value} value={tab.value} className="space-y-6">
               
               {/* Main Content Area */}
-              <div className="grid lg:grid-cols-3 gap-6">
+              <div className="w-full">
                 
-                {/* Left Column - Primary Content */}
-                <div className="lg:col-span-2 space-y-6">
+                {/* Primary Content */}
+                <div className="space-y-6">
                   
                   {tab.value === "presentation" ? (
                     <>
@@ -534,50 +534,6 @@ const TeamPage = () => {
                       </Card>
                     </>
                   )}
-                </div>
-
-                {/* Right Column - Collaboration Tools */}
-                <div className="space-y-6">
-                  
-                  {/* Quick Actions */}
-                  <Card className="p-4 bg-gradient-to-br from-primary/10 to-accent/20">
-                    <h3 className="font-semibold mb-3">Quick Actions</h3>
-                    <div className="space-y-2 text-sm">
-                      <div className="p-2 bg-background rounded hover:bg-accent/50 cursor-pointer transition">
-                        📊 View Data
-                      </div>
-                      <div className="p-2 bg-background rounded hover:bg-accent/50 cursor-pointer transition">
-                        📝 Add Notes
-                      </div>
-                      <div className="p-2 bg-background rounded hover:bg-accent/50 cursor-pointer transition">
-                        🔗 Share Resources
-                      </div>
-                    </div>
-                  </Card>
-
-                  {/* Resources */}
-                  <Card className="p-4">
-                    <h3 className="font-semibold mb-3">Resources</h3>
-                    <div className="space-y-2 text-sm text-muted-foreground">
-                      <p>• Project guidelines</p>
-                      <p>• Reference materials</p>
-                      <p>• Sample analyses</p>
-                      <p>• Data templates</p>
-                    </div>
-                  </Card>
-
-                  {/* Team Progress */}
-                  <Card className="p-4">
-                    <h3 className="font-semibold mb-3">Team Progress</h3>
-                    <div className="space-y-3">
-                      {tabs.map((t, idx) => (
-                        <div key={t.value} className="flex items-center gap-2">
-                          <div className={`h-2 w-2 rounded-full ${idx <= tabs.findIndex(tab => tab.value === tab.value) ? 'bg-primary' : 'bg-muted'}`} />
-                          <span className="text-xs text-muted-foreground">{t.name}</span>
-                        </div>
-                      ))}
-                    </div>
-                  </Card>
                 </div>
               </div>
 
