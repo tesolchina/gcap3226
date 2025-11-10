@@ -4,8 +4,8 @@ This document tracks the progress of embedding presentation slides for each proj
 
 ## Overview
 - **Total Teams**: 6
-- **Completed**: 3
-- **Pending**: 3
+- **Completed**: 4
+- **Pending**: 2
 - **Last Updated**: 10 November 2025
 
 ---
@@ -37,10 +37,12 @@ This document tracks the progress of embedding presentation slides for each proj
 
 ### 3. Typhoon Signal Analysis
 - **Slug**: `typhoon-signals`
-- **Status**: ⏳ Awaiting iframe code
+- **Status**: ✅ Completed
 - **Description**: Data-Driven Signal 8 Accuracy Assessment with Real-Time Wind Analysis
-- **Iframe Code**: *Not provided yet*
-- **External Link**: *Not provided yet*
+- **Presentation Title**: GCAP3226_Group 3_Typhoon Signal
+- **External Link**: https://www.canva.com/design/DAG3tPGBRlA/_ZZJcGDtrC7pstoyNz_vhA/view?utm_content=DAG3tPGBRlA&utm_campaign=designshare&utm_medium=embeds&utm_source=link
+- **Iframe Code**: Custom Canva embed with responsive styling (div wrapper with 16:9 aspect ratio)
+- **Implementation**: Canva presentation with full responsive wrapper including shadow and border-radius styling
 
 ---
 
