@@ -4,7 +4,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card } from "@/components/ui/card";
 import { AIConsultationCorner } from "@/components/AIConsultationCorner";
-import { Loader2, FileText, Database, Calculator, Lightbulb, Target, Presentation, ExternalLink } from "lucide-react";
+import { Loader2, FileText, Database, Calculator, Lightbulb, Target, Presentation, ExternalLink, Clock, Video } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
 
@@ -97,6 +97,7 @@ const TeamPage = () => {
   }
 
   const tabs = [
+    { name: "Presentation", value: "presentation", icon: Presentation },
     { name: "Introduction & Data Governance", value: "introduction", icon: FileText },
     { name: "Data Collection", value: "data-collection", icon: Database },
     { name: "Quantitative Reasoning", value: "quantitative", icon: Calculator },
@@ -116,8 +117,8 @@ const TeamPage = () => {
         </div>
 
         {/* Tabs Section */}
-        <Tabs defaultValue="introduction" className="w-full">
-          <TabsList className="grid w-full grid-cols-5 mb-8">
+        <Tabs defaultValue="presentation" className="w-full">
+          <TabsList className="grid w-full grid-cols-6 mb-8">
             {tabs.map((tab) => (
               <TabsTrigger key={tab.value} value={tab.value} className="flex items-center gap-2">
                 <tab.icon className="h-4 w-4" />
@@ -136,7 +137,143 @@ const TeamPage = () => {
                 {/* Left Column - Primary Content */}
                 <div className="lg:col-span-2 space-y-6">
                   
-                  {tab.value === "introduction" ? (
+                  {tab.value === "presentation" ? (
+                    <>
+                      {/* Presentation Schedule Card */}
+                      <Card className="p-6 bg-gradient-to-br from-primary/10 to-accent/20 border-2 border-primary/20">
+                        <div className="flex items-center gap-3 mb-4">
+                          <Clock className="h-6 w-6 text-primary" />
+                          <h2 className="text-2xl font-bold">Presentation Schedule</h2>
+                        </div>
+                        <div className="space-y-3">
+                          <div className="bg-background/80 p-4 rounded-lg">
+                            <p className="text-sm font-medium text-muted-foreground mb-1">Tentative Time:</p>
+                            <p className="text-lg font-semibold text-primary">To be announced</p>
+                            <p className="text-xs text-muted-foreground mt-2">
+                              Please check with your instructor for the exact presentation date and time.
+                            </p>
+                          </div>
+                        </div>
+                      </Card>
+
+                      {/* Recording Reminder for Teachers */}
+                      <Card className="p-6 bg-gradient-to-br from-orange-50 to-red-50 dark:from-orange-950/20 dark:to-red-950/20 border-2 border-orange-200 dark:border-orange-800">
+                        <div className="flex items-start gap-3">
+                          <Video className="h-6 w-6 text-orange-600 dark:text-orange-400 mt-1 flex-shrink-0" />
+                          <div>
+                            <h3 className="text-xl font-bold text-orange-900 dark:text-orange-100 mb-3">
+                              📹 Recording Reminder for Teachers
+                            </h3>
+                            <div className="space-y-3 text-orange-950 dark:text-orange-50">
+                              <p className="font-medium">
+                                Please remember to start recording before the presentation begins:
+                              </p>
+                              <ul className="space-y-2 ml-4">
+                                <li className="flex items-start gap-2">
+                                  <span className="text-orange-600 dark:text-orange-400 mt-1">✓</span>
+                                  <span>Turn on <strong>Zoom recording</strong> to capture the presentation</span>
+                                </li>
+                                <li className="flex items-start gap-2">
+                                  <span className="text-orange-600 dark:text-orange-400 mt-1">✓</span>
+                                  <span>Enable <strong>shared screen recording</strong> to capture slides</span>
+                                </li>
+                                <li className="flex items-start gap-2">
+                                  <span className="text-orange-600 dark:text-orange-400 mt-1">✓</span>
+                                  <span>Ensure <strong>audio recording</strong> is active for voice capture</span>
+                                </li>
+                                <li className="flex items-start gap-2">
+                                  <span className="text-orange-600 dark:text-orange-400 mt-1">✓</span>
+                                  <span>Test recording settings <strong>5 minutes before</strong> the session</span>
+                                </li>
+                              </ul>
+                              <div className="bg-orange-100 dark:bg-orange-900/30 p-3 rounded-lg mt-4">
+                                <p className="text-sm font-medium">
+                                  💡 Tip: Click "Record" in Zoom and select "Record to this Computer" or "Record to the Cloud"
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </Card>
+
+                      {/* Presentation Slides */}
+                      <Card className="p-6 bg-gradient-to-br from-primary/5 to-accent/10">
+                        <div className="flex items-center justify-between mb-4">
+                          <h3 className="text-xl font-semibold flex items-center gap-2">
+                            <Presentation className="h-5 w-5 text-primary" />
+                            Team Presentation Slides
+                          </h3>
+                          {presentationData[team.slug]?.link && (
+                            <Button
+                              variant="outline"
+                              size="sm"
+                              className="gap-2"
+                              asChild
+                            >
+                              <a href={presentationData[team.slug].link} target="_blank" rel="noopener noreferrer">
+                                <ExternalLink className="h-4 w-4" />
+                                Open in new tab
+                              </a>
+                            </Button>
+                          )}
+                        </div>
+                        
+                        {presentationData[team.slug]?.focus && (
+                          <div className="mb-4 p-3 bg-accent/30 rounded-lg">
+                            <p className="text-sm font-medium text-primary mb-1">Presentation Focus:</p>
+                            <p className="text-sm text-muted-foreground">{presentationData[team.slug].focus}</p>
+                          </div>
+                        )}
+                        
+                        {presentationData[team.slug]?.teamMembers && (
+                          <div className="mb-4 p-3 bg-accent/20 rounded-lg">
+                            <p className="text-sm font-medium text-primary mb-2">Team Members:</p>
+                            <ul className="text-xs text-muted-foreground space-y-1">
+                              {presentationData[team.slug].teamMembers.map((member, idx) => (
+                                <li key={idx}>• {member}</li>
+                              ))}
+                            </ul>
+                          </div>
+                        )}
+                        
+                        <p className="text-muted-foreground mb-4 text-sm">
+                          View the team's presentation slides below or open in a separate tab for a better experience.
+                        </p>
+                        
+                        {/* Dynamic iframe or placeholder */}
+                        {presentationData[team.slug]?.iframeCode ? (
+                          <div 
+                            className="rounded-lg overflow-hidden aspect-video"
+                            dangerouslySetInnerHTML={{ __html: presentationData[team.slug].iframeCode || '' }}
+                          />
+                        ) : presentationData[team.slug]?.link ? (
+                          <div className="rounded-lg overflow-hidden aspect-video border-2 border-muted">
+                            <iframe
+                              src={presentationData[team.slug].link}
+                              className="w-full h-full border-0"
+                              allowFullScreen
+                              title={`${team.name} Presentation`}
+                            />
+                          </div>
+                        ) : (
+                          <div className="bg-muted/50 rounded-lg border-2 border-dashed border-muted-foreground/20 aspect-video flex items-center justify-center">
+                            <div className="text-center space-y-2 p-8">
+                              <Presentation className="h-12 w-12 mx-auto text-muted-foreground/50" />
+                              <p className="text-muted-foreground font-medium">
+                                Presentation slides will be embedded here
+                              </p>
+                              <p className="text-sm text-muted-foreground/70">
+                                Team: {team.name}
+                              </p>
+                              <p className="text-xs text-muted-foreground/50">
+                                Awaiting iframe code or link
+                              </p>
+                            </div>
+                          </div>
+                        )}
+                      </Card>
+                    </>
+                  ) : tab.value === "introduction" ? (
                     <>
                       {/* Government Decisions to Review */}
                       <Card className="p-6 bg-gradient-to-br from-card to-accent/20">
@@ -283,83 +420,6 @@ const TeamPage = () => {
                             <p className="text-xs text-muted-foreground mt-2">🔗 legco.gov.hk</p>
                           </a>
                         </div>
-                      </Card>
-
-                      {/* Presentation Slides */}
-                      <Card className="p-6 bg-gradient-to-br from-primary/5 to-accent/10">
-                        <div className="flex items-center justify-between mb-4">
-                          <h3 className="text-xl font-semibold flex items-center gap-2">
-                            <Presentation className="h-5 w-5 text-primary" />
-                            Team Presentation Slides
-                          </h3>
-                          {presentationData[team.slug]?.link && (
-                            <Button
-                              variant="outline"
-                              size="sm"
-                              className="gap-2"
-                              asChild
-                            >
-                              <a href={presentationData[team.slug].link} target="_blank" rel="noopener noreferrer">
-                                <ExternalLink className="h-4 w-4" />
-                                Open in new tab
-                              </a>
-                            </Button>
-                          )}
-                        </div>
-                        
-                        {presentationData[team.slug]?.focus && (
-                          <div className="mb-4 p-3 bg-accent/30 rounded-lg">
-                            <p className="text-sm font-medium text-primary mb-1">Presentation Focus:</p>
-                            <p className="text-sm text-muted-foreground">{presentationData[team.slug].focus}</p>
-                          </div>
-                        )}
-                        
-                        {presentationData[team.slug]?.teamMembers && (
-                          <div className="mb-4 p-3 bg-accent/20 rounded-lg">
-                            <p className="text-sm font-medium text-primary mb-2">Team Members:</p>
-                            <ul className="text-xs text-muted-foreground space-y-1">
-                              {presentationData[team.slug].teamMembers.map((member, idx) => (
-                                <li key={idx}>• {member}</li>
-                              ))}
-                            </ul>
-                          </div>
-                        )}
-                        
-                        <p className="text-muted-foreground mb-4 text-sm">
-                          View the team's presentation slides below or open in a separate tab for a better experience.
-                        </p>
-                        
-                        {/* Dynamic iframe or placeholder */}
-                        {presentationData[team.slug]?.iframeCode ? (
-                          <div 
-                            className="rounded-lg overflow-hidden aspect-video"
-                            dangerouslySetInnerHTML={{ __html: presentationData[team.slug].iframeCode || '' }}
-                          />
-                        ) : presentationData[team.slug]?.link ? (
-                          <div className="rounded-lg overflow-hidden aspect-video border-2 border-muted">
-                            <iframe
-                              src={presentationData[team.slug].link}
-                              className="w-full h-full border-0"
-                              allowFullScreen
-                              title={`${team.name} Presentation`}
-                            />
-                          </div>
-                        ) : (
-                          <div className="bg-muted/50 rounded-lg border-2 border-dashed border-muted-foreground/20 aspect-video flex items-center justify-center">
-                            <div className="text-center space-y-2 p-8">
-                              <Presentation className="h-12 w-12 mx-auto text-muted-foreground/50" />
-                              <p className="text-muted-foreground font-medium">
-                                Presentation slides will be embedded here
-                              </p>
-                              <p className="text-sm text-muted-foreground/70">
-                                Team: {team.name}
-                              </p>
-                              <p className="text-xs text-muted-foreground/50">
-                                Awaiting iframe code or link
-                              </p>
-                            </div>
-                          </div>
-                        )}
                       </Card>
                     </>
                   ) : (
