@@ -20,6 +20,8 @@ interface PresentationData {
   iframeCode?: string;
   teamMembers?: string[];
   focus?: string;
+  presentationTime?: string;
+  presentationDate?: string;
 }
 
 // Presentation slides data for each team
@@ -28,31 +30,43 @@ const presentationData: Record<string, PresentationData> = {
     link: 'https://docs.google.com/presentation/d/e/2PACX-1vSsReEFYsr5YNy3x8LaGsH_83H36-ZkyVwTWNuRM3gUEIh475qCHqsLhFJykA9MgdY87Lb5XzPfLE9C/pub?start=false&loop=false&delayms=3000',
     iframeCode: '<iframe src="https://docs.google.com/presentation/d/e/2PACX-1vSsReEFYsr5YNy3x8LaGsH_83H36-ZkyVwTWNuRM3gUEIh475qCHqsLhFJykA9MgdY87Lb5XzPfLE9C/pubembed?start=false&loop=false&delayms=3000" frameborder="0" width="960" height="569" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>',
     teamMembers: ['Yeung Wing Yu (23238283)', 'SU Jialu (22256946)', 'Tsoi Yik Hon (22232192)', 'LYU Junhan (23213078)', 'Kwok Tsz Yau (22234020)'],
-    focus: 'Analysis of the collected data on flu shot participation, the identified issues and some suggestions'
+    focus: 'Analysis of the collected data on flu shot participation, the identified issues and some suggestions',
+    presentationDate: 'November 11, 2025',
+    presentationTime: '12:20 PM'
   },
   'bus-route': {
     link: 'https://www.canva.com/design/DAG35hPWmNQ/IlGCZkCiuludgaapq59b7g/edit?utm_content=DAG35hPWmNQ&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton',
     teamMembers: ['23229101 Tsoi Tsz Yan', '23229543 Yip Tsz Ying', '23232099 Chan Hei Tung', '23234997 Ko Man Wai', '23233168 Wong Ling Yan Cassy'],
-    focus: 'Latest results on overlap analysis of KMB 272A and Citybus 582, including primary data collection results and simulation approach.'
+    focus: 'Latest results on overlap analysis of KMB 272A and Citybus 582, including primary data collection results and simulation approach.',
+    presentationDate: 'November 11, 2025',
+    presentationTime: '10:45 AM'
   },
   'green-recycling': {
     link: 'https://www.canva.com/design/DAG3DVo0bFM/ccCZTkLPMLNSCDOxcBHo4w/view?embed',
     iframeCode: '<iframe src="https://www.canva.com/design/DAG3DVo0bFM/ccCZTkLPMLNSCDOxcBHo4w/view?embed" allowfullscreen="allowfullscreen" allow="fullscreen"></iframe>',
     teamMembers: ['CHAN Chi Ki (23233885)', 'CHEUNG Kwun Ho (24219169)', 'MAN Wai Yin (24202509)', 'TAG Tsz Tung (23230371)', 'HO Chun Chit (24202495)', 'XU Jingyi (24205397)'],
-    focus: 'Progress update on Green@Community Recycling Network Overall Effectiveness Analysis, including data collection results, methodological approach, and preliminary insights & recommendations.'
+    focus: 'Progress update on Green@Community Recycling Network Overall Effectiveness Analysis, including data collection results, methodological approach, and preliminary insights & recommendations.',
+    presentationDate: 'November 11, 2025',
+    presentationTime: '11:30 AM'
   },
   'typhoon-signals': {
     link: 'https://www.canva.com/design/DAG3tPGBRlA/_ZZJcGDtrC7pstoyNz_vhA/view?utm_content=DAG3tPGBRlA&utm_campaign=designshare&utm_medium=embeds&utm_source=link',
-    iframeCode: '<div style="position: relative; width: 100%; height: 0; padding-top: 56.2500%; padding-bottom: 0; box-shadow: 0 2px 8px 0 rgba(63,69,81,0.16); margin-top: 1.6em; margin-bottom: 0.9em; overflow: hidden; border-radius: 8px; will-change: transform;"><iframe loading="lazy" style="position: absolute; width: 100%; height: 100%; top: 0; left: 0; border: none; padding: 0;margin: 0;" src="https://www.canva.com/design/DAG3tPGBRlA/_ZZJcGDtrC7pstoyNz_vhA/view?embed" allowfullscreen="allowfullscreen" allow="fullscreen"></iframe></div>'
+    iframeCode: '<div style="position: relative; width: 100%; height: 0; padding-top: 56.2500%; padding-bottom: 0; box-shadow: 0 2px 8px 0 rgba(63,69,81,0.16); margin-top: 1.6em; margin-bottom: 0.9em; overflow: hidden; border-radius: 8px; will-change: transform;"><iframe loading="lazy" style="position: absolute; width: 100%; height: 100%; top: 0; left: 0; border: none; padding: 0;margin: 0;" src="https://www.canva.com/design/DAG3tPGBRlA/_ZZJcGDtrC7pstoyNz_vhA/view?embed" allowfullscreen="allowfullscreen" allow="fullscreen"></iframe></div>',
+    presentationDate: 'November 11, 2025',
+    presentationTime: '11:55 AM'
   },
   'bus-stop-merge': {
     link: 'https://docs.google.com/presentation/d/e/2PACX-1vQmRIpY6GAN3SywbCq35-49P39GstccyUWkZbrT8xsNqFj896EbaL9FGgUxbg3Mp4gVtkgZ2lT-MjXR/pub?start=false&loop=false&delayms=3000',
-    iframeCode: '<iframe src="https://docs.google.com/presentation/d/e/2PACX-1vQmRIpY6GAN3SywbCq35-49P39GstccyUWkZbrT8xsNqFj896EbaL9FGgUxbg3Mp4gVtkgZ2lT-MjXR/pubembed?start=false&loop=false&delayms=3000" frameborder="0" width="960" height="629" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>'
+    iframeCode: '<iframe src="https://docs.google.com/presentation/d/e/2PACX-1vQmRIpY6GAN3SywbCq35-49P39GstccyUWkZbrT8xsNqFj896EbaL9FGgUxbg3Mp4gVtkgZ2lT-MjXR/pubembed?start=false&loop=false&delayms=3000" frameborder="0" width="960" height="629" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>',
+    presentationDate: 'November 11, 2025',
+    presentationTime: '12:50 PM'
   },
   'food-waste': {
     link: 'https://docs.google.com/presentation/d/e/2PACX-1vSwB9lnsmSifF43eAYRf4_qRte4rkQb-z5HfI7zqIC366nLvZGi2DniSUhAE4iZx0eMleQVyVWeUX93/pub?start=false&loop=false&delayms=3000',
     iframeCode: '<iframe src="https://docs.google.com/presentation/d/e/2PACX-1vSwB9lnsmSifF43eAYRf4_qRte4rkQb-z5HfI7zqIC366nLvZGi2DniSUhAE4iZx0eMleQVyVWeUX93/pubembed?start=false&loop=false&delayms=3000" frameborder="0" width="960" height="569" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>',
-    focus: 'Municipal Solid Waste Charging Scheme Analysis'
+    focus: 'Municipal Solid Waste Charging Scheme Analysis',
+    presentationDate: 'November 11, 2025',
+    presentationTime: '11:05 AM'
   }
 };
 
@@ -146,13 +160,30 @@ const TeamPage = () => {
                           <h2 className="text-2xl font-bold">Presentation Schedule</h2>
                         </div>
                         <div className="space-y-3">
-                          <div className="bg-background/80 p-4 rounded-lg">
-                            <p className="text-sm font-medium text-muted-foreground mb-1">Tentative Time:</p>
-                            <p className="text-lg font-semibold text-primary">To be announced</p>
-                            <p className="text-xs text-muted-foreground mt-2">
-                              Please check with your instructor for the exact presentation date and time.
-                            </p>
-                          </div>
+                          {presentationData[team.slug]?.presentationDate && presentationData[team.slug]?.presentationTime ? (
+                            <div className="bg-background/80 p-4 rounded-lg border-2 border-primary/30">
+                              <p className="text-sm font-medium text-muted-foreground mb-2">📅 Scheduled For:</p>
+                              <p className="text-2xl font-bold text-primary mb-1">
+                                {presentationData[team.slug].presentationTime}
+                              </p>
+                              <p className="text-lg font-semibold text-foreground">
+                                {presentationData[team.slug].presentationDate}
+                              </p>
+                              <div className="mt-3 pt-3 border-t border-muted">
+                                <p className="text-xs text-muted-foreground">
+                                  ⏰ Please arrive 5 minutes early to set up
+                                </p>
+                              </div>
+                            </div>
+                          ) : (
+                            <div className="bg-background/80 p-4 rounded-lg">
+                              <p className="text-sm font-medium text-muted-foreground mb-1">Tentative Time:</p>
+                              <p className="text-lg font-semibold text-primary">To be announced</p>
+                              <p className="text-xs text-muted-foreground mt-2">
+                                Please check with your instructor for the exact presentation date and time.
+                              </p>
+                            </div>
+                          )}
                         </div>
                       </Card>
 
