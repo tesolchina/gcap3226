@@ -4,9 +4,10 @@ This document tracks the progress of embedding presentation slides for each proj
 
 ## Overview
 - **Total Teams**: 6
-- **Completed**: 4
-- **Pending**: 2
+- **Completed**: 6
+- **Pending**: 0
 - **Last Updated**: 10 November 2025
+- **Status**: ✅ ALL TEAMS COMPLETED!
 
 ---
 
@@ -48,10 +49,12 @@ This document tracks the progress of embedding presentation slides for each proj
 
 ### 4. Food Waste Management
 - **Slug**: `food-waste`
-- **Status**: ⏳ Awaiting iframe code
+- **Status**: ✅ Completed
 - **Description**: Municipal Solid Waste Charging Scheme Analysis
-- **Iframe Code**: *Not provided yet*
-- **External Link**: *Not provided yet*
+- **Presentation Focus**: Municipal Solid Waste Charging Scheme Analysis
+- **External Link**: https://docs.google.com/presentation/d/e/2PACX-1vSwB9lnsmSifF43eAYRf4_qRte4rkQb-z5HfI7zqIC366nLvZGi2DniSUhAE4iZx0eMleQVyVWeUX93/pub?start=false&loop=false&delayms=3000
+- **Iframe Code**: `<iframe src="https://docs.google.com/presentation/d/e/2PACX-1vSwB9lnsmSifF43eAYRf4_qRte4rkQb-z5HfI7zqIC366nLvZGi2DniSUhAE4iZx0eMleQVyVWeUX93/pubembed?start=false&loop=false&delayms=3000" frameborder="0" width="960" height="569" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>`
+- **Implementation**: Google Slides embedded with iframe code
 
 ---
 
@@ -69,10 +72,11 @@ This document tracks the progress of embedding presentation slides for each proj
 
 ### 6. Bus Stop Merge
 - **Slug**: `bus-stop-merge`
-- **Status**: ⏳ Awaiting iframe code
+- **Status**: ✅ Completed
 - **Description**: Real-Time API Data Analysis and Bus Stop Placement Optimization
-- **Iframe Code**: *Not provided yet*
-- **External Link**: *Not provided yet*
+- **External Link**: https://docs.google.com/presentation/d/e/2PACX-1vQmRIpY6GAN3SywbCq35-49P39GstccyUWkZbrT8xsNqFj896EbaL9FGgUxbg3Mp4gVtkgZ2lT-MjXR/pub?start=false&loop=false&delayms=3000
+- **Iframe Code**: `<iframe src="https://docs.google.com/presentation/d/e/2PACX-1vQmRIpY6GAN3SywbCq35-49P39GstccyUWkZbrT8xsNqFj896EbaL9FGgUxbg3Mp4gVtkgZ2lT-MjXR/pubembed?start=false&loop=false&delayms=3000" frameborder="0" width="960" height="629" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>`
+- **Implementation**: Google Slides embedded with custom iframe code
 
 ---
 

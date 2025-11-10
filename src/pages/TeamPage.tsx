@@ -44,6 +44,15 @@ const presentationData: Record<string, PresentationData> = {
   'typhoon-signals': {
     link: 'https://www.canva.com/design/DAG3tPGBRlA/_ZZJcGDtrC7pstoyNz_vhA/view?utm_content=DAG3tPGBRlA&utm_campaign=designshare&utm_medium=embeds&utm_source=link',
     iframeCode: '<div style="position: relative; width: 100%; height: 0; padding-top: 56.2500%; padding-bottom: 0; box-shadow: 0 2px 8px 0 rgba(63,69,81,0.16); margin-top: 1.6em; margin-bottom: 0.9em; overflow: hidden; border-radius: 8px; will-change: transform;"><iframe loading="lazy" style="position: absolute; width: 100%; height: 100%; top: 0; left: 0; border: none; padding: 0;margin: 0;" src="https://www.canva.com/design/DAG3tPGBRlA/_ZZJcGDtrC7pstoyNz_vhA/view?embed" allowfullscreen="allowfullscreen" allow="fullscreen"></iframe></div>'
+  },
+  'bus-stop-merge': {
+    link: 'https://docs.google.com/presentation/d/e/2PACX-1vQmRIpY6GAN3SywbCq35-49P39GstccyUWkZbrT8xsNqFj896EbaL9FGgUxbg3Mp4gVtkgZ2lT-MjXR/pub?start=false&loop=false&delayms=3000',
+    iframeCode: '<iframe src="https://docs.google.com/presentation/d/e/2PACX-1vQmRIpY6GAN3SywbCq35-49P39GstccyUWkZbrT8xsNqFj896EbaL9FGgUxbg3Mp4gVtkgZ2lT-MjXR/pubembed?start=false&loop=false&delayms=3000" frameborder="0" width="960" height="629" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>'
+  },
+  'food-waste': {
+    link: 'https://docs.google.com/presentation/d/e/2PACX-1vSwB9lnsmSifF43eAYRf4_qRte4rkQb-z5HfI7zqIC366nLvZGi2DniSUhAE4iZx0eMleQVyVWeUX93/pub?start=false&loop=false&delayms=3000',
+    iframeCode: '<iframe src="https://docs.google.com/presentation/d/e/2PACX-1vSwB9lnsmSifF43eAYRf4_qRte4rkQb-z5HfI7zqIC366nLvZGi2DniSUhAE4iZx0eMleQVyVWeUX93/pubembed?start=false&loop=false&delayms=3000" frameborder="0" width="960" height="569" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>',
+    focus: 'Municipal Solid Waste Charging Scheme Analysis'
   }
 };
 
