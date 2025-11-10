@@ -18,8 +18,9 @@ This document tracks the progress of embedding presentation slides for each proj
 - **Description**: Mathematical Models and Data Governance for School Vaccination Decision-Making
 - **Team Members**: Yeung Wing Yu (23238283), SU Jialu (22256946), Tsoi Yik Hon (22232192), LYU Junhan (23213078), Kwok Tsz Yau (22234020)
 - **Presentation Focus**: Analysis of the collected data on flu shot participation, the identified issues and some suggestions
-- **External Link**: https://docs.google.com/presentation/d/1pTljNxJVRCDRXT7upaSbb5BcUJN-fK8Fx9OKrEHXr9g/edit?slide=id.g13c2bc466cf_0_0#slide=id.g13c2bc466cf_0_0
-- **Implementation**: Google Slides embedded via iframe (auto-generated from link)
+- **External Link**: https://docs.google.com/presentation/d/e/2PACX-1vSsReEFYsr5YNy3x8LaGsH_83H36-ZkyVwTWNuRM3gUEIh475qCHqsLhFJykA9MgdY87Lb5XzPfLE9C/pub?start=false&loop=false&delayms=3000
+- **Iframe Code**: `<iframe src="https://docs.google.com/presentation/d/e/2PACX-1vSsReEFYsr5YNy3x8LaGsH_83H36-ZkyVwTWNuRM3gUEIh475qCHqsLhFJykA9MgdY87Lb5XzPfLE9C/pubembed?start=false&loop=false&delayms=3000" frameborder="0" width="960" height="569" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>`
+- **Implementation**: Google Slides embedded with custom iframe code
 
 ---
 
