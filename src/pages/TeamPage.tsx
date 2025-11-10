@@ -35,7 +35,7 @@ const presentationData: Record<string, PresentationData> = {
     presentationTime: '12:20 PM'
   },
   'bus-route': {
-    link: 'https://www.canva.com/design/DAG35hPWmNQ/IlGCZkCiuludgaapq59b7g/view?utm_content=DAG35hPWmNQ&utm_campaign=designshare&utm_medium=embeds&utm_source=link',
+    link: 'https://www.canva.com/design/DAG35hPWmNQ/IlGCZkCiuludgaapq59b7g/edit?utm_content=DAG35hPWmNQ&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton',
     iframeCode: '<iframe loading="lazy" style="position: absolute; width: 100%; height: 100%; top: 0; left: 0; border: none; padding: 0; margin: 0;" src="https://www.canva.com/design/DAG35hPWmNQ/IlGCZkCiuludgaapq59b7g/view?embed" allowfullscreen="allowfullscreen" allow="fullscreen"></iframe>',
     teamMembers: ['23229101 Tsoi Tsz Yan', '23229543 Yip Tsz Ying', '23232099 Chan Hei Tung', '23234997 Ko Man Wai', '23233168 Wong Ling Yan Cassy'],
     focus: 'Latest results on overlap analysis of KMB 272A and Citybus 582, including primary data collection results and simulation approach.',
