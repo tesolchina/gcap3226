@@ -35,8 +35,8 @@ const presentationData: Record<string, PresentationData> = {
     presentationTime: '12:20 PM'
   },
   'bus-route': {
-    link: 'https://www.canva.com/design/DAG35hPWmNQ/IlGCZkCiuludgaapq59b7g/edit?utm_content=DAG35hPWmNQ&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton',
-    iframeCode: '<iframe loading="lazy" style="position: absolute; width: 100%; height: 100%; top: 0; left: 0; border: none; padding: 0; margin: 0;" src="https://www.canva.com/design/DAG35hPWmNQ/IlGCZkCiuludgaapq59b7g/view?embed" allowfullscreen="allowfullscreen" allow="fullscreen"></iframe>',
+    link: 'https://www.canva.com/design/DAG35hPWmNQ/Th7KoMRLJhEexf0V7pvZgg/view?utm_content=DAG35hPWmNQ&utm_campaign=designshare&utm_medium=embeds&utm_source=link',
+    iframeCode: '<div style="position: relative; width: 100%; height: 0; padding-top: 56.2500%; padding-bottom: 0; box-shadow: 0 2px 8px 0 rgba(63,69,81,0.16); margin-top: 1.6em; margin-bottom: 0.9em; overflow: hidden; border-radius: 8px; will-change: transform;"><iframe loading="lazy" style="position: absolute; width: 100%; height: 100%; top: 0; left: 0; border: none; padding: 0;margin: 0;" src="https://www.canva.com/design/DAG35hPWmNQ/Th7KoMRLJhEexf0V7pvZgg/view?embed" allowfullscreen="allowfullscreen" allow="fullscreen"></iframe></div>',
     teamMembers: ['23229101 Tsoi Tsz Yan', '23229543 Yip Tsz Ying', '23232099 Chan Hei Tung', '23234997 Ko Man Wai', '23233168 Wong Ling Yan Cassy'],
     focus: 'Latest results on overlap analysis of KMB 272A and Citybus 582, including primary data collection results and simulation approach.',
     presentationDate: 'November 11, 2025',
