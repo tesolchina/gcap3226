@@ -124,6 +124,16 @@ Team 1: Flu Shot{"\n"}Team 2: Bus Routes{"\n"}Team 3: Typhoon Signals{"\n"}Team 
                     <p className="text-muted-foreground">
                       Please fill out the Course Feedback Questionnaire for both teachers. Deadline: <strong>29 November 2025, 23:59:59</strong>
                     </p>
+                    <p className="text-sm">
+                      <a 
+                        href="https://cfq-student.hkbu.edu.hk/" 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="text-primary hover:underline font-medium"
+                      >
+                        Access CFQ Portal →
+                      </a>
+                    </p>
                     
                     <div className="grid md:grid-cols-2 gap-6">
                       <div className="flex flex-col items-center gap-3 p-4 border rounded-lg">
