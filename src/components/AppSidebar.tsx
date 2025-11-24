@@ -1,4 +1,4 @@
-import { Home, Droplet, Bus, Cloud, Recycle, MapPin } from "lucide-react";
+import { Home, Droplet, Bus, Cloud, Recycle, MapPin, Award } from "lucide-react";
 import { NavLink } from "react-router-dom";
 import {
   Sidebar,
@@ -14,6 +14,7 @@ import {
 
 const teams = [
   { title: "Home", url: "/", icon: Home },
+  { title: "Week 13 Rundown", url: "/week-13", icon: Award },
   { title: "Team 1: Flu Shot", url: "/team/flu-shot", icon: Droplet },
   { title: "Team 2: Bus Routes", url: "/team/bus-route", icon: Bus },
   { title: "Team 3: Typhoon Signals", url: "/team/typhoon-signals", icon: Cloud },
