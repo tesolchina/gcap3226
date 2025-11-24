@@ -13,6 +13,9 @@ interface Team {
   name: string;
   slug: string;
   description: string;
+  presentation_time?: string | null;
+  presentation_end_time?: string | null;
+  presentation_date?: string | null;
 }
 
 interface PresentationData {
@@ -161,14 +164,18 @@ const TeamPage = () => {
                           <h2 className="text-2xl font-bold">Presentation Schedule</h2>
                         </div>
                         <div className="space-y-3">
-                          {presentationData[team.slug]?.presentationDate && presentationData[team.slug]?.presentationTime ? (
+                          {team.presentation_time && team.presentation_date ? (
                             <div className="bg-background/80 p-4 rounded-lg border-2 border-primary/30">
                               <p className="text-sm font-medium text-muted-foreground mb-2">📅 Scheduled For:</p>
                               <p className="text-2xl font-bold text-primary mb-1">
-                                {presentationData[team.slug].presentationTime}
+                                {team.presentation_time} - {team.presentation_end_time}
                               </p>
                               <p className="text-lg font-semibold text-foreground">
-                                {presentationData[team.slug].presentationDate}
+                                {new Date(team.presentation_date).toLocaleDateString('en-US', { 
+                                  year: 'numeric', 
+                                  month: 'long', 
+                                  day: 'numeric' 
+                                })}
                               </p>
                               <div className="mt-3 pt-3 border-t border-muted">
                                 <p className="text-xs text-muted-foreground">
@@ -181,7 +188,7 @@ const TeamPage = () => {
                               <p className="text-sm font-medium text-muted-foreground mb-1">Tentative Time:</p>
                               <p className="text-lg font-semibold text-primary">To be announced</p>
                               <p className="text-xs text-muted-foreground mt-2">
-                                Please check with your instructor for the exact presentation date and time.
+                                The presentation order will be randomly generated on Week 13.
                               </p>
                             </div>
                           )}
