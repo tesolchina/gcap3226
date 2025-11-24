@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Card } from "@/components/ui/card";
 import { BookOpen, Users, Target, ChevronDown, ChevronUp } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { CountdownTimer } from "@/components/CountdownTimer";
 
 const Home = () => {
   const [showRoadmap, setShowRoadmap] = useState(false);
@@ -31,6 +32,8 @@ const Home = () => {
             Empowering Citizens Through Data: Participatory Policy Analysis for Hong Kong
           </p>
         </div>
+
+        <CountdownTimer />
 
         {/* Course Info Cards */}
         <div className="grid md:grid-cols-3 gap-6">

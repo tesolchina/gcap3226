@@ -31,7 +31,7 @@ const presentationData: Record<string, PresentationData> = {
     iframeCode: '<iframe src="https://docs.google.com/presentation/d/e/2PACX-1vSsReEFYsr5YNy3x8LaGsH_83H36-ZkyVwTWNuRM3gUEIh475qCHqsLhFJykA9MgdY87Lb5XzPfLE9C/pubembed?start=false&loop=false&delayms=3000" frameborder="0" width="960" height="569" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>',
     teamMembers: ['Yeung Wing Yu (23238283)', 'SU Jialu (22256946)', 'Tsoi Yik Hon (22232192)', 'LYU Junhan (23213078)', 'Kwok Tsz Yau (22234020)'],
     focus: 'Analysis of the collected data on flu shot participation, the identified issues and some suggestions',
-    presentationDate: 'November 11, 2025',
+    presentationDate: 'November 25, 2025',
     presentationTime: '12:20 PM'
   },
   'bus-route': {
@@ -39,7 +39,7 @@ const presentationData: Record<string, PresentationData> = {
     iframeCode: '<div style="position: relative; width: 100%; height: 0; padding-top: 56.2500%; padding-bottom: 0; box-shadow: 0 2px 8px 0 rgba(63,69,81,0.16); margin-top: 1.6em; margin-bottom: 0.9em; overflow: hidden; border-radius: 8px; will-change: transform;"><iframe loading="lazy" style="position: absolute; width: 100%; height: 100%; top: 0; left: 0; border: none; padding: 0;margin: 0;" src="https://www.canva.com/design/DAG35hPWmNQ/Th7KoMRLJhEexf0V7pvZgg/view?embed" allowfullscreen="allowfullscreen" allow="fullscreen"></iframe></div>',
     teamMembers: ['23229101 Tsoi Tsz Yan', '23229543 Yip Tsz Ying', '23232099 Chan Hei Tung', '23234997 Ko Man Wai', '23233168 Wong Ling Yan Cassy'],
     focus: 'Latest results on overlap analysis of KMB 272A and Citybus 582, including primary data collection results and simulation approach.',
-    presentationDate: 'November 11, 2025',
+    presentationDate: 'November 25, 2025',
     presentationTime: '10:45 AM'
   },
   'green-recycling': {
@@ -47,26 +47,26 @@ const presentationData: Record<string, PresentationData> = {
     iframeCode: '<div style="position: relative; width: 100%; height: 0; padding-top: 56.2500%; padding-bottom: 0; box-shadow: 0 2px 8px 0 rgba(63,69,81,0.16); margin-top: 1.6em; margin-bottom: 0.9em; overflow: hidden; border-radius: 8px; will-change: transform;"><iframe loading="lazy" style="position: absolute; width: 100%; height: 100%; top: 0; left: 0; border: none; padding: 0; margin: 0;" src="https://www.canva.com/design/DAG3DVo0bFM/ccCZTkLPMLNSCDOxcBHo4w/view?embed" allowfullscreen="allowfullscreen" allow="fullscreen"></iframe></div>',
     teamMembers: ['CHAN Chi Ki (23233885)', 'CHEUNG Kwun Ho (24219169)', 'MAN Wai Yin (24202509)', 'TAG Tsz Tung (23230371)', 'HO Chun Chit (24202495)', 'XU Jingyi (24205397)'],
     focus: 'Progress update on Green@Community Recycling Network Overall Effectiveness Analysis, including data collection results, methodological approach, and preliminary insights & recommendations.',
-    presentationDate: 'November 11, 2025',
+    presentationDate: 'November 25, 2025',
     presentationTime: '11:30 AM'
   },
   'typhoon-signals': {
     link: 'https://www.canva.com/design/DAG3tPGBRlA/_ZZJcGDtrC7pstoyNz_vhA/view?utm_content=DAG3tPGBRlA&utm_campaign=designshare&utm_medium=embeds&utm_source=link',
     iframeCode: '<div style="position: relative; width: 100%; height: 0; padding-top: 56.2500%; padding-bottom: 0; box-shadow: 0 2px 8px 0 rgba(63,69,81,0.16); margin-top: 1.6em; margin-bottom: 0.9em; overflow: hidden; border-radius: 8px; will-change: transform;"><iframe loading="lazy" style="position: absolute; width: 100%; height: 100%; top: 0; left: 0; border: none; padding: 0;margin: 0;" src="https://www.canva.com/design/DAG3tPGBRlA/_ZZJcGDtrC7pstoyNz_vhA/view?embed" allowfullscreen="allowfullscreen" allow="fullscreen"></iframe></div>',
-    presentationDate: 'November 11, 2025',
+    presentationDate: 'November 25, 2025',
     presentationTime: '11:55 AM'
   },
   'bus-stop-merge': {
     link: 'https://docs.google.com/presentation/d/e/2PACX-1vQmRIpY6GAN3SywbCq35-49P39GstccyUWkZbrT8xsNqFj896EbaL9FGgUxbg3Mp4gVtkgZ2lT-MjXR/pub?start=false&loop=false&delayms=3000',
     iframeCode: '<iframe src="https://docs.google.com/presentation/d/e/2PACX-1vQmRIpY6GAN3SywbCq35-49P39GstccyUWkZbrT8xsNqFj896EbaL9FGgUxbg3Mp4gVtkgZ2lT-MjXR/pubembed?start=false&loop=false&delayms=3000" frameborder="0" width="960" height="629" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>',
-    presentationDate: 'November 11, 2025',
+    presentationDate: 'November 25, 2025',
     presentationTime: '12:50 PM'
   },
   'food-waste': {
     link: 'https://docs.google.com/presentation/d/e/2PACX-1vSwB9lnsmSifF43eAYRf4_qRte4rkQb-z5HfI7zqIC366nLvZGi2DniSUhAE4iZx0eMleQVyVWeUX93/pub?start=false&loop=false&delayms=3000',
     iframeCode: '<iframe src="https://docs.google.com/presentation/d/e/2PACX-1vSwB9lnsmSifF43eAYRf4_qRte4rkQb-z5HfI7zqIC366nLvZGi2DniSUhAE4iZx0eMleQVyVWeUX93/pubembed?start=false&loop=false&delayms=3000" frameborder="0" width="960" height="569" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>',
     focus: 'Municipal Solid Waste Charging Scheme Analysis',
-    presentationDate: 'November 11, 2025',
+    presentationDate: 'November 25, 2025',
     presentationTime: '11:05 AM'
   }
 };
