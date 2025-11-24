@@ -1,8 +1,11 @@
 import { useState, useEffect } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Award, Calendar } from "lucide-react";
+import { Award, Calendar, Users, ClipboardList } from "lucide-react";
 import { CountdownTimer } from "@/components/CountdownTimer";
 import { supabase } from "@/integrations/supabase/client";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import qrSimon from "@/assets/qr-simon.png";
+import qrTalia from "@/assets/qr-talia.png";
 
 interface PresentationSlot {
   team: string;
@@ -53,23 +56,105 @@ const Week13 = () => {
         <CountdownTimer />
 
         <Card>
-          <CardHeader>
-            <CardTitle className="text-xl">Course Summary</CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            <p className="text-muted-foreground">
-              This week marks the conclusion of GCAP 3226. We've covered data governance, 
-              policy analysis, and practical applications throughout the semester.
-            </p>
-            <div className="space-y-2">
-              <h3 className="font-semibold">Key Highlights:</h3>
-              <ul className="list-disc list-inside space-y-1 text-muted-foreground">
-                <li>6 team projects on Hong Kong government data policies</li>
-                <li>Data collection and analysis methodologies</li>
-                <li>Policy recommendations and impact assessment</li>
-                <li>Collaborative learning and peer feedback</li>
-              </ul>
-            </div>
+          <CardContent className="pt-6">
+            <Accordion type="single" collapsible className="w-full">
+              <AccordionItem value="guest">
+                <AccordionTrigger className="text-lg font-semibold">
+                  <div className="flex items-center gap-2">
+                    <Users className="h-5 w-5 text-primary" />
+                    Guest Speaker: Ms Natalie Wong
+                  </div>
+                </AccordionTrigger>
+                <AccordionContent className="pt-4">
+                  <div className="aspect-video w-full">
+                    <iframe
+                      className="w-full h-full rounded-lg"
+                      src="https://www.youtube.com/embed/V6c1mChPCDE"
+                      title="Ms Natalie Wong"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                    />
+                  </div>
+                </AccordionContent>
+              </AccordionItem>
+
+              <AccordionItem value="order">
+                <AccordionTrigger className="text-lg font-semibold">
+                  <div className="flex items-center gap-2">
+                    <ClipboardList className="h-5 w-5 text-primary" />
+                    Presentation Order
+                  </div>
+                </AccordionTrigger>
+                <AccordionContent className="pt-4 space-y-4">
+                  <p className="text-muted-foreground">
+                    The order of presentations will be determined around 10:50am on November 25, 2025.
+                  </p>
+                  <div className="space-y-2">
+                    <h3 className="font-semibold">Teams:</h3>
+                    <ul className="list-disc list-inside space-y-1 text-muted-foreground">
+                      <li>Team 1: Flu Shot</li>
+                      <li>Team 2: Bus Routes</li>
+                      <li>Team 3: Typhoon Signals</li>
+                      <li>Team 4: Food Waste</li>
+                      <li>Team 5: Green Recycling</li>
+                      <li>Team 6: Bus Stop Merge</li>
+                    </ul>
+                  </div>
+                  <div className="bg-muted/50 p-4 rounded-lg space-y-2">
+                    <p className="text-sm font-medium">Copy this list to randomize:</p>
+                    <pre className="text-sm bg-background p-3 rounded border overflow-x-auto">
+Team 1: Flu Shot{"\n"}Team 2: Bus Routes{"\n"}Team 3: Typhoon Signals{"\n"}Team 4: Food Waste{"\n"}Team 5: Green Recycling{"\n"}Team 6: Bus Stop Merge
+                    </pre>
+                    <p className="text-sm text-muted-foreground">
+                      Use <a href="https://www.random.org/lists/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">random.org/lists</a> to randomize the order
+                    </p>
+                  </div>
+                </AccordionContent>
+              </AccordionItem>
+
+              <AccordionItem value="feedback">
+                <AccordionTrigger className="text-lg font-semibold">
+                  <div className="flex items-center gap-2">
+                    <Award className="h-5 w-5 text-primary" />
+                    Course Feedback Questionnaire
+                  </div>
+                </AccordionTrigger>
+                <AccordionContent className="pt-4 space-y-6">
+                  <div className="space-y-4">
+                    <p className="text-muted-foreground">
+                      Please fill out the Course Feedback Questionnaire for both teachers. Deadline: <strong>29 November 2025, 23:59:59</strong>
+                    </p>
+                    
+                    <div className="grid md:grid-cols-2 gap-6">
+                      <div className="flex flex-col items-center gap-3 p-4 border rounded-lg">
+                        <h3 className="font-semibold text-lg">Simon</h3>
+                        <img src={qrSimon} alt="CFQ QR Code for Simon" className="w-48 h-48" />
+                      </div>
+                      
+                      <div className="flex flex-col items-center gap-3 p-4 border rounded-lg">
+                        <h3 className="font-semibold text-lg">Talia</h3>
+                        <img src={qrTalia} alt="CFQ QR Code for Talia" className="w-48 h-48" />
+                      </div>
+                    </div>
+
+                    <div className="bg-muted/50 p-4 rounded-lg space-y-2">
+                      <h3 className="font-semibold">Teaching Assistant Feedback</h3>
+                      <p className="text-sm text-muted-foreground">
+                        Please also provide feedback for Teaching Assistant Mr David Chan on his support during in-class exercises via Moodle:
+                      </p>
+                      <a 
+                        href="https://buelearning.hkbu.edu.hk/mod/feedback/view.php?id=1871347" 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="text-primary hover:underline text-sm block"
+                      >
+                        Submit TA Feedback on Moodle →
+                      </a>
+                    </div>
+                  </div>
+                </AccordionContent>
+              </AccordionItem>
+            </Accordion>
           </CardContent>
         </Card>
 
