@@ -197,6 +197,54 @@ Team 1: Flu Shot{"\n"}Team 2: Bus Routes{"\n"}Team 3: Typhoon Signals{"\n"}Team 
                   </div>
                 </AccordionContent>
               </AccordionItem>
+
+              <AccordionItem value="housekeeping">
+                <AccordionTrigger className="text-lg font-semibold">
+                  <div className="flex items-center gap-2">
+                    <ClipboardList className="h-5 w-5 text-primary" />
+                    Housekeeping
+                  </div>
+                </AccordionTrigger>
+                <AccordionContent className="pt-4 space-y-6">
+                  <div className="space-y-4">
+                    <div className="bg-muted/50 p-4 rounded-lg space-y-2">
+                      <h3 className="font-semibold">Human-AI Collaboration Report</h3>
+                      <p className="text-sm text-muted-foreground">
+                        Complete the Human-AI Collaboration Report via Moodle.
+                      </p>
+                      <p className="text-sm font-medium">
+                        Deadline: <strong>2 December 2025</strong>
+                      </p>
+                      <a 
+                        href="https://buelearning.hkbu.edu.hk/mod/forum/discuss.php?d=340207" 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="text-primary hover:underline text-sm block"
+                      >
+                        Submit Human-AI Collaboration Report →
+                      </a>
+                    </div>
+
+                    <div className="bg-muted/50 p-4 rounded-lg space-y-2">
+                      <h3 className="font-semibold">Project Report</h3>
+                      <p className="text-sm text-muted-foreground">
+                        Complete the Project Report via Moodle. Reach out to the teacher if you wish to use AI agent to help draft the report.
+                      </p>
+                      <p className="text-sm font-medium">
+                        Deadline: <strong>7 December 2025</strong>
+                      </p>
+                      <a 
+                        href="https://buelearning.hkbu.edu.hk/mod/forum/discuss.php?d=331522" 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="text-primary hover:underline text-sm block"
+                      >
+                        Submit Project Report →
+                      </a>
+                    </div>
+                  </div>
+                </AccordionContent>
+              </AccordionItem>
             </Accordion>
           </CardContent>
         </Card>
