@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -9,6 +9,7 @@ import { supabase } from "@/integrations/supabase/client";
 
 interface PresentationSlot {
   team: string;
+  slug: string;
   time: string;
   endTime: string;
 }
@@ -22,13 +23,36 @@ const Week13 = () => {
   const [isValidating, setIsValidating] = useState(false);
   const { toast } = useToast();
 
+  useEffect(() => {
+    // Load existing schedule on mount
+    const loadSchedule = async () => {
+      const { data, error } = await supabase
+        .from('teams')
+        .select('name, slug, presentation_time, presentation_end_time, presentation_date')
+        .not('presentation_time', 'is', null);
+      
+      if (!error && data && data.length > 0) {
+        const schedule = data.map(team => ({
+          team: team.name,
+          slug: team.slug,
+          time: team.presentation_time || '',
+          endTime: team.presentation_end_time || ''
+        }));
+        setPresentationOrder(schedule);
+        setShowSchedule(true);
+      }
+    };
+    
+    loadSchedule();
+  }, []);
+
   const teams = [
-    "Team 1: Flu Shot",
-    "Team 2: Bus Routes",
-    "Team 3: Typhoon Signals",
-    "Team 4: Food Waste",
-    "Team 5: Green Recycling",
-    "Team 6: Bus Stop Merge"
+    { name: "Team 1: Flu Shot", slug: "flu-shot" },
+    { name: "Team 2: Bus Routes", slug: "bus-route" },
+    { name: "Team 3: Typhoon Signals", slug: "typhoon-signals" },
+    { name: "Team 4: Food Waste", slug: "food-waste" },
+    { name: "Team 5: Green Recycling", slug: "green-recycling" },
+    { name: "Team 6: Bus Stop Merge", slug: "bus-stop-merge" }
   ];
 
   const generateTime = (slotIndex: number) => {
@@ -95,25 +119,22 @@ const Week13 = () => {
       const shuffled = [...teams].sort(() => Math.random() - 0.5);
       const schedule = shuffled.map((team, index) => {
         const { time, endTime } = generateTime(index);
-        return { team, time, endTime };
+        return { team: team.name, slug: team.slug, time, endTime };
       });
       
       setPresentationOrder(schedule);
       
       // Save schedule to database
       try {
-        const teamSlugs = ['flu-shot', 'bus-route', 'typhoon-signals', 'food-waste', 'green-recycling', 'bus-stop-merge'];
-        
-        for (let i = 0; i < schedule.length; i++) {
-          const teamSlug = teamSlugs[i];
+        for (const slot of schedule) {
           await supabase
             .from('teams')
             .update({
-              presentation_time: schedule[i].time,
-              presentation_end_time: schedule[i].endTime,
+              presentation_time: slot.time,
+              presentation_end_time: slot.endTime,
               presentation_date: '2025-11-25'
             })
-            .eq('slug', teamSlug);
+            .eq('slug', slot.slug);
         }
         
         toast({
@@ -135,9 +156,7 @@ const Week13 = () => {
   const handleResetOrder = async () => {
     // Clear schedule from database
     try {
-      const teamSlugs = ['flu-shot', 'bus-route', 'typhoon-signals', 'food-waste', 'green-recycling', 'bus-stop-merge'];
-      
-      for (const teamSlug of teamSlugs) {
+      for (const team of teams) {
         await supabase
           .from('teams')
           .update({
@@ -145,7 +164,7 @@ const Week13 = () => {
             presentation_end_time: null,
             presentation_date: null
           })
-          .eq('slug', teamSlug);
+          .eq('slug', team.slug);
       }
       
       setPresentationOrder([]);
