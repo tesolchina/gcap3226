@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Award, Calendar, Users, ClipboardList, Camera } from "lucide-react";
+import { Award, Calendar, Users, ClipboardList, Camera, Link } from "lucide-react";
 import { CountdownTimer } from "@/components/CountdownTimer";
 import { supabase } from "@/integrations/supabase/client";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
@@ -16,6 +16,11 @@ interface PresentationSlot {
 
 const Week13 = () => {
   const [presentationOrder, setPresentationOrder] = useState<PresentationSlot[]>([]);
+
+  const copyLinkToSection = (sectionId: string) => {
+    const url = `${window.location.origin}${window.location.pathname}#${sectionId}`;
+    navigator.clipboard.writeText(url);
+  };
 
   useEffect(() => {
     // Load existing schedule on mount
@@ -59,11 +64,21 @@ const Week13 = () => {
         <Card>
           <CardContent className="pt-6">
             <Accordion type="single" collapsible className="w-full">
-              <AccordionItem value="guest">
+              <AccordionItem value="guest" id="guest">
                 <AccordionTrigger className="text-lg font-semibold">
-                  <div className="flex items-center gap-2">
+                  <div className="flex items-center gap-2 flex-1">
                     <Users className="h-5 w-5 text-primary" />
                     Guest Speaker: Ms Natalie Wong
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        copyLinkToSection('guest');
+                      }}
+                      className="ml-auto opacity-0 group-hover:opacity-100 transition-opacity"
+                      title="Copy link to this section"
+                    >
+                      <Link className="h-4 w-4 text-muted-foreground hover:text-primary" />
+                    </button>
                   </div>
                 </AccordionTrigger>
                 <AccordionContent className="pt-4">
@@ -79,11 +94,21 @@ const Week13 = () => {
                 </AccordionContent>
               </AccordionItem>
 
-              <AccordionItem value="order">
-                <AccordionTrigger className="text-lg font-semibold">
-                  <div className="flex items-center gap-2">
+              <AccordionItem value="order" id="order">
+                <AccordionTrigger className="text-lg font-semibold group">
+                  <div className="flex items-center gap-2 flex-1">
                     <ClipboardList className="h-5 w-5 text-primary" />
                     Final Presentations
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        copyLinkToSection('order');
+                      }}
+                      className="ml-auto opacity-0 group-hover:opacity-100 transition-opacity"
+                      title="Copy link to this section"
+                    >
+                      <Link className="h-4 w-4 text-muted-foreground hover:text-primary" />
+                    </button>
                   </div>
                 </AccordionTrigger>
                 <AccordionContent className="pt-4 space-y-4">
@@ -123,11 +148,21 @@ Team 1: Flu Shot{"\n"}Team 2: Bus Routes{"\n"}Team 3: Typhoon Signals{"\n"}Team 
                 </AccordionContent>
               </AccordionItem>
 
-              <AccordionItem value="photo">
-                <AccordionTrigger className="text-lg font-semibold">
-                  <div className="flex items-center gap-2">
+              <AccordionItem value="photo" id="photo">
+                <AccordionTrigger className="text-lg font-semibold group">
+                  <div className="flex items-center gap-2 flex-1">
                     <Camera className="h-5 w-5 text-primary" />
                     Photo Taking
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        copyLinkToSection('photo');
+                      }}
+                      className="ml-auto opacity-0 group-hover:opacity-100 transition-opacity"
+                      title="Copy link to this section"
+                    >
+                      <Link className="h-4 w-4 text-muted-foreground hover:text-primary" />
+                    </button>
                   </div>
                 </AccordionTrigger>
                 <AccordionContent className="pt-4 space-y-4">
@@ -145,11 +180,21 @@ Team 1: Flu Shot{"\n"}Team 2: Bus Routes{"\n"}Team 3: Typhoon Signals{"\n"}Team 
                 </AccordionContent>
               </AccordionItem>
 
-              <AccordionItem value="feedback">
-                <AccordionTrigger className="text-lg font-semibold">
-                  <div className="flex items-center gap-2">
+              <AccordionItem value="feedback" id="feedback">
+                <AccordionTrigger className="text-lg font-semibold group">
+                  <div className="flex items-center gap-2 flex-1">
                     <Award className="h-5 w-5 text-primary" />
                     Course Feedback Questionnaire
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        copyLinkToSection('feedback');
+                      }}
+                      className="ml-auto opacity-0 group-hover:opacity-100 transition-opacity"
+                      title="Copy link to this section"
+                    >
+                      <Link className="h-4 w-4 text-muted-foreground hover:text-primary" />
+                    </button>
                   </div>
                 </AccordionTrigger>
                 <AccordionContent className="pt-4 space-y-6">
@@ -198,11 +243,21 @@ Team 1: Flu Shot{"\n"}Team 2: Bus Routes{"\n"}Team 3: Typhoon Signals{"\n"}Team 
                 </AccordionContent>
               </AccordionItem>
 
-              <AccordionItem value="housekeeping">
-                <AccordionTrigger className="text-lg font-semibold">
-                  <div className="flex items-center gap-2">
+              <AccordionItem value="assignments" id="assignments">
+                <AccordionTrigger className="text-lg font-semibold group">
+                  <div className="flex items-center gap-2 flex-1">
                     <ClipboardList className="h-5 w-5 text-primary" />
-                    Housekeeping
+                    Assignment Deadlines
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        copyLinkToSection('assignments');
+                      }}
+                      className="ml-auto opacity-0 group-hover:opacity-100 transition-opacity"
+                      title="Copy link to this section"
+                    >
+                      <Link className="h-4 w-4 text-muted-foreground hover:text-primary" />
+                    </button>
                   </div>
                 </AccordionTrigger>
                 <AccordionContent className="pt-4 space-y-6">
