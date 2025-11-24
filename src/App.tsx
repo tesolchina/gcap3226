@@ -8,6 +8,7 @@ import { AppSidebar } from "@/components/AppSidebar";
 import { AuthProvider } from "@/contexts/AuthContext";
 import { UserMenu } from "@/components/UserMenu";
 import Home from "./pages/Home";
+import Week13 from "./pages/Week13";
 import TeamPage from "./pages/TeamPage";
 import Auth from "./pages/Auth";
 import NotFound from "./pages/NotFound";
@@ -34,6 +35,7 @@ const App = () => (
                 </header>
                 <Routes>
                   <Route path="/" element={<Home />} />
+                  <Route path="/week-13" element={<Week13 />} />
                   <Route path="/team/:slug" element={<TeamPage />} />
                   <Route path="/auth" element={<Auth />} />
                   <Route path="*" element={<NotFound />} />
