@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Award, Calendar, Lock } from "lucide-react";
 import { CountdownTimer } from "@/components/CountdownTimer";
 import { useToast } from "@/hooks/use-toast";
+import { supabase } from "@/integrations/supabase/client";
 
 interface PresentationSlot {
   team: string;
@@ -18,10 +19,7 @@ const Week13 = () => {
   const [isGenerating, setIsGenerating] = useState(false);
   const [secretCode, setSecretCode] = useState("");
   const [isUnlocked, setIsUnlocked] = useState(false);
-  const [showChangeCode, setShowChangeCode] = useState(false);
-  const [currentCode, setCurrentCode] = useState("");
-  const [newCode, setNewCode] = useState("");
-  const [storedCode, setStoredCode] = useState("6223");
+  const [isValidating, setIsValidating] = useState(false);
   const { toast } = useToast();
 
   const teams = [
@@ -56,46 +54,36 @@ const Week13 = () => {
     };
   };
 
-  const handleSecretCodeSubmit = () => {
-    if (secretCode === storedCode) {
-      setIsUnlocked(true);
-      toast({
-        title: "Access Granted",
-        description: "You can now generate the presentation order.",
+  const handleSecretCodeSubmit = async () => {
+    setIsValidating(true);
+    try {
+      const { data, error } = await supabase.functions.invoke('validate-secret-code', {
+        body: { code: secretCode }
       });
-    } else {
-      toast({
-        title: "Invalid Code",
-        description: "Please enter the correct secret code.",
-        variant: "destructive",
-      });
-    }
-  };
 
-  const handleChangeCode = () => {
-    if (currentCode === storedCode) {
-      if (newCode.length >= 4) {
-        setStoredCode(newCode);
-        setCurrentCode("");
-        setNewCode("");
-        setShowChangeCode(false);
+      if (error) throw error;
+
+      if (data.valid) {
+        setIsUnlocked(true);
         toast({
-          title: "Secret Code Updated",
-          description: "Your new secret code has been set successfully.",
+          title: "Access Granted",
+          description: "You can now generate the presentation order.",
         });
       } else {
         toast({
-          title: "Invalid New Code",
-          description: "New code must be at least 4 characters.",
+          title: "Invalid Code",
+          description: "Please enter the correct secret code.",
           variant: "destructive",
         });
       }
-    } else {
+    } catch (error) {
       toast({
-        title: "Invalid Current Code",
-        description: "Please enter the correct current secret code.",
+        title: "Error",
+        description: "Failed to validate secret code. Please try again.",
         variant: "destructive",
       });
+    } finally {
+      setIsValidating(false);
     }
   };
 
@@ -136,66 +124,6 @@ const Week13 = () => {
         </Card>
 
         <CountdownTimer />
-
-        <Card>
-          <CardHeader>
-            <CardTitle className="text-xl flex items-center justify-between">
-              <span>Secret Code Management</span>
-            </CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            {!showChangeCode ? (
-              <Button 
-                onClick={() => setShowChangeCode(true)}
-                variant="outline"
-                className="w-full"
-              >
-                Change Secret Code
-              </Button>
-            ) : (
-              <div className="space-y-4">
-                <div className="space-y-2">
-                  <label className="text-sm font-medium">Current Secret Code</label>
-                  <Input
-                    type="password"
-                    placeholder="Enter current code"
-                    value={currentCode}
-                    onChange={(e) => setCurrentCode(e.target.value)}
-                  />
-                </div>
-                <div className="space-y-2">
-                  <label className="text-sm font-medium">New Secret Code</label>
-                  <Input
-                    type="text"
-                    placeholder="Enter new code (min 4 characters)"
-                    value={newCode}
-                    onChange={(e) => setNewCode(e.target.value)}
-                    onKeyDown={(e) => e.key === "Enter" && handleChangeCode()}
-                  />
-                </div>
-                <div className="flex gap-2">
-                  <Button 
-                    onClick={handleChangeCode}
-                    className="flex-1"
-                  >
-                    Update Code
-                  </Button>
-                  <Button 
-                    onClick={() => {
-                      setShowChangeCode(false);
-                      setCurrentCode("");
-                      setNewCode("");
-                    }}
-                    variant="outline"
-                    className="flex-1"
-                  >
-                    Cancel
-                  </Button>
-                </div>
-              </div>
-            )}
-          </CardContent>
-        </Card>
 
         <Card>
           <CardHeader>
@@ -244,8 +172,8 @@ const Week13 = () => {
                       onChange={(e) => setSecretCode(e.target.value)}
                       onKeyDown={(e) => e.key === "Enter" && handleSecretCodeSubmit()}
                     />
-                    <Button onClick={handleSecretCodeSubmit}>
-                      Unlock
+                    <Button onClick={handleSecretCodeSubmit} disabled={isValidating}>
+                      {isValidating ? "Validating..." : "Unlock"}
                     </Button>
                   </div>
                 </div>
