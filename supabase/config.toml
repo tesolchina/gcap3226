@@ -2,3 +2,9 @@ project_id = "vyaltlvpzypolkqutkct"
 
 [functions.ai-consultation]
 verify_jwt = false
+
+[functions.generate-presentation-order]
+verify_jwt = false
+
+[functions.reset-presentation-order]
+verify_jwt = false
