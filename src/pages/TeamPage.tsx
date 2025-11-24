@@ -4,6 +4,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card } from "@/components/ui/card";
 import { AIConsultationCorner } from "@/components/AIConsultationCorner";
+import { PresentationTimer } from "@/components/PresentationTimer";
 import { Loader2, FileText, Database, Calculator, Lightbulb, Target, Presentation, ExternalLink, Clock, Video } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
@@ -194,6 +195,9 @@ const TeamPage = () => {
                           )}
                         </div>
                       </Card>
+
+                      {/* Presentation Timer */}
+                      <PresentationTimer />
 
                       {/* Recording Reminder for Teachers */}
                       <Card className="p-6 bg-gradient-to-br from-orange-50 to-red-50 dark:from-orange-950/20 dark:to-red-950/20 border-2 border-orange-200 dark:border-orange-800">
