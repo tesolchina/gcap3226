@@ -1,11 +1,12 @@
 import { useState, useEffect } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Award, Calendar, Users, ClipboardList } from "lucide-react";
+import { Award, Calendar, Users, ClipboardList, Camera } from "lucide-react";
 import { CountdownTimer } from "@/components/CountdownTimer";
 import { supabase } from "@/integrations/supabase/client";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import qrSimon from "@/assets/qr-simon.png";
 import qrTalia from "@/assets/qr-talia.png";
+import workshopPhoto from "@/assets/workshop-photo.jpg";
 
 interface PresentationSlot {
   team: string;
@@ -108,6 +109,28 @@ Team 1: Flu Shot{"\n"}Team 2: Bus Routes{"\n"}Team 3: Typhoon Signals{"\n"}Team 
                     <p className="text-sm text-muted-foreground">
                       Use <a href="https://www.random.org/lists/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">random.org/lists</a> to randomize the order
                     </p>
+                  </div>
+                </AccordionContent>
+              </AccordionItem>
+
+              <AccordionItem value="photo">
+                <AccordionTrigger className="text-lg font-semibold">
+                  <div className="flex items-center gap-2">
+                    <Camera className="h-5 w-5 text-primary" />
+                    Photo Taking
+                  </div>
+                </AccordionTrigger>
+                <AccordionContent className="pt-4 space-y-4">
+                  <p className="text-muted-foreground">
+                    Remember to take a group photo with all teams before the presentations begin!
+                  </p>
+                  <div className="space-y-2">
+                    <p className="text-sm font-medium">Sample from AI workshop for journalism class:</p>
+                    <img 
+                      src={workshopPhoto} 
+                      alt="Group photo sample from AI workshop" 
+                      className="w-full rounded-lg border"
+                    />
                   </div>
                 </AccordionContent>
               </AccordionItem>
