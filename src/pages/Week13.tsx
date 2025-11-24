@@ -87,11 +87,11 @@ const Week13 = () => {
     }
   };
 
-  const handleGenerateOrder = () => {
+  const handleGenerateOrder = async () => {
     setIsGenerating(true);
     
     // Simulate generation animation
-    setTimeout(() => {
+    setTimeout(async () => {
       const shuffled = [...teams].sort(() => Math.random() - 0.5);
       const schedule = shuffled.map((team, index) => {
         const { time, endTime } = generateTime(index);
@@ -99,13 +99,71 @@ const Week13 = () => {
       });
       
       setPresentationOrder(schedule);
+      
+      // Save schedule to database
+      try {
+        const teamSlugs = ['flu-shot', 'bus-route', 'typhoon-signals', 'food-waste', 'green-recycling', 'bus-stop-merge'];
+        
+        for (let i = 0; i < schedule.length; i++) {
+          const teamSlug = teamSlugs[i];
+          await supabase
+            .from('teams')
+            .update({
+              presentation_time: schedule[i].time,
+              presentation_end_time: schedule[i].endTime,
+              presentation_date: '2025-11-25'
+            })
+            .eq('slug', teamSlug);
+        }
+        
+        toast({
+          title: "Schedule Saved",
+          description: "Presentation times have been assigned to all teams.",
+        });
+      } catch (error) {
+        toast({
+          title: "Error",
+          description: "Failed to save schedule. Please try again.",
+          variant: "destructive",
+        });
+      }
+      
       setIsGenerating(false);
     }, 1500);
   };
 
-  const handleResetOrder = () => {
-    setPresentationOrder([]);
-    setShowSchedule(false);
+  const handleResetOrder = async () => {
+    // Clear schedule from database
+    try {
+      const teamSlugs = ['flu-shot', 'bus-route', 'typhoon-signals', 'food-waste', 'green-recycling', 'bus-stop-merge'];
+      
+      for (const teamSlug of teamSlugs) {
+        await supabase
+          .from('teams')
+          .update({
+            presentation_time: null,
+            presentation_end_time: null,
+            presentation_date: null
+          })
+          .eq('slug', teamSlug);
+      }
+      
+      setPresentationOrder([]);
+      setShowSchedule(false);
+      setIsUnlocked(false);
+      setSecretCode("");
+      
+      toast({
+        title: "Schedule Reset",
+        description: "All presentation times have been cleared.",
+      });
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "Failed to reset schedule. Please try again.",
+        variant: "destructive",
+      });
+    }
   };
 
   return (
@@ -180,17 +238,17 @@ const Week13 = () => {
               </div>
             ) : (
               <>
-                <div className="flex gap-2">
-                  <Button 
-                    onClick={() => setShowSchedule(!showSchedule)}
-                    variant="outline"
-                    className="flex-1"
-                  >
-                    {showSchedule ? "Hide Schedule" : "Show Schedule"}
-                  </Button>
-                  
-            {isUnlocked && showSchedule && (
-                    <>
+                {presentationOrder.length === 0 ? (
+                  <div className="flex gap-2">
+                    <Button 
+                      onClick={() => setShowSchedule(!showSchedule)}
+                      variant="outline"
+                      className="flex-1"
+                    >
+                      {showSchedule ? "Hide Schedule" : "Show Schedule"}
+                    </Button>
+                    
+                    {isUnlocked && showSchedule && (
                       <Button
                         onClick={handleGenerateOrder}
                         disabled={isGenerating}
@@ -198,18 +256,27 @@ const Week13 = () => {
                       >
                         {isGenerating ? "Generating..." : "Generate Order"}
                       </Button>
-                      {presentationOrder.length > 0 && (
-                        <Button
-                          onClick={handleResetOrder}
-                          variant="outline"
-                          className="flex-1"
-                        >
-                          Reset
-                        </Button>
-                      )}
-                    </>
-                  )}
-                </div>
+                    )}
+                  </div>
+                ) : (
+                  <div className="bg-muted/50 rounded-lg p-6 text-center space-y-4">
+                    <p className="text-muted-foreground">
+                      Presentation order has been generated and saved. Enter the secret code again to reset.
+                    </p>
+                    <div className="flex gap-2 max-w-md mx-auto">
+                      <Input
+                        type="password"
+                        placeholder="Enter secret code to reset"
+                        value={secretCode}
+                        onChange={(e) => setSecretCode(e.target.value)}
+                        onKeyDown={(e) => e.key === "Enter" && handleSecretCodeSubmit()}
+                      />
+                      <Button onClick={handleResetOrder} disabled={isValidating}>
+                        Reset
+                      </Button>
+                    </div>
+                  </div>
+                )}
               </>
             )}
 

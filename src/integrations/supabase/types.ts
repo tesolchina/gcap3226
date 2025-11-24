@@ -251,18 +251,27 @@ export type Database = {
           description: string | null
           id: number
           name: string
+          presentation_date: string | null
+          presentation_end_time: string | null
+          presentation_time: string | null
           slug: string
         }
         Insert: {
           description?: string | null
           id?: number
           name: string
+          presentation_date?: string | null
+          presentation_end_time?: string | null
+          presentation_time?: string | null
           slug: string
         }
         Update: {
           description?: string | null
           id?: number
           name?: string
+          presentation_date?: string | null
+          presentation_end_time?: string | null
+          presentation_time?: string | null
           slug?: string
         }
         Relationships: []
