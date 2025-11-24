@@ -1,8 +1,10 @@
 import { useState } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Award, Calendar } from "lucide-react";
+import { Input } from "@/components/ui/input";
+import { Award, Calendar, Lock } from "lucide-react";
 import { CountdownTimer } from "@/components/CountdownTimer";
+import { useToast } from "@/hooks/use-toast";
 
 interface PresentationSlot {
   team: string;
@@ -14,6 +16,9 @@ const Week13 = () => {
   const [showSchedule, setShowSchedule] = useState(false);
   const [presentationOrder, setPresentationOrder] = useState<PresentationSlot[]>([]);
   const [isGenerating, setIsGenerating] = useState(false);
+  const [secretCode, setSecretCode] = useState("");
+  const [isUnlocked, setIsUnlocked] = useState(false);
+  const { toast } = useToast();
 
   const teams = [
     "Team 1: Flu Shot",
@@ -47,6 +52,22 @@ const Week13 = () => {
     };
   };
 
+  const handleSecretCodeSubmit = () => {
+    if (secretCode === "6223") {
+      setIsUnlocked(true);
+      toast({
+        title: "Access Granted",
+        description: "You can now generate the presentation order.",
+      });
+    } else {
+      toast({
+        title: "Invalid Code",
+        description: "Please enter the correct secret code.",
+        variant: "destructive",
+      });
+    }
+  };
+
   const handleGenerateOrder = () => {
     setIsGenerating(true);
     
@@ -61,6 +82,11 @@ const Week13 = () => {
       setPresentationOrder(schedule);
       setIsGenerating(false);
     }, 1500);
+  };
+
+  const handleResetOrder = () => {
+    setPresentationOrder([]);
+    setShowSchedule(false);
   };
 
   return (
@@ -112,25 +138,61 @@ const Week13 = () => {
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
-            <div className="flex gap-2">
-              <Button 
-                onClick={() => setShowSchedule(!showSchedule)}
-                variant="outline"
-                className="flex-1"
-              >
-                {showSchedule ? "Hide Schedule" : "Show Schedule"}
-              </Button>
-              
-              {showSchedule && (
-                <Button
-                  onClick={handleGenerateOrder}
-                  disabled={isGenerating}
-                  className="flex-1"
-                >
-                  {isGenerating ? "Generating..." : "Generate Order"}
-                </Button>
-              )}
-            </div>
+            {!isUnlocked ? (
+              <div className="space-y-4">
+                <div className="bg-muted/50 rounded-lg p-6 text-center space-y-4">
+                  <Lock className="h-12 w-12 text-muted-foreground mx-auto" />
+                  <p className="text-muted-foreground">
+                    Enter the secret code to unlock the presentation order generator
+                  </p>
+                  <div className="flex gap-2 max-w-md mx-auto">
+                    <Input
+                      type="password"
+                      placeholder="Enter secret code"
+                      value={secretCode}
+                      onChange={(e) => setSecretCode(e.target.value)}
+                      onKeyDown={(e) => e.key === "Enter" && handleSecretCodeSubmit()}
+                    />
+                    <Button onClick={handleSecretCodeSubmit}>
+                      Unlock
+                    </Button>
+                  </div>
+                </div>
+              </div>
+            ) : (
+              <>
+                <div className="flex gap-2">
+                  <Button 
+                    onClick={() => setShowSchedule(!showSchedule)}
+                    variant="outline"
+                    className="flex-1"
+                  >
+                    {showSchedule ? "Hide Schedule" : "Show Schedule"}
+                  </Button>
+                  
+            {isUnlocked && showSchedule && (
+                    <>
+                      <Button
+                        onClick={handleGenerateOrder}
+                        disabled={isGenerating}
+                        className="flex-1"
+                      >
+                        {isGenerating ? "Generating..." : "Generate Order"}
+                      </Button>
+                      {presentationOrder.length > 0 && (
+                        <Button
+                          onClick={handleResetOrder}
+                          variant="outline"
+                          className="flex-1"
+                        >
+                          Reset
+                        </Button>
+                      )}
+                    </>
+                  )}
+                </div>
+              </>
+            )}
 
             {showSchedule && (
               <div className="space-y-4 animate-in fade-in slide-in-from-top-4 duration-500">
