@@ -83,10 +83,20 @@ const Week13 = () => {
                 <AccordionTrigger className="text-lg font-semibold">
                   <div className="flex items-center gap-2">
                     <ClipboardList className="h-5 w-5 text-primary" />
-                    Presentation Order
+                    Final Presentations
                   </div>
                 </AccordionTrigger>
                 <AccordionContent className="pt-4 space-y-4">
+                  <div className="bg-primary/10 border border-primary/20 p-4 rounded-lg space-y-2 mb-4">
+                    <h3 className="font-semibold text-primary">Presentation Guidelines</h3>
+                    <ul className="list-disc list-inside space-y-1 text-sm">
+                      <li>Each team has a <strong>total of 15 minutes</strong></li>
+                      <li>Recommended to finish in <strong>10-12 minutes (12 minutes max)</strong></li>
+                      <li>A countdown timer is available on each team page</li>
+                      <li>Remember: Your audience is a senior journalist</li>
+                      <li>Focus on presenting arguments in a way that members of the public can understand</li>
+                    </ul>
+                  </div>
                   <p className="text-muted-foreground">
                     The order of presentations will be determined around 10:50am on November 25, 2025.
                   </p>
