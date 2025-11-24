@@ -18,6 +18,10 @@ const Week13 = () => {
   const [isGenerating, setIsGenerating] = useState(false);
   const [secretCode, setSecretCode] = useState("");
   const [isUnlocked, setIsUnlocked] = useState(false);
+  const [showChangeCode, setShowChangeCode] = useState(false);
+  const [currentCode, setCurrentCode] = useState("");
+  const [newCode, setNewCode] = useState("");
+  const [storedCode, setStoredCode] = useState("6223");
   const { toast } = useToast();
 
   const teams = [
@@ -53,7 +57,7 @@ const Week13 = () => {
   };
 
   const handleSecretCodeSubmit = () => {
-    if (secretCode === "6223") {
+    if (secretCode === storedCode) {
       setIsUnlocked(true);
       toast({
         title: "Access Granted",
@@ -63,6 +67,33 @@ const Week13 = () => {
       toast({
         title: "Invalid Code",
         description: "Please enter the correct secret code.",
+        variant: "destructive",
+      });
+    }
+  };
+
+  const handleChangeCode = () => {
+    if (currentCode === storedCode) {
+      if (newCode.length >= 4) {
+        setStoredCode(newCode);
+        setCurrentCode("");
+        setNewCode("");
+        setShowChangeCode(false);
+        toast({
+          title: "Secret Code Updated",
+          description: "Your new secret code has been set successfully.",
+        });
+      } else {
+        toast({
+          title: "Invalid New Code",
+          description: "New code must be at least 4 characters.",
+          variant: "destructive",
+        });
+      }
+    } else {
+      toast({
+        title: "Invalid Current Code",
+        description: "Please enter the correct current secret code.",
         variant: "destructive",
       });
     }
@@ -105,6 +136,66 @@ const Week13 = () => {
         </Card>
 
         <CountdownTimer />
+
+        <Card>
+          <CardHeader>
+            <CardTitle className="text-xl flex items-center justify-between">
+              <span>Secret Code Management</span>
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            {!showChangeCode ? (
+              <Button 
+                onClick={() => setShowChangeCode(true)}
+                variant="outline"
+                className="w-full"
+              >
+                Change Secret Code
+              </Button>
+            ) : (
+              <div className="space-y-4">
+                <div className="space-y-2">
+                  <label className="text-sm font-medium">Current Secret Code</label>
+                  <Input
+                    type="password"
+                    placeholder="Enter current code"
+                    value={currentCode}
+                    onChange={(e) => setCurrentCode(e.target.value)}
+                  />
+                </div>
+                <div className="space-y-2">
+                  <label className="text-sm font-medium">New Secret Code</label>
+                  <Input
+                    type="text"
+                    placeholder="Enter new code (min 4 characters)"
+                    value={newCode}
+                    onChange={(e) => setNewCode(e.target.value)}
+                    onKeyDown={(e) => e.key === "Enter" && handleChangeCode()}
+                  />
+                </div>
+                <div className="flex gap-2">
+                  <Button 
+                    onClick={handleChangeCode}
+                    className="flex-1"
+                  >
+                    Update Code
+                  </Button>
+                  <Button 
+                    onClick={() => {
+                      setShowChangeCode(false);
+                      setCurrentCode("");
+                      setNewCode("");
+                    }}
+                    variant="outline"
+                    className="flex-1"
+                  >
+                    Cancel
+                  </Button>
+                </div>
+              </div>
+            )}
+          </CardContent>
+        </Card>
 
         <Card>
           <CardHeader>
