@@ -31,8 +31,8 @@ interface PresentationData {
 // Presentation slides data for each team
 const presentationData: Record<string, PresentationData> = {
   'flu-shot': {
-    link: 'https://docs.google.com/presentation/d/e/2PACX-1vSsReEFYsr5YNy3x8LaGsH_83H36-ZkyVwTWNuRM3gUEIh475qCHqsLhFJykA9MgdY87Lb5XzPfLE9C/pub?start=false&loop=false&delayms=3000',
-    iframeCode: '<iframe src="https://docs.google.com/presentation/d/e/2PACX-1vSsReEFYsr5YNy3x8LaGsH_83H36-ZkyVwTWNuRM3gUEIh475qCHqsLhFJykA9MgdY87Lb5XzPfLE9C/pubembed?start=false&loop=false&delayms=3000" frameborder="0" width="960" height="569" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>',
+    link: 'https://docs.google.com/presentation/d/1CHH-kBS_dRR7RDyGDkttIQIlOvSrbFwtJR-ihtiAQ7o/edit?usp=sharing',
+    iframeCode: '<iframe src="https://docs.google.com/presentation/d/1CHH-kBS_dRR7RDyGDkttIQIlOvSrbFwtJR-ihtiAQ7o/embed" frameborder="0" width="960" height="569" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>',
     teamMembers: ['Yeung Wing Yu (23238283)', 'SU Jialu (22256946)', 'Tsoi Yik Hon (22232192)', 'LYU Junhan (23213078)', 'Kwok Tsz Yau (22234020)'],
     focus: 'Analysis of the collected data on flu shot participation, the identified issues and some suggestions',
     presentationDate: 'November 25, 2025',
