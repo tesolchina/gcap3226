@@ -29,7 +29,7 @@ const App = () => (
                 <header className="h-14 flex items-center justify-between border-b bg-card/50 backdrop-blur-sm sticky top-0 z-10 px-4">
                   <div className="flex items-center">
                     <SidebarTrigger />
-                    <span className="ml-4 font-semibold text-primary">Course Portal</span>
+                    <span className="ml-4 font-semibold text-primary">GCAP 3266 - Participatory Policy Analysis</span>
                   </div>
                   <UserMenu />
                 </header>
