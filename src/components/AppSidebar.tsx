@@ -32,7 +32,7 @@ export function AppSidebar() {
       <SidebarContent>
         <SidebarGroup>
           <SidebarGroupLabel className="text-primary font-semibold text-lg px-4">
-            GCAP 3226
+            GCAP 3266
           </SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
