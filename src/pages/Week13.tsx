@@ -6,7 +6,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import qrSimon from "@/assets/qr-simon.png";
 import qrTalia from "@/assets/qr-talia.png";
-import workshopPhoto from "@/assets/workshop-photo.jpg";
+import classPhoto from "@/assets/class-photo.jpeg";
 
 interface PresentationSlot {
   team: string;
@@ -170,10 +170,10 @@ Team 1: Flu Shot{"\n"}Team 2: Bus Routes{"\n"}Team 3: Typhoon Signals{"\n"}Team 
                     Remember to take a group photo with all teams before the presentations begin!
                   </p>
                   <div className="space-y-2">
-                    <p className="text-sm font-medium">Sample from AI workshop for journalism class:</p>
+                    <p className="text-sm font-medium">GCAP 3226 Class Photo - Nov 25, 2025:</p>
                     <img 
-                      src={workshopPhoto} 
-                      alt="Group photo sample from AI workshop" 
+                      src={classPhoto} 
+                      alt="GCAP 3226 Class Photo" 
                       className="w-full rounded-lg border"
                     />
                   </div>
