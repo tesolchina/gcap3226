@@ -47,7 +47,7 @@ export const CountdownTimer = () => {
           <div className="flex items-center gap-2">
             <Clock className="h-5 w-5 text-primary" />
             <span className="font-semibold">
-              {isEventPassed ? "Presentations Today!" : "Time Until Presentations"}
+              {isEventPassed ? "Presentations Today! - Nov 25" : "Time Until Presentations (Nov 25)"}
             </span>
           </div>
           
