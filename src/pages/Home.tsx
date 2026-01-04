@@ -47,10 +47,10 @@ const Home = () => {
               </div>
             </div>
             <Button asChild className="w-full" size="lg">
-              <a href="https://erpp.hkbu.me/gcap" target="_blank" rel="noopener noreferrer">
+              <Link to="/spring-2026">
                 Enter Spring 2026 Portal
                 <ArrowRight className="ml-2 h-5 w-5" />
-              </a>
+              </Link>
             </Button>
           </Card>
 

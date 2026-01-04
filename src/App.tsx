@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { ArchiveSidebar } from "@/components/ArchiveSidebar";
+import { Spring2026Sidebar } from "@/components/Spring2026Sidebar";
 import { AuthProvider } from "@/contexts/AuthContext";
 import { UserMenu } from "@/components/UserMenu";
 import Home from "./pages/Home";
@@ -13,15 +14,18 @@ import Week13 from "./pages/Week13";
 import TeamPage from "./pages/TeamPage";
 import Auth from "./pages/Auth";
 import NotFound from "./pages/NotFound";
+import Spring2026Home from "./pages/Spring2026Home";
+import Spring2026Week from "./pages/Spring2026Week";
+import Spring2026Placeholder from "./pages/Spring2026Placeholder";
 
 const queryClient = new QueryClient();
 
 const AppContent = () => {
   const location = useLocation();
   const isArchiveRoute = location.pathname.startsWith('/fall-2025');
-  const isHomePage = location.pathname === '/';
+  const isSpring2026Route = location.pathname.startsWith('/spring-2026');
 
-  // Show sidebar only for archive routes
+  // Show sidebar for Fall 2025 archive routes
   if (isArchiveRoute) {
     return (
       <SidebarProvider>
@@ -39,6 +43,34 @@ const AppContent = () => {
               <Route path="/fall-2025" element={<Fall2025Archive />} />
               <Route path="/fall-2025/week-13" element={<Week13 />} />
               <Route path="/fall-2025/team/:slug" element={<TeamPage />} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </main>
+        </div>
+      </SidebarProvider>
+    );
+  }
+
+  // Show sidebar for Spring 2026 routes
+  if (isSpring2026Route) {
+    return (
+      <SidebarProvider>
+        <div className="flex min-h-screen w-full">
+          <Spring2026Sidebar />
+          <main className="flex-1">
+            <header className="h-14 flex items-center justify-between border-b bg-card/50 backdrop-blur-sm sticky top-0 z-10 px-4">
+              <div className="flex items-center">
+                <SidebarTrigger />
+                <span className="ml-4 font-semibold text-primary">GCAP 3226 - Spring 2026</span>
+              </div>
+              <UserMenu />
+            </header>
+            <Routes>
+              <Route path="/spring-2026" element={<Spring2026Home />} />
+              <Route path="/spring-2026/weeks/:weekId" element={<Spring2026Week />} />
+              <Route path="/spring-2026/syllabus" element={<Spring2026Placeholder />} />
+              <Route path="/spring-2026/resources" element={<Spring2026Placeholder />} />
+              <Route path="/spring-2026/feedback" element={<Spring2026Placeholder />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </main>
