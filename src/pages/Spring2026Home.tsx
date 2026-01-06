@@ -66,11 +66,11 @@ const Spring2026Home = () => {
                 <User className="h-8 w-8 text-primary" />
               </div>
               <div>
-                <h3 className="text-sm font-medium text-muted-foreground uppercase tracking-wider">Lecturer</h3>
-                <p className="text-xl font-bold mt-1">Dr. Simon Wang</p>
-                <p className="text-muted-foreground">Language Centre, HKBU</p>
+                <h3 className="text-sm font-medium text-muted-foreground uppercase tracking-wider">Co-ordinator</h3>
+                <p className="text-xl font-bold mt-1">Dr. Talia Wu</p>
+                <p className="text-muted-foreground">Department of Mathematics, HKBU</p>
                 <a 
-                  href="https://lc.hkbu.edu.hk/main/simonwang/" 
+                  href="https://www.math.hkbu.edu.hk/v1/people/profile/taliawu17/" 
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="text-primary hover:underline text-sm mt-2 inline-flex items-center gap-1"
@@ -87,11 +87,11 @@ const Spring2026Home = () => {
                 <User className="h-8 w-8 text-primary" />
               </div>
               <div>
-                <h3 className="text-sm font-medium text-muted-foreground uppercase tracking-wider">Co-teacher & Coordinator</h3>
-                <p className="text-xl font-bold mt-1">Dr. Talia Wu</p>
-                <p className="text-muted-foreground">Department of Mathematics, HKBU</p>
+                <h3 className="text-sm font-medium text-muted-foreground uppercase tracking-wider">Co-teacher</h3>
+                <p className="text-xl font-bold mt-1">Dr. Simon Wang</p>
+                <p className="text-muted-foreground">Language Centre, HKBU</p>
                 <a 
-                  href="https://www.math.hkbu.edu.hk/v1/people/profile/taliawu17/" 
+                  href="https://lc.hkbu.edu.hk/main/simonwang/" 
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="text-primary hover:underline text-sm mt-2 inline-flex items-center gap-1"
