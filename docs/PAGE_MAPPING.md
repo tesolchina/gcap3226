@@ -2,7 +2,7 @@
 
 This document maps each frontend page/route to its corresponding source files.
 
-> **Last Updated:** 2026-01-04
+> **Last Updated:** 2026-01-06
 
 ---
 
@@ -18,11 +18,12 @@ This document maps each frontend page/route to its corresponding source files.
 
 | Route | Page Component | Description |
 |-------|----------------|-------------|
-| `/spring-2026` | `src/pages/Spring2026Home.tsx` | Spring 2026 course home page |
-| `/spring-2026/weeks/:weekId` | `src/pages/Spring2026Week.tsx` | Weekly content pages (1, 2-4, 5-6, etc.) |
-| `/spring-2026/syllabus` | `src/pages/Spring2026Placeholder.tsx` | Syllabus page (placeholder) |
-| `/spring-2026/resources` | `src/pages/Spring2026Placeholder.tsx` | Resources page (placeholder) |
-| `/spring-2026/feedback` | `src/pages/Spring2026Placeholder.tsx` | Feedback page (placeholder) |
+| `/spring-2026` | `src/pages/Spring2026Home.tsx` | Spring 2026 course home page with roadmap |
+| `/spring-2026/weeks/1` | `src/pages/Spring2026Week1.tsx` | Week 1: Course Introduction (detailed content) |
+| `/spring-2026/weeks/:weekId` | `src/pages/Spring2026Week.tsx` | Weekly content pages (2-13) |
+| `/spring-2026/syllabus` | `src/pages/Spring2026Placeholder.tsx` | Syllabus page with embedded PDF |
+| `/spring-2026/resources` | `src/pages/Spring2026Placeholder.tsx` | Resources page (coming soon) |
+| `/spring-2026/feedback` | `src/pages/Spring2026Placeholder.tsx` | Feedback page (coming soon) |
 
 ### Fall 2025 Archive
 
@@ -38,6 +39,23 @@ This document maps each frontend page/route to its corresponding source files.
 |-------|----------------|-------------|
 | `/auth` | `src/pages/Auth.tsx` | Authentication page |
 | `/*` | `src/pages/NotFound.tsx` | 404 error page |
+
+---
+
+## Page Files Summary
+
+| File | Used | Description |
+|------|------|-------------|
+| `Auth.tsx` | ✅ | Authentication/login page |
+| `Fall2025Archive.tsx` | ✅ | Fall 2025 semester archive |
+| `Home.tsx` | ✅ | Main landing page |
+| `NotFound.tsx` | ✅ | 404 error page |
+| `Spring2026Home.tsx` | ✅ | Spring 2026 home with course roadmap |
+| `Spring2026Placeholder.tsx` | ✅ | Placeholder for syllabus/resources/feedback |
+| `Spring2026Week.tsx` | ✅ | Generic week page (weeks 2-13) |
+| `Spring2026Week1.tsx` | ✅ | Detailed Week 1 content |
+| `TeamPage.tsx` | ✅ | Individual team pages |
+| `Week13.tsx` | ✅ | Week 13 presentation page |
 
 ---
 
@@ -57,6 +75,7 @@ This document maps each frontend page/route to its corresponding source files.
 |-----------|------|---------|
 | AI Consultation Corner | `src/components/AIConsultationCorner.tsx` | `TeamPage.tsx` |
 | Countdown Timer | `src/components/CountdownTimer.tsx` | `Fall2025Archive.tsx` |
+| Course Roadmap | `src/components/CourseRoadmap.tsx` | `Spring2026Home.tsx` |
 | Message Board | `src/components/MessageBoard.tsx` | `TeamPage.tsx` |
 | Presentation Timer | `src/components/PresentationTimer.tsx` | `Week13.tsx` |
 | Submission Form | `src/components/SubmissionForm.tsx` | `TeamPage.tsx` |
