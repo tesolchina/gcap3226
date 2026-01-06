@@ -372,7 +372,7 @@ const CourseRoadmap = () => {
                 </div>
                 <div>
                   <h3 className="font-bold text-foreground text-lg">🎯 Final Presentation & Report</h3>
-                  <p className="text-xs text-muted-foreground">📅 22 Apr (Last class: 25 Apr)</p>
+                  <p className="text-xs text-muted-foreground">📅 22 Apr</p>
                 </div>
               </div>
               <p className="text-sm text-muted-foreground mb-3">
