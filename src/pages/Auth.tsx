@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { supabase } from '@/integrations/supabase/client';
 import { useAuth } from '@/contexts/AuthContext';
-import { Github } from 'lucide-react';
+import { Chrome } from 'lucide-react';
 import { toast } from 'sonner';
 
 const Auth = () => {
@@ -17,10 +17,10 @@ const Auth = () => {
     }
   }, [user, navigate]);
 
-  const handleGitHubLogin = async () => {
+  const handleGoogleLogin = async () => {
     try {
       const { error } = await supabase.auth.signInWithOAuth({
-        provider: 'github',
+        provider: 'google',
         options: {
           redirectTo: `${window.location.origin}/`,
         },
@@ -29,7 +29,7 @@ const Auth = () => {
       if (error) throw error;
     } catch (error: any) {
       console.error('Error logging in:', error);
-      toast.error(error.message || 'Failed to login with GitHub');
+      toast.error(error.message || 'Failed to login with Google');
     }
   };
 
@@ -44,12 +44,12 @@ const Auth = () => {
         </CardHeader>
         <CardContent className="space-y-4">
           <Button 
-            onClick={handleGitHubLogin}
+            onClick={handleGoogleLogin}
             className="w-full"
             size="lg"
           >
-            <Github className="mr-2 h-5 w-5" />
-            Continue with GitHub
+            <Chrome className="mr-2 h-5 w-5" />
+            Continue with Google
           </Button>
           
           <p className="text-sm text-muted-foreground text-center mt-4">
