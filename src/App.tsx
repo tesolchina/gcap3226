@@ -12,7 +12,8 @@ import Home from "./pages/Home";
 import Fall2025Archive from "./pages/Fall2025Archive";
 import Week13 from "./pages/Week13";
 import TeamPage from "./pages/TeamPage";
-import Auth from "./pages/Auth";
+import Login from "./pages/Login";
+import TeacherDashboard from "./pages/TeacherDashboard";
 import NotFound from "./pages/NotFound";
 import Spring2026Home from "./pages/Spring2026Home";
 import Spring2026Week from "./pages/Spring2026Week";
@@ -105,7 +106,8 @@ const AppContent = () => {
     <div className="min-h-screen w-full">
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/auth" element={<Auth />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/teacher-dashboard" element={<TeacherDashboard />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </div>

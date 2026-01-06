@@ -170,6 +170,71 @@ export type Database = {
           },
         ]
       }
+      mc_questions: {
+        Row: {
+          correct_option: number | null
+          created_at: string | null
+          display_order: number | null
+          id: string
+          is_active: boolean | null
+          options: Json
+          page_slug: string
+          question_text: string
+        }
+        Insert: {
+          correct_option?: number | null
+          created_at?: string | null
+          display_order?: number | null
+          id?: string
+          is_active?: boolean | null
+          options?: Json
+          page_slug: string
+          question_text: string
+        }
+        Update: {
+          correct_option?: number | null
+          created_at?: string | null
+          display_order?: number | null
+          id?: string
+          is_active?: boolean | null
+          options?: Json
+          page_slug?: string
+          question_text?: string
+        }
+        Relationships: []
+      }
+      mc_responses: {
+        Row: {
+          created_at: string | null
+          id: string
+          question_id: string
+          selected_option: number
+          session_id: string
+        }
+        Insert: {
+          created_at?: string | null
+          id?: string
+          question_id: string
+          selected_option: number
+          session_id: string
+        }
+        Update: {
+          created_at?: string | null
+          id?: string
+          question_id?: string
+          selected_option?: number
+          session_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "mc_responses_question_id_fkey"
+            columns: ["question_id"]
+            isOneToOne: false
+            referencedRelation: "mc_questions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       messages: {
         Row: {
           author_name: string
