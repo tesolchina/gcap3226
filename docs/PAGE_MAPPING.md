@@ -20,7 +20,26 @@ This document maps each frontend page/route to its corresponding source files.
 |-------|----------------|-------------|
 | `/spring-2026` | `src/pages/Spring2026Home.tsx` | Spring 2026 course home page with roadmap |
 | `/spring-2026/weeks/1` | `src/pages/Spring2026Week1.tsx` | Week 1: Course Introduction (detailed content) |
-| `/spring-2026/weeks/:weekId` | `src/pages/Spring2026Week.tsx` | Weekly content pages (2-13) |
+| `/spring-2026/weeks/2` | `src/pages/Spring2026Week.tsx` | Week 2 content page |
+| `/spring-2026/weeks/3` | `src/pages/Spring2026Week.tsx` | Week 3 content page |
+| `/spring-2026/weeks/3/in-class-exercise-1` | `src/pages/AssessmentPage.tsx` | In-class Exercise 1 |
+| `/spring-2026/weeks/4` | `src/pages/Spring2026Week.tsx` | Week 4 content page |
+| `/spring-2026/weeks/4/in-class-exercise-2` | `src/pages/AssessmentPage.tsx` | In-class Exercise 2 |
+| `/spring-2026/weeks/5` | `src/pages/Spring2026Week.tsx` | Week 5 content page |
+| `/spring-2026/weeks/5/reflective-essay-1` | `src/pages/AssessmentPage.tsx` | Reflective Essay 1 |
+| `/spring-2026/weeks/6` | `src/pages/Spring2026Week.tsx` | Week 6 content page |
+| `/spring-2026/weeks/7` | `src/pages/Spring2026Week.tsx` | Week 7 content page |
+| `/spring-2026/weeks/7/reflective-essay-2` | `src/pages/AssessmentPage.tsx` | Reflective Essay 2 |
+| `/spring-2026/weeks/8` | `src/pages/Spring2026Week.tsx` | Week 8 content page |
+| `/spring-2026/weeks/8/reflective-essay-3` | `src/pages/AssessmentPage.tsx` | Reflective Essay 3 |
+| `/spring-2026/weeks/9` | `src/pages/Spring2026Week.tsx` | Week 9 content page |
+| `/spring-2026/weeks/10` | `src/pages/Spring2026Week.tsx` | Week 10 content page |
+| `/spring-2026/weeks/11` | `src/pages/Spring2026Week.tsx` | Week 11 content page |
+| `/spring-2026/weeks/11/presentation-1` | `src/pages/AssessmentPage.tsx` | In-Class Presentation 1 |
+| `/spring-2026/weeks/12` | `src/pages/Spring2026Week.tsx` | Week 12 content page |
+| `/spring-2026/weeks/12/human-ai-report` | `src/pages/AssessmentPage.tsx` | Human-AI Collaboration Report |
+| `/spring-2026/weeks/13` | `src/pages/Spring2026Week.tsx` | Week 13 content page |
+| `/spring-2026/weeks/13/final-presentation-report` | `src/pages/AssessmentPage.tsx` | Final Presentation & Report |
 | `/spring-2026/syllabus` | `src/pages/Spring2026Placeholder.tsx` | Syllabus page with embedded PDF |
 | `/spring-2026/resources` | `src/pages/Spring2026Placeholder.tsx` | Resources page (coming soon) |
 | `/spring-2026/feedback` | `src/pages/Spring2026Placeholder.tsx` | Feedback page (coming soon) |
