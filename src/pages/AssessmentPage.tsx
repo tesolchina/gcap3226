@@ -40,7 +40,7 @@ const AssessmentPage: React.FC<AssessmentPageProps> = ({ title, description, bac
           <Button asChild variant="outline">
             <Link to={backLink}>
               <ArrowLeft className="mr-2 h-4 w-4" />
-              Back to Week Overview
+              Back to Assessments
             </Link>
           </Button>
         </Card>

@@ -5,7 +5,7 @@ const Spring2026Presentation1 = () => {
     <AssessmentPage
       title="In-Class Presentation 1"
       description="First group presentation on project progress and data governance findings."
-      backLink="/spring-2026/weeks/11"
+      backLink="/spring-2026#assessments"
     />
   );
 };

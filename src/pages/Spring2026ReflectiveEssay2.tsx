@@ -5,7 +5,7 @@ const Spring2026ReflectiveEssay2 = () => {
     <AssessmentPage
       title="Reflective Essay 2"
       description="Second reflective essay focusing on data governance insights and fieldwork experiences."
-      backLink="/spring-2026/weeks/7"
+      backLink="/spring-2026#assessments"
     />
   );
 };
