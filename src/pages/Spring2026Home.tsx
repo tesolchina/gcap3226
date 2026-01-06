@@ -1,24 +1,27 @@
+import { useState } from "react";
 import { Card } from "@/components/ui/card";
 import CourseRoadmap from "@/components/CourseRoadmap";
 import { Button } from "@/components/ui/button";
-import { User, FileText, Presentation, BookOpen, Users, Target, ArrowRight } from "lucide-react";
+import { User, FileText, Presentation, ChevronDown, ChevronUp, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const Spring2026Home = () => {
+  const [showAssessments, setShowAssessments] = useState(false);
+
   const assessments = [
     {
       title: "In-class Exercises",
       timing: "Weeks 3-4",
       type: "In-class",
       weight: "10%",
-      link: "/spring-2026/weeks/3-4",
+      link: "/spring-2026/weeks/3",
     },
     {
       title: "Reflective Essays",
       timing: "Weeks 5-9",
       type: "Take-home",
       weight: "20%",
-      link: "/spring-2026/weeks/5-6",
+      link: "/spring-2026/weeks/5",
     },
     {
       title: "In-Class Presentation 1",
@@ -124,77 +127,46 @@ const Spring2026Home = () => {
           </div>
         </Card>
 
-        {/* Assessment Components */}
-        <div>
-          <h2 className="text-2xl font-bold mb-6 text-center">Assessment Components</h2>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {assessments.map((item, idx) => (
-              <Card key={idx} className="p-5 hover:shadow-lg transition-all hover:scale-[1.02] bg-card">
-                <div className="flex items-start justify-between mb-3">
-                  <Presentation className="h-5 w-5 text-primary" />
-                  <span className="text-lg font-bold text-primary">{item.weight}</span>
-                </div>
-                <h3 className="font-semibold mb-1">{item.title}</h3>
-                <p className="text-sm text-muted-foreground mb-3">
-                  {item.timing} • {item.type}
-                </p>
-                <Link 
-                  to={item.link}
-                  className="text-primary hover:underline text-sm inline-flex items-center gap-1"
-                >
-                  View Details <ArrowRight className="h-3 w-3" />
-                </Link>
-              </Card>
-            ))}
-          </div>
-        </div>
-
-        {/* Course Structure */}
-        <Card className="p-8 bg-gradient-to-br from-primary/5 to-accent/10">
-          <h2 className="text-2xl font-bold mb-6 text-center">Course Structure</h2>
-          <p className="text-center text-muted-foreground mb-6">
-            This 13-week course combines:
-          </p>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
-            <div className="flex items-center gap-3 p-4 bg-background rounded-lg">
-              <BookOpen className="h-5 w-5 text-primary flex-shrink-0" />
-              <span className="text-sm">Lectures on policy analysis methods</span>
-            </div>
-            <div className="flex items-center gap-3 p-4 bg-background rounded-lg">
-              <Users className="h-5 w-5 text-primary flex-shrink-0" />
-              <span className="text-sm">Team-based project work</span>
-            </div>
-            <div className="flex items-center gap-3 p-4 bg-background rounded-lg">
-              <Target className="h-5 w-5 text-primary flex-shrink-0" />
-              <span className="text-sm">Data-driven research</span>
-            </div>
-            <div className="flex items-center gap-3 p-4 bg-background rounded-lg">
-              <Presentation className="h-5 w-5 text-primary flex-shrink-0" />
-              <span className="text-sm">Oral presentations</span>
-            </div>
-          </div>
-        </Card>
-
-        {/* Course Objectives */}
-        <Card className="p-6 bg-gradient-to-br from-card to-accent/20">
-          <div className="flex items-start gap-4">
-            <div className="p-3 bg-primary/10 rounded-full">
-              <Target className="h-8 w-8 text-primary" />
-            </div>
-            <div>
-              <h3 className="text-sm font-medium text-muted-foreground uppercase tracking-wider">Course Objectives</h3>
-              <ul className="list-disc list-inside space-y-2 text-foreground">
-                <li>Equip students with analytical tools for data-informed policymaking in Hong Kong</li>
-                <li>Integrate quantitative and qualitative insights to address social issues aligned with UN SDGs</li>
-                <li>Evaluate government data use for transparency</li>
-                <li>Engage students in practical projects for experiential learning</li>
-              </ul>
-            </div>
-          </div>
-        </Card>
-
-        {/* Course Roadmap */}
+        {/* Course Roadmap (includes objectives) */}
         <CourseRoadmap />
+
+        {/* Assessment Toggle Section */}
+        <div className="space-y-4">
+          <button
+            onClick={() => setShowAssessments(!showAssessments)}
+            className="w-full flex items-center justify-between p-4 bg-primary/10 rounded-lg hover:bg-primary/20 transition-colors"
+          >
+            <span className="text-lg font-semibold text-foreground">Assessment</span>
+            {showAssessments ? (
+              <ChevronUp className="h-5 w-5 text-primary" />
+            ) : (
+              <ChevronDown className="h-5 w-5 text-primary" />
+            )}
+          </button>
+          
+          {showAssessments && (
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 animate-in fade-in slide-in-from-top-2 duration-300">
+              {assessments.map((item, idx) => (
+                <Card key={idx} className="p-5 hover:shadow-lg transition-all hover:scale-[1.02] bg-card">
+                  <div className="flex items-start justify-between mb-3">
+                    <Presentation className="h-5 w-5 text-primary" />
+                    <span className="text-lg font-bold text-primary">{item.weight}</span>
+                  </div>
+                  <h3 className="font-semibold mb-1">{item.title}</h3>
+                  <p className="text-sm text-muted-foreground mb-3">
+                    {item.timing} • {item.type}
+                  </p>
+                  <Link 
+                    to={item.link}
+                    className="text-primary hover:underline text-sm inline-flex items-center gap-1"
+                  >
+                    View Details <ArrowRight className="h-3 w-3" />
+                  </Link>
+                </Card>
+              ))}
+            </div>
+          )}
+        </div>
 
         {/* Quick Links */}
         <div className="flex flex-wrap justify-center gap-4">
