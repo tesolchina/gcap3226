@@ -27,6 +27,7 @@ import Spring2026Presentation1 from "./pages/Spring2026Presentation1";
 import Spring2026HumanAICollaborationReport from "./pages/Spring2026HumanAICollaborationReport";
 import Spring2026FinalPresentationReport from "./pages/Spring2026FinalPresentationReport";
 import Spring2026TopicSelection from "./pages/Spring2026TopicSelection";
+import Spring2026Topic from "./pages/Spring2026Topic";
 
 const queryClient = new QueryClient();
 
@@ -88,6 +89,7 @@ const AppContent = () => {
               <Route path="/spring-2026/weeks/13/final-presentation-report" element={<Spring2026FinalPresentationReport />} />
               <Route path="/spring-2026/weeks/:weekId" element={<Spring2026Week />} />
               <Route path="/spring-2026/topics" element={<Spring2026TopicSelection />} />
+              <Route path="/spring-2026/topics/:topicSlug" element={<Spring2026Topic />} />
               <Route path="/spring-2026/syllabus" element={<Spring2026Placeholder />} />
               <Route path="/spring-2026/resources" element={<Spring2026Placeholder />} />
               <Route path="/spring-2026/feedback" element={<Spring2026Placeholder />} />
