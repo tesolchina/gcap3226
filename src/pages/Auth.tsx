@@ -33,21 +33,23 @@ const Auth = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-background p-4">
-      <Card className="w-full max-w-md">
-        <CardHeader className="text-center space-y-2">
-          <CardTitle className="text-2xl font-bold">Teacher Login</CardTitle>
-          <CardDescription>
-            Sign in with your Google account to access the teacher dashboard
+    <div className="min-h-screen flex items-center justify-center bg-muted/30 p-4">
+      <Card className="w-full max-w-sm border-0 shadow-lg">
+        <CardHeader className="text-center pb-2">
+          <CardTitle className="text-xl font-semibold tracking-tight">
+            Teacher Login
+          </CardTitle>
+          <CardDescription className="text-muted-foreground text-sm">
+            Access your teacher dashboard
           </CardDescription>
         </CardHeader>
-        <CardContent className="space-y-6">
+        <CardContent className="pt-4 space-y-4">
           <Button 
             onClick={handleGoogleLogin}
-            className="w-full h-12 text-base"
+            className="w-full h-11"
             variant="outline"
           >
-            <svg className="mr-2 h-5 w-5" viewBox="0 0 24 24">
+            <svg className="mr-2 h-4 w-4" viewBox="0 0 24 24">
               <path
                 d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
                 fill="#4285F4"
@@ -68,7 +70,7 @@ const Auth = () => {
             Continue with Google
           </Button>
           
-          <p className="text-sm text-muted-foreground text-center">
+          <p className="text-xs text-muted-foreground text-center">
             Students can access course content without signing in
           </p>
         </CardContent>
