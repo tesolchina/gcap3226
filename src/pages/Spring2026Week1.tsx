@@ -2,7 +2,9 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, BookOpen, Target, MessageSquare, FileText, Users, Presentation } from "lucide-react";
+import { ArrowLeft, BookOpen, Target, MessageSquare, FileText, Users, ChevronDown, ChevronUp, Database, Scale, AlertTriangle, CheckCircle2 } from "lucide-react";
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
+import busAppScreenshot from "@/assets/bus-app-duplicate-stops.png";
 
 const Spring2026Week1 = () => {
   const [currentModule, setCurrentModule] = useState(1);
@@ -140,96 +142,173 @@ const Spring2026Week1 = () => {
 };
 
 const Module1: React.FC<{ onComplete: () => void }> = ({ onComplete }) => {
-  const [selectedChoice, setSelectedChoice] = useState<string | null>(null);
-  const [showFeedback, setShowFeedback] = useState(false);
-
-  const handleChoice = (choice: string) => {
-    setSelectedChoice(choice);
-    setShowFeedback(true);
-    if (choice === 'B') {
-      onComplete();
-    }
-  };
+  const [showExample, setShowExample] = useState(false);
 
   return (
     <div className="space-y-6">
+      {/* Section A: Lecture Notes */}
       <Card>
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <BookOpen className="h-5 w-5 text-blue-500" />
-            Module 1: Interactive Lecture - The St Martin Bus Stop Case
+            Module 1: Introduction to Data Governance
           </CardTitle>
         </CardHeader>
         <CardContent className="space-y-6">
-          <div>
-            <h3 className="text-lg font-semibold mb-3">📊 The Problem Discovery</h3>
-            <p className="text-muted-foreground mb-4">
-              A seemingly simple issue that reveals deeper data governance challenges.
-            </p>
-            <div className="bg-gradient-to-r from-red-50 to-orange-50 p-4 rounded-lg border border-red-200">
-              <h4 className="font-semibold text-red-800 mb-2">🚌 The St Martin Bus Stops</h4>
-              <p className="text-red-700 text-sm">
-                Both stops appear as "St Martin" in bus tracking apps. Passengers can't tell which side of the street the incoming bus is actually approaching.
-              </p>
-            </div>
-          </div>
-
-          <div>
-            <h3 className="text-lg font-semibold mb-3">🤔 Initial Assessment: What type of problem is this?</h3>
-            <div className="space-y-3">
-              {[
-                { id: 'A', text: 'Technology problem - apps need better GPS', correct: false },
-                { id: 'B', text: 'Data governance problem - inconsistent naming standards', correct: true },
-                { id: 'C', text: 'User experience problem - people need better training', correct: false },
-                { id: 'D', text: 'Business problem - bus companies need better coordination', correct: false }
-              ].map((choice) => (
-                <button
-                  key={choice.id}
-                  onClick={() => handleChoice(choice.id)}
-                  className={`w-full text-left p-4 border-2 rounded-lg transition-all ${
-                    selectedChoice === choice.id
-                      ? choice.correct
-                        ? 'border-green-500 bg-green-50'
-                        : 'border-red-500 bg-red-50'
-                      : 'border-gray-200 hover:bg-gray-50'
-                  }`}
-                  disabled={selectedChoice !== null}
-                >
-                  <span className="font-medium">{choice.id})</span> {choice.text}
-                  {selectedChoice === choice.id && (
-                    <span className="ml-2">
-                      {choice.correct ? '✅ Correct!' : '❌ Not quite'}
-                    </span>
-                  )}
-                </button>
-              ))}
-            </div>
-
-            {showFeedback && selectedChoice === 'B' && (
-              <div className="mt-4 p-4 bg-green-50 border border-green-200 rounded-lg">
-                <p className="text-green-800">
-                  ✅ Correct! This is fundamentally a data governance issue. While technology and user experience are affected, the root cause is poor data standards.
-                </p>
+          {/* Key Concepts */}
+          <div className="space-y-4">
+            <h3 className="text-lg font-semibold flex items-center gap-2">
+              <Database className="h-5 w-5 text-primary" />
+              What is Data Governance?
+            </h3>
+            
+            <div className="grid md:grid-cols-2 gap-4">
+              <div className="space-y-3">
+                <div className="flex items-start gap-3 p-3 bg-accent/50 rounded-lg">
+                  <Scale className="h-5 w-5 text-primary mt-0.5 shrink-0" />
+                  <div>
+                    <h4 className="font-medium">Definition</h4>
+                    <p className="text-sm text-muted-foreground">
+                      The policies, processes, and standards that ensure data is accurate, consistent, and usable across an organization.
+                    </p>
+                  </div>
+                </div>
+                
+                <div className="flex items-start gap-3 p-3 bg-accent/50 rounded-lg">
+                  <CheckCircle2 className="h-5 w-5 text-green-600 mt-0.5 shrink-0" />
+                  <div>
+                    <h4 className="font-medium">Core Principles</h4>
+                    <ul className="text-sm text-muted-foreground space-y-1 mt-1">
+                      <li>• <strong>Accuracy</strong> – Data reflects reality</li>
+                      <li>• <strong>Consistency</strong> – Same data across systems</li>
+                      <li>• <strong>Uniqueness</strong> – No confusing duplicates</li>
+                      <li>• <strong>Usability</strong> – Data serves user needs</li>
+                    </ul>
+                  </div>
+                </div>
               </div>
-            )}
+              
+              <div className="space-y-3">
+                <div className="flex items-start gap-3 p-3 bg-accent/50 rounded-lg">
+                  <AlertTriangle className="h-5 w-5 text-amber-500 mt-0.5 shrink-0" />
+                  <div>
+                    <h4 className="font-medium">Why It Matters</h4>
+                    <p className="text-sm text-muted-foreground">
+                      Poor data governance leads to confusion, wasted resources, and poor decision-making in both public and private sectors.
+                    </p>
+                  </div>
+                </div>
+                
+                <div className="flex items-start gap-3 p-3 bg-primary/10 rounded-lg border border-primary/20">
+                  <Target className="h-5 w-5 text-primary mt-0.5 shrink-0" />
+                  <div>
+                    <h4 className="font-medium text-primary">Course Focus</h4>
+                    <p className="text-sm text-muted-foreground">
+                      We'll examine how HK government manages public data and identify opportunities for improvement through citizen advocacy.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
 
-          <div>
-            <h3 className="text-lg font-semibold mb-3">📝 Optional Tasks</h3>
-            <ul className="space-y-2 text-muted-foreground">
-              <li>• Research similar data quality issues in Hong Kong public services</li>
-              <li>• Map out the user journey for someone trying to catch a bus at St Martin</li>
-            </ul>
+          {/* Real-World Example Toggle */}
+          <Collapsible open={showExample} onOpenChange={setShowExample}>
+            <CollapsibleTrigger asChild>
+              <Button variant="outline" className="w-full justify-between">
+                <span className="flex items-center gap-2">
+                  🚌 Real-World Example: The St Martin Bus Stop Problem
+                </span>
+                {showExample ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
+              </Button>
+            </CollapsibleTrigger>
+            <CollapsibleContent className="mt-4 space-y-4">
+              <div className="grid md:grid-cols-2 gap-6">
+                <div className="space-y-4">
+                  <div className="bg-destructive/10 p-4 rounded-lg border border-destructive/20">
+                    <h4 className="font-semibold text-destructive mb-2">The Problem</h4>
+                    <p className="text-sm text-muted-foreground mb-3">
+                      Look at the bus app screenshot. Can you spot the data governance issue?
+                    </p>
+                    <ul className="text-sm space-y-2">
+                      <li className="flex items-start gap-2">
+                        <span className="text-destructive font-bold">→</span>
+                        Stop #7 is named "St MARTIN"
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <span className="text-destructive font-bold">→</span>
+                        Stop #11 is also named "St MARTIN"
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <span className="text-destructive font-bold">→</span>
+                        Same name, different locations!
+                      </li>
+                    </ul>
+                  </div>
+                  
+                  <div className="bg-amber-50 dark:bg-amber-950/30 p-4 rounded-lg border border-amber-200 dark:border-amber-800">
+                    <h4 className="font-semibold text-amber-800 dark:text-amber-200 mb-2">Impact on Users</h4>
+                    <ul className="text-sm text-amber-700 dark:text-amber-300 space-y-1">
+                      <li>• Passengers can't tell which stop the bus is approaching</li>
+                      <li>• Confusion about which side of the street to wait</li>
+                      <li>• Missed buses and wasted time</li>
+                    </ul>
+                  </div>
+                </div>
+                
+                <div className="flex flex-col items-center">
+                  <img 
+                    src={busAppScreenshot} 
+                    alt="KMB Bus App showing duplicate St Martin stops"
+                    className="rounded-lg shadow-lg border max-h-[400px] object-contain"
+                  />
+                  <p className="text-xs text-muted-foreground mt-2 text-center">
+                    KMB app showing Route 272A with duplicate "St MARTIN" stops
+                  </p>
+                </div>
+              </div>
+              
+              <div className="bg-primary/5 p-4 rounded-lg border border-primary/20">
+                <h4 className="font-semibold text-primary mb-2">🔍 Data Governance Analysis</h4>
+                <div className="grid md:grid-cols-3 gap-3 text-sm">
+                  <div className="bg-background p-3 rounded">
+                    <span className="font-medium text-destructive">Uniqueness ❌</span>
+                    <p className="text-muted-foreground text-xs mt-1">Duplicate names without unique identifiers</p>
+                  </div>
+                  <div className="bg-background p-3 rounded">
+                    <span className="font-medium text-destructive">Usability ❌</span>
+                    <p className="text-muted-foreground text-xs mt-1">Data doesn't serve passenger needs</p>
+                  </div>
+                  <div className="bg-background p-3 rounded">
+                    <span className="font-medium text-amber-600">Consistency ⚠️</span>
+                    <p className="text-muted-foreground text-xs mt-1">Different systems may handle this differently</p>
+                  </div>
+                </div>
+              </div>
+            </CollapsibleContent>
+          </Collapsible>
+
+          {/* MC Tasks Placeholder */}
+          <div className="border-2 border-dashed border-muted-foreground/30 rounded-lg p-6">
+            <h3 className="text-lg font-semibold mb-2 text-muted-foreground">📝 Check Your Understanding</h3>
+            <p className="text-sm text-muted-foreground">MC questions will appear here (2-3 questions about data governance concepts)</p>
           </div>
 
-          <div>
-            <h3 className="text-lg font-semibold mb-3">🪞 Reflection & Note-taking</h3>
-            <textarea
-              className="w-full p-3 border border-gray-300 rounded-lg"
-              rows={4}
-              placeholder="Journal entry: Personal experiences with confusing data or services..."
-            />
+          {/* Open-Ended Task Placeholder */}
+          <div className="border-2 border-dashed border-muted-foreground/30 rounded-lg p-6">
+            <h3 className="text-lg font-semibold mb-2 text-muted-foreground">✍️ Reflection Task</h3>
+            <p className="text-sm text-muted-foreground">Open-ended reflection with AI feedback will appear here</p>
           </div>
+
+          {/* Teacher Comments Placeholder */}
+          <div className="border-2 border-dashed border-muted-foreground/30 rounded-lg p-6">
+            <h3 className="text-lg font-semibold mb-2 text-muted-foreground">💬 Teacher Comments</h3>
+            <p className="text-sm text-muted-foreground">Teacher observations and AI summaries will appear here</p>
+          </div>
+
+          <Button onClick={onComplete} className="w-full">
+            Mark Module as Complete
+          </Button>
         </CardContent>
       </Card>
     </div>
