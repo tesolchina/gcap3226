@@ -41,9 +41,13 @@ const ProjectMessageBoard = ({ projectGroupId, topicSlug }: ProjectMessageBoardP
   useEffect(() => {
     const storedMemberId = localStorage.getItem(`project_member_${topicSlug}`);
     const storedStudentId = localStorage.getItem(`project_student_id_${topicSlug}`);
+    const storedIsTeacher = localStorage.getItem(`project_is_teacher_${topicSlug}`);
+    const storedDisplayName = localStorage.getItem(`project_display_name_${topicSlug}`);
     if (storedMemberId && storedStudentId) {
       setMemberId(storedMemberId);
       setStudentId(storedStudentId);
+      setIsTeacher(storedIsTeacher === "true");
+      setDisplayName(storedDisplayName || null);
       setIsRegistered(true);
     }
   }, [topicSlug]);
@@ -128,6 +132,9 @@ const ProjectMessageBoard = ({ projectGroupId, topicSlug }: ProjectMessageBoardP
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
+  const [isTeacher, setIsTeacher] = useState(false);
+  const [displayName, setDisplayName] = useState<string | null>(null);
+
   const handleRegister = async () => {
     if (studentId.length !== 4 || !/^\d{4}$/.test(studentId)) {
       toast({
@@ -140,18 +147,42 @@ const ProjectMessageBoard = ({ projectGroupId, topicSlug }: ProjectMessageBoardP
 
     setIsLoading(true);
     try {
-      // Check if already registered
+      // First check for global teachers (project_group_id is null)
+      const { data: globalMember } = await supabase
+        .from("project_members")
+        .select("id, display_name")
+        .is("project_group_id", null)
+        .eq("student_id_last4", studentId)
+        .single();
+
+      if (globalMember) {
+        // This is a teacher - they can participate in any group
+        setMemberId(globalMember.id);
+        setDisplayName(globalMember.display_name);
+        setIsTeacher(true);
+        localStorage.setItem(`project_member_${topicSlug}`, globalMember.id);
+        localStorage.setItem(`project_student_id_${topicSlug}`, studentId);
+        localStorage.setItem(`project_is_teacher_${topicSlug}`, "true");
+        localStorage.setItem(`project_display_name_${topicSlug}`, globalMember.display_name || "");
+        setIsRegistered(true);
+        toast({ title: `Welcome, ${globalMember.display_name}!`, description: "You're logged in as a teacher" });
+        return;
+      }
+
+      // Check if already registered as student in this group
       const { data: existingMember } = await supabase
         .from("project_members")
-        .select("id")
+        .select("id, display_name")
         .eq("project_group_id", projectGroupId)
         .eq("student_id_last4", studentId)
         .single();
 
       if (existingMember) {
         setMemberId(existingMember.id);
+        setDisplayName(existingMember.display_name);
         localStorage.setItem(`project_member_${topicSlug}`, existingMember.id);
         localStorage.setItem(`project_student_id_${topicSlug}`, studentId);
+        localStorage.setItem(`project_display_name_${topicSlug}`, existingMember.display_name || "");
         setIsRegistered(true);
         toast({ title: "Welcome back!", description: "You're now connected to the group chat" });
       } else {
@@ -184,7 +215,7 @@ const ProjectMessageBoard = ({ projectGroupId, topicSlug }: ProjectMessageBoardP
     }
   };
 
-  const handleSendMessage = async () => {
+  const handleSendMessage = async (triggerAI: boolean = true) => {
     if (!newMessage.trim() || !memberId) return;
 
     const messageContent = newMessage.trim();
@@ -196,10 +227,67 @@ const ProjectMessageBoard = ({ projectGroupId, topicSlug }: ProjectMessageBoardP
         member_id: memberId,
         content: messageContent,
         is_ai: false,
-        is_teacher: false,
+        is_teacher: isTeacher,
       });
 
       if (error) throw error;
+
+      // Auto-trigger AI response for non-teacher messages
+      if (triggerAI && !isTeacher) {
+        setIsSendingAI(true);
+        try {
+          // Get recent messages for context
+          const recentMessages = messages.slice(-10).map((m) => ({
+            role: m.is_ai ? "assistant" : "user",
+            content: m.content,
+          }));
+
+          // Call AI
+          const response = await supabase.functions.invoke("chat", {
+            body: {
+              messages: [...recentMessages, { role: "user", content: messageContent }],
+              systemPrompt: `You are a helpful AI assistant for a university group project about public policy in Hong Kong. The current project topic is: ${topicSlug.replace(/-/g, " ")}. Help students with research questions, data analysis, report writing, and project planning. Be concise and educational.`,
+            },
+          });
+
+          if (response.error) throw response.error;
+
+          // Parse the AI response
+          let aiResponse = "";
+          const reader = response.data.getReader();
+          const decoder = new TextDecoder();
+
+          while (true) {
+            const { done, value } = await reader.read();
+            if (done) break;
+            const chunk = decoder.decode(value);
+            const lines = chunk.split("\n");
+            for (const line of lines) {
+              if (line.startsWith("data: ") && line !== "data: [DONE]") {
+                try {
+                  const json = JSON.parse(line.slice(6));
+                  if (json.choices?.[0]?.delta?.content) {
+                    aiResponse += json.choices[0].delta.content;
+                  }
+                } catch {}
+              }
+            }
+          }
+
+          // Save AI response
+          await supabase.from("project_messages").insert({
+            project_group_id: projectGroupId,
+            member_id: null,
+            content: aiResponse || "I apologize, but I couldn't generate a response. Please try again.",
+            is_ai: true,
+            is_teacher: false,
+          });
+        } catch (aiError: any) {
+          console.error("AI error:", aiError);
+        } finally {
+          setIsSendingAI(false);
+        }
+      }
     } catch (error: any) {
       toast({
         title: "Error",
@@ -210,80 +298,6 @@ const ProjectMessageBoard = ({ projectGroupId, topicSlug }: ProjectMessageBoardP
     }
   };
 
-  const handleAskAI = async () => {
-    if (!newMessage.trim() || !memberId) return;
-
-    const userQuestion = newMessage.trim();
-    setNewMessage("");
-    setIsSendingAI(true);
-
-    try {
-      // First send user's question as a regular message
-      await supabase.from("project_messages").insert({
-        project_group_id: projectGroupId,
-        member_id: memberId,
-        content: userQuestion,
-        is_ai: false,
-        is_teacher: false,
-      });
-
-      // Get recent messages for context
-      const recentMessages = messages.slice(-10).map((m) => ({
-        role: m.is_ai ? "assistant" : "user",
-        content: m.content,
-      }));
-
-      // Call AI
-      const response = await supabase.functions.invoke("chat", {
-        body: {
-          messages: [...recentMessages, { role: "user", content: userQuestion }],
-          systemPrompt: `You are a helpful AI assistant for a university group project about public policy in Hong Kong. The current project topic is: ${topicSlug.replace(/-/g, " ")}. Help students with research questions, data analysis, report writing, and project planning. Be concise and educational.`,
-        },
-      });
-
-      if (response.error) throw response.error;
-
-      // Parse the AI response
-      let aiResponse = "";
-      const reader = response.data.getReader();
-      const decoder = new TextDecoder();
-
-      while (true) {
-        const { done, value } = await reader.read();
-        if (done) break;
-        const chunk = decoder.decode(value);
-        const lines = chunk.split("\n");
-        for (const line of lines) {
-          if (line.startsWith("data: ") && line !== "data: [DONE]") {
-            try {
-              const json = JSON.parse(line.slice(6));
-              if (json.choices?.[0]?.delta?.content) {
-                aiResponse += json.choices[0].delta.content;
-              }
-            } catch {}
-          }
-        }
-      }
-
-      // Save AI response
-      await supabase.from("project_messages").insert({
-        project_group_id: projectGroupId,
-        member_id: null,
-        content: aiResponse || "I apologize, but I couldn't generate a response. Please try again.",
-        is_ai: true,
-        is_teacher: false,
-      });
-    } catch (error: any) {
-      console.error("AI error:", error);
-      toast({
-        title: "AI Error",
-        description: "Failed to get AI response",
-        variant: "destructive",
-      });
-    } finally {
-      setIsSendingAI(false);
-    }
-  };
 
   if (!isRegistered) {
     return (
@@ -313,7 +327,10 @@ const ProjectMessageBoard = ({ projectGroupId, topicSlug }: ProjectMessageBoardP
       <div className="p-4 border-b">
         <div className="flex items-center justify-between">
           <h3 className="font-semibold">Group Discussion</h3>
-          <Badge variant="outline">ID: ***{studentId}</Badge>
+          <div className="flex items-center gap-2">
+            {isTeacher && <Badge className="bg-amber-500">Teacher</Badge>}
+            <Badge variant="outline">{displayName || `ID: ***${studentId}`}</Badge>
+          </div>
         </div>
       </div>
 
@@ -381,23 +398,27 @@ const ProjectMessageBoard = ({ projectGroupId, topicSlug }: ProjectMessageBoardP
           />
         </div>
         <div className="flex gap-2 mt-2">
-          <Button onClick={handleSendMessage} disabled={!newMessage.trim()} className="flex-1">
-            <Send className="h-4 w-4 mr-2" />
-            Send
-          </Button>
-          <Button
-            onClick={handleAskAI}
-            disabled={!newMessage.trim() || isSendingAI}
-            variant="secondary"
+          <Button 
+            onClick={() => handleSendMessage()} 
+            disabled={!newMessage.trim() || isSendingAI} 
             className="flex-1"
           >
             {isSendingAI ? (
               <Loader2 className="h-4 w-4 mr-2 animate-spin" />
             ) : (
-              <Bot className="h-4 w-4 mr-2" />
+              <Send className="h-4 w-4 mr-2" />
             )}
-            Ask AI
+            {isTeacher ? "Send" : "Send (AI will respond)"}
           </Button>
+          {!isTeacher && (
+            <Button
+              onClick={() => handleSendMessage(false)}
+              disabled={!newMessage.trim() || isSendingAI}
+              variant="outline"
+            >
+              Send Only
+            </Button>
+          )}
         </div>
       </div>
     </Card>
