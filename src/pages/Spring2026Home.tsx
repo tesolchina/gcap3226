@@ -1,4 +1,5 @@
 import { Card } from "@/components/ui/card";
+import CourseRoadmap from "@/components/CourseRoadmap";
 import { Button } from "@/components/ui/button";
 import { User, FileText, Presentation, BookOpen, Users, Target, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -191,6 +192,9 @@ const Spring2026Home = () => {
             </div>
           </div>
         </Card>
+
+        {/* Course Roadmap */}
+        <CourseRoadmap />
 
         {/* Quick Links */}
         <div className="flex flex-wrap justify-center gap-4">
