@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { ChevronDown, ChevronUp, Target, Lightbulb, Users, BarChart3, Briefcase, MessageSquare, Rocket } from "lucide-react";
 import { Link } from "react-router-dom";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 
 const CourseRoadmap = () => {
+  const [selectedObjective, setSelectedObjective] = useState<number | null>(null);
   const [showRoadmap, setShowRoadmap] = useState(false);
 
   const weeks = [
@@ -222,32 +222,34 @@ const CourseRoadmap = () => {
             <Target className="h-6 w-6 text-primary" />
           </div>
           <h3 className="text-lg font-semibold text-foreground">Course Objectives</h3>
-          <span className="text-xs text-muted-foreground">(click to expand)</span>
+          <span className="text-xs text-muted-foreground">(click to see details)</span>
         </div>
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3">
           {objectives.map((obj, idx) => (
-            <Dialog key={idx}>
-              <DialogTrigger asChild>
-                <button className={`group relative p-4 rounded-xl bg-gradient-to-br ${obj.color} text-white hover:scale-105 transition-all duration-200 shadow-lg hover:shadow-xl`}>
-                  <obj.icon className="h-8 w-8 mx-auto mb-2 opacity-90" />
-                  <p className="text-sm font-medium text-center leading-tight">{obj.short}</p>
-                  <div className="absolute inset-0 rounded-xl bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity" />
-                </button>
-              </DialogTrigger>
-              <DialogContent className="sm:max-w-md">
-                <DialogHeader>
-                  <DialogTitle className="flex items-center gap-3">
-                    <div className={`p-2 rounded-lg bg-gradient-to-br ${obj.color}`}>
-                      <obj.icon className="h-5 w-5 text-white" />
-                    </div>
-                    {obj.short}
-                  </DialogTitle>
-                </DialogHeader>
-                <p className="text-muted-foreground leading-relaxed">{obj.full}</p>
-              </DialogContent>
-            </Dialog>
+            <button 
+              key={idx}
+              onClick={() => setSelectedObjective(selectedObjective === idx ? null : idx)}
+              className={`group relative p-4 rounded-xl bg-gradient-to-br ${obj.color} text-white hover:scale-105 transition-all duration-200 shadow-lg hover:shadow-xl ${selectedObjective === idx ? 'ring-4 ring-offset-2 ring-primary scale-105' : ''}`}
+            >
+              <obj.icon className="h-8 w-8 mx-auto mb-2 opacity-90" />
+              <p className="text-sm font-medium text-center leading-tight">{obj.short}</p>
+              <div className="absolute inset-0 rounded-xl bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity" />
+            </button>
           ))}
         </div>
+        
+        {/* Expanded objective text */}
+        {selectedObjective !== null && (
+          <div className={`mt-4 p-4 rounded-xl bg-gradient-to-r ${objectives[selectedObjective].color} text-white animate-in fade-in slide-in-from-top-2 duration-200`}>
+            <div className="flex items-start gap-3">
+              {React.createElement(objectives[selectedObjective].icon, { className: "h-6 w-6 shrink-0 mt-0.5" })}
+              <div>
+                <p className="font-semibold mb-1">{objectives[selectedObjective].short}</p>
+                <p className="text-white/90 leading-relaxed">{objectives[selectedObjective].full}</p>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
 
       {/* Roadmap Toggle Button */}
