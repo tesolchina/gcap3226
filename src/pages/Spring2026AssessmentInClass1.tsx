@@ -7,7 +7,7 @@ import { ArrowLeft, FileText, Lightbulb, Clock, CheckCircle } from "lucide-react
 const Spring2026AssessmentInClass1 = () => {
   const title = "In-class Exercise 1";
   const description = "This exercise focuses on applying initial course concepts and AI tools for data exploration.";
-  const backLink = "/spring-2026/weeks/3";
+  const backLink = "/spring-2026#assessments";
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-accent/5 to-background p-8">
@@ -77,7 +77,7 @@ const Spring2026AssessmentInClass1 = () => {
             <Button asChild variant="outline">
               <Link to={backLink}>
                 <ArrowLeft className="mr-2 h-4 w-4" />
-                Back to Week Overview
+                Back to Assessments
               </Link>
             </Button>
           </CardContent>
