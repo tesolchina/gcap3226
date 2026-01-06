@@ -19,6 +19,13 @@ import Spring2026Week from "./pages/Spring2026Week";
 import Spring2026Week1 from "./pages/Spring2026Week1";
 import Spring2026Placeholder from "./pages/Spring2026Placeholder";
 import Spring2026AssessmentInClass1 from "./pages/Spring2026AssessmentInClass1";
+import Spring2026AssessmentInClass2 from "./pages/Spring2026AssessmentInClass2";
+import Spring2026ReflectiveEssay1 from "./pages/Spring2026ReflectiveEssay1";
+import Spring2026ReflectiveEssay2 from "./pages/Spring2026ReflectiveEssay2";
+import Spring2026ReflectiveEssay3 from "./pages/Spring2026ReflectiveEssay3";
+import Spring2026Presentation1 from "./pages/Spring2026Presentation1";
+import Spring2026HumanAICollaborationReport from "./pages/Spring2026HumanAICollaborationReport";
+import Spring2026FinalPresentationReport from "./pages/Spring2026FinalPresentationReport";
 
 const queryClient = new QueryClient();
 
@@ -71,6 +78,13 @@ const AppContent = () => {
               <Route path="/spring-2026" element={<Spring2026Home />} />
               <Route path="/spring-2026/weeks/1" element={<Spring2026Week1 />} />
               <Route path="/spring-2026/weeks/3/in-class-exercise-1" element={<Spring2026AssessmentInClass1 />} />
+              <Route path="/spring-2026/weeks/4/in-class-exercise-2" element={<Spring2026AssessmentInClass2 />} />
+              <Route path="/spring-2026/weeks/5/reflective-essay-1" element={<Spring2026ReflectiveEssay1 />} />
+              <Route path="/spring-2026/weeks/7/reflective-essay-2" element={<Spring2026ReflectiveEssay2 />} />
+              <Route path="/spring-2026/weeks/8/reflective-essay-3" element={<Spring2026ReflectiveEssay3 />} />
+              <Route path="/spring-2026/weeks/11/presentation-1" element={<Spring2026Presentation1 />} />
+              <Route path="/spring-2026/weeks/12/human-ai-report" element={<Spring2026HumanAICollaborationReport />} />
+              <Route path="/spring-2026/weeks/13/final-presentation-report" element={<Spring2026FinalPresentationReport />} />
               <Route path="/spring-2026/weeks/:weekId" element={<Spring2026Week />} />
               <Route path="/spring-2026/syllabus" element={<Spring2026Placeholder />} />
               <Route path="/spring-2026/resources" element={<Spring2026Placeholder />} />
