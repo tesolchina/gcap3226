@@ -51,7 +51,7 @@ const Spring2026Home = () => {
             GCAP 3226
           </h1>
           <p className="text-2xl text-foreground font-medium">
-            Participatory Policy Analysis
+            Empowering Citizens Through Data: Participatory Policy Analysis for Hong Kong
           </p>
           <p className="text-lg text-primary font-semibold">
             Spring 2026
@@ -170,6 +170,24 @@ const Spring2026Home = () => {
             <div className="flex items-center gap-3 p-4 bg-background rounded-lg">
               <Presentation className="h-5 w-5 text-primary flex-shrink-0" />
               <span className="text-sm">Oral presentations</span>
+            </div>
+          </div>
+        </Card>
+
+        {/* Course Objectives */}
+        <Card className="p-6 bg-gradient-to-br from-card to-accent/20">
+          <div className="flex items-start gap-4">
+            <div className="p-3 bg-primary/10 rounded-full">
+              <Target className="h-8 w-8 text-primary" />
+            </div>
+            <div>
+              <h3 className="text-sm font-medium text-muted-foreground uppercase tracking-wider">Course Objectives</h3>
+              <ul className="list-disc list-inside space-y-2 text-foreground">
+                <li>Equip students with analytical tools for data-informed policymaking in Hong Kong</li>
+                <li>Integrate quantitative and qualitative insights to address social issues aligned with UN SDGs</li>
+                <li>Evaluate government data use for transparency</li>
+                <li>Engage students in practical projects for experiential learning</li>
+              </ul>
             </div>
           </div>
         </Card>
