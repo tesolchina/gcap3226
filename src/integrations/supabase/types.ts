@@ -276,6 +276,155 @@ export type Database = {
           },
         ]
       }
+      project_files: {
+        Row: {
+          created_at: string
+          description: string | null
+          file_name: string
+          file_path: string
+          file_size: number | null
+          id: string
+          member_id: string | null
+          mime_type: string | null
+          project_group_id: string | null
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          file_name: string
+          file_path: string
+          file_size?: number | null
+          id?: string
+          member_id?: string | null
+          mime_type?: string | null
+          project_group_id?: string | null
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          file_name?: string
+          file_path?: string
+          file_size?: number | null
+          id?: string
+          member_id?: string | null
+          mime_type?: string | null
+          project_group_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "project_files_member_id_fkey"
+            columns: ["member_id"]
+            isOneToOne: false
+            referencedRelation: "project_members"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "project_files_project_group_id_fkey"
+            columns: ["project_group_id"]
+            isOneToOne: false
+            referencedRelation: "project_groups"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      project_groups: {
+        Row: {
+          created_at: string
+          id: string
+          topic_name: string
+          topic_slug: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          topic_name: string
+          topic_slug: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          topic_name?: string
+          topic_slug?: string
+        }
+        Relationships: []
+      }
+      project_members: {
+        Row: {
+          created_at: string
+          display_name: string | null
+          id: string
+          project_group_id: string | null
+          student_id_last4: string
+        }
+        Insert: {
+          created_at?: string
+          display_name?: string | null
+          id?: string
+          project_group_id?: string | null
+          student_id_last4: string
+        }
+        Update: {
+          created_at?: string
+          display_name?: string | null
+          id?: string
+          project_group_id?: string | null
+          student_id_last4?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "project_members_project_group_id_fkey"
+            columns: ["project_group_id"]
+            isOneToOne: false
+            referencedRelation: "project_groups"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      project_messages: {
+        Row: {
+          content: string
+          created_at: string
+          id: string
+          is_ai: boolean
+          is_teacher: boolean
+          member_id: string | null
+          project_group_id: string | null
+        }
+        Insert: {
+          content: string
+          created_at?: string
+          id?: string
+          is_ai?: boolean
+          is_teacher?: boolean
+          member_id?: string | null
+          project_group_id?: string | null
+        }
+        Update: {
+          content?: string
+          created_at?: string
+          id?: string
+          is_ai?: boolean
+          is_teacher?: boolean
+          member_id?: string | null
+          project_group_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "project_messages_member_id_fkey"
+            columns: ["member_id"]
+            isOneToOne: false
+            referencedRelation: "project_members"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "project_messages_project_group_id_fkey"
+            columns: ["project_group_id"]
+            isOneToOne: false
+            referencedRelation: "project_groups"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       student_submissions: {
         Row: {
           created_at: string | null
