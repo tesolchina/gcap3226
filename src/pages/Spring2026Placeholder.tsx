@@ -52,7 +52,7 @@ const Spring2026Placeholder = () => {
               <h2 className="text-xl font-semibold">Official Course Syllabus</h2>
               <Button variant="outline" asChild>
                 <a
-                  href="https://buelearning.hkbu.edu.hk/pluginfile.php/3338536/mod_resource/content/1/GCAP3226_syllabus.pdf"
+                  href="https://buelearning.hkbu.edu.hk/mod/resource/view.php?id=1886480"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
