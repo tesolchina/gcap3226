@@ -3,69 +3,132 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, Calendar, BookOpen, Target, FileText } from "lucide-react";
 
-const weekContent: Record<string, { title: string; description: string; objectives: string[]; activities: string[]; assessment?: string }> = {
-  "1": {
-    title: "Course Introduction",
-    description: "Introduction to public policy analysis, the Hong Kong context, and Sustainable Development Goals (SDGs).",
+const weekContent: Record<string, { title: string; description: string; objectives: string[]; activities: string[]; assessment?: string; assessmentLink?: string }> = {
+  "2": {
+    title: "Policy Analysis Foundations",
+    description: "Introduction to policy analysis frameworks and understanding governance challenges in Hong Kong.",
     objectives: [
-      "Understand the course structure and expectations",
-      "Learn about participatory policy analysis",
-      "Explore Hong Kong's policy landscape",
+      "Understand key policy analysis frameworks",
+      "Explore Hong Kong's governance structure",
+      "Identify potential research topics",
     ],
     activities: [
-      "Introductory lecture on public policy",
-      "Overview of AI tools for research",
-      "Team formation discussion",
+      "Lecture on policy analysis methods",
+      "Discussion of Hong Kong policy challenges",
+      "Initial topic brainstorming",
     ],
   },
-  "2-4": {
-    title: "Group Formation & Case Studies",
-    description: "Form project groups and participate in case study demonstrations.",
+  "3": {
+    title: "Case Studies & Group Formation",
+    description: "Participate in case study demonstrations and form project groups.",
     objectives: [
+      "Analyze real-world policy case studies",
       "Form effective research teams",
-      "Analyze existing policy case studies",
-      "Develop research questions",
+      "Select a group research topic",
     ],
     activities: [
-      "Case study presentations",
-      "Group formation activities",
-      "Initial topic selection",
+      "Case study presentations and analysis",
+      "Team formation activities",
+      "Topic selection workshop",
     ],
-    assessment: "In-class Exercise 1 & 2 (10%)",
+    assessment: "In-class Exercise 1 (5%)",
+    assessmentLink: "/spring-2026/weeks/3/in-class-exercise-1",
   },
-  "5-6": {
-    title: "Data Collection & Preparation",
+  "4": {
+    title: "Data Governance Introduction",
+    description: "Introduction to data governance concepts and their application to policy analysis.",
+    objectives: [
+      "Understand data governance principles",
+      "Learn about open data initiatives in Hong Kong",
+      "Explore data ethics considerations",
+    ],
+    activities: [
+      "Data governance lecture",
+      "Open data portal exploration",
+      "Group project planning",
+    ],
+    assessment: "In-class Exercise 2 (5%)",
+    assessmentLink: "/spring-2026/weeks/4/in-class-exercise-2",
+  },
+  "5": {
+    title: "Data Requests & Collection",
     description: "Explore public datasets and draft data request emails to government departments.",
     objectives: [
-      "Identify relevant data sources",
-      "Learn to request government data",
-      "Prepare data collection strategy",
+      "Identify relevant public data sources",
+      "Learn to draft effective data requests",
+      "Understand FOIA and access to information",
     ],
     activities: [
-      "Data source exploration",
-      "Drafting FOIA requests",
-      "Data quality assessment",
+      "Data source exploration workshop",
+      "Drafting data request emails",
+      "Peer review of requests",
     ],
-    assessment: "Reflective Essay 1",
+    assessment: "Reflective Essay 1 (part of 20%)",
+    assessmentLink: "/spring-2026/weeks/5/reflective-essay-1",
   },
-  "7-9": {
-    title: "Data Analysis & Modeling",
-    description: "Complete data governance checkpoint and use AI tools for analysis.",
+  "6": {
+    title: "Fieldwork Preparation",
+    description: "Design fieldwork plans and prepare for primary data collection. Note: This week includes a public holiday.",
     objectives: [
-      "Apply data analysis techniques",
-      "Use AI-assisted tools for modeling",
-      "Interpret research findings",
+      "Design effective fieldwork strategies",
+      "Prepare interview and survey instruments",
+      "Understand research ethics",
     ],
     activities: [
-      "Data analysis workshops",
-      "AI tool demonstrations",
-      "Group consultations",
+      "Fieldwork planning workshop",
+      "Instrument design practice",
+      "Ethics discussion",
     ],
-    assessment: "Reflective Essays 2 & 3",
+  },
+  "7": {
+    title: "Fieldwork",
+    description: "Conduct fieldwork to collect primary data for your group project.",
+    objectives: [
+      "Execute fieldwork plans",
+      "Collect primary data effectively",
+      "Document fieldwork experiences",
+    ],
+    activities: [
+      "Fieldwork execution",
+      "Data collection and documentation",
+      "Progress check-ins",
+    ],
+    assessment: "Reflective Essay 2 (part of 20%)",
+    assessmentLink: "/spring-2026/weeks/7/reflective-essay-2",
+  },
+  "8": {
+    title: "Data Integration & Analysis",
+    description: "Complete data governance checkpoint. Integrate collected data and begin analysis using AI tools.",
+    objectives: [
+      "Integrate primary and secondary data",
+      "Apply AI tools for data analysis",
+      "Identify key patterns and insights",
+    ],
+    activities: [
+      "Data integration workshop",
+      "AI-assisted analysis demonstration",
+      "Group consultation sessions",
+    ],
+    assessment: "Reflective Essay 3 (part of 20%)",
+    assessmentLink: "/spring-2026/weeks/8/reflective-essay-3",
+  },
+  "9": {
+    title: "Visualization & Storytelling",
+    description: "Use AI tools for data visualization and develop compelling narratives for your findings.",
+    objectives: [
+      "Create effective data visualizations",
+      "Develop policy narratives",
+      "Refine analysis with AI assistance",
+    ],
+    activities: [
+      "Visualization workshop",
+      "Storytelling techniques",
+      "Peer feedback sessions",
+    ],
   },
   "10": {
-    title: "Draft Report Review",
-    description: "Submit and receive feedback on draft outline of group project report.",
+    title: "Draft Report Outline",
+    description: "Submit draft outline of group project report, including data analysis and governance critique.",
     objectives: [
       "Complete draft report outline",
       "Receive peer and instructor feedback",
@@ -79,7 +142,7 @@ const weekContent: Record<string, { title: string; description: string; objectiv
   },
   "11": {
     title: "In-Class Presentation 1",
-    description: "Deliver 8-minute presentations on research progress.",
+    description: "Deliver 8-minute presentations on project progress and data governance findings.",
     objectives: [
       "Present research findings clearly",
       "Receive constructive feedback",
@@ -91,13 +154,14 @@ const weekContent: Record<string, { title: string; description: string; objectiv
       "Feedback collection",
     ],
     assessment: "In-Class Presentation 1 (10%)",
+    assessmentLink: "/spring-2026/weeks/11/presentation-1",
   },
   "12": {
-    title: "Final Preparation",
-    description: "Refine models, visualizations, and advocacy products.",
+    title: "Finalize Deliverables",
+    description: "Refine models, visualizations, and advocacy products based on feedback.",
     objectives: [
       "Finalize research deliverables",
-      "Polish visualizations",
+      "Polish visualizations and reports",
       "Prepare advocacy materials",
     ],
     activities: [
@@ -106,10 +170,11 @@ const weekContent: Record<string, { title: string; description: string; objectiv
       "Final consultations",
     ],
     assessment: "Human-AI Collaboration Report (20%)",
+    assessmentLink: "/spring-2026/weeks/12/human-ai-report",
   },
   "13": {
     title: "Final Presentation & Report",
-    description: "Deliver final presentations to peers and stakeholders.",
+    description: "Deliver final presentations to peers and stakeholders, along with comprehensive group report.",
     objectives: [
       "Present final research findings",
       "Submit comprehensive group report",
@@ -120,7 +185,8 @@ const weekContent: Record<string, { title: string; description: string; objectiv
       "Stakeholder Q&A",
       "Course wrap-up",
     ],
-    assessment: "Presentation 2 (10%) + Group Report (30%)",
+    assessment: "Final Presentation (10%) + Group Report (30%)",
+    assessmentLink: "/spring-2026/weeks/13/final-presentation-report",
   },
 };
 
@@ -157,12 +223,19 @@ const Spring2026Week = () => {
         {/* Assessment Badge */}
         {content.assessment && (
           <Card className="p-4 bg-primary/10 border-primary/30">
-            <div className="flex items-center gap-3">
-              <FileText className="h-5 w-5 text-primary" />
-              <div>
-                <p className="text-sm font-medium text-primary">Assessment Due</p>
-                <p className="text-foreground font-semibold">{content.assessment}</p>
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <FileText className="h-5 w-5 text-primary" />
+                <div>
+                  <p className="text-sm font-medium text-primary">Assessment Due</p>
+                  <p className="text-foreground font-semibold">{content.assessment}</p>
+                </div>
               </div>
+              {content.assessmentLink && (
+                <Button asChild size="sm">
+                  <Link to={content.assessmentLink}>View Details</Link>
+                </Button>
+              )}
             </div>
           </Card>
         )}
