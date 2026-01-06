@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import { ChevronDown, ChevronUp, Target } from "lucide-react";
+import { ChevronDown, ChevronUp, Target, Lightbulb, Users, BarChart3, Briefcase, MessageSquare, Rocket } from "lucide-react";
 import { Link } from "react-router-dom";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 
 const CourseRoadmap = () => {
   const [showRoadmap, setShowRoadmap] = useState(false);
@@ -91,12 +92,42 @@ const CourseRoadmap = () => {
   ];
 
   const objectives = [
-    "Equip students with analytical tools and interdisciplinary approaches to assess and influence policy decisions",
-    "Integrate quantitative analysis with qualitative insights to address social issues aligned with UN SDGs",
-    "Evaluate Hong Kong government's use of data in policymaking, emphasizing transparency, accountability, and effectiveness",
-    "Engage students in practical projects and case studies in areas such as public transportation, health, and environmental management",
-    "Provide opportunities to request data from the government and interact with lawmakers for experiential learning",
-    "Prepare students to become active agents of change, advocating for policy improvements contributing to SDGs"
+    {
+      icon: Lightbulb,
+      short: "Analytical Tools",
+      full: "Equip students with analytical tools and interdisciplinary approaches to assess and influence policy decisions",
+      color: "from-amber-500 to-orange-500"
+    },
+    {
+      icon: BarChart3,
+      short: "Data & SDGs",
+      full: "Integrate quantitative analysis with qualitative insights to address social issues aligned with UN SDGs",
+      color: "from-blue-500 to-cyan-500"
+    },
+    {
+      icon: Target,
+      short: "Government Transparency",
+      full: "Evaluate Hong Kong government's use of data in policymaking, emphasizing transparency, accountability, and effectiveness",
+      color: "from-purple-500 to-pink-500"
+    },
+    {
+      icon: Briefcase,
+      short: "Practical Projects",
+      full: "Engage students in practical projects and case studies in areas such as public transportation, health, and environmental management",
+      color: "from-green-500 to-emerald-500"
+    },
+    {
+      icon: Users,
+      short: "Experiential Learning",
+      full: "Provide opportunities to request data from the government and interact with lawmakers for experiential learning",
+      color: "from-indigo-500 to-violet-500"
+    },
+    {
+      icon: Rocket,
+      short: "Agents of Change",
+      full: "Prepare students to become active agents of change, advocating for policy improvements contributing to SDGs",
+      color: "from-rose-500 to-red-500"
+    }
   ];
 
   // Row assignments for zigzag layout
@@ -185,19 +216,37 @@ const CourseRoadmap = () => {
   return (
     <div className="w-full">
       {/* Course Objectives Section */}
-      <div className="bg-gradient-to-br from-card to-accent/20 rounded-xl p-6 mb-6">
-        <div className="flex items-start gap-4">
-          <div className="p-3 bg-primary/10 rounded-full">
-            <Target className="h-8 w-8 text-primary" />
+      <div className="mb-6">
+        <div className="flex items-center gap-3 mb-4">
+          <div className="p-2 bg-primary/10 rounded-full">
+            <Target className="h-6 w-6 text-primary" />
           </div>
-          <div>
-            <h3 className="text-sm font-medium text-muted-foreground uppercase tracking-wider mb-3">Course Objectives</h3>
-            <ul className="list-disc list-inside space-y-2 text-foreground">
-              {objectives.map((obj, idx) => (
-                <li key={idx}>{obj}</li>
-              ))}
-            </ul>
-          </div>
+          <h3 className="text-lg font-semibold text-foreground">Course Objectives</h3>
+          <span className="text-xs text-muted-foreground">(click to expand)</span>
+        </div>
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3">
+          {objectives.map((obj, idx) => (
+            <Dialog key={idx}>
+              <DialogTrigger asChild>
+                <button className={`group relative p-4 rounded-xl bg-gradient-to-br ${obj.color} text-white hover:scale-105 transition-all duration-200 shadow-lg hover:shadow-xl`}>
+                  <obj.icon className="h-8 w-8 mx-auto mb-2 opacity-90" />
+                  <p className="text-sm font-medium text-center leading-tight">{obj.short}</p>
+                  <div className="absolute inset-0 rounded-xl bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity" />
+                </button>
+              </DialogTrigger>
+              <DialogContent className="sm:max-w-md">
+                <DialogHeader>
+                  <DialogTitle className="flex items-center gap-3">
+                    <div className={`p-2 rounded-lg bg-gradient-to-br ${obj.color}`}>
+                      <obj.icon className="h-5 w-5 text-white" />
+                    </div>
+                    {obj.short}
+                  </DialogTitle>
+                </DialogHeader>
+                <p className="text-muted-foreground leading-relaxed">{obj.full}</p>
+              </DialogContent>
+            </Dialog>
+          ))}
         </div>
       </div>
 
