@@ -66,14 +66,19 @@ const Spring2026Placeholder = () => {
                 <strong>Note:</strong> The actual schedule is subject to revision based on actual teaching progress and student feedback.
               </p>
             </div>
-            <div className="aspect-[4/3] bg-gray-100 rounded-lg overflow-hidden">
-              <iframe
-                src="/assets/GCAP3226_syllabus.pdf"
-                className="w-full h-full border-0"
-                title="GCAP3226 Syllabus"
+            <div className="aspect-[4/3] bg-muted rounded-lg overflow-hidden">
+              <object
+                data="/assets/GCAP3226_syllabus.pdf"
+                type="application/pdf"
+                className="w-full h-full"
               >
-                <p>Your browser does not support iframes. Please download the PDF directly.</p>
-              </iframe>
+                <p className="p-4 text-muted-foreground">
+                  Your browser does not support PDF viewing. 
+                  <a href="/assets/GCAP3226_syllabus.pdf" className="text-primary underline ml-1" download>
+                    Download the PDF directly
+                  </a>.
+                </p>
+              </object>
             </div>
           </Card>
         </div>
