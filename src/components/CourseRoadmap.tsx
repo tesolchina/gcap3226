@@ -9,6 +9,7 @@ const CourseRoadmap = () => {
   const weeks = [
     {
       week: "1",
+      date: "14 Jan",
       title: "Course Introduction",
       description: "Attend introductory lecture on public policy, the Hong Kong context, and SDGs. Install VS Code and apply for GitHub Copilot.",
       assessment: null,
@@ -18,6 +19,7 @@ const CourseRoadmap = () => {
     },
     {
       week: "2",
+      date: "21 Jan",
       title: "Learning AI Tools",
       description: "Attend lecture on AI-assisted Python programming, focusing on data visualization and customized chatbots on Bytewise.",
       assessment: null,
@@ -27,6 +29,7 @@ const CourseRoadmap = () => {
     },
     {
       week: "3-4",
+      date: "28 Jan – 4 Feb",
       title: "Case Studies & Groups",
       description: "Participate in case study demonstrations. Form project groups and select a topic.",
       assessment: { text: "In-class Exercise 1 & 2 (10%)", color: "text-green-600" },
@@ -36,9 +39,10 @@ const CourseRoadmap = () => {
     },
     {
       week: "5-6",
+      date: "11 Feb – 25 Feb",
       title: "Data Requests & Prep",
       description: "Explore public datasets and draft data request emails. Design fieldwork plans.",
-      warning: "Week 6 includes a public holiday",
+      warning: "18 Feb is a public holiday",
       assessment: { text: "Reflective Essay 1 (part of 20%)", color: "text-blue-600" },
       link: "/spring-2026/weeks/5",
       borderColor: "border-blue-500",
@@ -46,6 +50,7 @@ const CourseRoadmap = () => {
     },
     {
       week: "7",
+      date: "4 Mar",
       title: "Fieldwork",
       description: "Conduct fieldwork to collect primary data.",
       assessment: { text: "Reflective Essay 2 (part of 20%)", color: "text-blue-600" },
@@ -55,6 +60,7 @@ const CourseRoadmap = () => {
     },
     {
       week: "8-9",
+      date: "11 Mar – 18 Mar",
       title: "Group Consultation",
       description: "Complete data governance checkpoint. Integrate data. Use AI tools for analysis, visualization, and storytelling.",
       assessment: { text: "Reflective Essay 3 (part of 20%)", color: "text-blue-600" },
@@ -64,6 +70,7 @@ const CourseRoadmap = () => {
     },
     {
       week: "10",
+      date: "25 Mar",
       title: "Draft Report Outline",
       description: "Submit draft outline of group project report, including data analysis and governance critique.",
       assessment: null,
@@ -73,6 +80,7 @@ const CourseRoadmap = () => {
     },
     {
       week: "11",
+      date: "1 Apr",
       title: "First Presentation",
       description: "Deliver In-Class Presentation 1 (8 minutes) on project progress and data governance findings.",
       assessment: { text: "In-Class Presentation 1 (10%)", color: "text-purple-600" },
@@ -82,8 +90,10 @@ const CourseRoadmap = () => {
     },
     {
       week: "12",
+      date: "15 Apr",
       title: "Finalize Deliverables",
       description: "Refine models, visualizations, and advocacy products.",
+      warning: "8 Apr is a public holiday",
       assessment: { text: "Human-AI Collaboration Report (20%)", color: "text-orange-600" },
       link: "/spring-2026/weeks/12",
       borderColor: "border-orange-500",
@@ -137,11 +147,14 @@ const CourseRoadmap = () => {
 
   const WeekCard = ({ week, isLast = false }: { week: typeof weeks[0]; isLast?: boolean }) => (
     <div className={`bg-card rounded-xl shadow-md p-5 w-72 border-l-4 ${week.borderColor} hover:shadow-lg transition-shadow`}>
-      <div className="flex items-center gap-3 mb-3">
+      <div className="flex items-center gap-3 mb-2">
         <div className={`${week.badgeColor} text-white rounded-full w-9 h-9 flex items-center justify-center font-bold text-sm`}>
           {week.week}
         </div>
-        <h3 className="font-bold text-foreground">{week.title}</h3>
+        <div>
+          <h3 className="font-bold text-foreground">{week.title}</h3>
+          <p className="text-xs text-muted-foreground">📅 {week.date}</p>
+        </div>
       </div>
       <p className="text-sm text-muted-foreground mb-3">📚 {week.description}</p>
       {week.warning && (
@@ -353,11 +366,14 @@ const CourseRoadmap = () => {
           {/* Final Week 13 */}
           <div className="flex justify-center">
             <div className="bg-gradient-to-r from-yellow-100 to-yellow-50 dark:from-yellow-900/30 dark:to-yellow-800/20 rounded-xl shadow-lg p-6 w-96 border-l-4 border-yellow-500">
-              <div className="flex items-center gap-3 mb-3">
+              <div className="flex items-center gap-3 mb-2">
                 <div className="bg-yellow-500 text-white rounded-full w-10 h-10 flex items-center justify-center font-bold ring-2 ring-yellow-300">
                   13
                 </div>
-                <h3 className="font-bold text-foreground text-lg">🎯 Final Presentation & Report</h3>
+                <div>
+                  <h3 className="font-bold text-foreground text-lg">🎯 Final Presentation & Report</h3>
+                  <p className="text-xs text-muted-foreground">📅 22 Apr (Last class: 25 Apr)</p>
+                </div>
               </div>
               <p className="text-sm text-muted-foreground mb-3">
                 📚 Deliver In-Class Presentation 2 (8 minutes) to peers, instructors, and stakeholders.
