@@ -64,12 +64,12 @@ const Spring2026TopicSelection = () => {
           </Button>
           <div>
             <p className="text-sm text-muted-foreground">Spring 2026</p>
-            <h1 className="text-4xl font-bold text-primary">Topic Selection</h1>
+            <h1 className="text-4xl font-bold text-primary">Group Projects</h1>
           </div>
         </div>
 
         <p className="text-lg text-muted-foreground">
-          Choose one of the following topics for your group project. Each topic focuses on a public policy area in Hong Kong with opportunities for data governance analysis.
+          Select your group project below to access the discussion board, shared files, and project resources.
         </p>
 
         {/* Topic Cards */}
@@ -87,7 +87,7 @@ const Spring2026TopicSelection = () => {
                 </div>
                 <div className="flex items-center gap-2 mb-2">
                   <span className="text-xs font-medium text-muted-foreground bg-muted px-2 py-0.5 rounded">
-                    Topic {topic.id}
+                    Group {topic.id}
                   </span>
                 </div>
                 <h3 className="text-lg font-semibold mb-2 group-hover:text-primary transition-colors">{topic.title}</h3>
@@ -97,10 +97,10 @@ const Spring2026TopicSelection = () => {
           ))}
         </div>
 
-        {/* Coming Soon Notice */}
+        {/* Info Notice */}
         <Card className="p-6 bg-muted/50 text-center">
           <p className="text-muted-foreground">
-            📋 Detailed topic briefs and data sources will be available when groups are formed in Week 3.
+            💡 Enter your last 4 student ID digits to join your group's discussion and share files with teammates and AI.
           </p>
         </Card>
       </div>

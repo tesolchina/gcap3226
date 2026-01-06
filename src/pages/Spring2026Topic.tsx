@@ -1,7 +1,12 @@
+import { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, Syringe, Activity, Car, Wallet, HeartPulse, ExternalLink } from "lucide-react";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { ArrowLeft, Syringe, Activity, Car, Wallet, HeartPulse, ExternalLink, MessageSquare, FolderOpen, Info } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
+import ProjectMessageBoard from "@/components/ProjectMessageBoard";
+import ProjectFileUpload from "@/components/ProjectFileUpload";
 
 const topicData: Record<string, {
   id: number;
@@ -123,7 +128,29 @@ const topicData: Record<string, {
 
 const Spring2026Topic = () => {
   const { topicSlug } = useParams<{ topicSlug: string }>();
+  const [projectGroupId, setProjectGroupId] = useState<string | null>(null);
   const topic = topicSlug ? topicData[topicSlug] : null;
+
+  useEffect(() => {
+    const fetchProjectGroup = async () => {
+      if (!topicSlug) return;
+      
+      const { data, error } = await supabase
+        .from("project_groups")
+        .select("id")
+        .eq("topic_slug", topicSlug)
+        .single();
+
+      if (error) {
+        console.error("Error fetching project group:", error);
+        return;
+      }
+
+      setProjectGroupId(data?.id || null);
+    };
+
+    fetchProjectGroup();
+  }, [topicSlug]);
 
   if (!topic) {
     return (
@@ -131,7 +158,7 @@ const Spring2026Topic = () => {
         <div className="max-w-4xl mx-auto text-center">
           <h1 className="text-2xl font-bold mb-4">Topic not found</h1>
           <Button asChild>
-            <Link to="/spring-2026/topics">Back to Topics</Link>
+            <Link to="/spring-2026/topics">Back to Group Projects</Link>
           </Button>
         </div>
       </div>
@@ -142,7 +169,7 @@ const Spring2026Topic = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-accent/5 to-background p-8">
-      <div className="max-w-4xl mx-auto space-y-8">
+      <div className="max-w-6xl mx-auto space-y-6">
         {/* Header */}
         <div className="flex items-center gap-4">
           <Button variant="ghost" size="icon" asChild>
@@ -155,62 +182,95 @@ const Spring2026Topic = () => {
               <Icon className="h-6 w-6 text-white" />
             </div>
             <div>
-              <p className="text-sm text-muted-foreground">Topic {topic.id}</p>
+              <p className="text-sm text-muted-foreground">Group Project {topic.id}</p>
               <h1 className="text-3xl font-bold text-primary">{topic.title}</h1>
             </div>
           </div>
         </div>
 
-        {/* Overview */}
-        <Card className="p-6">
-          <h2 className="text-xl font-semibold mb-4">Overview</h2>
-          <p className="text-muted-foreground">{topic.overview}</p>
-        </Card>
+        {/* Main Content with Tabs */}
+        <Tabs defaultValue="discussion" className="space-y-6">
+          <TabsList className="grid w-full grid-cols-3">
+            <TabsTrigger value="discussion" className="flex items-center gap-2">
+              <MessageSquare className="h-4 w-4" />
+              Discussion
+            </TabsTrigger>
+            <TabsTrigger value="files" className="flex items-center gap-2">
+              <FolderOpen className="h-4 w-4" />
+              Files
+            </TabsTrigger>
+            <TabsTrigger value="info" className="flex items-center gap-2">
+              <Info className="h-4 w-4" />
+              Project Info
+            </TabsTrigger>
+          </TabsList>
 
-        {/* Key Research Questions */}
-        <Card className="p-6">
-          <h2 className="text-xl font-semibold mb-4">Key Research Questions</h2>
-          <ul className="space-y-2">
-            {topic.keyQuestions.map((question, idx) => (
-              <li key={idx} className="flex items-start gap-2 text-muted-foreground">
-                <span className="text-primary mt-1">•</span>
-                <span>{question}</span>
-              </li>
-            ))}
-          </ul>
-        </Card>
+          <TabsContent value="discussion" className="space-y-4">
+            {projectGroupId ? (
+              <ProjectMessageBoard projectGroupId={projectGroupId} topicSlug={topicSlug!} />
+            ) : (
+              <Card className="p-6 text-center text-muted-foreground">
+                Loading discussion...
+              </Card>
+            )}
+          </TabsContent>
 
-        {/* Potential Data Sources */}
-        <Card className="p-6">
-          <h2 className="text-xl font-semibold mb-4">Potential Data Sources</h2>
-          <ul className="space-y-2">
-            {topic.potentialDataSources.map((source, idx) => (
-              <li key={idx} className="flex items-start gap-2 text-muted-foreground">
-                <ExternalLink className="h-4 w-4 text-primary mt-1 flex-shrink-0" />
-                <span>{source}</span>
-              </li>
-            ))}
-          </ul>
-        </Card>
+          <TabsContent value="files" className="space-y-4">
+            {projectGroupId ? (
+              <ProjectFileUpload projectGroupId={projectGroupId} topicSlug={topicSlug!} />
+            ) : (
+              <Card className="p-6 text-center text-muted-foreground">
+                Loading files...
+              </Card>
+            )}
+          </TabsContent>
 
-        {/* Relevant SDGs */}
-        <Card className="p-6">
-          <h2 className="text-xl font-semibold mb-4">Relevant Sustainable Development Goals</h2>
-          <div className="flex flex-wrap gap-2">
-            {topic.relevantSDGs.map((sdg, idx) => (
-              <span key={idx} className="px-3 py-1 bg-primary/10 text-primary rounded-full text-sm">
-                {sdg}
-              </span>
-            ))}
-          </div>
-        </Card>
+          <TabsContent value="info" className="space-y-6">
+            {/* Overview */}
+            <Card className="p-6">
+              <h2 className="text-xl font-semibold mb-4">Overview</h2>
+              <p className="text-muted-foreground">{topic.overview}</p>
+            </Card>
 
-        {/* Coming Soon Notice */}
-        <Card className="p-6 bg-muted/50 text-center">
-          <p className="text-muted-foreground">
-            📋 Detailed data sources and project guidelines will be available when groups are formed in Week 3.
-          </p>
-        </Card>
+            {/* Key Research Questions */}
+            <Card className="p-6">
+              <h2 className="text-xl font-semibold mb-4">Key Research Questions</h2>
+              <ul className="space-y-2">
+                {topic.keyQuestions.map((question, idx) => (
+                  <li key={idx} className="flex items-start gap-2 text-muted-foreground">
+                    <span className="text-primary mt-1">•</span>
+                    <span>{question}</span>
+                  </li>
+                ))}
+              </ul>
+            </Card>
+
+            {/* Potential Data Sources */}
+            <Card className="p-6">
+              <h2 className="text-xl font-semibold mb-4">Potential Data Sources</h2>
+              <ul className="space-y-2">
+                {topic.potentialDataSources.map((source, idx) => (
+                  <li key={idx} className="flex items-start gap-2 text-muted-foreground">
+                    <ExternalLink className="h-4 w-4 text-primary mt-1 flex-shrink-0" />
+                    <span>{source}</span>
+                  </li>
+                ))}
+              </ul>
+            </Card>
+
+            {/* Relevant SDGs */}
+            <Card className="p-6">
+              <h2 className="text-xl font-semibold mb-4">Relevant Sustainable Development Goals</h2>
+              <div className="flex flex-wrap gap-2">
+                {topic.relevantSDGs.map((sdg, idx) => (
+                  <span key={idx} className="px-3 py-1 bg-primary/10 text-primary rounded-full text-sm">
+                    {sdg}
+                  </span>
+                ))}
+              </div>
+            </Card>
+          </TabsContent>
+        </Tabs>
       </div>
     </div>
   );

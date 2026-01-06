@@ -1,4 +1,4 @@
-import { Home, ArrowLeft, BookOpen, Presentation, FileText, MessageSquare, Calendar, Users } from "lucide-react";
+import { Home, ArrowLeft, Presentation, FileText, MessageSquare, Calendar, Users } from "lucide-react";
 import { NavLink } from "react-router-dom";
 import {
   Sidebar,
@@ -30,9 +30,8 @@ const weeklyItems = [
 ];
 
 const resourceItems = [
-  { title: "Topic Selection", url: "/spring-2026/topics", icon: Users },
+  { title: "Group Projects", url: "/spring-2026/topics", icon: Users },
   { title: "Syllabus", url: "/spring-2026/syllabus", icon: FileText },
-  { title: "Resources", url: "/spring-2026/resources", icon: BookOpen },
   { title: "Feedback", url: "/spring-2026/feedback", icon: MessageSquare },
 ];
 
