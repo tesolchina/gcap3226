@@ -34,7 +34,7 @@ const AssessmentPage: React.FC<AssessmentPageProps> = ({ title, description, bac
           <p className="text-muted-foreground mb-8">{description}</p>
           <div className="p-6 bg-muted/50 rounded-lg mb-8">
             <p className="text-muted-foreground">
-              📚 Detailed instructions and submission guidelines will be available here soon.
+              📚 Content for this assessment page is to be updated. Please check back later.
             </p>
           </div>
           <Button asChild variant="outline">
