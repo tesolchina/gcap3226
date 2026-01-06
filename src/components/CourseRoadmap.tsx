@@ -91,10 +91,12 @@ const CourseRoadmap = () => {
   ];
 
   const objectives = [
-    "Equip students with analytical tools for data-informed policymaking in Hong Kong",
-    "Integrate quantitative and qualitative insights to address social issues aligned with UN SDGs",
-    "Evaluate government data use for transparency",
-    "Engage students in practical projects for experiential learning",
+    "Equip students with analytical tools and interdisciplinary approaches to assess and influence policy decisions",
+    "Integrate quantitative analysis with qualitative insights to address social issues aligned with UN SDGs",
+    "Evaluate Hong Kong government's use of data in policymaking, emphasizing transparency, accountability, and effectiveness",
+    "Engage students in practical projects and case studies in areas such as public transportation, health, and environmental management",
+    "Provide opportunities to request data from the government and interact with lawmakers for experiential learning",
+    "Prepare students to become active agents of change, advocating for policy improvements contributing to SDGs"
   ];
 
   // Row assignments for zigzag layout
