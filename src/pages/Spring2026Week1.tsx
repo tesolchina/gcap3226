@@ -377,7 +377,7 @@ const Module3: React.FC<{ onComplete: () => void }> = ({ onComplete }) => {
                 <div className="ml-4">response = requests.get(<span className="text-green-300">'https://api.data.gov.hk/v1/bus-stops'</span>)</div>
                 <div className="ml-4">stops = response.json()</div>
                 <div className="ml-4"><span className="text-blue-400"># Find duplicates</span></div>
-                <div className="ml-4">duplicates = stops.groupby(<span className="text-green-300">'name'</span>).filter(<span className="text-yellow-400">lambda</span> x: len(x) > 1)</div>
+                <div className="ml-4">duplicates = stops.groupby(<span className="text-green-300">'name'</span>).filter(<span className="text-yellow-400">lambda</span> x: len(x) {'>'} 1)</div>
                 <div className="ml-4"><span className="text-yellow-400">return</span> duplicates</div>
               </div>
               <div className="mt-3 text-white">
