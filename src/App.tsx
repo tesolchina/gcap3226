@@ -18,6 +18,7 @@ import Spring2026Home from "./pages/Spring2026Home";
 import Spring2026Week from "./pages/Spring2026Week";
 import Spring2026Week1 from "./pages/Spring2026Week1";
 import Spring2026Placeholder from "./pages/Spring2026Placeholder";
+import Spring2026AssessmentInClass1 from "./pages/Spring2026AssessmentInClass1";
 
 const queryClient = new QueryClient();
 
@@ -69,6 +70,7 @@ const AppContent = () => {
             <Routes>
               <Route path="/spring-2026" element={<Spring2026Home />} />
               <Route path="/spring-2026/weeks/1" element={<Spring2026Week1 />} />
+              <Route path="/spring-2026/weeks/3/in-class-exercise-1" element={<Spring2026AssessmentInClass1 />} />
               <Route path="/spring-2026/weeks/:weekId" element={<Spring2026Week />} />
               <Route path="/spring-2026/syllabus" element={<Spring2026Placeholder />} />
               <Route path="/spring-2026/resources" element={<Spring2026Placeholder />} />
