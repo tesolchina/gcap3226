@@ -19,15 +19,15 @@ const CourseRoadmap = () => {
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          entry.target.style.opacity = "1";
-          entry.target.style.transform = "translateY(0)";
+          (entry.target as HTMLElement).style.opacity = "1";
+          (entry.target as HTMLElement).style.transform = "translateY(0)";
         }
       });
     }, observerOptions);
 
     document.querySelectorAll(".fade-in-up").forEach((card) => {
-      card.style.opacity = "0";
-      card.style.transform = "translateY(30px)";
+      (card as HTMLElement).style.opacity = "0";
+      (card as HTMLElement).style.transform = "translateY(30px)";
       observer.observe(card);
     });
 
