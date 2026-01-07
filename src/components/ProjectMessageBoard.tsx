@@ -9,6 +9,7 @@ import { useToast } from "@/hooks/use-toast";
 import { streamChat } from "@/lib/ai-chat";
 import { Send, Bot, User, GraduationCap, Loader2 } from "lucide-react";
 import { format } from "date-fns";
+import ReactMarkdown from "react-markdown";
 
 interface Message {
   id: string;
@@ -364,7 +365,13 @@ const ProjectMessageBoard = ({ projectGroupId, topicSlug }: ProjectMessageBoardP
                 </span>
                 <span className="text-xs text-muted-foreground">{format(new Date(msg.created_at), "MMM d, h:mm a")}</span>
               </div>
-              <p className="text-sm whitespace-pre-wrap">{msg.content}</p>
+              {msg.is_ai ? (
+                <div className="text-sm prose prose-sm dark:prose-invert max-w-none">
+                  <ReactMarkdown>{msg.content}</ReactMarkdown>
+                </div>
+              ) : (
+                <p className="text-sm whitespace-pre-wrap">{msg.content}</p>
+              )}
             </div>
           </div>
         ))}
