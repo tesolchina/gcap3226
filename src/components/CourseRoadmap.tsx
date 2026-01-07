@@ -39,22 +39,32 @@ const CourseRoadmap = () => {
       milestone: "✓ Confirm group membership by Week 3",
     },
     {
-      week: "5-6",
-      date: "11 Feb – 25 Feb",
-      title: "Data Governance & Requests",
-      description: "Learn data governance concepts. Draft and send data request letters to government departments. Design fieldwork plans.",
-      warning: "18 Feb is a public holiday",
+      week: "5",
+      date: "11 Feb",
+      title: "Empirical Data Collection Plan",
+      description: "Submit plan to collect empirical data. Connect government data requests to data governance evaluation using skills from Weeks 3-4.",
       assessment: { text: "Reflective Essay 1 (part of 20%)", color: "text-blue-600" },
       link: "/spring-2026/weeks/5",
       borderColor: "border-blue-500",
       badgeColor: "bg-blue-500",
-      milestone: "✓ Week 5: Draft letters ready | Week 6: Requests sent",
+      milestone: "✓ Data collection plan submitted",
+    },
+    {
+      week: "6",
+      date: "25 Feb",
+      title: "Field Work",
+      description: "Conduct fieldwork to collect primary empirical data. Apply data collection plan in real-world settings.",
+      warning: "18 Feb is a public holiday",
+      link: "/spring-2026/weeks/6",
+      borderColor: "border-green-500",
+      badgeColor: "bg-green-500",
+      milestone: "✓ Fieldwork conducted",
     },
     {
       week: "7",
       date: "4 Mar",
-      title: "Fieldwork",
-      description: "Conduct fieldwork to collect primary data. Debrief and review collected data.",
+      title: "Data Review & Consultation",
+      description: "Debrief fieldwork experiences. Review collected data and government responses.",
       assessment: { text: "Reflective Essay 2 (part of 20%)", color: "text-blue-600" },
       link: "/spring-2026/weeks/7",
       borderColor: "border-blue-500",
@@ -145,10 +155,11 @@ const CourseRoadmap = () => {
     }
   ];
 
-  // Row assignments for zigzag layout
+  // Row assignments for zigzag layout (10 weeks total: indexes 0-9)
+  // Week indexes: 0=W1, 1=W2, 2=W3-4, 3=W5, 4=W6, 5=W7, 6=W8-9, 7=W10, 8=W11, 9=W12
   const row1 = weeks.slice(0, 3); // Weeks 1, 2, 3-4
-  const row2 = [weeks[5], weeks[4], weeks[3]]; // Weeks 8-9, 7, 5-6 (reversed)
-  const row3 = weeks.slice(6, 9); // Weeks 10, 11, 12
+  const row2 = [weeks[5], weeks[4], weeks[3]]; // Weeks 7, 6, 5 (reversed)
+  const row3 = [weeks[6], weeks[7], weeks[8]]; // Weeks 8-9, 10, 11
 
   const WeekCard = ({ week, isLast = false }: { week: typeof weeks[0]; isLast?: boolean }) => (
     <div className={`bg-card rounded-xl shadow-md p-5 w-72 border-l-4 ${week.borderColor} hover:shadow-lg transition-shadow`}>
@@ -321,7 +332,7 @@ const CourseRoadmap = () => {
           {/* Connector: Row 1 to Row 2 */}
           <RowConnector direction="down-left" />
 
-          {/* Row 2: Right to Left (Weeks 8-9, 7, 5-6) */}
+          {/* Row 2: Right to Left (Weeks 7, 6, 5) */}
           <div className="flex items-center justify-center gap-0">
             <WeekCard week={row2[0]} />
             <HorizontalConnector direction="left" />
@@ -333,13 +344,21 @@ const CourseRoadmap = () => {
           {/* Connector: Row 2 to Row 3 */}
           <RowConnector direction="down-right" />
 
-          {/* Row 3: Left to Right (Weeks 10, 11, 12) */}
+          {/* Row 3: Left to Right (Weeks 8-9, 10, 11) */}
           <div className="flex items-center justify-center gap-0">
             <WeekCard week={row3[0]} />
             <HorizontalConnector direction="right" />
             <WeekCard week={row3[1]} />
             <HorizontalConnector direction="right" />
             <WeekCard week={row3[2]} />
+          </div>
+
+          {/* Connector to Week 12 */}
+          <RowConnector direction="down-left" />
+
+          {/* Row 4: Week 12 */}
+          <div className="flex items-center justify-center gap-0">
+            <WeekCard week={weeks[9]} />
           </div>
 
           {/* Connector to Final Week */}
