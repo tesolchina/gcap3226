@@ -3,7 +3,7 @@ import { useParams, Link } from "react-router-dom";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { ArrowLeft, Syringe, Activity, Car, Wallet, HeartPulse, ExternalLink, MessageSquare, FolderOpen, Info } from "lucide-react";
+import { ArrowLeft, Syringe, Activity, Car, Wallet, HeartPulse, Bug, ExternalLink, MessageSquare, FolderOpen, Info } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import ProjectMessageBoard from "@/components/ProjectMessageBoard";
 import ProjectFileUpload from "@/components/ProjectFileUpload";
@@ -123,6 +123,30 @@ const topicData: Record<string, {
       "Academic research on primary healthcare",
     ],
     relevantSDGs: ["SDG 3: Good Health and Well-being"],
+  },
+  "rodent-control": {
+    id: 6,
+    title: "Rodent Control",
+    description: "Urban pest management and public hygiene initiatives for rodent prevention across Hong Kong districts.",
+    icon: Bug,
+    color: "bg-yellow-600",
+    overview: "This topic explores Hong Kong's rodent control initiatives managed by the Food and Environmental Hygiene Department (FEHD). The government publishes monthly rat-free percentage data for all 18 districts, measuring the effectiveness of pest control efforts. Rodent infestation is a significant public health concern linked to disease transmission, food safety, and urban environmental hygiene.",
+    keyQuestions: [
+      "How does the rat-free percentage vary across Hong Kong's 18 districts?",
+      "What factors contribute to higher rodent infestation rates in certain areas?",
+      "How effective are current rodent control measures and public education campaigns?",
+      "What is the correlation between urban density, sanitation practices, and rodent prevalence?",
+      "How do seasonal patterns affect rodent activity and control effectiveness?",
+    ],
+    potentialDataSources: [
+      "FEHD Rat-Free Percentage Statistics (monthly updates by district)",
+      "FEHD Pest Control Advisory Section reports",
+      "District Council meeting minutes on environmental hygiene",
+      "Legislative Council papers on pest control policy",
+      "Hong Kong Observatory weather data (for seasonal analysis)",
+      "Census data on population density by district",
+    ],
+    relevantSDGs: ["SDG 3: Good Health and Well-being", "SDG 11: Sustainable Cities and Communities"],
   },
 };
 
