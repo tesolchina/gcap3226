@@ -359,7 +359,7 @@ const ProjectMessageBoard = ({ projectGroupId, topicSlug }: ProjectMessageBoardP
                   {msg.is_ai
                     ? "AI Assistant"
                     : msg.is_teacher
-                    ? "Teacher"
+                    ? msg.member?.display_name || "Teacher"
                     : msg.member?.display_name || `Student ***${msg.member?.student_id_last4}`}
                 </span>
                 <span className="text-xs text-muted-foreground">{format(new Date(msg.created_at), "MMM d, h:mm a")}</span>
