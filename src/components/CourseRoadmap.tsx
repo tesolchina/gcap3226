@@ -72,15 +72,25 @@ const CourseRoadmap = () => {
       milestone: "✓ Fieldwork debrief complete",
     },
     {
-      week: "8-9",
-      date: "11 Mar – 18 Mar",
-      title: "Analysis & Consultation",
-      description: "Integrate data. Use AI tools for analysis, visualization, and storytelling. Prepare draft report outline.",
-      assessment: { text: "Reflective Essay 3 (part of 20%)", color: "text-blue-600" },
+      week: "8",
+      date: "11 Mar",
+      title: "Data Collection Complete",
+      description: "MILESTONE: Complete all empirical data collection. Integrate data and begin analysis with AI tools.",
       link: "/spring-2026/weeks/8",
+      borderColor: "border-green-500",
+      badgeColor: "bg-green-500",
+      milestone: "✓ Empirical data collection complete",
+    },
+    {
+      week: "9",
+      date: "18 Mar",
+      title: "Analysis & Consultation",
+      description: "Third consultation meeting. Use AI tools for analysis, visualization, and storytelling. Prepare draft report outline.",
+      assessment: { text: "Reflective Essay 3 (part of 20%)", color: "text-blue-600" },
+      link: "/spring-2026/weeks/9",
       borderColor: "border-blue-500",
       badgeColor: "bg-blue-500",
-      milestone: "✓ Week 9: Draft report outline submitted",
+      milestone: "✓ Draft report outline submitted",
     },
     {
       week: "10",
@@ -155,11 +165,12 @@ const CourseRoadmap = () => {
     }
   ];
 
-  // Row assignments for zigzag layout (10 weeks total: indexes 0-9)
-  // Week indexes: 0=W1, 1=W2, 2=W3-4, 3=W5, 4=W6, 5=W7, 6=W8-9, 7=W10, 8=W11, 9=W12
+  // Row assignments for zigzag layout (11 weeks total: indexes 0-10)
+  // Week indexes: 0=W1, 1=W2, 2=W3-4, 3=W5, 4=W6, 5=W7, 6=W8, 7=W9, 8=W10, 9=W11, 10=W12
   const row1 = weeks.slice(0, 3); // Weeks 1, 2, 3-4
   const row2 = [weeks[5], weeks[4], weeks[3]]; // Weeks 7, 6, 5 (reversed)
-  const row3 = [weeks[6], weeks[7], weeks[8]]; // Weeks 8-9, 10, 11
+  const row3 = [weeks[6], weeks[7], weeks[8]]; // Weeks 8, 9, 10
+  const row4 = [weeks[9]]; // Week 11
 
   const WeekCard = ({ week, isLast = false }: { week: typeof weeks[0]; isLast?: boolean }) => (
     <div className={`bg-card rounded-xl shadow-md p-5 w-72 border-l-4 ${week.borderColor} hover:shadow-lg transition-shadow`}>
@@ -344,7 +355,7 @@ const CourseRoadmap = () => {
           {/* Connector: Row 2 to Row 3 */}
           <RowConnector direction="down-right" />
 
-          {/* Row 3: Left to Right (Weeks 8-9, 10, 11) */}
+          {/* Row 3: Left to Right (Weeks 8, 9, 10) */}
           <div className="flex items-center justify-center gap-0">
             <WeekCard week={row3[0]} />
             <HorizontalConnector direction="right" />
@@ -353,12 +364,14 @@ const CourseRoadmap = () => {
             <WeekCard week={row3[2]} />
           </div>
 
-          {/* Connector to Week 12 */}
+          {/* Connector: Row 3 to Row 4 */}
           <RowConnector direction="down-left" />
 
-          {/* Row 4: Week 12 */}
+          {/* Row 4: Week 11 */}
           <div className="flex items-center justify-center gap-0">
-            <WeekCard week={weeks[9]} />
+            <WeekCard week={row4[0]} />
+            <HorizontalConnector direction="right" />
+            <WeekCard week={weeks[10]} />
           </div>
 
           {/* Connector to Final Week */}
