@@ -472,6 +472,98 @@ export type Database = {
           },
         ]
       }
+      project_milestones: {
+        Row: {
+          completed_at: string | null
+          created_at: string
+          description: string | null
+          display_order: number
+          due_date: string | null
+          id: string
+          is_completed: boolean
+          is_custom: boolean
+          project_group_id: string | null
+          title: string
+        }
+        Insert: {
+          completed_at?: string | null
+          created_at?: string
+          description?: string | null
+          display_order?: number
+          due_date?: string | null
+          id?: string
+          is_completed?: boolean
+          is_custom?: boolean
+          project_group_id?: string | null
+          title: string
+        }
+        Update: {
+          completed_at?: string | null
+          created_at?: string
+          description?: string | null
+          display_order?: number
+          due_date?: string | null
+          id?: string
+          is_completed?: boolean
+          is_custom?: boolean
+          project_group_id?: string | null
+          title?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "project_milestones_project_group_id_fkey"
+            columns: ["project_group_id"]
+            isOneToOne: false
+            referencedRelation: "project_groups"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      project_sessions: {
+        Row: {
+          created_at: string
+          created_by: string | null
+          description: string | null
+          id: string
+          project_group_id: string | null
+          scheduled_at: string | null
+          title: string
+        }
+        Insert: {
+          created_at?: string
+          created_by?: string | null
+          description?: string | null
+          id?: string
+          project_group_id?: string | null
+          scheduled_at?: string | null
+          title: string
+        }
+        Update: {
+          created_at?: string
+          created_by?: string | null
+          description?: string | null
+          id?: string
+          project_group_id?: string | null
+          scheduled_at?: string | null
+          title?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "project_sessions_created_by_fkey"
+            columns: ["created_by"]
+            isOneToOne: false
+            referencedRelation: "project_members"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "project_sessions_project_group_id_fkey"
+            columns: ["project_group_id"]
+            isOneToOne: false
+            referencedRelation: "project_groups"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       student_submissions: {
         Row: {
           created_at: string | null
