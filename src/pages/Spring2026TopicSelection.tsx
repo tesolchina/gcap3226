@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, Syringe, Activity, Car, Wallet, HeartPulse, ChevronRight } from "lucide-react";
+import { ArrowLeft, Syringe, Activity, Car, Wallet, HeartPulse, Bug, ChevronRight } from "lucide-react";
 
 const topics = [
   {
@@ -48,6 +48,15 @@ const topics = [
     icon: HeartPulse,
     color: "bg-red-500",
     borderColor: "border-red-500",
+  },
+  {
+    id: 6,
+    title: "Rodent Control",
+    slug: "rodent-control",
+    description: "Urban pest management and public hygiene initiatives for rodent prevention across Hong Kong districts.",
+    icon: Bug,
+    color: "bg-yellow-600",
+    borderColor: "border-yellow-600",
   },
 ];
 
