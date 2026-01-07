@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, BookOpen, Target, MessageSquare, FileText, Users, ChevronDown, ChevronUp, Database, Scale, AlertTriangle, CheckCircle2 } from "lucide-react";
+import { ArrowLeft, BookOpen, Target, MessageSquare, FileText, Users, ChevronDown, ChevronUp, Database, Scale, AlertTriangle, CheckCircle2, Code, Calculator, LineChart, Bot, Cpu, TrendingUp } from "lucide-react";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 import busAppScreenshot from "@/assets/bus-app-duplicate-stops.png";
 
@@ -42,10 +42,17 @@ const Spring2026Week1 = () => {
     },
     {
       id: 5,
+      title: "Technology & Math (Dr. Talia)",
+      icon: Code,
+      color: "cyan",
+      content: <Module5TechMath onComplete={() => handleModuleComplete(5)} />
+    },
+    {
+      id: 6,
       title: "Reflection & Assessment",
       icon: FileText,
       color: "red",
-      content: <Module5 onComplete={() => handleModuleComplete(5)} />
+      content: <Module6 onComplete={() => handleModuleComplete(6)} />
     }
   ];
 
@@ -623,14 +630,287 @@ Sincerely,
   );
 };
 
-const Module5: React.FC<{ onComplete: () => void }> = ({ onComplete }) => {
+// Module 5: Technology & Math (Talia's content)
+const Module5TechMath: React.FC<{ onComplete: () => void }> = ({ onComplete }) => {
+  const [showCopilot, setShowCopilot] = useState(false);
+  const [showSimulation, setShowSimulation] = useState(false);
+  const [showRegression, setShowRegression] = useState(false);
+
+  return (
+    <div className="space-y-6">
+      <Card>
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2">
+            <Code className="h-5 w-5 text-cyan-500" />
+            Module 5: Technology & Math
+          </CardTitle>
+          <p className="text-sm text-muted-foreground mt-1">Content by Dr. Talia</p>
+        </CardHeader>
+        <CardContent className="space-y-6">
+          {/* Python Introduction */}
+          <div className="space-y-4">
+            <h3 className="text-lg font-semibold flex items-center gap-2">
+              <Cpu className="h-5 w-5 text-cyan-600" />
+              Technology Tools
+            </h3>
+            
+            <div className="grid md:grid-cols-2 gap-4">
+              <div className="flex items-start gap-3 p-4 bg-cyan-50 dark:bg-cyan-950/30 rounded-lg border border-cyan-200 dark:border-cyan-800">
+                <div className="bg-cyan-600 text-white rounded-lg p-2">
+                  <Code className="h-5 w-5" />
+                </div>
+                <div>
+                  <h4 className="font-semibold text-cyan-800 dark:text-cyan-200">1. Python</h4>
+                  <p className="text-sm text-cyan-700 dark:text-cyan-300">
+                    Programming language that we will use for <strong>data visualization</strong>, <strong>analysis</strong>, and <strong>simulation</strong>.
+                  </p>
+                </div>
+              </div>
+              
+              <div className="flex items-start gap-3 p-4 bg-purple-50 dark:bg-purple-950/30 rounded-lg border border-purple-200 dark:border-purple-800">
+                <div className="bg-purple-600 text-white rounded-lg p-2">
+                  <Bot className="h-5 w-5" />
+                </div>
+                <div>
+                  <h4 className="font-semibold text-purple-800 dark:text-purple-200">2. GitHub Copilot</h4>
+                  <p className="text-sm text-purple-700 dark:text-purple-300">
+                    Your AI assistant for programming - helps write code from natural language descriptions.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* GitHub Copilot Section */}
+          <Collapsible open={showCopilot} onOpenChange={setShowCopilot}>
+            <CollapsibleTrigger asChild>
+              <Button variant="outline" className="w-full justify-between">
+                <span className="flex items-center gap-2">
+                  🤖 How GitHub Copilot Changes Programming
+                </span>
+                {showCopilot ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
+              </Button>
+            </CollapsibleTrigger>
+            <CollapsibleContent className="mt-4 space-y-4">
+              <div className="bg-gradient-to-r from-purple-50 to-blue-50 dark:from-purple-950/30 dark:to-blue-950/30 p-6 rounded-lg border">
+                <h4 className="font-semibold mb-4">How Copilot Changes How We Learn to Program</h4>
+                <div className="grid md:grid-cols-2 gap-4">
+                  <div className="bg-background p-4 rounded-lg">
+                    <h5 className="font-medium text-amber-600 mb-2">📜 In the Past</h5>
+                    <p className="text-sm text-muted-foreground">
+                      Learners spent most time on <strong>syntax and structure</strong> of programs.
+                    </p>
+                  </div>
+                  <div className="bg-background p-4 rounded-lg">
+                    <h5 className="font-medium text-green-600 mb-2">🚀 Now</h5>
+                    <p className="text-sm text-muted-foreground">
+                      Copilot can generate basic programs <strong>almost immediately</strong> and almost always syntactically correct. Users describe programs in words (write a <strong>prompt</strong>).
+                    </p>
+                  </div>
+                </div>
+                
+                <div className="mt-4">
+                  <h5 className="font-medium mb-3">How Does Copilot Work?</h5>
+                  <div className="flex flex-col md:flex-row gap-2 items-center">
+                    <div className="bg-blue-100 dark:bg-blue-900 p-3 rounded-lg text-center flex-1">
+                      <p className="text-sm font-medium">You type a prompt</p>
+                    </div>
+                    <span className="text-2xl">→</span>
+                    <div className="bg-purple-100 dark:bg-purple-900 p-3 rounded-lg text-center flex-1">
+                      <p className="text-sm font-medium">Copilot sends to LLM</p>
+                    </div>
+                    <span className="text-2xl">→</span>
+                    <div className="bg-green-100 dark:bg-green-900 p-3 rounded-lg text-center flex-1">
+                      <p className="text-sm font-medium">GPT generates code</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="mt-4 bg-amber-50 dark:bg-amber-950/30 p-4 rounded-lg border border-amber-200 dark:border-amber-800">
+                  <h5 className="font-semibold text-amber-800 dark:text-amber-200 mb-2">🎯 Skills We Need to Develop</h5>
+                  <ul className="text-sm text-amber-700 dark:text-amber-300 space-y-2">
+                    <li>• The skill to <strong>break down large problems</strong> into smaller tasks that Copilot can help with</li>
+                    <li>• How to tell Copilot what to do, i.e., <strong>prompt engineering</strong></li>
+                  </ul>
+                </div>
+              </div>
+            </CollapsibleContent>
+          </Collapsible>
+
+          {/* Simulation Modeling Section */}
+          <Collapsible open={showSimulation} onOpenChange={setShowSimulation}>
+            <CollapsibleTrigger asChild>
+              <Button variant="outline" className="w-full justify-between">
+                <span className="flex items-center gap-2">
+                  🎲 Optimization via Simulation Modelling
+                </span>
+                {showSimulation ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
+              </Button>
+            </CollapsibleTrigger>
+            <CollapsibleContent className="mt-4 space-y-4">
+              <div className="bg-gradient-to-r from-green-50 to-teal-50 dark:from-green-950/30 dark:to-teal-950/30 p-6 rounded-lg border">
+                <div className="space-y-4">
+                  <div>
+                    <h4 className="font-semibold mb-2">Optimization Goals</h4>
+                    <p className="text-sm text-muted-foreground">
+                      The shortest path to the destination, the smallest amount of waste production, the minimized costs, the shortest queueing time...
+                    </p>
+                    <p className="text-sm font-medium text-green-700 dark:text-green-300 mt-2">
+                      🎯 Objective: Efficient system operation
+                    </p>
+                  </div>
+
+                  <div className="bg-background p-4 rounded-lg">
+                    <h5 className="font-medium mb-3">Simulation Can Be Used To:</h5>
+                    <ul className="text-sm space-y-2">
+                      <li className="flex items-start gap-2">
+                        <CheckCircle2 className="h-4 w-4 text-green-600 mt-0.5 shrink-0" />
+                        <span>Model <strong>complex systems</strong></span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <CheckCircle2 className="h-4 w-4 text-green-600 mt-0.5 shrink-0" />
+                        <span>Assess <strong>dynamic system behavior</strong></span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <CheckCircle2 className="h-4 w-4 text-green-600 mt-0.5 shrink-0" />
+                        <span>Explore hypothetical situations and answer <strong>"what-if" scenarios</strong></span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <CheckCircle2 className="h-4 w-4 text-green-600 mt-0.5 shrink-0" />
+                        <span>Test new solutions in a <strong>cheaper and safer manner</strong></span>
+                      </li>
+                    </ul>
+                  </div>
+
+                  <div className="bg-gray-900 rounded-lg p-4 text-green-400 font-mono text-sm">
+                    <div className="flex items-center mb-3">
+                      <span className="text-white bg-green-600 px-2 py-1 rounded text-xs mr-3">PYTHON</span>
+                      <span className="text-white font-bold">SimPy: Discrete-Event Simulation</span>
+                    </div>
+                    <div className="space-y-1 text-xs">
+                      <div><span className="text-blue-400"># Simulation is about mimicking complex systems over time</span></div>
+                      <div><span className="text-yellow-400">import</span> simpy</div>
+                      <div className="text-gray-400"># Run and rerun a model many times under different scenarios</div>
+                      <div className="text-gray-400"># Predict system behaviour and evaluate performance</div>
+                    </div>
+                  </div>
+
+                  <div className="text-sm text-muted-foreground">
+                    <p className="font-medium">📚 Example Resources:</p>
+                    <ul className="mt-1 space-y-1">
+                      <li>• Bus simulation: <a href="https://poe.com/Bus56" className="text-primary hover:underline" target="_blank" rel="noopener noreferrer">poe.com/Bus56</a></li>
+                      <li>• Transport Dept Regional Planning: <a href="https://www.td.gov.hk/filemanager/en/util_uarticle_cp/southern%20-%20rpp%202023-24%20(eng).pdf" className="text-primary hover:underline" target="_blank" rel="noopener noreferrer">Southern Region Report</a></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </CollapsibleContent>
+          </Collapsible>
+
+          {/* Linear Regression Section */}
+          <Collapsible open={showRegression} onOpenChange={setShowRegression}>
+            <CollapsibleTrigger asChild>
+              <Button variant="outline" className="w-full justify-between">
+                <span className="flex items-center gap-2">
+                  📈 Linear Regression and Public Services
+                </span>
+                {showRegression ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
+              </Button>
+            </CollapsibleTrigger>
+            <CollapsibleContent className="mt-4 space-y-4">
+              <div className="bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-950/30 dark:to-indigo-950/30 p-6 rounded-lg border">
+                <div className="space-y-4">
+                  <div>
+                    <h4 className="font-semibold mb-3">Public Policy Applications</h4>
+                    <div className="grid md:grid-cols-2 gap-4">
+                      <div className="bg-background p-4 rounded-lg">
+                        <div className="flex items-center gap-2 mb-2">
+                          <TrendingUp className="h-4 w-4 text-blue-600" />
+                          <h5 className="font-medium">Population Density & Services</h5>
+                        </div>
+                        <p className="text-sm text-muted-foreground">
+                          How population density impacts the demand for public services?
+                        </p>
+                        <p className="text-xs text-blue-600 mt-2">→ Informs resource allocation & sustainable city development</p>
+                      </div>
+                      <div className="bg-background p-4 rounded-lg">
+                        <div className="flex items-center gap-2 mb-2">
+                          <LineChart className="h-4 w-4 text-indigo-600" />
+                          <h5 className="font-medium">Opinion & Satisfaction</h5>
+                        </div>
+                        <p className="text-sm text-muted-foreground">
+                          What's the relationship among public opinion, political trust, and public satisfaction?
+                        </p>
+                        <p className="text-xs text-indigo-600 mt-2">→ Assesses government performance & legitimacy</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="bg-blue-100 dark:bg-blue-900/50 p-4 rounded-lg">
+                    <h5 className="font-medium mb-2 flex items-center gap-2">
+                      <Calculator className="h-4 w-4" />
+                      Linear Regression Overview
+                    </h5>
+                    <p className="text-sm text-muted-foreground mb-3">
+                      Linear regression is a statistical method used to model the relationship between a <strong>dependent variable</strong> and one or more <strong>independent variables</strong>, assuming a linear relationship.
+                    </p>
+                    <p className="text-sm text-muted-foreground">
+                      The model is <strong>built (fitted)</strong> based on data.
+                    </p>
+                  </div>
+
+                  <div className="bg-gray-900 rounded-lg p-4 text-green-400 font-mono text-sm">
+                    <div className="flex items-center mb-3">
+                      <span className="text-white bg-orange-600 px-2 py-1 rounded text-xs mr-3">PYTHON</span>
+                      <span className="text-white font-bold">scikit-learn: Machine Learning Library</span>
+                    </div>
+                    <div className="space-y-1 text-xs">
+                      <div><span className="text-yellow-400">from</span> sklearn.linear_model <span className="text-yellow-400">import</span> LinearRegression</div>
+                      <div><span className="text-yellow-400">import</span> pandas <span className="text-yellow-400">as</span> pd</div>
+                      <div className="mt-2"><span className="text-blue-400"># Fit model to predict public service demand</span></div>
+                      <div>model = LinearRegression()</div>
+                      <div>model.fit(population_density, service_demand)</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </CollapsibleContent>
+          </Collapsible>
+
+          {/* MC Tasks Placeholder */}
+          <div className="border-2 border-dashed border-muted-foreground/30 rounded-lg p-6">
+            <h3 className="text-lg font-semibold mb-2 text-muted-foreground">📝 Check Your Understanding</h3>
+            <p className="text-sm text-muted-foreground">MC questions about simulation modeling and linear regression will appear here</p>
+          </div>
+
+          {/* Reflection */}
+          <div>
+            <h3 className="text-lg font-semibold mb-3">🪞 Reflection & Note-taking</h3>
+            <textarea
+              className="w-full p-3 border border-gray-300 rounded-lg"
+              rows={4}
+              placeholder="How might you use simulation modeling or linear regression to analyze a policy problem in Hong Kong?"
+            />
+          </div>
+
+          <Button onClick={onComplete} className="w-full">
+            Complete Module 5
+          </Button>
+        </CardContent>
+      </Card>
+    </div>
+  );
+};
+
+// Module 6: Reflection & Assessment (renamed from Module 5)
+const Module6: React.FC<{ onComplete: () => void }> = ({ onComplete }) => {
   return (
     <div className="space-y-6">
       <Card>
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <FileText className="h-5 w-5 text-red-500" />
-            Module 5: Reflection & Assessment
+            Module 6: Reflection & Assessment
           </CardTitle>
         </CardHeader>
         <CardContent className="space-y-6">
