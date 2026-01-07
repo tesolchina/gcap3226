@@ -1,22 +1,41 @@
 import { useParams, Link } from "react-router-dom";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, Calendar, BookOpen, Target, FileText } from "lucide-react";
+import { ArrowLeft, Calendar, BookOpen, Target, FileText, Laptop, Users, CheckCircle2, AlertCircle } from "lucide-react";
 
-const weekContent: Record<string, { title: string; description: string; objectives: string[]; activities: string[]; assessment?: string; assessmentLink?: string }> = {
+const weekContent: Record<string, { title: string; description: string; objectives: string[]; activities: string[]; techSetup?: { tools: string[]; support: string[] }; assessment?: string; assessmentLink?: string }> = {
   "2": {
-    title: "Policy Analysis Foundations",
-    description: "Introduction to policy analysis frameworks and understanding governance challenges in Hong Kong.",
+    title: "Development Environment & Python Foundations",
+    description: "Set up your coding environment with IDE and Jupyter Notebook. Learn Python basics through 'vibe coding' - an intuitive, AI-assisted approach to programming.",
     objectives: [
-      "Understand key policy analysis frameworks",
-      "Explore Hong Kong's governance structure",
-      "Identify potential research topics",
+      "Install and configure VS Code or preferred IDE",
+      "Set up Jupyter Notebook for data visualization",
+      "Understand Python basics through hands-on coding",
+      "Use GitHub Copilot for AI-assisted programming",
+      "Connect Python skills to policy data analysis",
     ],
     activities: [
-      "Lecture on policy analysis methods",
-      "Discussion of Hong Kong policy challenges",
-      "Initial topic brainstorming",
+      "IDE installation and configuration workshop",
+      "Jupyter Notebook introduction and setup",
+      "Python 'vibe coding' session with AI assistance",
+      "Data visualization basics with matplotlib/pandas",
+      "Hands-on practice with student partner support",
     ],
+    techSetup: {
+      tools: [
+        "VS Code (recommended) or PyCharm",
+        "Python 3.10+ installation",
+        "Jupyter Notebook / JupyterLab",
+        "GitHub Copilot (student license available)",
+        "Required packages: pandas, matplotlib, numpy",
+      ],
+      support: [
+        "Student partners available on-site for setup assistance",
+        "Bring your laptop fully charged",
+        "Pre-install VS Code before class if possible",
+        "IT support available for troubleshooting",
+      ],
+    },
   },
   "3": {
     title: "Case Studies & Group Formation",
@@ -271,6 +290,41 @@ const Spring2026Week = () => {
             ))}
           </ul>
         </Card>
+
+        {/* Tech Setup Section (for Week 2) */}
+        {content.techSetup && (
+          <div className="grid md:grid-cols-2 gap-6">
+            <Card className="p-6 bg-cyan-50 dark:bg-cyan-950/30 border-cyan-200 dark:border-cyan-800">
+              <div className="flex items-center gap-3 mb-4">
+                <Laptop className="h-5 w-5 text-cyan-600" />
+                <h2 className="text-xl font-semibold text-cyan-800 dark:text-cyan-200">Required Tools</h2>
+              </div>
+              <ul className="space-y-2">
+                {content.techSetup.tools.map((tool, idx) => (
+                  <li key={idx} className="flex items-start gap-2 text-cyan-700 dark:text-cyan-300">
+                    <CheckCircle2 className="h-4 w-4 text-cyan-600 mt-0.5 shrink-0" />
+                    <span className="text-sm">{tool}</span>
+                  </li>
+                ))}
+              </ul>
+            </Card>
+
+            <Card className="p-6 bg-amber-50 dark:bg-amber-950/30 border-amber-200 dark:border-amber-800">
+              <div className="flex items-center gap-3 mb-4">
+                <Users className="h-5 w-5 text-amber-600" />
+                <h2 className="text-xl font-semibold text-amber-800 dark:text-amber-200">Student Partner Support</h2>
+              </div>
+              <ul className="space-y-2">
+                {content.techSetup.support.map((item, idx) => (
+                  <li key={idx} className="flex items-start gap-2 text-amber-700 dark:text-amber-300">
+                    <AlertCircle className="h-4 w-4 text-amber-600 mt-0.5 shrink-0" />
+                    <span className="text-sm">{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </Card>
+          </div>
+        )}
 
         {/* Coming Soon Notice */}
         <Card className="p-6 bg-muted/50 text-center">
