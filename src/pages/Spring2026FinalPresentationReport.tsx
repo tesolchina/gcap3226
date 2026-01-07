@@ -12,7 +12,7 @@ const Spring2026FinalPresentationReport = () => {
         {/* Header */}
         <div className="flex items-center gap-4">
           <Button variant="ghost" size="icon" asChild>
-            <Link to="/spring-2026">
+            <Link to="/spring-2026/assessments">
               <ArrowLeft className="h-5 w-5" />
             </Link>
           </Button>
@@ -474,9 +474,9 @@ const Spring2026FinalPresentationReport = () => {
         {/* Back Button */}
         <div className="flex justify-center">
           <Button asChild variant="outline">
-            <Link to="/spring-2026">
+            <Link to="/spring-2026/assessments">
               <ArrowLeft className="mr-2 h-4 w-4" />
-              Back to Course Home
+              Back to Assessments
             </Link>
           </Button>
         </div>
