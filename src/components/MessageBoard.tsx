@@ -100,13 +100,7 @@ export function MessageBoard({ teamId, tabName }: MessageBoardProps) {
       <Card className="p-6 bg-gradient-to-br from-background to-accent/20">
         {!user ? (
           <div className="text-center py-8">
-            <p className="text-muted-foreground mb-4">Sign in to post messages</p>
-            <Button asChild>
-              <Link to="/auth">
-                <LogIn className="mr-2 h-4 w-4" />
-                Sign In
-              </Link>
-            </Button>
+            <p className="text-muted-foreground">View-only mode. Teachers can log in at /login to post.</p>
           </div>
         ) : (
           <form onSubmit={handleSubmit} className="space-y-4">

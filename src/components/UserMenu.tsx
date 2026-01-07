@@ -26,14 +26,7 @@ export function UserMenu() {
   };
 
   if (!user) {
-    return (
-      <Button asChild variant="ghost" size="sm">
-        <Link to="/auth">
-          <LogIn className="mr-2 h-4 w-4" />
-          Sign In
-        </Link>
-      </Button>
-    );
+    return null;
   }
 
   return (
