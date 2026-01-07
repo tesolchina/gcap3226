@@ -14,9 +14,8 @@ interface Session {
   id: string;
   title: string;
   description: string | null;
-  session_date: string | null;
-  led_by_teacher: boolean;
-  is_active: boolean;
+  scheduled_at: string | null;
+  created_by: string | null;
   created_at: string;
 }
 
@@ -128,9 +127,7 @@ const ProjectSessions = ({ projectGroupId, topicSlug, memberId, isTeacher }: Pro
           project_group_id: projectGroupId,
           title: newSessionTitle.trim(),
           description: newSessionDesc.trim() || null,
-          session_date: new Date().toISOString().split("T")[0],
-          led_by_teacher: isTeacher,
-          teacher_member_id: isTeacher ? memberId : null,
+          created_by: memberId,
         })
         .select()
         .single();
@@ -308,22 +305,14 @@ const ProjectSessions = ({ projectGroupId, topicSlug, memberId, isTeacher }: Pro
                 >
                   <div className="flex items-start justify-between">
                     <div>
-                      <h4 className="font-medium flex items-center gap-2">
-                        {session.title}
-                        {session.led_by_teacher && (
-                          <Badge variant="outline" className="text-amber-600">
-                            <GraduationCap className="h-3 w-3 mr-1" />
-                            Teacher-led
-                          </Badge>
-                        )}
-                      </h4>
+                      <h4 className="font-medium">{session.title}</h4>
                       {session.description && (
                         <p className="text-sm text-muted-foreground mt-1">{session.description}</p>
                       )}
                     </div>
                     <div className="text-xs text-muted-foreground flex items-center gap-1">
                       <Calendar className="h-3 w-3" />
-                      {session.session_date ? format(new Date(session.session_date), "MMM d") : "No date"}
+                      {session.scheduled_at ? format(new Date(session.scheduled_at), "MMM d") : format(new Date(session.created_at), "MMM d")}
                     </div>
                   </div>
                 </Card>
@@ -343,9 +332,6 @@ const ProjectSessions = ({ projectGroupId, topicSlug, memberId, isTeacher }: Pro
               </Button>
               <span className="font-semibold">{activeSession.title}</span>
             </div>
-            {activeSession.led_by_teacher && (
-              <Badge className="bg-amber-500">Teacher-led</Badge>
-            )}
           </div>
 
           <div className="flex-1 overflow-y-auto p-4 space-y-4">
