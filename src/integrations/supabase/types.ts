@@ -348,6 +348,50 @@ export type Database = {
         }
         Relationships: []
       }
+      project_knowledge: {
+        Row: {
+          content: string
+          created_at: string
+          embedding: string | null
+          id: string
+          metadata: Json | null
+          project_group_id: string | null
+          source_id: string | null
+          source_type: string
+          title: string
+        }
+        Insert: {
+          content: string
+          created_at?: string
+          embedding?: string | null
+          id?: string
+          metadata?: Json | null
+          project_group_id?: string | null
+          source_id?: string | null
+          source_type: string
+          title: string
+        }
+        Update: {
+          content?: string
+          created_at?: string
+          embedding?: string | null
+          id?: string
+          metadata?: Json | null
+          project_group_id?: string | null
+          source_id?: string | null
+          source_type?: string
+          title?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "project_knowledge_project_group_id_fkey"
+            columns: ["project_group_id"]
+            isOneToOne: false
+            referencedRelation: "project_groups"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       project_members: {
         Row: {
           created_at: string
@@ -516,6 +560,10 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      create_default_milestones: {
+        Args: { p_project_group_id: string }
+        Returns: undefined
+      }
       has_role: {
         Args: {
           _role: Database["public"]["Enums"]["app_role"]
