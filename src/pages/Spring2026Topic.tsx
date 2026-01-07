@@ -3,11 +3,13 @@ import { useParams, Link } from "react-router-dom";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { ArrowLeft, Syringe, Activity, Car, Wallet, HeartPulse, Bug, ExternalLink, MessageSquare, FolderOpen, Info, Users } from "lucide-react";
+import { ArrowLeft, Syringe, Activity, Car, Wallet, HeartPulse, Bug, ExternalLink, MessageSquare, FolderOpen, Info, Users, Calendar, Target } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import ProjectMessageBoard from "@/components/ProjectMessageBoard";
 import ProjectFileUpload from "@/components/ProjectFileUpload";
 import ProjectMembership from "@/components/ProjectMembership";
+import ProjectSessions from "@/components/ProjectSessions";
+import ProjectMilestones from "@/components/ProjectMilestones";
 
 const topicData: Record<string, {
   id: number;
@@ -154,7 +156,21 @@ const topicData: Record<string, {
 const Spring2026Topic = () => {
   const { topicSlug } = useParams<{ topicSlug: string }>();
   const [projectGroupId, setProjectGroupId] = useState<string | null>(null);
+  const [memberId, setMemberId] = useState<string | null>(null);
+  const [isTeacher, setIsTeacher] = useState(false);
   const topic = topicSlug ? topicData[topicSlug] : null;
+
+  // Load member info from localStorage
+  useEffect(() => {
+    if (topicSlug) {
+      const storedMemberId = localStorage.getItem(`project_member_${topicSlug}`);
+      const storedIsTeacher = localStorage.getItem(`project_is_teacher_${topicSlug}`);
+      if (storedMemberId) {
+        setMemberId(storedMemberId);
+        setIsTeacher(storedIsTeacher === "true");
+      }
+    }
+  }, [topicSlug]);
 
   useEffect(() => {
     const fetchProjectGroup = async () => {
@@ -215,37 +231,74 @@ const Spring2026Topic = () => {
 
         {/* Main Content with Tabs */}
         <Tabs defaultValue={topicSlug === "flu-shot" ? "membership" : "discussion"} className="space-y-6">
-          <TabsList className={`grid w-full ${topicSlug === "flu-shot" ? "grid-cols-4" : "grid-cols-3"}`}>
+          <TabsList className={`grid w-full ${topicSlug === "flu-shot" ? "grid-cols-6" : "grid-cols-3"}`}>
             {topicSlug === "flu-shot" && (
-              <TabsTrigger value="membership" className="flex items-center gap-2">
-                <Users className="h-4 w-4" />
-                Membership
-              </TabsTrigger>
+              <>
+                <TabsTrigger value="membership" className="flex items-center gap-2">
+                  <Users className="h-4 w-4" />
+                  <span className="hidden sm:inline">Membership</span>
+                </TabsTrigger>
+                <TabsTrigger value="sessions" className="flex items-center gap-2">
+                  <Calendar className="h-4 w-4" />
+                  <span className="hidden sm:inline">Meetings</span>
+                </TabsTrigger>
+                <TabsTrigger value="milestones" className="flex items-center gap-2">
+                  <Target className="h-4 w-4" />
+                  <span className="hidden sm:inline">Milestones</span>
+                </TabsTrigger>
+              </>
             )}
             <TabsTrigger value="discussion" className="flex items-center gap-2">
               <MessageSquare className="h-4 w-4" />
-              Discussion
+              <span className="hidden sm:inline">Discussion</span>
             </TabsTrigger>
             <TabsTrigger value="files" className="flex items-center gap-2">
               <FolderOpen className="h-4 w-4" />
-              Files
+              <span className="hidden sm:inline">Files</span>
             </TabsTrigger>
             <TabsTrigger value="info" className="flex items-center gap-2">
               <Info className="h-4 w-4" />
-              Project Info
+              <span className="hidden sm:inline">Info</span>
             </TabsTrigger>
           </TabsList>
 
           {topicSlug === "flu-shot" && (
-            <TabsContent value="membership" className="space-y-4">
-              {projectGroupId ? (
-                <ProjectMembership projectGroupId={projectGroupId} topicSlug={topicSlug} topicTitle={topic.title} />
-              ) : (
-                <Card className="p-6 text-center text-muted-foreground">
-                  Loading membership...
-                </Card>
-              )}
-            </TabsContent>
+            <>
+              <TabsContent value="membership" className="space-y-4">
+                {projectGroupId ? (
+                  <ProjectMembership projectGroupId={projectGroupId} topicSlug={topicSlug} topicTitle={topic.title} />
+                ) : (
+                  <Card className="p-6 text-center text-muted-foreground">
+                    Loading membership...
+                  </Card>
+                )}
+              </TabsContent>
+
+              <TabsContent value="sessions" className="space-y-4">
+                {projectGroupId ? (
+                  <ProjectSessions 
+                    projectGroupId={projectGroupId} 
+                    topicSlug={topicSlug} 
+                    memberId={memberId}
+                    isTeacher={isTeacher}
+                  />
+                ) : (
+                  <Card className="p-6 text-center text-muted-foreground">
+                    Loading sessions...
+                  </Card>
+                )}
+              </TabsContent>
+
+              <TabsContent value="milestones" className="space-y-4">
+                {projectGroupId ? (
+                  <ProjectMilestones projectGroupId={projectGroupId} isTeacher={isTeacher} />
+                ) : (
+                  <Card className="p-6 text-center text-muted-foreground">
+                    Loading milestones...
+                  </Card>
+                )}
+              </TabsContent>
+            </>
           )}
 
           <TabsContent value="discussion" className="space-y-4">
