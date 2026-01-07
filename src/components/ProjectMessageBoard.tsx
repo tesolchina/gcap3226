@@ -250,40 +250,58 @@ const ProjectMessageBoard = ({ projectGroupId, topicSlug }: ProjectMessageBoardP
             },
           });
 
-          if (response.error) throw response.error;
+          if (response.error) {
+            console.error("Edge function error:", response.error);
+            throw response.error;
+          }
 
-          // Parse the AI response
+          // Handle streaming response
           let aiResponse = "";
-          const reader = response.data.getReader();
-          const decoder = new TextDecoder();
+          
+          if (response.data instanceof ReadableStream) {
+            const reader = response.data.getReader();
+            const decoder = new TextDecoder();
 
-          while (true) {
-            const { done, value } = await reader.read();
-            if (done) break;
-            const chunk = decoder.decode(value);
-            const lines = chunk.split("\n");
-            for (const line of lines) {
-              if (line.startsWith("data: ") && line !== "data: [DONE]") {
-                try {
-                  const json = JSON.parse(line.slice(6));
-                  if (json.choices?.[0]?.delta?.content) {
-                    aiResponse += json.choices[0].delta.content;
-                  }
-                } catch {}
+            while (true) {
+              const { done, value } = await reader.read();
+              if (done) break;
+              const chunk = decoder.decode(value);
+              const lines = chunk.split("\n");
+              for (const line of lines) {
+                if (line.startsWith("data: ") && line !== "data: [DONE]") {
+                  try {
+                    const json = JSON.parse(line.slice(6));
+                    if (json.choices?.[0]?.delta?.content) {
+                      aiResponse += json.choices[0].delta.content;
+                    }
+                  } catch {}
+                }
               }
             }
+          } else if (typeof response.data === 'string') {
+            // Handle non-streaming response
+            aiResponse = response.data;
+          } else if (response.data?.error) {
+            throw new Error(response.data.error);
           }
 
           // Save AI response
-          await supabase.from("project_messages").insert({
-            project_group_id: projectGroupId,
-            member_id: null,
-            content: aiResponse || "I apologize, but I couldn't generate a response. Please try again.",
-            is_ai: true,
-            is_teacher: false,
-          });
+          if (aiResponse) {
+            await supabase.from("project_messages").insert({
+              project_group_id: projectGroupId,
+              member_id: null,
+              content: aiResponse,
+              is_ai: true,
+              is_teacher: false,
+            });
+          }
         } catch (aiError: any) {
           console.error("AI error:", aiError);
+          toast({
+            title: "AI Error",
+            description: "Failed to get AI response. Please try again.",
+            variant: "destructive",
+          });
         } finally {
           setIsSendingAI(false);
         }
