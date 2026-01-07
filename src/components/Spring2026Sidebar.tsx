@@ -36,6 +36,11 @@ const resourceItems = [
   { title: "Feedback", url: "/spring-2026/feedback", icon: MessageSquare },
 ];
 
+const learningModuleItems = [
+  { title: "Gov Info Requests", url: "/spring-2026/resources/government-info-requests", icon: FileText },
+  { title: "Curating Public Data", url: "/spring-2026/resources/curating-public-data", icon: FileText },
+];
+
 export function Spring2026Sidebar() {
   return (
     <Sidebar collapsible="offcanvas" className="border-r border-border/50">
@@ -98,6 +103,36 @@ export function Spring2026Sidebar() {
           <SidebarGroupContent>
             <SidebarMenu className="space-y-0.5">
               {resourceItems.map((item) => (
+                <SidebarMenuItem key={item.title}>
+                  <SidebarMenuButton asChild>
+                    <NavLink
+                      to={item.url}
+                      className={({ isActive }) =>
+                        isActive
+                          ? "flex items-center gap-3 w-full bg-primary text-primary-foreground rounded-lg px-3 py-2 font-medium text-sm"
+                          : "flex items-center gap-3 w-full text-foreground/80 hover:bg-accent/50 hover:text-foreground rounded-lg px-3 py-2 text-sm transition-colors"
+                      }
+                    >
+                      <item.icon className="h-4 w-4 flex-shrink-0" />
+                      <span>{item.title}</span>
+                    </NavLink>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+              ))}
+            </SidebarMenu>
+          </SidebarGroupContent>
+        </SidebarGroup>
+
+        <SidebarSeparator className="my-3" />
+
+        {/* Learning Modules */}
+        <SidebarGroup className="px-2">
+          <SidebarGroupLabel className="text-xs uppercase tracking-wider text-muted-foreground/70 font-semibold mb-2 px-2">
+            Learning Modules
+          </SidebarGroupLabel>
+          <SidebarGroupContent>
+            <SidebarMenu className="space-y-0.5">
+              {learningModuleItems.map((item) => (
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton asChild>
                     <NavLink

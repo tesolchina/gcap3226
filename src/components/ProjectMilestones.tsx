@@ -64,12 +64,15 @@ const ProjectMilestones = ({ projectGroupId, isTeacher }: ProjectMilestonesProps
 
   const createDefaultMilestones = async () => {
     const defaults = [
-      { title: "Topic Finalized", description: "Confirm research topic and scope with teacher approval", display_order: 1 },
-      { title: "Data Collection Complete", description: "Gather all primary and secondary data sources", display_order: 2 },
-      { title: "Analysis Framework Ready", description: "Complete data analysis using agreed methodology", display_order: 3 },
-      { title: "Draft Report Submitted", description: "Submit draft report outline for feedback", display_order: 4 },
-      { title: "Presentation Prepared", description: "Complete presentation slides and rehearse", display_order: 5 },
-      { title: "Final Report Submitted", description: "Submit final group report", display_order: 6 },
+      { title: "Week 3: Group Membership Confirmed", description: "All team members registered in project space", display_order: 1, due_date: "2026-01-28" },
+      { title: "Week 5: Data Governance Discussion", description: "Discussed data governance concepts in class consultation", display_order: 2, due_date: "2026-02-11" },
+      { title: "Week 5: Draft Request Letters Ready", description: "Government data request letters drafted for review", display_order: 3, due_date: "2026-02-11" },
+      { title: "Week 6: Information Requests Sent", description: "Data request letters sent to government departments", display_order: 4, due_date: "2026-02-25" },
+      { title: "Week 7: Fieldwork Debrief Complete", description: "Primary data collection reviewed and documented", display_order: 5, due_date: "2026-03-04" },
+      { title: "Week 9: Draft Report Outline Submitted", description: "Draft structure reviewed with teachers", display_order: 6, due_date: "2026-03-18" },
+      { title: "Week 10: Final Draft Ready", description: "Report ready for presentation preparation", display_order: 7, due_date: "2026-03-25" },
+      { title: "Week 11: Presentation 1 Delivered", description: "First presentation completed with feedback received", display_order: 8, due_date: "2026-04-01" },
+      { title: "Week 13: Final Report Submitted", description: "Final group report and poster submitted", display_order: 9, due_date: "2026-04-22" },
     ];
 
     const { data, error } = await supabase
