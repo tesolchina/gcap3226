@@ -564,6 +564,47 @@ export type Database = {
           },
         ]
       }
+      session_messages: {
+        Row: {
+          content: string
+          created_at: string
+          id: string
+          is_ai: boolean
+          is_teacher: boolean
+          is_voice_transcription: boolean
+          member_id: string | null
+          session_id: string
+        }
+        Insert: {
+          content: string
+          created_at?: string
+          id?: string
+          is_ai?: boolean
+          is_teacher?: boolean
+          is_voice_transcription?: boolean
+          member_id?: string | null
+          session_id: string
+        }
+        Update: {
+          content?: string
+          created_at?: string
+          id?: string
+          is_ai?: boolean
+          is_teacher?: boolean
+          is_voice_transcription?: boolean
+          member_id?: string | null
+          session_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "session_messages_session_id_fkey"
+            columns: ["session_id"]
+            isOneToOne: false
+            referencedRelation: "project_sessions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       student_submissions: {
         Row: {
           created_at: string | null
