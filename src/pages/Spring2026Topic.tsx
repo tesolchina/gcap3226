@@ -272,24 +272,20 @@ const Spring2026Topic = () => {
         </div>
 
         {/* Main Content with Tabs */}
-        <Tabs defaultValue={topicSlug === "flu-shot" ? "membership" : "discussion"} className="space-y-6">
-          <TabsList className={`grid w-full ${topicSlug === "flu-shot" ? "grid-cols-6" : "grid-cols-3"}`}>
-            {topicSlug === "flu-shot" && (
-              <>
-                <TabsTrigger value="membership" className="flex items-center gap-2">
-                  <Users className="h-4 w-4" />
-                  <span className="hidden sm:inline">Membership</span>
-                </TabsTrigger>
-                <TabsTrigger value="sessions" className="flex items-center gap-2">
-                  <Calendar className="h-4 w-4" />
-                  <span className="hidden sm:inline">Meetings</span>
-                </TabsTrigger>
-                <TabsTrigger value="milestones" className="flex items-center gap-2">
-                  <Target className="h-4 w-4" />
-                  <span className="hidden sm:inline">Milestones</span>
-                </TabsTrigger>
-              </>
-            )}
+        <Tabs defaultValue="membership" className="space-y-6">
+          <TabsList className="grid w-full grid-cols-6">
+            <TabsTrigger value="membership" className="flex items-center gap-2">
+              <Users className="h-4 w-4" />
+              <span className="hidden sm:inline">Membership</span>
+            </TabsTrigger>
+            <TabsTrigger value="sessions" className="flex items-center gap-2">
+              <Calendar className="h-4 w-4" />
+              <span className="hidden sm:inline">Meetings</span>
+            </TabsTrigger>
+            <TabsTrigger value="milestones" className="flex items-center gap-2">
+              <Target className="h-4 w-4" />
+              <span className="hidden sm:inline">Milestones</span>
+            </TabsTrigger>
             <TabsTrigger value="discussion" className="flex items-center gap-2">
               <MessageSquare className="h-4 w-4" />
               <span className="hidden sm:inline">Discussion</span>
@@ -304,44 +300,40 @@ const Spring2026Topic = () => {
             </TabsTrigger>
           </TabsList>
 
-          {topicSlug === "flu-shot" && (
-            <>
-              <TabsContent value="membership" className="space-y-4">
-                {projectGroupId ? (
-                  <ProjectMembership projectGroupId={projectGroupId} topicSlug={topicSlug} topicTitle={topic.title} />
-                ) : (
-                  <Card className="p-6 text-center text-muted-foreground">
-                    Loading membership...
-                  </Card>
-                )}
-              </TabsContent>
+          <TabsContent value="membership" className="space-y-4">
+            {projectGroupId ? (
+              <ProjectMembership projectGroupId={projectGroupId} topicSlug={topicSlug!} topicTitle={topic.title} />
+            ) : (
+              <Card className="p-6 text-center text-muted-foreground">
+                Loading membership...
+              </Card>
+            )}
+          </TabsContent>
 
-              <TabsContent value="sessions" className="space-y-4">
-                {projectGroupId ? (
-                  <ProjectSessions 
-                    projectGroupId={projectGroupId} 
-                    topicSlug={topicSlug} 
-                    memberId={memberId}
-                    isTeacher={isTeacher}
-                  />
-                ) : (
-                  <Card className="p-6 text-center text-muted-foreground">
-                    Loading sessions...
-                  </Card>
-                )}
-              </TabsContent>
+          <TabsContent value="sessions" className="space-y-4">
+            {projectGroupId ? (
+              <ProjectSessions 
+                projectGroupId={projectGroupId} 
+                topicSlug={topicSlug!} 
+                memberId={memberId}
+                isTeacher={isTeacher}
+              />
+            ) : (
+              <Card className="p-6 text-center text-muted-foreground">
+                Loading sessions...
+              </Card>
+            )}
+          </TabsContent>
 
-              <TabsContent value="milestones" className="space-y-4">
-                {projectGroupId ? (
-                  <ProjectMilestones projectGroupId={projectGroupId} isTeacher={isTeacher} />
-                ) : (
-                  <Card className="p-6 text-center text-muted-foreground">
-                    Loading milestones...
-                  </Card>
-                )}
-              </TabsContent>
-            </>
-          )}
+          <TabsContent value="milestones" className="space-y-4">
+            {projectGroupId ? (
+              <ProjectMilestones projectGroupId={projectGroupId} isTeacher={isTeacher} />
+            ) : (
+              <Card className="p-6 text-center text-muted-foreground">
+                Loading milestones...
+              </Card>
+            )}
+          </TabsContent>
 
           <TabsContent value="discussion" className="space-y-4">
             {projectGroupId ? (
