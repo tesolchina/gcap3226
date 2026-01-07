@@ -20,7 +20,7 @@ const topicData: Record<string, {
   overview: string;
   keyQuestions: string[];
   potentialDataSources: string[];
-  relevantSDGs: string[];
+  relevantSDGs: { name: string; explanation: string }[];
 }> = {
   "flu-shot": {
     id: 1,
@@ -41,7 +41,12 @@ const topicData: Record<string, {
       "Department of Health press releases",
       "Census and Statistics Department health surveys",
     ],
-    relevantSDGs: ["SDG 3: Good Health and Well-being"],
+    relevantSDGs: [
+      {
+        name: "SDG 3: Good Health and Well-being",
+        explanation: "Flu vaccination programs directly contribute to ensuring healthy lives by preventing seasonal influenza outbreaks, reducing hospitalizations, and protecting vulnerable populations including the elderly and those with chronic conditions.",
+      },
+    ],
   },
   "colorectal-cancer-screening": {
     id: 2,
@@ -62,7 +67,12 @@ const topicData: Record<string, {
       "Department of Health annual reports",
       "Academic studies on screening effectiveness",
     ],
-    relevantSDGs: ["SDG 3: Good Health and Well-being"],
+    relevantSDGs: [
+      {
+        name: "SDG 3: Good Health and Well-being",
+        explanation: "Early cancer detection through screening programs significantly improves survival rates and quality of life. This program aims to reduce premature mortality from colorectal cancer, which is one of the leading causes of cancer deaths in Hong Kong.",
+      },
+    ],
   },
   "road-safety": {
     id: 3,
@@ -83,7 +93,16 @@ const topicData: Record<string, {
       "Road Safety Council publications",
       "Legislative Council papers on transport policy",
     ],
-    relevantSDGs: ["SDG 3: Good Health and Well-being", "SDG 11: Sustainable Cities and Communities"],
+    relevantSDGs: [
+      {
+        name: "SDG 3: Good Health and Well-being",
+        explanation: "Target 3.6 specifically aims to halve global deaths and injuries from road traffic accidents by 2030. Road safety initiatives directly contribute to preventing premature deaths and reducing disability from traffic injuries.",
+      },
+      {
+        name: "SDG 11: Sustainable Cities and Communities",
+        explanation: "Safe and accessible transport systems are essential for sustainable urban development. Road safety improvements support the goal of making cities inclusive, safe, resilient, and sustainable for all residents.",
+      },
+    ],
   },
   "empf": {
     id: 4,
@@ -104,7 +123,16 @@ const topicData: Record<string, {
       "Legislative Council papers on MPF reform",
       "Industry reports on pension digitalization",
     ],
-    relevantSDGs: ["SDG 8: Decent Work and Economic Growth", "SDG 10: Reduced Inequalities"],
+    relevantSDGs: [
+      {
+        name: "SDG 8: Decent Work and Economic Growth",
+        explanation: "The eMPF platform promotes economic efficiency and reduces administrative burdens for employers, supporting productive employment. Streamlined pension management helps ensure workers' retirement savings are protected and properly managed.",
+      },
+      {
+        name: "SDG 10: Reduced Inequalities",
+        explanation: "By centralizing and simplifying MPF administration, the platform aims to reduce information asymmetry and transaction costs, potentially benefiting lower-income workers who previously faced higher proportional fees.",
+      },
+    ],
   },
   "cdcc": {
     id: 5,
@@ -125,7 +153,12 @@ const topicData: Record<string, {
       "Hospital Authority chronic disease statistics",
       "Academic research on primary healthcare",
     ],
-    relevantSDGs: ["SDG 3: Good Health and Well-being"],
+    relevantSDGs: [
+      {
+        name: "SDG 3: Good Health and Well-being",
+        explanation: "The CDCC scheme addresses Target 3.4 by strengthening the prevention and treatment of non-communicable diseases like diabetes and hypertension. Effective chronic disease management improves quality of life and reduces premature mortality.",
+      },
+    ],
   },
   "rodent-control": {
     id: 6,
@@ -149,7 +182,16 @@ const topicData: Record<string, {
       "Hong Kong Observatory weather data (for seasonal analysis)",
       "Census data on population density by district",
     ],
-    relevantSDGs: ["SDG 3: Good Health and Well-being", "SDG 11: Sustainable Cities and Communities"],
+    relevantSDGs: [
+      {
+        name: "SDG 3: Good Health and Well-being",
+        explanation: "Rodent control is essential for preventing zoonotic diseases such as leptospirosis, hantavirus, and plague. Effective pest management protects public health by reducing disease transmission vectors in urban environments.",
+      },
+      {
+        name: "SDG 11: Sustainable Cities and Communities",
+        explanation: "Urban pest management is a key component of sustainable city governance. Maintaining clean, rodent-free public spaces contributes to livable communities and reflects effective municipal environmental management.",
+      },
+    ],
   },
 };
 
@@ -357,11 +399,12 @@ const Spring2026Topic = () => {
             {/* Relevant SDGs */}
             <Card className="p-6">
               <h2 className="text-xl font-semibold mb-4">Relevant Sustainable Development Goals</h2>
-              <div className="flex flex-wrap gap-2">
+              <div className="space-y-4">
                 {topic.relevantSDGs.map((sdg, idx) => (
-                  <span key={idx} className="px-3 py-1 bg-primary/10 text-primary rounded-full text-sm">
-                    {sdg}
-                  </span>
+                  <div key={idx} className="border-l-4 border-primary pl-4">
+                    <h3 className="font-medium text-primary">{sdg.name}</h3>
+                    <p className="text-sm text-muted-foreground mt-1">{sdg.explanation}</p>
+                  </div>
                 ))}
               </div>
             </Card>
