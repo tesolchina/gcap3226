@@ -1,9 +1,9 @@
 import { useParams, Link } from "react-router-dom";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, Calendar, BookOpen, Target, FileText, Laptop, Users, CheckCircle2, AlertCircle } from "lucide-react";
+import { ArrowLeft, Calendar, BookOpen, Target, FileText, Laptop, Users, CheckCircle2, AlertCircle, Download, Code } from "lucide-react";
 
-const weekContent: Record<string, { title: string; description: string; objectives: string[]; activities: string[]; techSetup?: { tools: string[]; support: string[] }; assessment?: string; assessmentLink?: string }> = {
+const weekContent: Record<string, { title: string; description: string; objectives: string[]; activities: string[]; techSetup?: { tools: string[]; support: string[] }; inClassExercise?: { title: string; description: string; dataset: string; skills: string[]; downloadLink: string; downloadLabel: string }; assessment?: string; assessmentLink?: string }> = {
   "2": {
     title: "Development Environment & Python Foundations",
     description: "Set up your coding environment with IDE and Jupyter Notebook. Learn Python basics through 'vibe coding' - an intuitive, AI-assisted approach to programming.",
@@ -38,18 +38,35 @@ const weekContent: Record<string, { title: string; description: string; objectiv
     },
   },
   "3": {
-    title: "Case Studies & Group Formation",
-    description: "Participate in case study demonstrations and form project groups.",
+    title: "Regression Analysis & Group Formation",
+    description: "Apply regression analysis techniques to real policy data and form project groups for the semester.",
     objectives: [
-      "Analyze real-world policy case studies",
-      "Form effective research teams",
-      "Select a group research topic",
+      "Practice linear and logistic regression analysis",
+      "Compare forward and backward variable selection methods",
+      "Interpret regression results for policy insights",
+      "Create exploratory data visualizations",
+      "Form effective research teams and select topics",
     ],
     activities: [
-      "Case study presentations and analysis",
+      "In-class regression exercise using Jupyter Notebook",
+      "Analysis of Hong Kong Waste Charging Policy survey data",
       "Team formation activities",
       "Topic selection workshop",
     ],
+    inClassExercise: {
+      title: "Regression Analysis In-Class Exercise",
+      description: "Analyze Hong Kong Waste Charging Policy survey data using linear and logistic regression. Explore the relationship between support levels and various demographic/attitudinal factors.",
+      dataset: "GCAP3226_week3.csv - Hong Kong Waste Charging Policy Survey Data",
+      skills: [
+        "Linear regression with statsmodels",
+        "Logistic regression for binary outcomes",
+        "Forward and backward variable selection",
+        "Data visualization with matplotlib",
+        "Interpreting regression coefficients and p-values",
+      ],
+      downloadLink: "/exercises/regression_exercise_student.ipynb",
+      downloadLabel: "Download Jupyter Notebook",
+    },
     assessment: "In-class Exercise 1 (5%)",
     assessmentLink: "/spring-2026/weeks/3/in-class-exercise-1",
   },
@@ -324,6 +341,41 @@ const Spring2026Week = () => {
               </ul>
             </Card>
           </div>
+        )}
+
+        {/* In-Class Exercise Section */}
+        {content.inClassExercise && (
+          <Card className="p-6 bg-indigo-50 dark:bg-indigo-950/30 border-indigo-200 dark:border-indigo-800">
+            <div className="flex items-center gap-3 mb-4">
+              <Code className="h-5 w-5 text-indigo-600" />
+              <h2 className="text-xl font-semibold text-indigo-800 dark:text-indigo-200">{content.inClassExercise.title}</h2>
+            </div>
+            <p className="text-indigo-700 dark:text-indigo-300 mb-4">{content.inClassExercise.description}</p>
+            
+            <div className="bg-white/50 dark:bg-black/20 rounded-lg p-4 mb-4">
+              <p className="text-sm font-medium text-indigo-800 dark:text-indigo-200 mb-2">Dataset:</p>
+              <p className="text-sm text-indigo-600 dark:text-indigo-400">{content.inClassExercise.dataset}</p>
+            </div>
+
+            <div className="mb-4">
+              <p className="text-sm font-medium text-indigo-800 dark:text-indigo-200 mb-2">Skills Practiced:</p>
+              <ul className="space-y-1">
+                {content.inClassExercise.skills.map((skill, idx) => (
+                  <li key={idx} className="flex items-start gap-2 text-sm text-indigo-700 dark:text-indigo-300">
+                    <CheckCircle2 className="h-4 w-4 text-indigo-500 mt-0.5 shrink-0" />
+                    <span>{skill}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <Button asChild className="bg-indigo-600 hover:bg-indigo-700">
+              <a href={content.inClassExercise.downloadLink} download>
+                <Download className="h-4 w-4 mr-2" />
+                {content.inClassExercise.downloadLabel}
+              </a>
+            </Button>
+          </Card>
         )}
 
         {/* Coming Soon Notice */}
