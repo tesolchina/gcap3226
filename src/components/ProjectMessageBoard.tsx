@@ -6,6 +6,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Badge } from "@/components/ui/badge";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
+import { streamChat } from "@/lib/ai-chat";
 import { Send, Bot, User, GraduationCap, Loader2 } from "lucide-react";
 import { format } from "date-fns";
 
@@ -59,14 +60,16 @@ const ProjectMessageBoard = ({ projectGroupId, topicSlug }: ProjectMessageBoardP
     const fetchMessages = async () => {
       const { data, error } = await supabase
         .from("project_messages")
-        .select(`
+        .select(
+          `
           id,
           content,
           is_ai,
           is_teacher,
           created_at,
           member_id
-        `)
+        `
+        )
         .eq("project_group_id", projectGroupId)
         .order("created_at", { ascending: true });
 
@@ -232,74 +235,50 @@ const ProjectMessageBoard = ({ projectGroupId, topicSlug }: ProjectMessageBoardP
 
       if (error) throw error;
 
-      // Auto-trigger AI response for non-teacher messages
-      if (triggerAI && !isTeacher) {
+      // Trigger AI response (previously disabled for teachers)
+      if (triggerAI) {
         setIsSendingAI(true);
+
+        let aiResponse = "";
         try {
-          // Get recent messages for context
-          const recentMessages = messages.slice(-10).map((m) => ({
+          const recentMessages = messages.slice(-10).map((m): { role: "assistant" | "user"; content: string } => ({
             role: m.is_ai ? "assistant" : "user",
             content: m.content,
           }));
 
-          // Call AI
-          const response = await supabase.functions.invoke("chat", {
-            body: {
-              messages: [...recentMessages, { role: "user", content: messageContent }],
-              systemPrompt: `You are a helpful AI assistant for a university group project about public policy in Hong Kong. The current project topic is: ${topicSlug.replace(/-/g, " ")}. Help students with research questions, data analysis, report writing, and project planning. Be concise and educational.`,
+          await streamChat({
+            messages: [...recentMessages, { role: "user" as const, content: messageContent }],
+            systemPrompt: `You are a helpful AI assistant for a university group project about public policy in Hong Kong. The current project topic is: ${topicSlug.replace(
+              /-/g,
+              " "
+            )}. Help students with research questions, data analysis, report writing, and project planning. Be concise and educational.`,
+            onDelta: (delta) => {
+              aiResponse += delta;
+            },
+            onDone: () => {
+              // handled below (we await insert after stream finishes)
+            },
+            onError: (err) => {
+              throw new Error(err);
             },
           });
 
-          if (response.error) {
-            console.error("Edge function error:", response.error);
-            throw response.error;
-          }
-
-          // Handle streaming response
-          let aiResponse = "";
-          
-          if (response.data instanceof ReadableStream) {
-            const reader = response.data.getReader();
-            const decoder = new TextDecoder();
-
-            while (true) {
-              const { done, value } = await reader.read();
-              if (done) break;
-              const chunk = decoder.decode(value);
-              const lines = chunk.split("\n");
-              for (const line of lines) {
-                if (line.startsWith("data: ") && line !== "data: [DONE]") {
-                  try {
-                    const json = JSON.parse(line.slice(6));
-                    if (json.choices?.[0]?.delta?.content) {
-                      aiResponse += json.choices[0].delta.content;
-                    }
-                  } catch {}
-                }
-              }
-            }
-          } else if (typeof response.data === 'string') {
-            // Handle non-streaming response
-            aiResponse = response.data;
-          } else if (response.data?.error) {
-            throw new Error(response.data.error);
-          }
-
-          // Save AI response
-          if (aiResponse) {
-            await supabase.from("project_messages").insert({
+          if (aiResponse.trim()) {
+            const { error: insertAiError } = await supabase.from("project_messages").insert({
               project_group_id: projectGroupId,
               member_id: null,
               content: aiResponse,
               is_ai: true,
               is_teacher: false,
             });
+
+            if (insertAiError) throw insertAiError;
           }
         } catch (aiError: any) {
           console.error("AI error:", aiError);
           toast({
             title: "AI Error",
-            description: "Failed to get AI response. Please try again.",
+            description: aiError?.message || "Failed to get AI response. Please try again.",
             variant: "destructive",
           });
         } finally {
@@ -315,7 +294,6 @@ const ProjectMessageBoard = ({ projectGroupId, topicSlug }: ProjectMessageBoardP
       setNewMessage(messageContent);
     }
   };
-
 
   if (!isRegistered) {
     return (
@@ -354,15 +332,10 @@ const ProjectMessageBoard = ({ projectGroupId, topicSlug }: ProjectMessageBoardP
 
       <div className="flex-1 overflow-y-auto p-4 space-y-4">
         {messages.length === 0 && (
-          <p className="text-center text-muted-foreground py-8">
-            No messages yet. Start the conversation!
-          </p>
+          <p className="text-center text-muted-foreground py-8">No messages yet. Start the conversation!</p>
         )}
         {messages.map((msg) => (
-          <div
-            key={msg.id}
-            className={`flex gap-3 ${msg.is_ai ? "bg-accent/50 -mx-4 px-4 py-3" : ""}`}
-          >
+          <div key={msg.id} className={`flex gap-3 ${msg.is_ai ? "bg-accent/50 -mx-4 px-4 py-3" : ""}`}>
             <div
               className={`h-8 w-8 rounded-full flex items-center justify-center flex-shrink-0 ${
                 msg.is_ai
@@ -389,9 +362,7 @@ const ProjectMessageBoard = ({ projectGroupId, topicSlug }: ProjectMessageBoardP
                     ? "Teacher"
                     : msg.member?.display_name || `Student ***${msg.member?.student_id_last4}`}
                 </span>
-                <span className="text-xs text-muted-foreground">
-                  {format(new Date(msg.created_at), "MMM d, h:mm a")}
-                </span>
+                <span className="text-xs text-muted-foreground">{format(new Date(msg.created_at), "MMM d, h:mm a")}</span>
               </div>
               <p className="text-sm whitespace-pre-wrap">{msg.content}</p>
             </div>
@@ -416,27 +387,13 @@ const ProjectMessageBoard = ({ projectGroupId, topicSlug }: ProjectMessageBoardP
           />
         </div>
         <div className="flex gap-2 mt-2">
-          <Button 
-            onClick={() => handleSendMessage()} 
-            disabled={!newMessage.trim() || isSendingAI} 
-            className="flex-1"
-          >
-            {isSendingAI ? (
-              <Loader2 className="h-4 w-4 mr-2 animate-spin" />
-            ) : (
-              <Send className="h-4 w-4 mr-2" />
-            )}
-            {isTeacher ? "Send" : "Send (AI will respond)"}
+          <Button onClick={() => handleSendMessage()} disabled={!newMessage.trim() || isSendingAI} className="flex-1">
+            {isSendingAI ? <Loader2 className="h-4 w-4 mr-2 animate-spin" /> : <Send className="h-4 w-4 mr-2" />}
+            Send (AI will respond)
           </Button>
-          {!isTeacher && (
-            <Button
-              onClick={() => handleSendMessage(false)}
-              disabled={!newMessage.trim() || isSendingAI}
-              variant="outline"
-            >
-              Send Only
-            </Button>
-          )}
+          <Button onClick={() => handleSendMessage(false)} disabled={!newMessage.trim() || isSendingAI} variant="outline">
+            Send Only
+          </Button>
         </div>
       </div>
     </Card>
@@ -444,3 +401,4 @@ const ProjectMessageBoard = ({ projectGroupId, topicSlug }: ProjectMessageBoardP
 };
 
 export default ProjectMessageBoard;
+
