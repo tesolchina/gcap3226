@@ -8,3 +8,6 @@ verify_jwt = false
 
 [functions.reset-presentation-order]
 verify_jwt = false
+
+[functions.chat]
+verify_jwt = false
