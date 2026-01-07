@@ -354,6 +354,7 @@ export type Database = {
           display_name: string | null
           id: string
           project_group_id: string | null
+          status: string | null
           student_id_last4: string
         }
         Insert: {
@@ -361,6 +362,7 @@ export type Database = {
           display_name?: string | null
           id?: string
           project_group_id?: string | null
+          status?: string | null
           student_id_last4: string
         }
         Update: {
@@ -368,6 +370,7 @@ export type Database = {
           display_name?: string | null
           id?: string
           project_group_id?: string | null
+          status?: string | null
           student_id_last4?: string
         }
         Relationships: [

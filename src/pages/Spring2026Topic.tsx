@@ -3,10 +3,11 @@ import { useParams, Link } from "react-router-dom";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { ArrowLeft, Syringe, Activity, Car, Wallet, HeartPulse, Bug, ExternalLink, MessageSquare, FolderOpen, Info } from "lucide-react";
+import { ArrowLeft, Syringe, Activity, Car, Wallet, HeartPulse, Bug, ExternalLink, MessageSquare, FolderOpen, Info, Users } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import ProjectMessageBoard from "@/components/ProjectMessageBoard";
 import ProjectFileUpload from "@/components/ProjectFileUpload";
+import ProjectMembership from "@/components/ProjectMembership";
 
 const topicData: Record<string, {
   id: number;
@@ -213,8 +214,14 @@ const Spring2026Topic = () => {
         </div>
 
         {/* Main Content with Tabs */}
-        <Tabs defaultValue="discussion" className="space-y-6">
-          <TabsList className="grid w-full grid-cols-3">
+        <Tabs defaultValue={topicSlug === "flu-shot" ? "membership" : "discussion"} className="space-y-6">
+          <TabsList className={`grid w-full ${topicSlug === "flu-shot" ? "grid-cols-4" : "grid-cols-3"}`}>
+            {topicSlug === "flu-shot" && (
+              <TabsTrigger value="membership" className="flex items-center gap-2">
+                <Users className="h-4 w-4" />
+                Membership
+              </TabsTrigger>
+            )}
             <TabsTrigger value="discussion" className="flex items-center gap-2">
               <MessageSquare className="h-4 w-4" />
               Discussion
@@ -228,6 +235,18 @@ const Spring2026Topic = () => {
               Project Info
             </TabsTrigger>
           </TabsList>
+
+          {topicSlug === "flu-shot" && (
+            <TabsContent value="membership" className="space-y-4">
+              {projectGroupId ? (
+                <ProjectMembership projectGroupId={projectGroupId} topicSlug={topicSlug} topicTitle={topic.title} />
+              ) : (
+                <Card className="p-6 text-center text-muted-foreground">
+                  Loading membership...
+                </Card>
+              )}
+            </TabsContent>
+          )}
 
           <TabsContent value="discussion" className="space-y-4">
             {projectGroupId ? (
