@@ -11,9 +11,13 @@ import {
   Clock,
   MapPin,
   ArrowRight,
-  CheckCircle2
+  CheckCircle2,
+  Calculator,
+  Languages,
+  Blend
 } from "lucide-react";
 import { Link } from "react-router-dom";
+import { QRCodeCanvas } from "qrcode.react";
 
 const CourseTeaser = () => {
   const features = [
@@ -122,6 +126,85 @@ const CourseTeaser = () => {
         </div>
       </div>
 
+      {/* Transdisciplinary Section */}
+      <div className="bg-gradient-to-r from-accent/10 via-primary/10 to-accent/10 py-16">
+        <div className="max-w-5xl mx-auto px-6">
+          <div className="flex justify-center mb-6">
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 rounded-full border border-primary/20">
+              <Blend className="h-4 w-4 text-primary" />
+              <span className="text-sm font-semibold text-primary">Transdisciplinary Learning</span>
+            </div>
+          </div>
+          
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-6">
+            Where Numbers Meet Narratives
+          </h2>
+          <p className="text-center text-muted-foreground mb-12 max-w-3xl mx-auto text-lg">
+            A unique collaboration synergizing <span className="text-primary font-semibold">quantitative reasoning</span> with <span className="text-primary font-semibold">qualitative analytical skills</span> to decode public policy
+          </p>
+
+          <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+            {/* Math Teacher */}
+            <Card className="p-8 bg-card/80 backdrop-blur-sm border-2 border-primary/20 hover:border-primary/40 transition-all">
+              <div className="flex items-center gap-4 mb-4">
+                <div className="p-4 bg-gradient-to-br from-primary/20 to-primary/10 rounded-2xl">
+                  <Calculator className="h-8 w-8 text-primary" />
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold">Quantitative Reasoning</h3>
+                  <p className="text-sm text-muted-foreground">Mathematics Expertise</p>
+                </div>
+              </div>
+              <ul className="space-y-2 text-muted-foreground">
+                <li className="flex items-center gap-2">
+                  <CheckCircle2 className="h-4 w-4 text-primary flex-shrink-0" />
+                  <span>Mathematical modeling of policy impacts</span>
+                </li>
+                <li className="flex items-center gap-2">
+                  <CheckCircle2 className="h-4 w-4 text-primary flex-shrink-0" />
+                  <span>Data analysis & statistical reasoning</span>
+                </li>
+                <li className="flex items-center gap-2">
+                  <CheckCircle2 className="h-4 w-4 text-primary flex-shrink-0" />
+                  <span>Evidence-based decision frameworks</span>
+                </li>
+              </ul>
+            </Card>
+
+            {/* Language Teacher */}
+            <Card className="p-8 bg-card/80 backdrop-blur-sm border-2 border-accent/30 hover:border-accent/50 transition-all">
+              <div className="flex items-center gap-4 mb-4">
+                <div className="p-4 bg-gradient-to-br from-accent/30 to-accent/10 rounded-2xl">
+                  <Languages className="h-8 w-8 text-primary" />
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold">Qualitative Analysis</h3>
+                  <p className="text-sm text-muted-foreground">Language Expertise</p>
+                </div>
+              </div>
+              <ul className="space-y-2 text-muted-foreground">
+                <li className="flex items-center gap-2">
+                  <CheckCircle2 className="h-4 w-4 text-primary flex-shrink-0" />
+                  <span>Critical reading of policy documents</span>
+                </li>
+                <li className="flex items-center gap-2">
+                  <CheckCircle2 className="h-4 w-4 text-primary flex-shrink-0" />
+                  <span>Persuasive advocacy & communication</span>
+                </li>
+                <li className="flex items-center gap-2">
+                  <CheckCircle2 className="h-4 w-4 text-primary flex-shrink-0" />
+                  <span>Stakeholder engagement strategies</span>
+                </li>
+              </ul>
+            </Card>
+          </div>
+
+          <p className="text-center mt-10 text-lg font-medium text-primary">
+            Two perspectives. One powerful approach to civic engagement.
+          </p>
+        </div>
+      </div>
+
       {/* Features Grid */}
       <div className="max-w-6xl mx-auto px-6 py-16">
         <h2 className="text-3xl font-bold text-center mb-4">What You'll Learn</h2>
@@ -177,7 +260,7 @@ const CourseTeaser = () => {
               Join us this Spring and learn how data can transform policy and empower communities.
             </p>
             
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
               <Button asChild size="lg" className="text-lg px-8">
                 <Link to="/spring-2026">
                   Explore the Course
@@ -190,6 +273,24 @@ const CourseTeaser = () => {
                 </Link>
               </Button>
             </div>
+
+            {/* QR Code */}
+            <div className="flex flex-col items-center">
+              <div className="bg-white p-4 rounded-2xl shadow-lg">
+                <QRCodeCanvas 
+                  value="https://gcap3226.hkbu.tech/teaser" 
+                  size={160}
+                  level="H"
+                  marginSize={1}
+                />
+              </div>
+              <p className="mt-4 text-sm text-muted-foreground">
+                Scan to share this page
+              </p>
+              <p className="text-xs text-muted-foreground/70 mt-1">
+                gcap3226.hkbu.tech/teaser
+              </p>
+            </div>
           </div>
         </div>
       </div>
@@ -198,7 +299,7 @@ const CourseTeaser = () => {
       <div className="border-t border-border/50 py-8">
         <div className="max-w-6xl mx-auto px-6 text-center">
           <p className="text-muted-foreground text-sm">
-            GCAP 3226: Participatory Policy Analysis • Spring 2026
+            GCAP 3226: Participatory Policy Analysis • Spring 2026 • Hong Kong Baptist University
           </p>
         </div>
       </div>
