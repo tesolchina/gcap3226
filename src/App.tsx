@@ -33,6 +33,7 @@ import Spring2026Topic from "./pages/Spring2026Topic";
 import Spring2026Assessments from "./pages/Spring2026Assessments";
 import Spring2026GovInfoRequests from "./pages/Spring2026GovInfoRequests";
 import Spring2026CuratingPublicData from "./pages/Spring2026CuratingPublicData";
+import CourseTeaser from "./pages/CourseTeaser";
 
 const queryClient = new QueryClient();
 
@@ -114,6 +115,7 @@ const AppContent = () => {
     <div className="min-h-screen w-full">
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/teaser" element={<CourseTeaser />} />
         <Route path="/login" element={<Login />} />
         <Route path="/teacher-dashboard" element={<TeacherDashboard />} />
         <Route path="*" element={<NotFound />} />
