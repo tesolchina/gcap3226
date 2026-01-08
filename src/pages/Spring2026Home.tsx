@@ -94,12 +94,14 @@ const Spring2026Home = () => {
                 <h3 className="text-sm font-medium text-muted-foreground uppercase tracking-wider">Co-teacher</h3>
                 <p className="text-xl font-bold mt-1">Dr. Simon Wang</p>
                 <p className="text-muted-foreground">Language Centre, HKBU</p>
-                <Link 
-                to="/spring-2026/syllabus"
-                className="text-primary hover:underline text-sm mt-2 inline-flex items-center gap-1"
-              >
-                View Syllabus <ArrowRight className="h-3 w-3" />
-              </Link>
+                <a 
+                  href="https://lc.hkbu.edu.hk/main/simonwang/" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="text-primary hover:underline text-sm mt-2 inline-flex items-center gap-1"
+                >
+                  View profile <ArrowRight className="h-3 w-3" />
+                </a>
               </div>
             </div>
           </Card>
