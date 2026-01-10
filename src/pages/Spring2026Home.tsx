@@ -34,22 +34,24 @@ const Spring2026Home = () => {
                 <h3 className="text-sm font-medium text-muted-foreground uppercase tracking-wider">Co-ordinator</h3>
                 <p className="text-xl font-bold mt-1">Dr. Talia Wu</p>
                 <p className="text-muted-foreground text-sm">Department of Mathematics, HKBU</p>
-                <a 
-                  href="https://ge.hkbu.edu.hk/en/teaching_learning/ge_teaching_award/award_recipients/_clone3/Tian_Wu/" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="text-primary hover:underline text-sm mt-2 inline-flex items-center gap-1"
-                >
-                  GE Teaching Awardee AY 2025/26 <ArrowRight className="h-3 w-3" />
-                </a>
-                <a 
-                  href="https://www.math.hkbu.edu.hk/v1/people/profile/taliawu17/" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="text-primary hover:underline text-sm inline-flex items-center gap-1"
-                >
-                  View profile <ArrowRight className="h-3 w-3" />
-                </a>
+                <div className="flex flex-col gap-1 mt-2">
+                  <a 
+                    href="https://ge.hkbu.edu.hk/en/teaching_learning/ge_teaching_award/award_recipients/_clone3/Tian_Wu/" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="text-primary hover:underline text-sm inline-flex items-center gap-1"
+                  >
+                    GE Teaching Awardee AY 2025/26 <ArrowRight className="h-3 w-3" />
+                  </a>
+                  <a 
+                    href="https://www.math.hkbu.edu.hk/v1/people/profile/taliawu17/" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="text-primary hover:underline text-sm inline-flex items-center gap-1"
+                  >
+                    View department profile <ArrowRight className="h-3 w-3" />
+                  </a>
+                </div>
               </div>
             </div>
           </Card>
@@ -65,22 +67,24 @@ const Spring2026Home = () => {
                 <h3 className="text-sm font-medium text-muted-foreground uppercase tracking-wider">Co-teacher</h3>
                 <p className="text-xl font-bold mt-1">Dr. Simon Wang</p>
                 <p className="text-muted-foreground text-sm">Language Centre, HKBU</p>
-                <a 
-                  href="https://ge.hkbu.edu.hk/en/teaching_learning/ge_teaching_award/award_recipients/2021_22/team_Dr_Simon_Wang/" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="text-primary hover:underline text-sm mt-2 inline-flex items-center gap-1"
-                >
-                  GE Teaching Awardee AY 2021/22 <ArrowRight className="h-3 w-3" />
-                </a>
-                <a 
-                  href="https://lc.hkbu.edu.hk/main/simonwang/" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="text-primary hover:underline text-sm inline-flex items-center gap-1"
-                >
-                  View profile <ArrowRight className="h-3 w-3" />
-                </a>
+                <div className="flex flex-col gap-1 mt-2">
+                  <a 
+                    href="https://ge.hkbu.edu.hk/en/teaching_learning/ge_teaching_award/award_recipients/2021_22/team_Dr_Simon_Wang/" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="text-primary hover:underline text-sm inline-flex items-center gap-1"
+                  >
+                    GE Teaching Awardee AY 2021/22 <ArrowRight className="h-3 w-3" />
+                  </a>
+                  <a 
+                    href="https://lc.hkbu.edu.hk/main/simonwang/" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="text-primary hover:underline text-sm inline-flex items-center gap-1"
+                  >
+                    View department profile <ArrowRight className="h-3 w-3" />
+                  </a>
+                </div>
               </div>
             </div>
           </Card>
