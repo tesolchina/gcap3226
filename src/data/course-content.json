@@ -1,0 +1,329 @@
+{
+  "lastUpdated": "2026-01-10",
+  "version": "1.0.0",
+  "pages": [
+    {
+      "path": "/spring-2026",
+      "title": "Spring 2026 Course Home",
+      "type": "home",
+      "content": "GCAP 3226: Empowering Citizens Through Data - Participatory Policy Analysis for Hong Kong. Spring 2026 semester. Instructed by Dr. Talia Wu and Dr. Simon Wang. This course teaches students to analyze public data, engage with government information, and create impactful policy recommendations. Students work in groups on real Hong Kong policy issues.",
+      "metadata": {
+        "semester": "Spring 2026",
+        "course_code": "GCAP 3226",
+        "instructors": ["Dr. Talia Wu", "Dr. Simon Wang"]
+      }
+    },
+    {
+      "path": "/spring-2026/syllabus",
+      "title": "Course Syllabus",
+      "type": "resource",
+      "content": "GCAP3226: Empowering Citizens Through Data. Course aims to empower students with essential data literacy skills to collect, analyze, and communicate data effectively for civic impact. Objectives: 1) Search, source, and clean data, 2) Analyze data using statistical and visualization techniques, 3) Communicate findings via visual and written methods, 4) Engage with government, 5) Work collaboratively. CILOs: Apply quantitative techniques, synthesize information, communicate insights, evaluate government programs. Assessment: Reflective Essays (30%), Group Presentation 1 (5%), Group Presentation 2 (10%), Human-AI Collaboration Report (15%), Final Presentation (15%), Final Report (15%), In-class Activities (10%).",
+      "metadata": {
+        "assessments": {
+          "reflective_essays": 30,
+          "presentation_1": 5,
+          "presentation_2": 10,
+          "human_ai_report": 15,
+          "final_presentation": 15,
+          "final_report": 15,
+          "in_class": 10
+        }
+      }
+    },
+    {
+      "path": "/spring-2026/week/1",
+      "title": "Week 1: Introduction and Course Overview",
+      "type": "week",
+      "content": "Week 1: Introduction and Course Overview. Description: Welcome to GCAP 3226! This week we introduce the course and set the foundation for your journey in civic data analysis. Objectives: Understand the role of data in civic engagement, Learn about Hong Kong's government data ecosystem, Form groups and explore topic options, Set up required technical tools. Activities: Lecture on civic data and government transparency, Group formation exercise, Topic selection activity, Technical setup: GitHub, RStudio. Topics covered: What is civic data, Why data matters for policy, Hong Kong government data sources, Overview of group project topics.",
+      "metadata": { "week_number": 1 }
+    },
+    {
+      "path": "/spring-2026/week/2",
+      "title": "Week 2: Data Literacy Fundamentals",
+      "type": "week",
+      "content": "Week 2: Data Literacy Fundamentals. Description: Develop fundamental skills in finding, understanding, and evaluating government data sources. Objectives: Navigate Hong Kong government data portals, Identify reliable data sources, Understand data formats and metadata, Evaluate data quality and limitations. Activities: Hands-on exploration of DATA.GOV.HK, Data quality assessment exercise, Group topic deep-dive. Key skills: Finding government data, Understanding metadata, Assessing data quality.",
+      "metadata": { "week_number": 2 }
+    },
+    {
+      "path": "/spring-2026/week/3",
+      "title": "Week 3: Data Collection and Cleaning",
+      "type": "week",
+      "content": "Week 3: Data Collection and Cleaning. Description: Learn systematic approaches to collecting and preparing data for analysis. Objectives: Apply data collection strategies, Clean and preprocess datasets, Document data provenance, Handle missing and inconsistent data. Activities: Data cleaning workshop in R, API data extraction exercise, Data documentation practice.",
+      "metadata": { "week_number": 3 }
+    },
+    {
+      "path": "/spring-2026/week/4",
+      "title": "Week 4: Descriptive Statistics and Visualization",
+      "type": "week",
+      "content": "Week 4: Descriptive Statistics and Visualization. Description: Master the basics of summarizing and visualizing data for insights. Objectives: Calculate and interpret descriptive statistics, Create effective data visualizations, Choose appropriate chart types, Present data findings clearly. Activities: ggplot2 visualization workshop, Statistical summary exercises, Peer review of visualizations. Assessment: Reflective Essay 1 due this week.",
+      "metadata": { "week_number": 4, "assessment_due": "Reflective Essay 1" }
+    },
+    {
+      "path": "/spring-2026/week/5",
+      "title": "Week 5: Regression Analysis",
+      "type": "week",
+      "content": "Week 5: Regression Analysis. Description: Understand and apply regression techniques to analyze relationships in civic data. Objectives: Understand linear regression concepts, Interpret regression outputs, Apply regression to policy questions, Communicate statistical findings. Activities: Regression modeling in R, Case study analysis, Group project check-in.",
+      "metadata": { "week_number": 5 }
+    },
+    {
+      "path": "/spring-2026/week/6",
+      "title": "Week 6: Group Presentation 1",
+      "type": "week",
+      "content": "Week 6: Group Presentation 1. Description: Present your initial research findings and data exploration to the class. Each group has 5 minutes to present followed by Q&A. Assessment: Group Presentation 1 (5% of grade). Presentation requirements: Introduction to your topic, Data sources identified, Preliminary findings, Research questions, Next steps.",
+      "metadata": { "week_number": 6, "assessment_due": "Group Presentation 1" }
+    },
+    {
+      "path": "/spring-2026/week/7",
+      "title": "Week 7: Simulation and Modeling",
+      "type": "week",
+      "content": "Week 7: Simulation and Modeling. Description: Learn to build and interpret simulation models for policy analysis. Objectives: Understand Monte Carlo simulation, Build simple policy simulation models, Interpret simulation results, Apply simulation to your project. Activities: Simulation workshop in R, Policy scenario modeling, Reflective Essay 2 due.",
+      "metadata": { "week_number": 7, "assessment_due": "Reflective Essay 2" }
+    },
+    {
+      "path": "/spring-2026/week/8",
+      "title": "Week 8: Government Engagement",
+      "type": "week",
+      "content": "Week 8: Government Engagement. Description: Learn strategies for engaging with government and accessing additional information. Objectives: Understand the Code on Access to Information, Draft effective information requests, Navigate government departments, Prepare for stakeholder engagement. Activities: Information request drafting workshop, Government contact identification, Role-play exercises.",
+      "metadata": { "week_number": 8 }
+    },
+    {
+      "path": "/spring-2026/week/9",
+      "title": "Week 9: Group Presentation 2",
+      "type": "week",
+      "content": "Week 9: Group Presentation 2. Description: Present your refined analysis and policy recommendations. Each group has 8 minutes followed by Q&A. Assessment: Group Presentation 2 (10% of grade). Presentation requirements: Refined research question, Complete data analysis, Key findings and insights, Policy recommendations, Visualization of results. Reflective Essay 3 due.",
+      "metadata": { "week_number": 9, "assessment_due": ["Group Presentation 2", "Reflective Essay 3"] }
+    },
+    {
+      "path": "/spring-2026/week/10",
+      "title": "Week 10: Human-AI Collaboration",
+      "type": "week",
+      "content": "Week 10: Human-AI Collaboration. Description: Explore the role of AI in data analysis and policy research. Objectives: Understand AI capabilities and limitations, Use AI tools effectively for research, Document human-AI collaboration, Reflect on ethical considerations. Activities: AI-assisted analysis workshop, Collaboration documentation practice.",
+      "metadata": { "week_number": 10 }
+    },
+    {
+      "path": "/spring-2026/week/11",
+      "title": "Week 11: Policy Communication",
+      "type": "week",
+      "content": "Week 11: Policy Communication. Description: Learn to communicate data findings to policy audiences. Objectives: Write for non-technical audiences, Create impactful policy briefs, Design effective presentations, Tailor messaging for stakeholders. Activities: Policy brief writing workshop, Presentation design session. Assessment: Human-AI Collaboration Report due.",
+      "metadata": { "week_number": 11, "assessment_due": "Human-AI Collaboration Report" }
+    },
+    {
+      "path": "/spring-2026/week/12",
+      "title": "Week 12: Final Presentation Preparation",
+      "type": "week",
+      "content": "Week 12: Final Presentation Preparation. Description: Prepare for final presentations and reports. Activities: Presentation rehearsal, Peer feedback sessions, Report writing workshop, Final project consultation.",
+      "metadata": { "week_number": 12 }
+    },
+    {
+      "path": "/spring-2026/week/13",
+      "title": "Week 13: Final Presentations",
+      "type": "week",
+      "content": "Week 13: Final Presentations. Description: Present your complete research findings and policy recommendations. Each group has 12-15 minutes for their final presentation. Assessment: Final Presentation (15% of grade), Final Report due one week after presentation. Course wrap-up and reflection on learning journey.",
+      "metadata": { "week_number": 13, "assessment_due": ["Final Presentation", "Final Report"] }
+    },
+    {
+      "path": "/spring-2026/assessments",
+      "title": "Course Assessments Overview",
+      "type": "assessment",
+      "content": "Course Assessments for GCAP 3226 Spring 2026. Assessment breakdown: Reflective Essays (10% each, 30% total) - Three essays reflecting on learning and project progress. Group Presentation 1 (5%) - Week 6, 5 minutes, initial findings. Group Presentation 2 (10%) - Week 9, 8 minutes, refined analysis. Human-AI Collaboration Report (15%) - Week 11, 1500-2000 words. Final Presentation (15%) - Week 13, 12-15 minutes. Final Report (15%) - Due one week after presentations. In-class Activities (10%) - Participation and exercises.",
+      "metadata": {
+        "total_weight": 100
+      }
+    },
+    {
+      "path": "/spring-2026/assessments/reflective-essay-1",
+      "title": "Reflective Essay 1",
+      "type": "assessment",
+      "content": "Reflective Essay 1. Due: Week 4. Word count: 500-800 words. Weight: 10%. Format: Word document or PDF. Focus: Reflect on regression and simulation models and how they connect to your group project. Questions to address: How do regression techniques help analyze your topic? What patterns might simulation reveal? How will you apply these methods? Assessment criteria: Content Quality (7 points) - Clear reflection on methods, connection to project, depth of analysis. Presentation Quality (3 points) - Structure, writing quality, formatting. Late policy: 10% deduction per day, maximum 3 days late.",
+      "metadata": {
+        "due_week": 4,
+        "weight": 10,
+        "word_count": "500-800"
+      }
+    },
+    {
+      "path": "/spring-2026/assessments/reflective-essay-2",
+      "title": "Reflective Essay 2",
+      "type": "assessment",
+      "content": "Reflective Essay 2. Due: Week 7. Word count: 500-800 words. Weight: 10%. Focus: Reflect on data collection, challenges, and insights from your project work. Key reflection points: Data sourcing experience, Technical challenges overcome, Collaboration dynamics, Lessons learned. Assessment: Content Quality (7 points), Presentation Quality (3 points).",
+      "metadata": {
+        "due_week": 7,
+        "weight": 10,
+        "word_count": "500-800"
+      }
+    },
+    {
+      "path": "/spring-2026/assessments/reflective-essay-3",
+      "title": "Reflective Essay 3",
+      "type": "assessment",
+      "content": "Reflective Essay 3. Due: Week 9. Word count: 500-800 words. Weight: 10%. Focus: Reflect on your growth as a civic data analyst and policy researcher. Questions: How has your understanding of data-driven policy evolved? What skills have you developed? How will you apply these in future? Assessment: Content Quality (7 points), Presentation Quality (3 points).",
+      "metadata": {
+        "due_week": 9,
+        "weight": 10,
+        "word_count": "500-800"
+      }
+    },
+    {
+      "path": "/spring-2026/assessments/presentation-1",
+      "title": "Group Presentation 1",
+      "type": "assessment",
+      "content": "Group Presentation 1. Due: Week 6. Duration: 5 minutes + Q&A. Weight: 5%. All team members must participate. Content structure: Topic Introduction (1 min), Data Sources Overview (1.5 min), Preliminary Findings (1.5 min), Research Questions and Next Steps (1 min). Submission: Upload slides to Moodle before presentation. Common issues to avoid: Exceeding time limit, Reading from slides, Unequal participation, Missing data context.",
+      "metadata": {
+        "due_week": 6,
+        "weight": 5,
+        "duration": "5 minutes"
+      }
+    },
+    {
+      "path": "/spring-2026/assessments/presentation-2",
+      "title": "Group Presentation 2",
+      "type": "assessment",
+      "content": "Group Presentation 2. Due: Week 9. Duration: 8 minutes + Q&A. Weight: 10%. Requirements: All members present, visual data displays, clear policy recommendations. Structure: Recap (1 min), Methodology (2 min), Key Findings (3 min), Recommendations (2 min). Assessment focuses on analysis depth, visualization quality, and team coordination.",
+      "metadata": {
+        "due_week": 9,
+        "weight": 10,
+        "duration": "8 minutes"
+      }
+    },
+    {
+      "path": "/spring-2026/assessments/human-ai-collaboration-report",
+      "title": "Human-AI Collaboration Report",
+      "type": "assessment",
+      "content": "Human-AI Collaboration Report. Due: Week 11. Word count: 1500-2000 words. Weight: 15%. CRITICAL: Write in narrative paragraphs, NOT bullet points. Report structure: Introduction (200 words), AI Tools Used (300 words), Collaboration Process (400 words), Critical Evaluation (400 words), Lessons Learned (300 words), Conclusion (200 words). Key questions: What AI tools did you use? How did human and AI work together? What were limitations? What would you do differently? Assessment focus: Depth of reflection, critical analysis, specific examples, professional presentation.",
+      "metadata": {
+        "due_week": 11,
+        "weight": 15,
+        "word_count": "1500-2000"
+      }
+    },
+    {
+      "path": "/spring-2026/assessments/final-presentation",
+      "title": "Final Presentation and Report",
+      "type": "assessment",
+      "content": "Final Presentation. Due: Week 13. Duration: 12-15 minutes + Q&A. Weight: 15%. Present complete research findings and policy recommendations. Final Report. Due: One week after presentation. Weight: 15%. Word count: 3000-4000 words. Report structure: Executive Summary, Introduction, Literature Review, Methodology, Findings, Policy Recommendations, Conclusion, References, Appendices.",
+      "metadata": {
+        "due_week": 13,
+        "weight_presentation": 15,
+        "weight_report": 15,
+        "duration": "12-15 minutes"
+      }
+    },
+    {
+      "path": "/spring-2026/assessments/in-class-1",
+      "title": "In-Class Activity 1",
+      "type": "assessment",
+      "content": "In-Class Activity 1. Part of 10% in-class activities grade. Completed during class time. Focus on data exploration and initial analysis exercises. Participation and completion graded.",
+      "metadata": {
+        "weight": "part of 10%"
+      }
+    },
+    {
+      "path": "/spring-2026/assessments/in-class-2",
+      "title": "In-Class Activity 2",
+      "type": "assessment",
+      "content": "In-Class Activity 2. Part of 10% in-class activities grade. Completed during class time. Focus on collaborative analysis and peer feedback exercises.",
+      "metadata": {
+        "weight": "part of 10%"
+      }
+    },
+    {
+      "path": "/spring-2026/gov-info-requests",
+      "title": "How to Request Information from the Government",
+      "type": "resource",
+      "content": "Guide to requesting information from Hong Kong Government. The Code on Access to Information provides a framework for public access to government-held information. Steps: 1) Identify the correct department using the Government Directory (directory.gov.hk), 2) Draft your request clearly specifying what information you need and why, 3) Submit via email or letter, 4) Wait 21 days for initial response (can extend to 51 days). If denied, you can appeal or try alternative approaches like LegCo questions. Tips: Be specific, be polite, explain public interest, follow up if no response.",
+      "metadata": {
+        "response_time": "21-51 days"
+      }
+    },
+    {
+      "path": "/spring-2026/curating-public-data",
+      "title": "Curating Public Data",
+      "type": "resource",
+      "content": "Guide to finding and curating public data in Hong Kong. Key sources: DATA.GOV.HK - Hong Kong open data portal, Census and Statistics Department, individual bureau websites, Legislative Council documents. Best practices: Document all data sources, maintain data provenance, clean systematically, version control your datasets, assess data quality before use.",
+      "metadata": {}
+    },
+    {
+      "path": "/spring-2026/legco-submission",
+      "title": "Submitting Reports to Legislative Council",
+      "type": "resource",
+      "content": "Guide to submitting research findings to the Legislative Council. The LegCo accepts public submissions on policy matters. Steps: Identify relevant panel or committee, format your submission professionally, include executive summary, submit via official channels. Your research can influence policy discussions and become part of public record.",
+      "metadata": {}
+    },
+    {
+      "path": "/spring-2026/topics",
+      "title": "Group Project Topics",
+      "type": "topic",
+      "content": "Group Project Topic Selection for Spring 2026. Six available topics: 1) Flu Shot - Seasonal influenza vaccination program, 2) Colorectal Cancer Screening Programme - Government subsidized screening, 3) Road Safety - Traffic accident prevention, 4) eMPF - Electronic pension fund platform, 5) Chronic Disease Co-Care Pilot Scheme - Primary healthcare partnership, 6) Rodent Control - Urban pest management by district. Each topic has defined research questions, data sources, and relevant SDGs.",
+      "metadata": {
+        "topic_count": 6
+      }
+    },
+    {
+      "path": "/spring-2026/topics/flu-shot",
+      "title": "Topic: Flu Shot Vaccination Program",
+      "type": "topic",
+      "content": "Flu Shot topic for group project. Focus on seasonal influenza vaccination program and public health campaigns in Hong Kong. Key questions: What is current vaccination coverage? How effective are government campaigns? What barriers exist? How does HK compare to other cities? Data sources: Centre for Health Protection statistics, Hospital Authority reports, Department of Health releases, Census health surveys. SDG 3: Good Health and Well-being - Flu vaccination prevents outbreaks and protects vulnerable populations.",
+      "metadata": {
+        "topic_id": 1,
+        "sdgs": ["SDG 3"]
+      }
+    },
+    {
+      "path": "/spring-2026/topics/colorectal-cancer-screening",
+      "title": "Topic: Colorectal Cancer Screening Programme",
+      "type": "topic",
+      "content": "Colorectal Cancer Screening Programme topic. Government-subsidized screening for ages 50-75. Key questions: Participation rate? Detection effectiveness? Factors influencing participation? Improvement opportunities? Data sources: Official programme statistics, Hong Kong Cancer Registry, Department of Health reports. SDG 3: Early detection improves survival rates.",
+      "metadata": {
+        "topic_id": 2,
+        "sdgs": ["SDG 3"]
+      }
+    },
+    {
+      "path": "/spring-2026/topics/road-safety",
+      "title": "Topic: Road Safety",
+      "type": "topic",
+      "content": "Road Safety topic. Focus on policies, traffic management, accident prevention. Key questions: Accident trends? Vulnerable user groups? Campaign effectiveness? Successful interventions? Data sources: Transport Department statistics, Police accident reports, Road Safety Council, LegCo papers. SDGs: SDG 3 (reduce traffic deaths - Target 3.6) and SDG 11 (sustainable cities).",
+      "metadata": {
+        "topic_id": 3,
+        "sdgs": ["SDG 3", "SDG 11"]
+      }
+    },
+    {
+      "path": "/spring-2026/topics/empf",
+      "title": "Topic: eMPF Platform",
+      "type": "topic",
+      "content": "eMPF Platform topic. Electronic Mandatory Provident Fund centralized system. Key questions: Efficiency improvements? Benefits for employers/employees? Data governance challenges? Digital transformation effects? Data sources: MPFA reports, eMPF announcements, LegCo papers, industry reports. SDGs: SDG 8 (decent work), SDG 10 (reduced inequalities through lower fees).",
+      "metadata": {
+        "topic_id": 4,
+        "sdgs": ["SDG 8", "SDG 10"]
+      }
+    },
+    {
+      "path": "/spring-2026/topics/cdcc",
+      "title": "Topic: Chronic Disease Co-Care Pilot Scheme",
+      "type": "topic",
+      "content": "CDCC Pilot Scheme topic. Primary healthcare through public-private partnership for chronic disease management. Key questions: Effectiveness? Uptake and satisfaction? Partnership model? Implications for primary healthcare reform? Data sources: Primary Healthcare Office, Food and Health Bureau, Hospital Authority statistics. SDG 3: Target 3.4 on non-communicable diseases.",
+      "metadata": {
+        "topic_id": 5,
+        "sdgs": ["SDG 3"]
+      }
+    },
+    {
+      "path": "/spring-2026/topics/rodent-control",
+      "title": "Topic: Rodent Control",
+      "type": "topic",
+      "content": "Rodent Control topic. Urban pest management by FEHD across 18 districts. Key questions: Rat-free percentage variation across districts? Contributing factors? Control measure effectiveness? Correlation with urban density? Seasonal patterns? Data sources: FEHD monthly rat-free statistics, Pest Control Advisory reports, District Council minutes, LegCo papers, weather data, census density data. SDGs: SDG 3 (prevent zoonotic diseases), SDG 11 (sustainable cities).",
+      "metadata": {
+        "topic_id": 6,
+        "sdgs": ["SDG 3", "SDG 11"]
+      }
+    },
+    {
+      "path": "/spring-2026/ai-writing-tutor",
+      "title": "AI Writing Tutor",
+      "type": "resource",
+      "content": "AI Writing Tutor for GCAP 3226. This tool helps students improve their reflective essays and reports. Features: Grammar and style suggestions, Structure feedback, Academic writing guidance. The tutor can help with Reflective Essays 1-3, Human-AI Collaboration Report, and Final Report drafting. Access requires HKBU API key or uses course default AI.",
+      "metadata": {}
+    }
+  ]
+}

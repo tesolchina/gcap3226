@@ -272,11 +272,15 @@ const Spring2026Topic = () => {
         </div>
 
         {/* Main Content with Tabs */}
-        <Tabs defaultValue="membership" className="space-y-6">
+        <Tabs defaultValue="overview" className="space-y-6">
           <TabsList className="grid w-full grid-cols-6">
+            <TabsTrigger value="overview" className="flex items-center gap-2">
+              <Info className="h-4 w-4" />
+              <span className="hidden sm:inline">Overview</span>
+            </TabsTrigger>
             <TabsTrigger value="membership" className="flex items-center gap-2">
               <Users className="h-4 w-4" />
-              <span className="hidden sm:inline">Membership</span>
+              <span className="hidden sm:inline">Team</span>
             </TabsTrigger>
             <TabsTrigger value="sessions" className="flex items-center gap-2">
               <Calendar className="h-4 w-4" />
@@ -294,11 +298,81 @@ const Spring2026Topic = () => {
               <FolderOpen className="h-4 w-4" />
               <span className="hidden sm:inline">Files</span>
             </TabsTrigger>
-            <TabsTrigger value="info" className="flex items-center gap-2">
-              <Info className="h-4 w-4" />
-              <span className="hidden sm:inline">Info</span>
-            </TabsTrigger>
           </TabsList>
+
+          <TabsContent value="overview" className="space-y-6">
+            {/* Topic Overview */}
+            <Card className="p-6">
+              <h2 className="text-xl font-semibold mb-4">Project Overview</h2>
+              <p className="text-muted-foreground">{topic.overview}</p>
+            </Card>
+
+            {/* Quick Navigation */}
+            <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
+              <Card className="p-4 cursor-pointer hover:border-primary transition-colors" onClick={() => document.querySelector('[value="membership"]')?.dispatchEvent(new MouseEvent('click', { bubbles: true }))}>
+                <Users className="h-6 w-6 text-primary mb-2" />
+                <h3 className="font-medium">Team</h3>
+                <p className="text-xs text-muted-foreground">View members</p>
+              </Card>
+              <Card className="p-4 cursor-pointer hover:border-primary transition-colors" onClick={() => document.querySelector('[value="sessions"]')?.dispatchEvent(new MouseEvent('click', { bubbles: true }))}>
+                <Calendar className="h-6 w-6 text-primary mb-2" />
+                <h3 className="font-medium">Meetings</h3>
+                <p className="text-xs text-muted-foreground">Schedule sessions</p>
+              </Card>
+              <Card className="p-4 cursor-pointer hover:border-primary transition-colors" onClick={() => document.querySelector('[value="milestones"]')?.dispatchEvent(new MouseEvent('click', { bubbles: true }))}>
+                <Target className="h-6 w-6 text-primary mb-2" />
+                <h3 className="font-medium">Milestones</h3>
+                <p className="text-xs text-muted-foreground">Track progress</p>
+              </Card>
+              <Card className="p-4 cursor-pointer hover:border-primary transition-colors" onClick={() => document.querySelector('[value="discussion"]')?.dispatchEvent(new MouseEvent('click', { bubbles: true }))}>
+                <MessageSquare className="h-6 w-6 text-primary mb-2" />
+                <h3 className="font-medium">Discussion</h3>
+                <p className="text-xs text-muted-foreground">AI-powered chat</p>
+              </Card>
+              <Card className="p-4 cursor-pointer hover:border-primary transition-colors" onClick={() => document.querySelector('[value="files"]')?.dispatchEvent(new MouseEvent('click', { bubbles: true }))}>
+                <FolderOpen className="h-6 w-6 text-primary mb-2" />
+                <h3 className="font-medium">Files</h3>
+                <p className="text-xs text-muted-foreground">Upload documents</p>
+              </Card>
+            </div>
+
+            {/* Research Context */}
+            <Card className="p-6">
+              <h2 className="text-xl font-semibold mb-4">Key Research Questions</h2>
+              <ul className="space-y-2">
+                {topic.keyQuestions.map((question, idx) => (
+                  <li key={idx} className="flex items-start gap-2 text-muted-foreground">
+                    <span className="text-primary mt-1">•</span>
+                    <span>{question}</span>
+                  </li>
+                ))}
+              </ul>
+            </Card>
+
+            <Card className="p-6">
+              <h2 className="text-xl font-semibold mb-4">Potential Data Sources</h2>
+              <ul className="space-y-2">
+                {topic.potentialDataSources.map((source, idx) => (
+                  <li key={idx} className="flex items-start gap-2 text-muted-foreground">
+                    <ExternalLink className="h-4 w-4 text-primary mt-1 flex-shrink-0" />
+                    <span>{source}</span>
+                  </li>
+                ))}
+              </ul>
+            </Card>
+
+            <Card className="p-6">
+              <h2 className="text-xl font-semibold mb-4">Relevant SDGs</h2>
+              <div className="space-y-4">
+                {topic.relevantSDGs.map((sdg, idx) => (
+                  <div key={idx} className="border-l-4 border-primary pl-4">
+                    <h3 className="font-medium text-primary">{sdg.name}</h3>
+                    <p className="text-sm text-muted-foreground mt-1">{sdg.explanation}</p>
+                  </div>
+                ))}
+              </div>
+            </Card>
+          </TabsContent>
 
           <TabsContent value="membership" className="space-y-4">
             {projectGroupId ? (
