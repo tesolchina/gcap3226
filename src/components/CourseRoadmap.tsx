@@ -16,7 +16,7 @@ const CourseRoadmap = () => {
       week: "1",
       date: "14 Jan",
       title: "Course Introduction",
-      description: "Attend introductory lecture on public policy, the Hong Kong context, and SDGs. Install VS Code and apply for GitHub Copilot.",
+      description: "Welcome and course overview. Introduction to public policy, Hong Kong context, and SDGs. Install VS Code and apply for GitHub Copilot.",
       assessment: null,
       link: "/spring-2026/weeks/1",
       borderColor: "border-primary",
@@ -25,8 +25,8 @@ const CourseRoadmap = () => {
     {
       week: "2",
       date: "21 Jan",
-      title: "Learning AI Tools",
-      description: "Attend lecture on AI-assisted Python programming, focusing on data visualization and customized chatbots on Bytewise.",
+      title: "AI Tools & Vibe Coding",
+      description: "Learn AI-assisted Python programming. Introduction to Jupyter Notebook, VS Code, and GitHub. No prior Python knowledge required – vibe coding makes it accessible!",
       assessment: null,
       link: "/spring-2026/weeks/2",
       borderColor: "border-primary",
@@ -35,19 +35,19 @@ const CourseRoadmap = () => {
     {
       week: "3-4",
       date: "28 Jan – 4 Feb",
-      title: "Group Formation & Case Studies",
-      description: "Form project groups and confirm membership. Participate in case study demonstrations and select a topic.",
+      title: "Group Formation & Topic Selection",
+      description: "Form project groups (5 students each). Choose from 6 project topics: Flu Shot, Colorectal Cancer Screening, Road Safety, MPF, CDCC Pilot Scheme, or Rodent Control. In-class exercises with AI tools.",
       assessment: { text: "In-class Exercise 1 & 2 (10%)", color: "text-green-600" },
       link: "/spring-2026/weeks/3",
       borderColor: "border-green-500",
       badgeColor: "bg-green-500",
-      milestone: "✓ Confirm group membership by Week 3",
+      milestone: "✓ Confirm group membership and topic by Week 4",
     },
     {
       week: "5",
       date: "11 Feb",
-      title: "Empirical Data Collection Plan",
-      description: "Submit plan to collect empirical data. Connect government data requests to data governance evaluation using skills from Weeks 3-4.",
+      title: "Data Collection Planning",
+      description: "Plan how to collect data: (1) Write to government departments requesting data, and (2) Plan fieldwork for primary data collection. Receive HK$300 fieldwork allowance forms.",
       assessment: { text: "Reflective Essay 1 (part of 20%)", color: "text-blue-600" },
       link: "/spring-2026/weeks/5",
       borderColor: "border-blue-500",
@@ -57,9 +57,9 @@ const CourseRoadmap = () => {
     {
       week: "6",
       date: "25 Feb",
-      title: "Field Work",
-      description: "Conduct fieldwork to collect primary empirical data. Apply data collection plan in real-world settings.",
-      warning: "18 Feb is a public holiday",
+      title: "Field Work (No Class)",
+      description: "No in-class session. Go out to collect primary empirical data! Each student receives HK$300 allowance. Submit fieldwork allowance form by deadline.",
+      warning: "18 Feb is a public holiday. Fieldwork allowance form due this week.",
       link: "/spring-2026/weeks/6",
       borderColor: "border-green-500",
       badgeColor: "bg-green-500",
@@ -68,8 +68,8 @@ const CourseRoadmap = () => {
     {
       week: "7",
       date: "4 Mar",
-      title: "Data Review & Consultation",
-      description: "Debrief fieldwork experiences. Review collected data and government responses.",
+      title: "Group Meeting: Data Review",
+      description: "Debrief fieldwork experiences. Review collected data and any government responses received. Group consultation with teachers.",
       assessment: { text: "Reflective Essay 2 (part of 20%)", color: "text-blue-600" },
       link: "/spring-2026/weeks/7",
       borderColor: "border-blue-500",
@@ -79,18 +79,18 @@ const CourseRoadmap = () => {
     {
       week: "8",
       date: "11 Mar",
-      title: "Data Collection Complete",
-      description: "MILESTONE: Complete all empirical data collection. Integrate data and begin analysis with AI tools.",
+      title: "Group Meeting: Data Complete",
+      description: "MILESTONE: Complete all empirical data collection. Integrate data from government requests and fieldwork. Begin analysis with AI tools.",
       link: "/spring-2026/weeks/8",
       borderColor: "border-green-500",
       badgeColor: "bg-green-500",
-      milestone: "✓ Empirical data collection complete",
+      milestone: "✓ All data collection complete",
     },
     {
       week: "9",
       date: "18 Mar",
-      title: "Analysis & Consultation",
-      description: "Third consultation meeting. Use AI tools for analysis, visualization, and storytelling. Prepare draft report outline.",
+      title: "Group Meeting: Analysis",
+      description: "Consultation meeting. Use AI for analysis, visualization, and mathematical modeling. Prepare draft report outline focusing on data governance assessment.",
       assessment: { text: "Reflective Essay 3 (part of 20%)", color: "text-blue-600" },
       link: "/spring-2026/weeks/9",
       borderColor: "border-blue-500",
@@ -100,19 +100,19 @@ const CourseRoadmap = () => {
     {
       week: "10",
       date: "25 Mar",
-      title: "Final Draft Ready",
-      description: "Complete final draft of group report. Prepare for presentation with feedback from teachers.",
+      title: "Group Meeting: Draft Ready",
+      description: "Complete final draft of group report. Report structure: Background → Identify specific decisions → Data available → Government data use → Math modeling → Recommendations.",
       assessment: null,
       link: "/spring-2026/weeks/10",
       borderColor: "border-primary",
       badgeColor: "bg-primary",
-      milestone: "✓ Report ready for presentation prep",
+      milestone: "✓ Report draft ready for review",
     },
     {
       week: "11",
       date: "1 Apr",
-      title: "First Presentation",
-      description: "Deliver In-Class Presentation 1 (8 minutes) on project progress and data governance findings.",
+      title: "Presentation 1",
+      description: "Deliver In-Class Presentation 1 (8 minutes) on project progress, data governance findings, and preliminary recommendations.",
       assessment: { text: "In-Class Presentation 1 (10%)", color: "text-purple-600" },
       link: "/spring-2026/weeks/11",
       borderColor: "border-purple-500",
@@ -122,12 +122,22 @@ const CourseRoadmap = () => {
       week: "12",
       date: "15 Apr",
       title: "Finalize Deliverables",
-      description: "Refine models, visualizations, and advocacy products based on feedback.",
+      description: "Refine models, visualizations, and report based on feedback. Prepare for LegCo submission as a formal complaint about data governance.",
       warning: "8 Apr is a public holiday",
       assessment: { text: "Human-AI Collaboration Report (20%)", color: "text-orange-600" },
       link: "/spring-2026/weeks/12",
       borderColor: "border-orange-500",
       badgeColor: "bg-orange-500",
+    },
+    {
+      week: "13",
+      date: "22 Apr",
+      title: "Final Presentation & LegCo Submission",
+      description: "Final team presentations. Submit report to Legislative Council via the redress system as a complaint about government data governance practices.",
+      assessment: { text: "Final Presentation (10%) + Report (30%)", color: "text-yellow-600" },
+      link: "/spring-2026/weeks/13",
+      borderColor: "border-yellow-500",
+      badgeColor: "bg-yellow-500",
     },
   ];
 
@@ -199,12 +209,12 @@ const CourseRoadmap = () => {
     }
   ];
 
-  // Row assignments for zigzag layout (11 weeks total: indexes 0-10)
-  // Week indexes: 0=W1, 1=W2, 2=W3-4, 3=W5, 4=W6, 5=W7, 6=W8, 7=W9, 8=W10, 9=W11, 10=W12
+  // Row assignments for zigzag layout (12 weeks total: indexes 0-11)
+  // Week indexes: 0=W1, 1=W2, 2=W3-4, 3=W5, 4=W6, 5=W7, 6=W8, 7=W9, 8=W10, 9=W11, 10=W12, 11=W13
   const row1 = weeks.slice(0, 3); // Weeks 1, 2, 3-4
   const row2 = [weeks[5], weeks[4], weeks[3]]; // Weeks 7, 6, 5 (reversed)
   const row3 = [weeks[6], weeks[7], weeks[8]]; // Weeks 8, 9, 10
-  const row4 = [weeks[9]]; // Week 11
+  const row4 = [weeks[9], weeks[10]]; // Weeks 11, 12
 
   const WeekCard = ({ week, isLast = false }: { week: typeof weeks[0]; isLast?: boolean }) => (
     <div className={`bg-card rounded-xl shadow-md p-5 w-72 border-l-4 ${week.borderColor} hover:shadow-lg transition-shadow`}>
@@ -432,11 +442,11 @@ const CourseRoadmap = () => {
           {/* Connector: Row 3 to Row 4 */}
           <RowConnector direction="down-left" />
 
-          {/* Row 4: Week 11 */}
+          {/* Row 4: Weeks 11, 12 */}
           <div className="flex items-center justify-center gap-0">
             <WeekCard week={row4[0]} />
             <HorizontalConnector direction="right" />
-            <WeekCard week={weeks[10]} />
+            <WeekCard week={row4[1]} />
           </div>
 
           {/* Connector to Final Week */}
@@ -473,16 +483,16 @@ const CourseRoadmap = () => {
                   13
                 </div>
                 <div>
-                  <h3 className="font-bold text-foreground text-lg">🎯 Final Presentation & Report</h3>
+                  <h3 className="font-bold text-foreground text-lg">🎯 Final Presentation & LegCo Submission</h3>
                   <p className="text-xs text-muted-foreground">📅 22 Apr</p>
                 </div>
               </div>
               <p className="text-sm text-muted-foreground mb-3">
-                📚 Deliver In-Class Presentation 2 (8 minutes) to peers, instructors, and stakeholders.
+                📚 Final presentations. Submit report to LegCo via redress system as a complaint about government data governance.
               </p>
               <div className="space-y-1 mb-3">
-                <p className="text-sm text-purple-600">📝 In-Class Presentation 2 (10%)</p>
-                <p className="text-sm text-red-600">📝 Final Project Report & Poster (30%)</p>
+                <p className="text-sm text-purple-600">📝 Final Presentation (10%)</p>
+                <p className="text-sm text-red-600">📝 Group Report & Poster (30%)</p>
               </div>
               <div className="text-center">
                 <span className="bg-yellow-500 text-white text-sm px-4 py-1.5 rounded-full font-bold">
