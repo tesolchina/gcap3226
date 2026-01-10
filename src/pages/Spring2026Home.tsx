@@ -28,7 +28,7 @@ const Spring2026Home = () => {
               <img 
                 src={taliaPhoto} 
                 alt="Dr. Talia Wu" 
-                className="w-20 h-20 rounded-full object-cover border-2 border-primary/20"
+                className="w-20 h-20 rounded-full object-cover object-top border-2 border-primary/20"
               />
               <div>
                 <h3 className="text-sm font-medium text-muted-foreground uppercase tracking-wider">Co-ordinator</h3>
@@ -51,7 +51,7 @@ const Spring2026Home = () => {
               <img 
                 src={simonPhoto} 
                 alt="Dr. Simon Wang" 
-                className="w-20 h-20 rounded-full object-cover border-2 border-primary/20"
+                className="w-20 h-20 rounded-full object-cover object-top border-2 border-primary/20"
               />
               <div>
                 <h3 className="text-sm font-medium text-muted-foreground uppercase tracking-wider">Co-teacher</h3>
