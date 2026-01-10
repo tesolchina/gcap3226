@@ -35,8 +35,9 @@ const resourceItems = [
 ];
 
 const learningModuleItems = [
-  { title: "Gov Info Requests", url: "/spring-2026/resources/government-info-requests", icon: FileText },
   { title: "Curating Public Data", url: "/spring-2026/resources/curating-public-data", icon: FileText },
+  { title: "Gov Info Requests", url: "/spring-2026/resources/government-info-requests", icon: FileText },
+  { title: "Submit to LegCo", url: "/spring-2026/resources/legco-submission", icon: FileText },
 ];
 
 export function Spring2026Sidebar() {
