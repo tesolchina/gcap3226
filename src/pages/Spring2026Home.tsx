@@ -89,15 +89,6 @@ const Spring2026Home = () => {
         {/* Course Roadmap (includes objectives) */}
         <CourseRoadmap />
 
-        {/* Quick Links */}
-        <div className="flex flex-wrap justify-center gap-4">
-          <Button asChild variant="outline">
-            <Link to="/spring-2026/resources">Resources</Link>
-          </Button>
-          <Button asChild variant="outline">
-            <Link to="/spring-2026/feedback">Course Feedback</Link>
-          </Button>
-        </div>
       </div>
     </div>
   );
