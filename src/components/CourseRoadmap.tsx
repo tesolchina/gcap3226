@@ -9,6 +9,7 @@ import {
 } from "@/components/ui/accordion";
 
 const CourseRoadmap = () => {
+  const [showObjectives, setShowObjectives] = useState(false);
   const [showRoadmap, setShowRoadmap] = useState(false);
 
   const weeks = [
@@ -299,73 +300,82 @@ const CourseRoadmap = () => {
 
   return (
     <div className="w-full">
-      {/* Course Objectives Section */}
-      <div className="mb-6">
-        <div className="flex items-center gap-3 mb-4">
-          <div className="p-2 bg-primary/10 rounded-full">
-            <Target className="h-6 w-6 text-primary" />
-          </div>
-          <h3 className="text-lg font-semibold text-foreground">Course Objectives</h3>
-          <span className="text-xs text-muted-foreground">(click to expand)</span>
+      {/* Course Objectives Toggle Button */}
+      <button
+        onClick={() => setShowObjectives(!showObjectives)}
+        className="w-full flex items-center justify-between p-4 bg-primary/10 rounded-lg hover:bg-primary/20 transition-colors mb-6"
+      >
+        <div className="flex items-center gap-3">
+          <Target className="h-5 w-5 text-primary" />
+          <span className="text-lg font-semibold text-foreground">Course Objectives</span>
         </div>
-        
-        <Accordion type="single" collapsible className="space-y-3">
-          {objectives.map((obj, idx) => (
-            <AccordionItem 
-              key={idx} 
-              value={`item-${idx}`}
-              className={`border-none rounded-xl overflow-hidden shadow-lg`}
-            >
-              <AccordionTrigger className={`bg-gradient-to-r ${obj.color} text-white px-5 py-4 hover:no-underline hover:opacity-95 transition-all [&[data-state=open]]:rounded-b-none rounded-xl`}>
-                <div className="flex items-center gap-4 text-left">
-                  <obj.icon className="h-8 w-8 shrink-0 opacity-90" />
-                  <div>
-                    <p className="text-base font-semibold">{obj.title}</p>
-                    <p className="text-sm text-white/80 font-normal">{obj.subtitle}</p>
+        {showObjectives ? (
+          <ChevronUp className="h-5 w-5 text-primary" />
+        ) : (
+          <ChevronDown className="h-5 w-5 text-primary" />
+        )}
+      </button>
+
+      {showObjectives && (
+        <div className="animate-in fade-in slide-in-from-top-2 duration-300 mb-6">
+          <Accordion type="single" collapsible className="space-y-3">
+            {objectives.map((obj, idx) => (
+              <AccordionItem 
+                key={idx} 
+                value={`item-${idx}`}
+                className={`border-none rounded-xl overflow-hidden shadow-lg`}
+              >
+                <AccordionTrigger className={`bg-gradient-to-r ${obj.color} text-white px-5 py-4 hover:no-underline hover:opacity-95 transition-all [&[data-state=open]]:rounded-b-none rounded-xl`}>
+                  <div className="flex items-center gap-4 text-left">
+                    <obj.icon className="h-8 w-8 shrink-0 opacity-90" />
+                    <div>
+                      <p className="text-base font-semibold">{obj.title}</p>
+                      <p className="text-sm text-white/80 font-normal">{obj.subtitle}</p>
+                    </div>
                   </div>
-                </div>
-              </AccordionTrigger>
-              <AccordionContent className="bg-card border border-t-0 border-muted rounded-b-xl px-5 py-4">
-                <ul className="space-y-2 mb-4">
-                  {obj.bullets.map((bullet, bulletIdx) => (
-                    <li key={bulletIdx} className="flex items-start gap-2 text-muted-foreground">
-                      <span className="text-primary mt-1">•</span>
-                      <span>{bullet}</span>
-                    </li>
-                  ))}
-                </ul>
-                {obj.links.length > 0 && (
-                  <div className="flex flex-wrap gap-3 pt-2 border-t border-muted">
-                    {obj.links.map((link, linkIdx) => (
-                      link.external ? (
-                        <a 
-                          key={linkIdx}
-                          href={link.url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="inline-flex items-center gap-1 text-sm text-primary hover:underline font-medium"
-                        >
-                          <ExternalLink className="h-4 w-4" />
-                          {link.text}
-                        </a>
-                      ) : (
-                        <Link 
-                          key={linkIdx}
-                          to={link.url}
-                          className="inline-flex items-center gap-1 text-sm text-primary hover:underline font-medium"
-                        >
-                          <FileText className="h-4 w-4" />
-                          {link.text}
-                        </Link>
-                      )
+                </AccordionTrigger>
+                <AccordionContent className="bg-card border border-t-0 border-muted rounded-b-xl px-5 py-4">
+                  <ul className="space-y-2 mb-4">
+                    {obj.bullets.map((bullet, bulletIdx) => (
+                      <li key={bulletIdx} className="flex items-start gap-2 text-muted-foreground">
+                        <span className="text-primary mt-1">•</span>
+                        <span>{bullet}</span>
+                      </li>
                     ))}
-                  </div>
-                )}
-              </AccordionContent>
-            </AccordionItem>
-          ))}
-        </Accordion>
-      </div>
+                  </ul>
+                  {obj.links.length > 0 && (
+                    <div className="flex flex-wrap gap-3 pt-2 border-t border-muted">
+                      {obj.links.map((link, linkIdx) => (
+                        link.external ? (
+                          <a 
+                            key={linkIdx}
+                            href={link.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-1 text-sm text-primary hover:underline font-medium"
+                          >
+                            <ExternalLink className="h-4 w-4" />
+                            {link.text}
+                          </a>
+                        ) : (
+                          <Link 
+                            key={linkIdx}
+                            to={link.url}
+                            className="inline-flex items-center gap-1 text-sm text-primary hover:underline font-medium"
+                          >
+                            <FileText className="h-4 w-4" />
+                            {link.text}
+                          </Link>
+                        )
+                      ))}
+                    </div>
+                  )}
+                </AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
+        </div>
+      )}
 
       {/* Roadmap Toggle Button */}
       <button
