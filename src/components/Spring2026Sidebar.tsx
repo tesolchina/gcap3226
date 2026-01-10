@@ -32,8 +32,6 @@ const weeklyItems = [
 const resourceItems = [
   { title: "Assessments", url: "/spring-2026/assessments", icon: ClipboardList },
   { title: "Group Projects", url: "/spring-2026/topics", icon: Users },
-  { title: "Syllabus", url: "/spring-2026/syllabus", icon: FileText },
-  { title: "Feedback", url: "/spring-2026/feedback", icon: MessageSquare },
 ];
 
 const learningModuleItems = [
