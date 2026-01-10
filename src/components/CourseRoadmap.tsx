@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { ChevronDown, ChevronUp, Target, Lightbulb, Users, BarChart3, Briefcase, Rocket, Bot, Eye, FileText } from "lucide-react";
+import { ChevronDown, ChevronUp, Target, Lightbulb, Users, BarChart3, Briefcase, Rocket, Bot, Eye, FileText, ExternalLink } from "lucide-react";
 import { Link } from "react-router-dom";
 import {
   Accordion,
@@ -144,7 +144,7 @@ const CourseRoadmap = () => {
         "No math major required – designed for students from all backgrounds"
       ],
       links: [
-        { text: "Week 2: AI Tools Introduction", url: "/spring-2026/weeks/2" }
+        { text: "Week 2: AI Tools Introduction", url: "/spring-2026/weeks/2", external: false }
       ]
     },
     {
@@ -160,7 +160,7 @@ const CourseRoadmap = () => {
         "Aligned with UN Sustainable Development Goals (SDGs)"
       ],
       links: [
-        { text: "Government Information Requests Guide", url: "/spring-2026/gov-info-requests" }
+        { text: "Government Information Requests Guide", url: "/spring-2026/resources/government-info-requests", external: false }
       ]
     },
     {
@@ -176,8 +176,8 @@ const CourseRoadmap = () => {
         "Submit findings to stakeholders including the Legislative Council"
       ],
       links: [
-        { text: "Fall 2025 Student Projects", url: "/fall-2025" },
-        { text: "Week 6: Fieldwork", url: "/spring-2026/weeks/6" }
+        { text: "Fall 2025 Student Projects", url: "https://gcap3226.hkbu.tech/fall-2025", external: true },
+        { text: "Week 6: Fieldwork", url: "https://gcap3226.hkbu.tech/spring-2026/weeks/6", external: true }
       ]
     },
     {
@@ -193,7 +193,8 @@ const CourseRoadmap = () => {
         "Your voice can influence real policy decisions"
       ],
       links: [
-        { text: "Week 13: Final Presentation", url: "/spring-2026/weeks/13" }
+        { text: "Week 13: Final Presentation", url: "/spring-2026/weeks/13", external: false },
+        { text: "Submitting Reports to LegCo", url: "/spring-2026/legco-submission", external: false }
       ]
     }
   ];
@@ -326,14 +327,27 @@ const CourseRoadmap = () => {
                 {obj.links.length > 0 && (
                   <div className="flex flex-wrap gap-3 pt-2 border-t border-muted">
                     {obj.links.map((link, linkIdx) => (
-                      <Link 
-                        key={linkIdx}
-                        to={link.url}
-                        className="inline-flex items-center gap-1 text-sm text-primary hover:underline font-medium"
-                      >
-                        <FileText className="h-4 w-4" />
-                        {link.text}
-                      </Link>
+                      link.external ? (
+                        <a 
+                          key={linkIdx}
+                          href={link.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-1 text-sm text-primary hover:underline font-medium"
+                        >
+                          <ExternalLink className="h-4 w-4" />
+                          {link.text}
+                        </a>
+                      ) : (
+                        <Link 
+                          key={linkIdx}
+                          to={link.url}
+                          className="inline-flex items-center gap-1 text-sm text-primary hover:underline font-medium"
+                        >
+                          <FileText className="h-4 w-4" />
+                          {link.text}
+                        </Link>
+                      )
                     ))}
                   </div>
                 )}
