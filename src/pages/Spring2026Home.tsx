@@ -1,51 +1,10 @@
-import { useState } from "react";
 import { Card } from "@/components/ui/card";
 import CourseRoadmap from "@/components/CourseRoadmap";
 import { Button } from "@/components/ui/button";
-import { User, FileText, Presentation, ChevronDown, ChevronUp, ArrowRight } from "lucide-react";
+import { User, FileText, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const Spring2026Home = () => {
-  const [showAssessments, setShowAssessments] = useState(false);
-
-  const assessments = [
-    {
-      title: "In-class Exercises",
-      timing: "Weeks 3-4",
-      type: "In-class",
-      weight: "10%",
-      link: "/spring-2026/weeks/3/in-class-exercise-1",
-    },
-    {
-      title: "Reflective Essays",
-      timing: "Weeks 5-9",
-      type: "Take-home",
-      weight: "20%",
-      link: "/spring-2026/weeks/5/reflective-essay-1",
-    },
-    {
-      title: "In-Class Presentation 1",
-      timing: "Week 11",
-      type: "In-class",
-      weight: "10%",
-      link: "/spring-2026/weeks/11/presentation-1",
-    },
-    {
-      title: "Human-AI Collaboration Report",
-      timing: "Week 12",
-      type: "Take-home",
-      weight: "20%",
-      link: "/spring-2026/weeks/12/human-ai-report",
-    },
-    {
-      title: "Final Presentation & Report",
-      timing: "Week 13",
-      type: "In-class",
-      weight: "40%",
-      link: "/spring-2026/weeks/13/final-presentation-report",
-    },
-  ];
-
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-accent/10 to-background p-8">
       <div className="max-w-5xl mx-auto space-y-10">
@@ -129,44 +88,6 @@ const Spring2026Home = () => {
 
         {/* Course Roadmap (includes objectives) */}
         <CourseRoadmap />
-
-        {/* Assessment Toggle Section */}
-        <div className="space-y-4">
-          <button
-            onClick={() => setShowAssessments(!showAssessments)}
-            className="w-full flex items-center justify-between p-4 bg-primary/10 rounded-lg hover:bg-primary/20 transition-colors"
-          >
-            <span className="text-lg font-semibold text-foreground">Assessment</span>
-            {showAssessments ? (
-              <ChevronUp className="h-5 w-5 text-primary" />
-            ) : (
-              <ChevronDown className="h-5 w-5 text-primary" />
-            )}
-          </button>
-          
-          {showAssessments && (
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 animate-in fade-in slide-in-from-top-2 duration-300">
-              {assessments.map((item, idx) => (
-                <Card key={idx} className="p-5 hover:shadow-lg transition-all hover:scale-[1.02] bg-card">
-                  <div className="flex items-start justify-between mb-3">
-                    <Presentation className="h-5 w-5 text-primary" />
-                    <span className="text-lg font-bold text-primary">{item.weight}</span>
-                  </div>
-                  <h3 className="font-semibold mb-1">{item.title}</h3>
-                  <p className="text-sm text-muted-foreground mb-3">
-                    {item.timing} • {item.type}
-                  </p>
-                  <Link 
-                    to={item.link}
-                    className="text-primary hover:underline text-sm inline-flex items-center gap-1"
-                  >
-                    View Details <ArrowRight className="h-3 w-3" />
-                  </Link>
-                </Card>
-              ))}
-            </div>
-          )}
-        </div>
 
         {/* Quick Links */}
         <div className="flex flex-wrap justify-center gap-4">
