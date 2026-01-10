@@ -704,6 +704,55 @@ export type Database = {
         }
         Returns: boolean
       }
+      search_all_knowledge: {
+        Args: {
+          match_count?: number
+          match_threshold?: number
+          p_project_group_id?: string
+          query_embedding: string
+        }
+        Returns: {
+          content: string
+          id: string
+          similarity: number
+          source: string
+          source_type: string
+          title: string
+        }[]
+      }
+      search_course_knowledge: {
+        Args: {
+          filter_content_type?: string
+          match_count?: number
+          match_threshold?: number
+          query_embedding: string
+        }
+        Returns: {
+          content: string
+          content_type: string
+          id: string
+          metadata: Json
+          page_path: string
+          page_title: string
+          similarity: number
+        }[]
+      }
+      search_project_knowledge: {
+        Args: {
+          match_count?: number
+          match_threshold?: number
+          p_project_group_id: string
+          query_embedding: string
+        }
+        Returns: {
+          content: string
+          id: string
+          metadata: Json
+          similarity: number
+          source_type: string
+          title: string
+        }[]
+      }
     }
     Enums: {
       app_role: "teacher" | "student"
