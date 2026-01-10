@@ -6,6 +6,7 @@ import { ArrowLeft, Database, Code, ChevronDown, ChevronUp, FileText, Calculator
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import busAppScreenshot from "@/assets/bus-app-duplicate-stops.png";
+import busAppFixed from "@/assets/bus-app-fixed-stops.jpeg";
 
 const Spring2026Week1 = () => {
   const [currentPart, setCurrentPart] = useState(1);
@@ -138,35 +139,52 @@ const Part1DataGovernance = () => {
               <p className="text-sm text-muted-foreground">
                 Here's a simple example of citizen engagement with government. When Simon noticed duplicate bus stop names causing passenger confusion, he wrote to the Transport Department. This small example shows how constructive engagement can lead to change – though it took <strong>4 years</strong> of persistent follow-up!
               </p>
+              {/* Before and After Comparison */}
               <div className="grid md:grid-cols-2 gap-6">
-                <div className="space-y-4">
-                  <div className="bg-destructive/10 p-4 rounded-lg border border-destructive/20">
-                    <h4 className="font-semibold text-destructive mb-2">The Problem</h4>
-                    <ul className="text-sm space-y-1">
+                {/* Before */}
+                <div className="space-y-3">
+                  <div className="bg-destructive/10 p-3 rounded-lg border border-destructive/20">
+                    <h4 className="font-semibold text-destructive mb-1 text-sm">❌ Before: The Problem</h4>
+                    <ul className="text-xs space-y-1">
                       <li>• Two stops with the same name "St MARTIN"</li>
-                      <li>• Passengers confused about which stop they're at</li>
-                      <li>• A data governance issue: lack of unique identifiers</li>
+                      <li>• No way to distinguish between them</li>
+                      <li>• Passengers confused about arrival times</li>
                     </ul>
                   </div>
-                  <div className="bg-green-50 dark:bg-green-950/30 p-4 rounded-lg border border-green-200 dark:border-green-800">
-                    <h4 className="font-semibold text-green-800 dark:text-green-200 mb-2 flex items-center gap-2">
-                      <CheckCircle2 className="h-4 w-4" />
-                      The Outcome (May 2025)
-                    </h4>
-                    <p className="text-sm text-green-700 dark:text-green-300">
-                      "KMB has added new bus stop codes to the bus stops of KMB Route No. 272A on both KMB's website and mobile application."
+                  <div className="flex flex-col items-center">
+                    <img 
+                      src={busAppScreenshot} 
+                      alt="KMB Bus App showing duplicate St Martin stops without codes"
+                      className="rounded-lg shadow-lg border max-h-[280px] object-contain"
+                    />
+                    <p className="text-xs text-muted-foreground mt-2 text-center">
+                      Before: Both stops named "St MARTIN" with no identifier
                     </p>
                   </div>
                 </div>
-                <div className="flex flex-col items-center">
-                  <img 
-                    src={busAppScreenshot} 
-                    alt="KMB Bus App showing duplicate St Martin stops"
-                    className="rounded-lg shadow-lg border max-h-[300px] object-contain"
-                  />
-                  <p className="text-xs text-muted-foreground mt-2 text-center">
-                    KMB app showing duplicate "St MARTIN" stops
-                  </p>
+                {/* After */}
+                <div className="space-y-3">
+                  <div className="bg-green-50 dark:bg-green-950/30 p-3 rounded-lg border border-green-200 dark:border-green-800">
+                    <h4 className="font-semibold text-green-800 dark:text-green-200 mb-1 text-sm flex items-center gap-2">
+                      <CheckCircle2 className="h-4 w-4" />
+                      ✓ After: The Win (May 2025)
+                    </h4>
+                    <ul className="text-xs text-green-700 dark:text-green-300 space-y-1">
+                      <li>• Bus stop codes added: PA125 and PA206</li>
+                      <li>• Each stop now uniquely identifiable</li>
+                      <li>• 4 years of persistence paid off!</li>
+                    </ul>
+                  </div>
+                  <div className="flex flex-col items-center">
+                    <img 
+                      src={busAppFixed} 
+                      alt="KMB Bus App now showing St Martin stops with unique codes PA125 and PA206"
+                      className="rounded-lg shadow-lg border max-h-[280px] object-contain"
+                    />
+                    <p className="text-xs text-muted-foreground mt-2 text-center">
+                      After: "St MARTIN (PA125)" and "St MARTIN (PA206)"
+                    </p>
+                  </div>
                 </div>
               </div>
 
