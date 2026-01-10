@@ -49,7 +49,7 @@ const Spring2026AssessmentInClass1 = () => {
               </h3>
               <ul className="list-disc list-inside space-y-2 text-muted-foreground">
                 <li>Review the provided dataset on Hong Kong public services.</li>
-                <li>Use AI tools (e.g., Python with AI assistance) to perform a basic exploratory data analysis.</li>
+                <li>Use AI tools (e.g., Python with AI assistance via <a href="/spring-2026/weeks/2" className="text-primary hover:underline">Vibe Coding</a>) to perform a basic exploratory data analysis.</li>
                 <li>Identify 1-2 key patterns or anomalies in the data related to data governance.</li>
                 <li>Prepare a short (100-150 words) summary of your findings and the methods used.</li>
                 <li>Submit your analysis (Jupyter Notebook or text summary) via Moodle by the end of the session.</li>

@@ -66,41 +66,76 @@ const Spring2026FinalPresentationReport = () => {
           </CardContent>
         </Card>
 
+        {/* Report Focus: Data Governance */}
+        <Card className="border-primary/30 bg-primary/5">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <FileText className="h-5 w-5 text-primary" />
+              Report Focus: Evaluating Government Data Governance
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <p className="text-muted-foreground">
+              The core question your report must answer: <strong>To what extent does the Hong Kong government use data to inform its policy decisions?</strong>
+            </p>
+            <div className="grid md:grid-cols-2 gap-4">
+              <div className="p-4 bg-background rounded-lg border">
+                <h4 className="font-semibold mb-2">Key Questions to Address:</h4>
+                <ul className="text-sm text-muted-foreground space-y-1">
+                  <li>• What specific decisions were made by the government?</li>
+                  <li>• What data is available related to this policy area?</li>
+                  <li>• To what extent did the government use data to make these decisions?</li>
+                  <li>• Could they do a better job with data-driven decision making?</li>
+                </ul>
+              </div>
+              <div className="p-4 bg-background rounded-lg border">
+                <h4 className="font-semibold mb-2">Your Research Approach:</h4>
+                <ul className="text-sm text-muted-foreground space-y-1">
+                  <li>• Request data from government departments</li>
+                  <li>• Collect primary data through fieldwork</li>
+                  <li>• Apply mathematical modeling and AI tools</li>
+                  <li>• Generate evidence-based recommendations</li>
+                </ul>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
         {/* Report Requirements */}
         <Card>
           <CardHeader>
-            <CardTitle>Report Requirements (~3,000 words)</CardTitle>
+            <CardTitle>Report Structure (~3,000 words)</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="space-y-6">
               <div className="p-4 bg-muted/50 rounded-lg">
-                <h4 className="font-semibold text-lg mb-2">1. Introduction</h4>
-                <p className="text-muted-foreground">Clearly articulate the problem, your research questions, and the relevance to SDG 11 (Sustainable Cities and Communities). Explain why this policy issue matters for Hong Kong and what gap your research addresses.</p>
+                <h4 className="font-semibold text-lg mb-2">1. Background & Policy Context</h4>
+                <p className="text-muted-foreground">Learn about the policy area and collect publicly available information. Provide context about the program, relevant existing policies, and the current state of data governance. Document what data is available publicly and what data you had to request.</p>
               </div>
 
               <div className="p-4 bg-muted/50 rounded-lg">
-                <h4 className="font-semibold text-lg mb-2">2. Background</h4>
-                <p className="text-muted-foreground">Provide context about the policy issue, relevant existing policies and plans, and the current state of data governance related to this topic. Document what data is available and what data is missing.</p>
+                <h4 className="font-semibold text-lg mb-2">2. Identifying Government Decisions</h4>
+                <p className="text-muted-foreground">Identify a specific decision or set of decisions made by government staff. This is critical – you must pinpoint concrete decisions that can be evaluated for their data-driven basis.</p>
               </div>
 
               <div className="p-4 bg-muted/50 rounded-lg">
-                <h4 className="font-semibold text-lg mb-2">3. Data Analysis</h4>
-                <p className="text-muted-foreground">Conduct quantitative analysis using appropriate mathematical models (simulation, regression, or other appropriate methods). Evaluate data governance issues, including data availability, transparency, and how improved data collection could enhance decision-making. Include visualizations and clear interpretation of results.</p>
+                <h4 className="font-semibold text-lg mb-2">3. Data Availability Assessment</h4>
+                <p className="text-muted-foreground">Document what data the government has access to, what they shared with you, and what was unavailable. Evaluate the government's data governance practices: Are they collecting the right data? Are they using it effectively?</p>
               </div>
 
               <div className="p-4 bg-muted/50 rounded-lg">
-                <h4 className="font-semibold text-lg mb-2">4. Community Engagement</h4>
-                <p className="text-muted-foreground">Describe your community engagement activities, including interactions with stakeholders, government staff, or community members. Document your use of AI tools throughout the project and explain how they supported your work.</p>
+                <h4 className="font-semibold text-lg mb-2">4. Mathematical Modeling & Analysis</h4>
+                <p className="text-muted-foreground">Apply mathematical models using AI tools to analyze the data. This includes your fieldwork data and any government data received. Use visualizations and clear interpretation to support your findings.</p>
               </div>
 
               <div className="p-4 bg-muted/50 rounded-lg">
-                <h4 className="font-semibold text-lg mb-2">5. Recommendations</h4>
-                <p className="text-muted-foreground">Provide 2-3 specific, actionable recommendations for policymakers. Explain how your recommendations address data governance gaps and align with SDG 11.</p>
+                <h4 className="font-semibold text-lg mb-2">5. Evidence-Based Recommendations</h4>
+                <p className="text-muted-foreground">Based on your modeling results, provide 2-3 specific, actionable recommendations for how the government can improve data governance and evidence-based decision making in this policy area.</p>
               </div>
 
               <div className="p-4 bg-muted/50 rounded-lg">
-                <h4 className="font-semibold text-lg mb-2">6. Conclusion</h4>
-                <p className="text-muted-foreground">Summarize key findings, acknowledge limitations of your study, and suggest directions for future work. Reflect on what you learned about data-driven policymaking and data governance.</p>
+                <h4 className="font-semibold text-lg mb-2">6. Conclusion & LegCo Complaint Framing</h4>
+                <p className="text-muted-foreground">Frame your findings as a formal complaint to the Legislative Council's redress system. The complaint should argue that the government is not adequately using data to inform decision making, and lawmakers should follow up with the relevant department.</p>
               </div>
             </div>
           </CardContent>
