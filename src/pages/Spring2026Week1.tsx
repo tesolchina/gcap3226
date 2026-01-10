@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, Database, Code, ChevronDown, ChevronUp, FileText, Calculator, LineChart, Bot, Cpu, TrendingUp, ExternalLink } from "lucide-react";
+import { ArrowLeft, Database, Code, ChevronDown, ChevronUp, FileText, Calculator, LineChart, Bot, Cpu, TrendingUp, ExternalLink, Mail, Clock, CheckCircle2 } from "lucide-react";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import busAppScreenshot from "@/assets/bus-app-duplicate-stops.png";
 
 const Spring2026Week1 = () => {
@@ -77,6 +78,7 @@ const Spring2026Week1 = () => {
 const Part1DataGovernance = () => {
   const [showBusExample, setShowBusExample] = useState(false);
   const [showFluShotLetter, setShowFluShotLetter] = useState(false);
+  const [showEmailCorrespondence, setShowEmailCorrespondence] = useState(false);
 
   return (
     <div className="space-y-6">
@@ -134,7 +136,7 @@ const Part1DataGovernance = () => {
             </CollapsibleTrigger>
             <CollapsibleContent className="mt-4 space-y-4">
               <p className="text-sm text-muted-foreground">
-                Here's a simple example of citizen engagement with government. When Dr. Simon noticed duplicate bus stop names causing passenger confusion, he wrote to the Transport Department. This small example shows how constructive engagement can lead to change.
+                Here's a simple example of citizen engagement with government. When Simon noticed duplicate bus stop names causing passenger confusion, he wrote to the Transport Department. This small example shows how constructive engagement can lead to change – though it took <strong>4 years</strong> of persistent follow-up!
               </p>
               <div className="grid md:grid-cols-2 gap-6">
                 <div className="space-y-4">
@@ -147,9 +149,12 @@ const Part1DataGovernance = () => {
                     </ul>
                   </div>
                   <div className="bg-green-50 dark:bg-green-950/30 p-4 rounded-lg border border-green-200 dark:border-green-800">
-                    <h4 className="font-semibold text-green-800 dark:text-green-200 mb-2">The Outcome</h4>
+                    <h4 className="font-semibold text-green-800 dark:text-green-200 mb-2 flex items-center gap-2">
+                      <CheckCircle2 className="h-4 w-4" />
+                      The Outcome (May 2025)
+                    </h4>
                     <p className="text-sm text-green-700 dark:text-green-300">
-                      After escalating to the Assistant Director with a clear explanation, the department coordinated with bus companies to fix the issue.
+                      "KMB has added new bus stop codes to the bus stops of KMB Route No. 272A on both KMB's website and mobile application."
                     </p>
                   </div>
                 </div>
@@ -164,14 +169,192 @@ const Part1DataGovernance = () => {
                   </p>
                 </div>
               </div>
+
+              {/* Timeline */}
+              <div className="p-4 bg-amber-50 dark:bg-amber-950/30 rounded-lg border border-amber-200 dark:border-amber-800">
+                <h4 className="font-semibold text-amber-800 dark:text-amber-200 mb-3 flex items-center gap-2">
+                  <Clock className="h-4 w-4" />
+                  4-Year Timeline: From Complaint to Resolution
+                </h4>
+                <div className="space-y-2 text-sm">
+                  <div className="flex gap-3">
+                    <span className="text-amber-600 dark:text-amber-400 font-mono w-24 shrink-0">Mar 2021</span>
+                    <span className="text-muted-foreground">Initial complaint filed via 1823</span>
+                  </div>
+                  <div className="flex gap-3">
+                    <span className="text-amber-600 dark:text-amber-400 font-mono w-24 shrink-0">Jul 2021</span>
+                    <span className="text-muted-foreground">Escalation to Commissioner for Transport; Code on Access to Information request filed</span>
+                  </div>
+                  <div className="flex gap-3">
+                    <span className="text-amber-600 dark:text-amber-400 font-mono w-24 shrink-0">Nov 2023</span>
+                    <span className="text-muted-foreground">Requested revisit of the case</span>
+                  </div>
+                  <div className="flex gap-3">
+                    <span className="text-amber-600 dark:text-amber-400 font-mono w-24 shrink-0">Mar 2024</span>
+                    <span className="text-muted-foreground">Escalation to Assistant Director; Tai Po District Council also contacted</span>
+                  </div>
+                  <div className="flex gap-3">
+                    <span className="text-green-600 dark:text-green-400 font-mono w-24 shrink-0">May 2025</span>
+                    <span className="text-muted-foreground font-medium">✓ Issue resolved – bus stop codes added</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Key Learning: Finding Contacts */}
+              <div className="p-4 bg-blue-50 dark:bg-blue-950/30 rounded-lg border border-blue-200 dark:border-blue-800">
+                <h4 className="font-semibold text-blue-800 dark:text-blue-200 mb-2">Key Skill: Finding Government Contacts</h4>
+                <p className="text-sm text-blue-700 dark:text-blue-300 mb-3">
+                  One key question is: how do you find the Assistant Director's contact? The Hong Kong Government provides a directory of all government officials:
+                </p>
+                <Button variant="outline" size="sm" asChild className="bg-white dark:bg-transparent">
+                  <a href="https://tel.directory.gov.hk/index_ENG.html?accept_disclaimer=yes" target="_blank" rel="noopener noreferrer">
+                    <ExternalLink className="h-4 w-4 mr-2" />
+                    Government Telephone Directory
+                  </a>
+                </Button>
+              </div>
+
+              {/* Email Correspondence */}
+              <Collapsible open={showEmailCorrespondence} onOpenChange={setShowEmailCorrespondence}>
+                <CollapsibleTrigger asChild>
+                  <Button variant="outline" className="w-full justify-between bg-muted/50">
+                    <span className="flex items-center gap-2">
+                      <Mail className="h-4 w-4" />
+                      View Full Email Correspondence (2021-2025)
+                    </span>
+                    {showEmailCorrespondence ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
+                  </Button>
+                </CollapsibleTrigger>
+                <CollapsibleContent className="mt-4">
+                  <div className="border rounded-lg overflow-hidden">
+                    <Accordion type="single" collapsible className="w-full">
+                      {/* Final Resolution */}
+                      <AccordionItem value="resolution">
+                        <AccordionTrigger className="px-4 bg-green-50 dark:bg-green-950/30 hover:bg-green-100 dark:hover:bg-green-950/50">
+                          <div className="flex items-center gap-2">
+                            <CheckCircle2 className="h-4 w-4 text-green-600" />
+                            <span className="font-medium">May 2025: Issue Resolved</span>
+                          </div>
+                        </AccordionTrigger>
+                        <AccordionContent className="px-4 pb-4">
+                          <div className="bg-muted/30 p-4 rounded-lg text-sm space-y-3">
+                            <p className="text-xs text-muted-foreground">From: YUEN Ching-wun (for Commissioner for Transport)</p>
+                            <p>Dear Mr. WANG,</p>
+                            <p>KMB has added new bus stop codes to the bus stops of KMB Route No. 272A on both KMB's website and mobile application. Thank you for your comments on KMB Route No. 272A.</p>
+                          </div>
+                        </AccordionContent>
+                      </AccordionItem>
+
+                      {/* Follow-up May 2025 */}
+                      <AccordionItem value="may2025-followup">
+                        <AccordionTrigger className="px-4 hover:bg-muted/50">
+                          <span className="text-sm">May 2025: Follow-up inquiry about bus stop codes</span>
+                        </AccordionTrigger>
+                        <AccordionContent className="px-4 pb-4">
+                          <div className="bg-muted/30 p-4 rounded-lg text-sm space-y-3">
+                            <p className="text-xs text-muted-foreground">From: Simon Wang → TD</p>
+                            <p>Could you explain why the bus stop codes are gone?</p>
+                            <hr className="my-3" />
+                            <p className="text-xs text-muted-foreground">Reply from YUEN Ching-wun (23 May 2025):</p>
+                            <p>I acknowledge receipt of your email dated 13 May 2025 regarding the bus stop naming of KMB Route No. 272A. We are following up the case and will provide a reply to you.</p>
+                          </div>
+                        </AccordionContent>
+                      </AccordionItem>
+
+                      {/* March 2024 Escalation */}
+                      <AccordionItem value="mar2024">
+                        <AccordionTrigger className="px-4 hover:bg-muted/50">
+                          <span className="text-sm">March 2024: Escalation to Assistant Director & District Council</span>
+                        </AccordionTrigger>
+                        <AccordionContent className="px-4 pb-4">
+                          <div className="bg-muted/30 p-4 rounded-lg text-sm space-y-3">
+                            <p className="text-xs text-muted-foreground">From: Simon Wang → Patrick Ho (Assistant Director) | 15 March 2024</p>
+                            <p>Dear Mr Ho,</p>
+                            <p>I hope this email finds you well even though you are unlikely to find the time to write back. Referring to the captioned matter I am currently waiting for 272A and have the time to revisit this issue because, regrettably, the confusion over same bus name made me spend more time waiting at the bus stop.</p>
+                            <p>For senior government officials like you it may be difficult to understand my concern. Do you have KMB app on your phone? Yet your colleagues' failure to convince KMB to take action to solve this little problem says a lot about the lack of oversight of your department over franchised bus services.</p>
+                            <p>I write regularly for SCMP and meet with Legco members from time to time. I still hope matters like this can be resolved without troubling more senior people outside TD.</p>
+                            <hr className="my-3" />
+                            <p className="text-xs text-muted-foreground">Reply from YUEN Ching-wun (later):</p>
+                            <p>We have once again referred your comments on the bus stop names of Route No. 272A to KMB for reconsideration. KMB has added bus stop codes to the en-route stops along Chong San Road and Science Park Road on both KMB's website and mobile application to further differentiate the bus stops.</p>
+                            <hr className="my-3" />
+                            <p className="text-xs text-muted-foreground">Tai Po District Council (16 March 2024):</p>
+                            <p>Thank you for your email. Regarding your concern on public transportation in Pak Shek Kok, we understand that the Transport Department is currently looking into the matter and will reply when information becomes available.</p>
+                          </div>
+                        </AccordionContent>
+                      </AccordionItem>
+
+                      {/* November 2023 */}
+                      <AccordionItem value="nov2023">
+                        <AccordionTrigger className="px-4 hover:bg-muted/50">
+                          <span className="text-sm">November 2023: Third request for reconsideration</span>
+                        </AccordionTrigger>
+                        <AccordionContent className="px-4 pb-4">
+                          <div className="bg-muted/30 p-4 rounded-lg text-sm space-y-3">
+                            <p className="text-xs text-muted-foreground">Reply from YUEN Ching-wun | 3 November 2023</p>
+                            <p>The naming of a bus stop is generally determined by the relevant franchised bus company after taking into account factors such as its geographical environment, nearby landmarks and usual naming by passengers.</p>
+                            <p>While we have provided our reply on the issue, in view of your comment, we have referred your comment on the bus stop names to KMB for reconsideration. <strong>KMB has reviewed the existing arrangement and considered that there would not be confusion caused to passengers.</strong> While KMB has no plan to change the bus stop names for the time being, it has taken note of your opinion.</p>
+                            <hr className="my-3" />
+                            <p className="text-xs text-muted-foreground">Original request from Simon Wang | 29 July 2023:</p>
+                            <p>Dear Sir/Madam, I'm writing to request a revisit of this issue and believe that KMB should change the bus stop names. It's fairly straightforward and can help improve user experience. I really don't want to bring this matter to Ombudsman but please do something so I don't have to.</p>
+                          </div>
+                        </AccordionContent>
+                      </AccordionItem>
+
+                      {/* July 2021 Escalation */}
+                      <AccordionItem value="jul2021">
+                        <AccordionTrigger className="px-4 hover:bg-muted/50">
+                          <span className="text-sm">July 2021: Escalation to Commissioner for Transport</span>
+                        </AccordionTrigger>
+                        <AccordionContent className="px-4 pb-4">
+                          <div className="bg-muted/30 p-4 rounded-lg text-sm space-y-3">
+                            <p className="text-xs text-muted-foreground">From: Simon Wang → Commissioner for Transport | 7 July 2021</p>
+                            <p>Attn: Miss LAW Shuk Pui, Rosanna, JP, Commissioner for Transport</p>
+                            <p>Dear Miss Law,</p>
+                            <p>I hope this email finds you well. I am writing to bring your attention to the fact that the bus stop names are the same for different stops for KMB 272A. I have communicated with your colleagues about this matter but we cannot reach an agreement. Please kindly review and follow up.</p>
+                            <p>As regular contributor to SCMP I have established working relationships with the Legco. I urge your office to review this case taking into account the user experience of the real bus passengers and the IT experts. I'll further pursue this case with all the tools and resources at my disposal.</p>
+                            <hr className="my-3" />
+                            <p className="text-xs text-muted-foreground">Previous email from Simon Wang | 8 July 2021:</p>
+                            <p>Yesterday morning I left home when the app indicated the 272A will arrive in 5 minutes. When I walked downstairs and checked the app again I found the bus will arrive in 12 minutes; I thought I must have missed the bus but found later I was looking at the info for the bus stop across the street. This is the consequence of having two bus stops with the same name.</p>
+                            <p className="mt-2">Any reasonable person should acknowledge that this is not an ideal situation and it is better to have different names for different bus stops.</p>
+                            <p className="mt-2">Thinking in the long term and considering my argument on data integrity for smart bus management system, I think KMB should be asked to change all the duplicate bus stop names and learn a lesson so no such farce will happen again.</p>
+                            <hr className="my-3" />
+                            <p className="text-xs text-muted-foreground">Note: Simon also filed a Code on Access to Information request (12 July 2021):</p>
+                            <p className="italic">"I've made a Code on Access to Information request about this issue. Let's find out the scale of the problem and see if it can be addressed at the city level."</p>
+                          </div>
+                        </AccordionContent>
+                      </AccordionItem>
+
+                      {/* Initial Response */}
+                      <AccordionItem value="initial">
+                        <AccordionTrigger className="px-4 hover:bg-muted/50">
+                          <span className="text-sm">May-June 2021: Initial complaint and response</span>
+                        </AccordionTrigger>
+                        <AccordionContent className="px-4 pb-4">
+                          <div className="bg-muted/30 p-4 rounded-lg text-sm space-y-3">
+                            <p className="text-xs text-muted-foreground">From: Simon Wang → Transport Department | 1 May 2021</p>
+                            <p>Dear Miss So,</p>
+                            <p>I am writing to discuss this case with you. According to the TD staff, if the name of a bus stop causes confusion to passengers, we will request the relevant franchised bus company to review the name of the bus stop. Yet, you decided that passengers should have no confusion with reference to the two bus stops despite my complaint as a passenger.</p>
+                            <p>As a passenger, I often use the KMB app to check when a bus will arrive; having two different bus stops with the same name made it inconvenient for me to be informed about the bus arrival time.</p>
+                            <p className="font-medium mt-2">I will refer the case to the Commissioner of Transport on 15 May if it is not resolved.</p>
+                            <hr className="my-3" />
+                            <p className="text-xs text-muted-foreground">Reply from SO Pui-man | 4 June 2021:</p>
+                            <p>Upon entering the route number and selecting the route concerned in the "Search" page in KMB mobile app, users will be directed to a page showing the routeing and the list of stops. To check the ETA of the route selected at a particular stop, users would be required to select the stop concerned either from the map or from the list of stops.</p>
+                            <p className="mt-2"><strong>In consideration of the above, KMB mobile app users should have no confusion of which stop is being referred to.</strong></p>
+                            <hr className="my-3" />
+                            <p className="text-xs text-muted-foreground">Initial TD Response | 1 May 2021:</p>
+                            <p>"The naming of a bus stop is determined by the relevant franchised bus company taking into account factors such as its geographical environment, nearby landmarks and usual naming by passengers. If the name of a bus stop causes confusion to passengers, we will request the relevant franchised bus company to review the name of the bus stop."</p>
+                            <p className="mt-2">"Given the current routeing of KMB Route No. 272A in Pak Shek Kok, <strong>passengers should have no confusion</strong> with reference to the two bus stops on Chong San Road both bounds near St. Martin despite being named the same as 'St. Martin'."</p>
+                          </div>
+                        </AccordionContent>
+                      </AccordionItem>
+                    </Accordion>
+                  </div>
+                </CollapsibleContent>
+              </Collapsible>
+
               <p className="text-sm text-muted-foreground italic">
                 This is just an appetizer – a simple case to illustrate the concept. Your projects will tackle more sophisticated policy issues with real data analysis.
               </p>
-              <div className="border-2 border-dashed border-muted-foreground/30 rounded-lg p-4">
-                <p className="text-sm text-muted-foreground">
-                  📧 <strong>Letter to Transport Department Assistant Director</strong> – to be added
-                </p>
-              </div>
             </CollapsibleContent>
           </Collapsible>
 
