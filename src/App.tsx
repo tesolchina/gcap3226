@@ -33,6 +33,7 @@ import Spring2026Topic from "./pages/Spring2026Topic";
 import Spring2026Assessments from "./pages/Spring2026Assessments";
 import Spring2026GovInfoRequests from "./pages/Spring2026GovInfoRequests";
 import Spring2026CuratingPublicData from "./pages/Spring2026CuratingPublicData";
+import Spring2026LegCoSubmission from "./pages/Spring2026LegCoSubmission";
 import CourseTeaser from "./pages/CourseTeaser";
 
 const queryClient = new QueryClient();
@@ -102,6 +103,7 @@ const AppContent = () => {
               <Route path="/spring-2026/resources/government-info-requests" element={<Spring2026GovInfoRequests />} />
               <Route path="/spring-2026/resources/curating-public-data" element={<Spring2026CuratingPublicData />} />
               <Route path="/spring-2026/resources" element={<Spring2026Placeholder />} />
+              <Route path="/spring-2026/legco-submission" element={<Spring2026LegCoSubmission />} />
               <Route path="/spring-2026/feedback" element={<Spring2026Placeholder />} />
             </Routes>
           </main>
