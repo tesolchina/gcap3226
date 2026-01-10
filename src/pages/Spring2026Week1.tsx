@@ -38,7 +38,7 @@ const Spring2026Week1 = () => {
             className="flex-1"
           >
             <Database className="h-4 w-4 mr-2" />
-            Part 1: Data Governance (Dr. Simon)
+            Part 1: Data Governance (Simon)
           </Button>
           <Button
             variant={currentPart === 2 ? "default" : "outline"}
@@ -46,7 +46,7 @@ const Spring2026Week1 = () => {
             className="flex-1"
           >
             <Code className="h-4 w-4 mr-2" />
-            Part 2: Technology & Math (Dr. Talia)
+            Part 2: Technology & Math (Talia)
           </Button>
         </div>
 
@@ -87,7 +87,7 @@ const Part1DataGovernance = () => {
             <Database className="h-5 w-5 text-primary" />
             Part 1: Critical Review of Data Governance
           </CardTitle>
-          <p className="text-sm text-muted-foreground">Presented by Dr. Simon Wang</p>
+          <p className="text-sm text-muted-foreground">Presented by Simon</p>
         </CardHeader>
         <CardContent className="space-y-6">
           {/* Core Message */}
@@ -237,7 +237,7 @@ const Part2TechnologyMath = () => {
             <Code className="h-5 w-5 text-cyan-500" />
             Part 2: Technology & Math Overview
           </CardTitle>
-          <p className="text-sm text-muted-foreground">Presented by Dr. Talia Wu</p>
+          <p className="text-sm text-muted-foreground">Presented by Talia</p>
         </CardHeader>
         <CardContent className="space-y-6">
           {/* Introduction */}
