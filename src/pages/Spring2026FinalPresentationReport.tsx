@@ -66,6 +66,118 @@ const Spring2026FinalPresentationReport = () => {
           </CardContent>
         </Card>
 
+        {/* Project Milestones */}
+        <Card className="border-primary/30">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <CheckCircle2 className="h-5 w-5 text-primary" />
+              Project Milestones
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <p className="text-muted-foreground">
+              Your project journey is structured around key milestones. Completing these on time ensures steady progress toward your final submission.
+            </p>
+            <div className="space-y-3">
+              <div className="flex items-start gap-4 p-4 bg-muted/50 rounded-lg border-l-4 border-primary">
+                <div className="text-center">
+                  <p className="text-xs text-muted-foreground">Week 1-2</p>
+                </div>
+                <div className="flex-1">
+                  <h4 className="font-semibold">Topic Selection & Team Formation</h4>
+                  <p className="text-sm text-muted-foreground">Identify your policy issue and form your project team. Begin background research.</p>
+                </div>
+                <div className="text-muted-foreground text-sm">📋 To be updated</div>
+              </div>
+              
+              <div className="flex items-start gap-4 p-4 bg-muted/50 rounded-lg border-l-4 border-muted-foreground/30">
+                <div className="text-center">
+                  <p className="text-xs text-muted-foreground">Week 3-4</p>
+                </div>
+                <div className="flex-1">
+                  <h4 className="font-semibold">Government Information Requests</h4>
+                  <p className="text-sm text-muted-foreground">Submit formal requests to government departments. Learn about data availability.</p>
+                </div>
+                <div className="text-muted-foreground text-sm">📋 To be updated</div>
+              </div>
+              
+              <div className="flex items-start gap-4 p-4 bg-muted/50 rounded-lg border-l-4 border-muted-foreground/30">
+                <div className="text-center">
+                  <p className="text-xs text-muted-foreground">Week 5-6</p>
+                </div>
+                <div className="flex-1">
+                  <h4 className="font-semibold">Data Collection & Fieldwork</h4>
+                  <p className="text-sm text-muted-foreground">Collect primary data through fieldwork. Document government responses.</p>
+                </div>
+                <div className="text-muted-foreground text-sm">📋 To be updated</div>
+              </div>
+              
+              <div className="flex items-start gap-4 p-4 bg-muted/50 rounded-lg border-l-4 border-muted-foreground/30">
+                <div className="text-center">
+                  <p className="text-xs text-muted-foreground">Week 7-8</p>
+                </div>
+                <div className="flex-1">
+                  <h4 className="font-semibold">Mathematical Modeling</h4>
+                  <p className="text-sm text-muted-foreground">Apply mathematical models and AI tools to analyze your data.</p>
+                </div>
+                <div className="text-muted-foreground text-sm">📋 To be updated</div>
+              </div>
+              
+              <div className="flex items-start gap-4 p-4 bg-muted/50 rounded-lg border-l-4 border-muted-foreground/30">
+                <div className="text-center">
+                  <p className="text-xs text-muted-foreground">Week 9-10</p>
+                </div>
+                <div className="flex-1">
+                  <h4 className="font-semibold">Draft Report & Poster</h4>
+                  <p className="text-sm text-muted-foreground">Complete first draft of report and poster design. Get feedback from teachers.</p>
+                </div>
+                <div className="text-muted-foreground text-sm">📋 To be updated</div>
+              </div>
+              
+              <div className="flex items-start gap-4 p-4 bg-muted/50 rounded-lg border-l-4 border-muted-foreground/30">
+                <div className="text-center">
+                  <p className="text-xs text-muted-foreground">Week 11-12</p>
+                </div>
+                <div className="flex-1">
+                  <h4 className="font-semibold">Final Submission & LegCo Preparation</h4>
+                  <p className="text-sm text-muted-foreground">Submit final report and poster. Prepare materials for LegCo submission.</p>
+                </div>
+                <div className="text-muted-foreground text-sm">📋 To be updated</div>
+              </div>
+            </div>
+            <div className="p-4 border-2 border-dashed border-muted-foreground/30 rounded-lg">
+              <p className="text-sm text-muted-foreground italic">
+                📅 Specific dates and detailed milestone requirements will be added as the semester progresses.
+              </p>
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Example Letters Placeholder */}
+        <Card className="border-blue-500/30 bg-blue-500/5">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2 text-blue-600">
+              <Mail className="h-5 w-5" />
+              Reference Materials: Letters & Correspondence
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <p className="text-muted-foreground">
+              Examples of citizen engagement with government departments will be shared here to guide your own correspondence.
+            </p>
+            <div className="space-y-3">
+              <div className="p-4 border-2 border-dashed border-muted-foreground/30 rounded-lg">
+                <h4 className="font-semibold text-sm mb-1">📧 Letter to Transport Department Assistant Director</h4>
+                <p className="text-xs text-muted-foreground">Example of successful escalation on data governance issue – to be added</p>
+              </div>
+              <div className="p-4 border-2 border-dashed border-muted-foreground/30 rounded-lg">
+                <h4 className="font-semibold text-sm mb-1">📰 Letter to the Editor: Flu Shot Program</h4>
+                <p className="text-xs text-muted-foreground">Published letter on vaccination data governance – to be added</p>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
         {/* Report Focus: Data Governance */}
         <Card className="border-primary/30 bg-primary/5">
           <CardHeader>
