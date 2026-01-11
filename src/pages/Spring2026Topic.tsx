@@ -429,52 +429,6 @@ const Spring2026Topic = () => {
             )}
           </TabsContent>
 
-          <TabsContent value="info" className="space-y-6">
-            {/* Overview */}
-            <Card className="p-6">
-              <h2 className="text-xl font-semibold mb-4">Overview</h2>
-              <p className="text-muted-foreground">{topic.overview}</p>
-            </Card>
-
-            {/* Key Research Questions */}
-            <Card className="p-6">
-              <h2 className="text-xl font-semibold mb-4">Key Research Questions</h2>
-              <ul className="space-y-2">
-                {topic.keyQuestions.map((question, idx) => (
-                  <li key={idx} className="flex items-start gap-2 text-muted-foreground">
-                    <span className="text-primary mt-1">•</span>
-                    <span>{question}</span>
-                  </li>
-                ))}
-              </ul>
-            </Card>
-
-            {/* Potential Data Sources */}
-            <Card className="p-6">
-              <h2 className="text-xl font-semibold mb-4">Potential Data Sources</h2>
-              <ul className="space-y-2">
-                {topic.potentialDataSources.map((source, idx) => (
-                  <li key={idx} className="flex items-start gap-2 text-muted-foreground">
-                    <ExternalLink className="h-4 w-4 text-primary mt-1 flex-shrink-0" />
-                    <span>{source}</span>
-                  </li>
-                ))}
-              </ul>
-            </Card>
-
-            {/* Relevant SDGs */}
-            <Card className="p-6">
-              <h2 className="text-xl font-semibold mb-4">Relevant Sustainable Development Goals</h2>
-              <div className="space-y-4">
-                {topic.relevantSDGs.map((sdg, idx) => (
-                  <div key={idx} className="border-l-4 border-primary pl-4">
-                    <h3 className="font-medium text-primary">{sdg.name}</h3>
-                    <p className="text-sm text-muted-foreground mt-1">{sdg.explanation}</p>
-                  </div>
-                ))}
-              </div>
-            </Card>
-          </TabsContent>
         </Tabs>
       </div>
     </div>
