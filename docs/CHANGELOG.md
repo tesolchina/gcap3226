@@ -15,6 +15,25 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ---
 
+## [2026-01-11] - RAG System & Documentation
+
+### Added
+- **RAG System** for AI-powered project discussions
+  - `supabase/functions/project-ai-chat/index.ts` - RAG-enabled chat
+  - `supabase/functions/generate-embeddings/index.ts` - Embedding generation
+  - `supabase/functions/search-knowledge/index.ts` - Semantic search
+  - `src/data/course-content.json` - Pre-extracted course content (30+ pages)
+- **`streamProjectChat()`** in `src/lib/ai-chat.ts` for RAG-enabled streaming
+- **`docs/ARCHITECTURE.md`** - Comprehensive architecture guide for external IDE developers
+
+### Changed
+- `src/pages/Spring2026Topic.tsx` - Reorganized tabs (Overview first), removed redundant Info tab
+- `src/components/ProjectMessageBoard.tsx` - Now uses RAG-enabled `streamProjectChat()`
+- `docs/PAGE_MAPPING.md` - Expanded with all routes, components, and database tables
+- `docs/README.md` - Updated quick reference
+
+---
+
 ## [2026-01-04] - Semester Restructure
 
 ### Added
