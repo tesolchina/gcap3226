@@ -6,7 +6,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Badge } from "@/components/ui/badge";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
-import { streamChat } from "@/lib/ai-chat";
+import { streamProjectChat } from "@/lib/ai-chat";
 import { Send, Bot, User, GraduationCap, Loader2 } from "lucide-react";
 import { format } from "date-fns";
 import ReactMarkdown from "react-markdown";
@@ -247,12 +247,14 @@ const ProjectMessageBoard = ({ projectGroupId, topicSlug }: ProjectMessageBoardP
             content: m.content,
           }));
 
-          await streamChat({
+          // Format topic title from slug
+          const topicTitle = topicSlug.replace(/-/g, " ").replace(/\b\w/g, c => c.toUpperCase());
+
+          await streamProjectChat({
             messages: [...recentMessages, { role: "user" as const, content: messageContent }],
-            systemPrompt: `You are a helpful AI assistant for a university group project about public policy in Hong Kong. The current project topic is: ${topicSlug.replace(
-              /-/g,
-              " "
-            )}. Help students with research questions, data analysis, report writing, and project planning. Be concise and educational.`,
+            projectGroupId,
+            topicTitle,
+            enableRAG: true,
             onDelta: (delta) => {
               aiResponse += delta;
             },
