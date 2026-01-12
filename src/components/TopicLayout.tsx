@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useParams, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -10,31 +10,41 @@ import ProjectFileUpload from "@/components/ProjectFileUpload";
 import ProjectMembership from "@/components/ProjectMembership";
 import ProjectSessions from "@/components/ProjectSessions";
 import ProjectMilestones from "@/components/ProjectMilestones";
-import { topicData } from "@/data/topic-data";
 
-const Spring2026Topic = () => {
-  const { topicSlug } = useParams<{ topicSlug: string }>();
+export interface TopicData {
+  id: number;
+  title: string;
+  description: string;
+  icon: React.ComponentType<{ className?: string }>;
+  color: string;
+  overview: string;
+  keyQuestions: string[];
+  potentialDataSources: string[];
+  relevantSDGs: { name: string; explanation: string }[];
+}
+
+interface TopicLayoutProps {
+  topicSlug: string;
+  topic: TopicData;
+}
+
+const TopicLayout = ({ topicSlug, topic }: TopicLayoutProps) => {
   const [projectGroupId, setProjectGroupId] = useState<string | null>(null);
   const [memberId, setMemberId] = useState<string | null>(null);
   const [isTeacher, setIsTeacher] = useState(false);
-  const topic = topicSlug ? topicData[topicSlug] : null;
 
   // Load member info from localStorage
   useEffect(() => {
-    if (topicSlug) {
-      const storedMemberId = localStorage.getItem(`project_member_${topicSlug}`);
-      const storedIsTeacher = localStorage.getItem(`project_is_teacher_${topicSlug}`);
-      if (storedMemberId) {
-        setMemberId(storedMemberId);
-        setIsTeacher(storedIsTeacher === "true");
-      }
+    const storedMemberId = localStorage.getItem(`project_member_${topicSlug}`);
+    const storedIsTeacher = localStorage.getItem(`project_is_teacher_${topicSlug}`);
+    if (storedMemberId) {
+      setMemberId(storedMemberId);
+      setIsTeacher(storedIsTeacher === "true");
     }
   }, [topicSlug]);
 
   useEffect(() => {
     const fetchProjectGroup = async () => {
-      if (!topicSlug) return;
-      
       const { data, error } = await supabase
         .from("project_groups")
         .select("id")
@@ -51,19 +61,6 @@ const Spring2026Topic = () => {
 
     fetchProjectGroup();
   }, [topicSlug]);
-
-  if (!topic) {
-    return (
-      <div className="min-h-screen bg-background p-8">
-        <div className="max-w-4xl mx-auto text-center">
-          <h1 className="text-2xl font-bold mb-4">Topic not found</h1>
-          <Button asChild>
-            <Link to="/spring-2026/topics">Back to Group Projects</Link>
-          </Button>
-        </div>
-      </div>
-    );
-  }
 
   const Icon = topic.icon;
 
@@ -192,7 +189,7 @@ const Spring2026Topic = () => {
           </TabsContent>
 
           <TabsContent value="membership">
-            {projectGroupId && topicSlug ? (
+            {projectGroupId ? (
               <ProjectMembership
                 projectGroupId={projectGroupId}
                 topicSlug={topicSlug}
@@ -206,7 +203,7 @@ const Spring2026Topic = () => {
           </TabsContent>
 
           <TabsContent value="sessions">
-            {projectGroupId && topicSlug ? (
+            {projectGroupId ? (
               <ProjectSessions
                 projectGroupId={projectGroupId}
                 topicSlug={topicSlug}
@@ -234,7 +231,7 @@ const Spring2026Topic = () => {
           </TabsContent>
 
           <TabsContent value="discussion">
-            {projectGroupId && topicSlug ? (
+            {projectGroupId ? (
               <ProjectMessageBoard
                 projectGroupId={projectGroupId}
                 topicSlug={topicSlug}
@@ -247,7 +244,7 @@ const Spring2026Topic = () => {
           </TabsContent>
 
           <TabsContent value="files">
-            {projectGroupId && topicSlug ? (
+            {projectGroupId ? (
               <ProjectFileUpload
                 projectGroupId={projectGroupId}
                 topicSlug={topicSlug}
@@ -264,4 +261,4 @@ const Spring2026Topic = () => {
   );
 };
 
-export default Spring2026Topic;
+export default TopicLayout;

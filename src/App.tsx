@@ -41,7 +41,12 @@ import Spring2026Presentation2 from "./pages/Spring2026Presentation2";
 import Spring2026HumanAICollaborationReport from "./pages/Spring2026HumanAICollaborationReport";
 import Spring2026FinalPresentationReport from "./pages/Spring2026FinalPresentationReport";
 import Spring2026TopicSelection from "./pages/Spring2026TopicSelection";
-import Spring2026Topic from "./pages/Spring2026Topic";
+import Spring2026TopicFluShot from "./pages/Spring2026TopicFluShot";
+import Spring2026TopicColorectalCancer from "./pages/Spring2026TopicColorectalCancer";
+import Spring2026TopicRoadSafety from "./pages/Spring2026TopicRoadSafety";
+import Spring2026TopicEMPF from "./pages/Spring2026TopicEMPF";
+import Spring2026TopicCDCC from "./pages/Spring2026TopicCDCC";
+import Spring2026TopicRodentControl from "./pages/Spring2026TopicRodentControl";
 import Spring2026Assessments from "./pages/Spring2026Assessments";
 import Spring2026GovInfoRequests from "./pages/Spring2026GovInfoRequests";
 import Spring2026CuratingPublicData from "./pages/Spring2026CuratingPublicData";
@@ -121,7 +126,12 @@ const AppContent = () => {
               <Route path="/spring-2026/weeks/12" element={<Spring2026Week12 />} />
               <Route path="/spring-2026/weeks/13" element={<Spring2026Week13 />} />
               <Route path="/spring-2026/topics" element={<Spring2026TopicSelection />} />
-              <Route path="/spring-2026/topics/:topicSlug" element={<Spring2026Topic />} />
+              <Route path="/spring-2026/topics/flu-shot" element={<Spring2026TopicFluShot />} />
+              <Route path="/spring-2026/topics/colorectal-cancer-screening" element={<Spring2026TopicColorectalCancer />} />
+              <Route path="/spring-2026/topics/road-safety" element={<Spring2026TopicRoadSafety />} />
+              <Route path="/spring-2026/topics/empf" element={<Spring2026TopicEMPF />} />
+              <Route path="/spring-2026/topics/cdcc" element={<Spring2026TopicCDCC />} />
+              <Route path="/spring-2026/topics/rodent-control" element={<Spring2026TopicRodentControl />} />
               <Route path="/spring-2026/syllabus" element={<Spring2026Syllabus />} />
               <Route path="/spring-2026/resources/government-info-requests" element={<Spring2026GovInfoRequests />} />
               <Route path="/spring-2026/resources/curating-public-data" element={<Spring2026CuratingPublicData />} />
