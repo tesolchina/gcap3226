@@ -426,12 +426,40 @@ const Part1DataGovernance = () => {
 };
 
 const Part2TechnologyMath = () => {
+  const [showSlides, setShowSlides] = useState(false);
   const [showPython, setShowPython] = useState(false);
   const [showAI, setShowAI] = useState(false);
   const [showMath, setShowMath] = useState(false);
 
   return (
     <div className="space-y-6">
+      {/* Presentation Slides */}
+      <Collapsible open={showSlides} onOpenChange={setShowSlides}>
+        <CollapsibleTrigger asChild>
+          <Button variant="outline" className="w-full justify-between bg-primary/5 border-primary/20 hover:bg-primary/10">
+            <span className="flex items-center gap-2">
+              <FileText className="h-4 w-4 text-primary" />
+              📊 View Presentation Slides
+            </span>
+            {showSlides ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
+          </Button>
+        </CollapsibleTrigger>
+        <CollapsibleContent className="mt-4">
+          <div className="rounded-lg overflow-hidden border bg-muted/30">
+            <iframe
+              src="https://docs.google.com/presentation/d/e/2PACX-1vQUKhZM1QcZuSFopfIbJ09PEkRnFAMaRzuUWtoUvtMIfD26Htmwe5KuZUQMKA8Q1U4KsyNg0-ktqrUo/embed?start=false&loop=false&delayms=60000"
+              width="100%"
+              height="480"
+              allowFullScreen
+              className="border-0"
+              title="Week 1 Part 2 Slides"
+            />
+          </div>
+          <p className="text-xs text-muted-foreground mt-2 text-center">
+            Use arrow keys or click to navigate slides
+          </p>
+        </CollapsibleContent>
+      </Collapsible>
       <Card>
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
