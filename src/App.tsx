@@ -16,8 +16,19 @@ import Login from "./pages/Login";
 import TeacherDashboard from "./pages/TeacherDashboard";
 import NotFound from "./pages/NotFound";
 import Spring2026Home from "./pages/Spring2026Home";
-import Spring2026Week from "./pages/Spring2026Week";
 import Spring2026Week1 from "./pages/Spring2026Week1";
+import Spring2026Week2 from "./pages/Spring2026Week2";
+import Spring2026Week3 from "./pages/Spring2026Week3";
+import Spring2026Week4 from "./pages/Spring2026Week4";
+import Spring2026Week5 from "./pages/Spring2026Week5";
+import Spring2026Week6 from "./pages/Spring2026Week6";
+import Spring2026Week7 from "./pages/Spring2026Week7";
+import Spring2026Week8 from "./pages/Spring2026Week8";
+import Spring2026Week9 from "./pages/Spring2026Week9";
+import Spring2026Week10 from "./pages/Spring2026Week10";
+import Spring2026Week11 from "./pages/Spring2026Week11";
+import Spring2026Week12 from "./pages/Spring2026Week12";
+import Spring2026Week13 from "./pages/Spring2026Week13";
 import Spring2026Placeholder from "./pages/Spring2026Placeholder";
 import Spring2026Syllabus from "./pages/Spring2026Syllabus";
 import Spring2026AssessmentInClass1 from "./pages/Spring2026AssessmentInClass1";
@@ -97,7 +108,18 @@ const AppContent = () => {
               <Route path="/spring-2026/assessments/final-report" element={<Spring2026FinalPresentationReport />} />
               <Route path="/spring-2026/assessments/human-ai-collaboration" element={<Spring2026HumanAICollaborationReport />} />
               <Route path="/spring-2026/weeks/1" element={<Spring2026Week1 />} />
-              <Route path="/spring-2026/weeks/:weekId" element={<Spring2026Week />} />
+              <Route path="/spring-2026/weeks/2" element={<Spring2026Week2 />} />
+              <Route path="/spring-2026/weeks/3" element={<Spring2026Week3 />} />
+              <Route path="/spring-2026/weeks/4" element={<Spring2026Week4 />} />
+              <Route path="/spring-2026/weeks/5" element={<Spring2026Week5 />} />
+              <Route path="/spring-2026/weeks/6" element={<Spring2026Week6 />} />
+              <Route path="/spring-2026/weeks/7" element={<Spring2026Week7 />} />
+              <Route path="/spring-2026/weeks/8" element={<Spring2026Week8 />} />
+              <Route path="/spring-2026/weeks/9" element={<Spring2026Week9 />} />
+              <Route path="/spring-2026/weeks/10" element={<Spring2026Week10 />} />
+              <Route path="/spring-2026/weeks/11" element={<Spring2026Week11 />} />
+              <Route path="/spring-2026/weeks/12" element={<Spring2026Week12 />} />
+              <Route path="/spring-2026/weeks/13" element={<Spring2026Week13 />} />
               <Route path="/spring-2026/topics" element={<Spring2026TopicSelection />} />
               <Route path="/spring-2026/topics/:topicSlug" element={<Spring2026Topic />} />
               <Route path="/spring-2026/syllabus" element={<Spring2026Syllabus />} />
