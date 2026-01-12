@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { 
   ArrowLeft, Play, Copy, Check, Download, ExternalLink, Sparkles, 
   Plus, Trash2, Code, BookOpen, Database, Lightbulb, FileCode, Send,
-  PanelLeftClose, PanelLeftOpen, MessageSquare, FolderOpen, PanelRightClose, PanelRightOpen
+  PanelLeftClose, PanelLeftOpen, MessageSquare, FolderOpen, PanelRightClose, PanelRightOpen, AlertTriangle, Info
 } from "lucide-react";
 import LabFileManager from "@/components/LabFileManager";
 import { Button } from "@/components/ui/button";
@@ -25,6 +25,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Textarea } from "@/components/ui/textarea";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import {
@@ -219,50 +220,59 @@ const Spring2026Week2Lab = () => {
           // Check if code matches any expected pattern and return appropriate output
           const code = c.content.toLowerCase();
           let output = "";
+          const simBadge = "🔬 SIMULATED OUTPUT\n─────────────────\n";
           
           if (code.includes("import pandas") || code.includes("import matplotlib") || code.includes("import seaborn")) {
-            output = "✓ Libraries imported successfully";
+            output = simBadge + "✓ Libraries imported successfully\n\n💡 In real Python, these libraries would now be available for use.";
           } else if (code.includes("read_csv")) {
-            output = "✓ DataFrame loaded: 97 rows × 28 columns";
+            output = simBadge + "✓ DataFrame loaded: 97 rows × 28 columns\n\n💡 This simulates loading the MSW survey dataset.";
           } else if (code.includes(".head()")) {
-            output = `   support_info  fairness  food_waste_behavior  recycling_effort  Distance_artificial
+            output = simBadge + `   support_info  fairness  food_waste_behavior  recycling_effort  Distance_artificial
 0             1         1           never_seen                 1               259.83
 1             5         5           never_seen                 2               260.04
 2             3         5        seen_not_used                 1               338.89
 3             1         2           never_seen                 2               192.59
-4             1         4        seen_not_used                 2               232.95`;
+4             1         4        seen_not_used                 2               232.95
+
+💡 This shows what the first 5 rows would look like in pandas.`;
           } else if (code.includes(".describe()")) {
-            output = `       support_info   fairness  recycling_effort  Distance_artificial
+            output = simBadge + `       support_info   fairness  recycling_effort  Distance_artificial
 count     97.000000  97.000000         97.000000            97.000000
 mean       2.783505   2.979381          2.206186           183.461546
 std        1.293847   1.136547          0.716307            61.789423
 min        1.000000   1.000000          1.000000            16.440000
-max        5.000000   5.000000          4.000000           338.890000`;
+max        5.000000   5.000000          4.000000           338.890000
+
+💡 These are actual statistics from the dataset.`;
           } else if (code.includes(".info()")) {
-            output = `<class 'pandas.core.frame.DataFrame'>
+            output = simBadge + `<class 'pandas.core.frame.DataFrame'>
 RangeIndex: 97 entries, 0 to 96
 Data columns (total 28 columns)
 dtypes: float64(1), int64(26), object(1)
-memory usage: 21.3 KB`;
+memory usage: 21.3 KB
+
+💡 This shows the DataFrame structure.`;
           } else if (code.includes("value_counts")) {
-            output = `never_seen       47
+            output = simBadge + `never_seen       47
 seen_not_used    26
 seen_and_used    24
-Name: food_waste_behavior, dtype: int64`;
+Name: food_waste_behavior, dtype: int64
+
+💡 This shows category frequencies in the data.`;
           } else if (code.includes("plt.show()") || code.includes("plot(")) {
-            output = "📊 [Chart displayed - in a real Jupyter notebook, you would see the visualization here]";
+            output = simBadge + "📊 [Chart would display here]\n\n💡 In Jupyter Notebook, you would see the actual visualization.\n   Download the .ipynb file to run with real charts!";
           } else if (code.includes("hist(") || code.includes("histogram")) {
-            output = "📊 [Histogram displayed - shows distribution of data]";
+            output = simBadge + "📊 [Histogram would display here]\n\n💡 Shows data distribution. Run in Jupyter for the real chart!";
           } else if (code.includes("scatter")) {
-            output = "📊 [Scatter plot displayed - shows relationship between variables]";
+            output = simBadge + "📊 [Scatter plot would display here]\n\n💡 Shows relationships between variables. Run in Jupyter for the real chart!";
           } else if (code.includes("print(")) {
             // Extract what's being printed
             const match = code.match(/print\(([^)]+)\)/);
-            output = match ? `Output: ${match[1]}` : "Output printed";
+            output = simBadge + (match ? `Output: ${match[1]}` : "Output printed");
           } else if (code.trim() === "" || code.startsWith("#")) {
             output = "";
           } else {
-            output = "✓ Code executed successfully";
+            output = simBadge + "✓ Code executed successfully\n\n💡 This is a preview. Run in Jupyter Notebook for actual execution.";
           }
           
           return { ...c, isRunning: false, output };
@@ -354,6 +364,10 @@ Name: food_waste_behavior, dtype: int64`;
             <div className="flex items-center gap-2">
               <Sparkles className="w-5 h-5 text-purple-500" />
               <h1 className="text-lg font-semibold">Vibe Coding Lab</h1>
+              <Badge variant="outline" className="ml-2 text-amber-600 border-amber-500/50 bg-amber-500/10">
+                <AlertTriangle className="w-3 h-3 mr-1" />
+                Simulation
+              </Badge>
             </div>
           </div>
           <div className="flex items-center gap-2">
@@ -399,12 +413,23 @@ Name: food_waste_behavior, dtype: int64`;
           <div className="h-full flex flex-col overflow-auto">
           <ScrollArea className="flex-1" ref={notebookRef}>
             <div className="p-6 space-y-6">
+              {/* Simulation Notice Banner */}
+              <Alert className="border-amber-500/50 bg-amber-500/10">
+                <AlertTriangle className="h-4 w-4 text-amber-500" />
+                <AlertTitle className="text-amber-600 dark:text-amber-400">Simulation Mode</AlertTitle>
+                <AlertDescription className="text-sm">
+                  This is an <strong>interactive simulation</strong> to help you understand the Vibe Coding workflow. 
+                  Outputs are pre-programmed examples based on real data. For actual Python execution, 
+                  download the <a href="/assets/GCAP3226_week2_student.ipynb" download className="underline font-medium">Jupyter Notebook</a> and run it in Google Colab or locally.
+                </AlertDescription>
+              </Alert>
+
               {/* Introduction */}
               <section className="space-y-4">
                 <div className="text-center">
                   <h2 className="text-2xl font-bold mb-2">Welcome to Vibe Coding! 🎉</h2>
                   <p className="text-muted-foreground">
-                    Describe what you want in plain English → AI generates Python code → Run it!
+                    Describe what you want in plain English → AI generates Python code → Preview it!
                   </p>
                 </div>
 
