@@ -1,4 +1,4 @@
-import { Home, ArrowLeft, Presentation, FileText, Calendar, Users, ClipboardList, FlaskConical, ChevronRight } from "lucide-react";
+import { Home, ArrowLeft, Presentation, FileText, Calendar, Users, ClipboardList, FlaskConical, ChevronRight, Terminal } from "lucide-react";
 import { NavLink, useLocation } from "react-router-dom";
 import {
   Sidebar,
@@ -37,7 +37,8 @@ const weeklyItems: WeeklyItem[] = [
     url: "/spring-2026/weeks/2", 
     icon: Calendar,
     subItems: [
-      { title: "Vibe Coding Lab", url: "/spring-2026/weeks/2/lab", icon: FlaskConical }
+      { title: "Vibe Coding Lab", url: "/spring-2026/weeks/2/lab", icon: FlaskConical },
+      { title: "Python Notebook", url: "/spring-2026/weeks/2/notebook", icon: Terminal }
     ]
   },
   { title: "Week 3", url: "/spring-2026/weeks/3", icon: Calendar },
