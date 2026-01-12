@@ -1,3 +1,6 @@
+import { Link } from "react-router-dom";
+import { Button } from "@/components/ui/button";
+import { Sparkles } from "lucide-react";
 import WeekLayout from "@/components/WeekLayout";
 
 const Spring2026Week2 = () => (
@@ -34,6 +37,24 @@ const Spring2026Week2 = () => (
         "IT support available for troubleshooting",
       ],
     }}
+    customContent={
+      <div className="mt-8 p-6 bg-gradient-to-r from-purple-500/10 to-blue-500/10 rounded-lg border border-purple-500/20">
+        <div className="flex items-center gap-3 mb-3">
+          <Sparkles className="w-6 h-6 text-purple-400" />
+          <h3 className="text-lg font-semibold">Try Vibe Coding Now!</h3>
+        </div>
+        <p className="text-muted-foreground mb-4">
+          Experience AI-assisted coding before installing anything. Our interactive demo simulates 
+          VS Code with GitHub Copilot — type a prompt and watch AI generate Python code.
+        </p>
+        <Link to="/spring-2026/weeks/2/lab">
+          <Button className="bg-purple-600 hover:bg-purple-700">
+            <Sparkles className="w-4 h-4 mr-2" />
+            Launch Vibe Coding Demo
+          </Button>
+        </Link>
+      </div>
+    }
   />
 );
 

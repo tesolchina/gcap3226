@@ -13,6 +13,7 @@ export interface WeekLayoutProps {
   inClassExercise?: { title: string; description: string; dataset: string; skills: string[] };
   assessment?: string;
   assessmentLink?: string;
+  customContent?: React.ReactNode;
 }
 
 const WeekLayout = ({
@@ -25,6 +26,7 @@ const WeekLayout = ({
   inClassExercise,
   assessment,
   assessmentLink,
+  customContent,
 }: WeekLayoutProps) => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-accent/5 to-background p-8">
@@ -151,6 +153,9 @@ const WeekLayout = ({
             </div>
           </Card>
         )}
+
+        {/* Custom Content */}
+        {customContent}
 
         {/* Navigation */}
         <div className="flex justify-between">
