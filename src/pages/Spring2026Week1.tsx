@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, Database, Code, ChevronDown, ChevronUp, FileText, Calculator, LineChart, Bot, Cpu, TrendingUp, ExternalLink, Mail, Clock, CheckCircle2 } from "lucide-react";
+import { ArrowLeft, Database, Code, ChevronDown, ChevronUp, FileText, Calculator, LineChart, Bot, Cpu, TrendingUp, ExternalLink, Mail, Clock, CheckCircle2, Maximize, ExternalLinkIcon } from "lucide-react";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import busAppScreenshot from "@/assets/bus-app-duplicate-stops.png";
@@ -430,6 +430,18 @@ const Part2TechnologyMath = () => {
   const [showPython, setShowPython] = useState(false);
   const [showAI, setShowAI] = useState(false);
   const [showMath, setShowMath] = useState(false);
+  const slidesContainerRef = React.useRef<HTMLDivElement>(null);
+
+  const handleFullscreen = () => {
+    if (slidesContainerRef.current) {
+      if (slidesContainerRef.current.requestFullscreen) {
+        slidesContainerRef.current.requestFullscreen();
+      }
+    }
+  };
+
+  const slidesUrl = "https://docs.google.com/presentation/d/e/2PACX-1vQUKhZM1QcZuSFopfIbJ09PEkRnFAMaRzuUWtoUvtMIfD26Htmwe5KuZUQMKA8Q1U4KsyNg0-ktqrUo/pub?start=false&loop=false&delayms=60000";
+  const embedUrl = "https://docs.google.com/presentation/d/e/2PACX-1vQUKhZM1QcZuSFopfIbJ09PEkRnFAMaRzuUWtoUvtMIfD26Htmwe5KuZUQMKA8Q1U4KsyNg0-ktqrUo/embed?start=false&loop=false&delayms=60000";
 
   return (
     <div className="space-y-6">
@@ -444,10 +456,22 @@ const Part2TechnologyMath = () => {
             {showSlides ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
           </Button>
         </CollapsibleTrigger>
-        <CollapsibleContent className="mt-4">
-          <div className="rounded-lg overflow-hidden border bg-muted/30">
+        <CollapsibleContent className="mt-4 space-y-3">
+          <div className="flex justify-end gap-2">
+            <Button variant="outline" size="sm" onClick={handleFullscreen}>
+              <Maximize className="h-4 w-4 mr-2" />
+              Fullscreen
+            </Button>
+            <Button variant="outline" size="sm" asChild>
+              <a href={slidesUrl} target="_blank" rel="noopener noreferrer">
+                <ExternalLinkIcon className="h-4 w-4 mr-2" />
+                Open in New Tab
+              </a>
+            </Button>
+          </div>
+          <div ref={slidesContainerRef} className="rounded-lg overflow-hidden border bg-muted/30">
             <iframe
-              src="https://docs.google.com/presentation/d/e/2PACX-1vQUKhZM1QcZuSFopfIbJ09PEkRnFAMaRzuUWtoUvtMIfD26Htmwe5KuZUQMKA8Q1U4KsyNg0-ktqrUo/embed?start=false&loop=false&delayms=60000"
+              src={embedUrl}
               width="100%"
               height="480"
               allowFullScreen
@@ -455,7 +479,7 @@ const Part2TechnologyMath = () => {
               title="Week 1 Part 2 Slides"
             />
           </div>
-          <p className="text-xs text-muted-foreground mt-2 text-center">
+          <p className="text-xs text-muted-foreground text-center">
             Use arrow keys or click to navigate slides
           </p>
         </CollapsibleContent>
