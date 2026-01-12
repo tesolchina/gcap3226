@@ -192,14 +192,11 @@ const Spring2026Topic = () => {
           </TabsContent>
 
           <TabsContent value="membership">
-            {projectGroupId ? (
+            {projectGroupId && topicSlug ? (
               <ProjectMembership
                 projectGroupId={projectGroupId}
-                topicSlug={topicSlug || ""}
-                onMemberAuthenticated={(newMemberId, newIsTeacher) => {
-                  setMemberId(newMemberId);
-                  setIsTeacher(newIsTeacher);
-                }}
+                topicSlug={topicSlug}
+                topicTitle={topic.title}
               />
             ) : (
               <Card className="p-6 text-center">
@@ -209,23 +206,16 @@ const Spring2026Topic = () => {
           </TabsContent>
 
           <TabsContent value="sessions">
-            {projectGroupId && memberId ? (
+            {projectGroupId && topicSlug ? (
               <ProjectSessions
                 projectGroupId={projectGroupId}
+                topicSlug={topicSlug}
                 memberId={memberId}
                 isTeacher={isTeacher}
               />
             ) : (
               <Card className="p-6 text-center">
-                <p className="text-muted-foreground">
-                  Please join or sign in to the team first to access meetings.
-                </p>
-                <Button
-                  className="mt-4"
-                  onClick={() => document.querySelector('[value="membership"]')?.dispatchEvent(new MouseEvent('click', { bubbles: true }))}
-                >
-                  Go to Team
-                </Button>
+                <p className="text-muted-foreground">Loading sessions...</p>
               </Card>
             )}
           </TabsContent>
@@ -244,45 +234,27 @@ const Spring2026Topic = () => {
           </TabsContent>
 
           <TabsContent value="discussion">
-            {projectGroupId && memberId ? (
+            {projectGroupId && topicSlug ? (
               <ProjectMessageBoard
                 projectGroupId={projectGroupId}
-                memberId={memberId}
-                isTeacher={isTeacher}
-                topicTitle={topic.title}
+                topicSlug={topicSlug}
               />
             ) : (
               <Card className="p-6 text-center">
-                <p className="text-muted-foreground">
-                  Please join or sign in to the team first to access the discussion board.
-                </p>
-                <Button
-                  className="mt-4"
-                  onClick={() => document.querySelector('[value="membership"]')?.dispatchEvent(new MouseEvent('click', { bubbles: true }))}
-                >
-                  Go to Team
-                </Button>
+                <p className="text-muted-foreground">Loading discussion...</p>
               </Card>
             )}
           </TabsContent>
 
           <TabsContent value="files">
-            {projectGroupId && memberId ? (
+            {projectGroupId && topicSlug ? (
               <ProjectFileUpload
                 projectGroupId={projectGroupId}
-                memberId={memberId}
+                topicSlug={topicSlug}
               />
             ) : (
               <Card className="p-6 text-center">
-                <p className="text-muted-foreground">
-                  Please join or sign in to the team first to access files.
-                </p>
-                <Button
-                  className="mt-4"
-                  onClick={() => document.querySelector('[value="membership"]')?.dispatchEvent(new MouseEvent('click', { bubbles: true }))}
-                >
-                  Go to Team
-                </Button>
+                <p className="text-muted-foreground">Loading files...</p>
               </Card>
             )}
           </TabsContent>
