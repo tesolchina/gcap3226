@@ -47,6 +47,7 @@ import Spring2026TopicRoadSafety from "./pages/Spring2026TopicRoadSafety";
 import Spring2026TopicEMPF from "./pages/Spring2026TopicEMPF";
 import Spring2026TopicCDCC from "./pages/Spring2026TopicCDCC";
 import Spring2026TopicRodentControl from "./pages/Spring2026TopicRodentControl";
+import Spring2026TopicBusStopMerge from "./pages/Spring2026TopicBusStopMerge";
 import Spring2026Assessments from "./pages/Spring2026Assessments";
 import Spring2026GovInfoRequests from "./pages/Spring2026GovInfoRequests";
 import Spring2026CuratingPublicData from "./pages/Spring2026CuratingPublicData";
@@ -132,6 +133,7 @@ const AppContent = () => {
               <Route path="/spring-2026/topics/empf" element={<Spring2026TopicEMPF />} />
               <Route path="/spring-2026/topics/cdcc" element={<Spring2026TopicCDCC />} />
               <Route path="/spring-2026/topics/rodent-control" element={<Spring2026TopicRodentControl />} />
+              <Route path="/spring-2026/topics/bus-stop-merge" element={<Spring2026TopicBusStopMerge />} />
               <Route path="/spring-2026/syllabus" element={<Spring2026Syllabus />} />
               <Route path="/spring-2026/resources/government-info-requests" element={<Spring2026GovInfoRequests />} />
               <Route path="/spring-2026/resources/curating-public-data" element={<Spring2026CuratingPublicData />} />

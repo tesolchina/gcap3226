@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, Syringe, Activity, Car, Wallet, HeartPulse, Bug, ChevronRight } from "lucide-react";
+import { ArrowLeft, Syringe, Activity, Car, Wallet, HeartPulse, Bug, MapPin, ChevronRight } from "lucide-react";
 
 const topics = [
   {
@@ -57,6 +57,15 @@ const topics = [
     icon: Bug,
     color: "bg-yellow-600",
     borderColor: "border-yellow-600",
+  },
+  {
+    id: 7,
+    title: "Bus Stop Merge",
+    slug: "bus-stop-merge",
+    description: "Real-Time API Data Analysis and Bus Stop Placement Optimization in Hong Kong.",
+    icon: MapPin,
+    color: "bg-cyan-500",
+    borderColor: "border-cyan-500",
   },
 ];
 
