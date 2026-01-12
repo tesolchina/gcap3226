@@ -2,7 +2,8 @@ import { useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { 
   ArrowLeft, Play, Copy, Check, Download, ExternalLink, Sparkles, 
-  Plus, Trash2, Code, BookOpen, Database, Lightbulb, FileCode, Send
+  Plus, Trash2, Code, BookOpen, Database, Lightbulb, FileCode, Send,
+  PanelLeftClose, PanelLeftOpen
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
@@ -25,6 +26,12 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Textarea } from "@/components/ui/textarea";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import {
+  ResizablePanelGroup,
+  ResizablePanel,
+  ResizableHandle,
+} from "@/components/ui/resizable";
+import { useSidebar } from "@/components/ui/sidebar";
 
 // Types for notebook cells
 interface NotebookCell {
@@ -317,12 +324,22 @@ Name: food_waste_behavior, dtype: int64`;
     setChatInput(step.prompt);
   };
 
+  // Sidebar toggle
+  const { toggleSidebar, state: sidebarState } = useSidebar();
+
   return (
     <div className="min-h-screen bg-background text-foreground">
       {/* Header */}
       <header className="border-b bg-card px-4 py-3 sticky top-0 z-10">
         <div className="flex items-center justify-between max-w-[1800px] mx-auto">
           <div className="flex items-center gap-4">
+            <Button variant="ghost" size="sm" onClick={toggleSidebar}>
+              {sidebarState === "collapsed" ? (
+                <PanelLeftOpen className="w-4 h-4" />
+              ) : (
+                <PanelLeftClose className="w-4 h-4" />
+              )}
+            </Button>
             <Link to="/spring-2026/weeks/2">
               <Button variant="ghost" size="sm">
                 <ArrowLeft className="w-4 h-4 mr-2" />
@@ -351,10 +368,11 @@ Name: food_waste_behavior, dtype: int64`;
         </div>
       </header>
 
-      {/* Main Layout: Notebook + Chat */}
-      <div className="flex h-[calc(100vh-57px)]">
+      {/* Main Layout: Notebook + Chat with Resizable Panels */}
+      <ResizablePanelGroup direction="horizontal" className="h-[calc(100vh-57px)]">
         {/* Left: Introduction + Notebook */}
-        <div className="flex-1 flex flex-col overflow-hidden">
+        <ResizablePanel defaultSize={65} minSize={40}>
+          <div className="h-full flex flex-col overflow-hidden">
           <ScrollArea className="flex-1" ref={notebookRef}>
             <div className="max-w-4xl mx-auto p-6 space-y-6">
               {/* Introduction */}
@@ -614,10 +632,14 @@ Name: food_waste_behavior, dtype: int64`;
               </section>
             </div>
           </ScrollArea>
-        </div>
+          </div>
+        </ResizablePanel>
+
+        <ResizableHandle withHandle />
 
         {/* Right: AI Chat */}
-        <div className="w-[400px] border-l flex flex-col bg-card">
+        <ResizablePanel defaultSize={35} minSize={25}>
+          <div className="h-full flex flex-col bg-card">
           <div className="px-4 py-3 border-b">
             <h2 className="font-semibold flex items-center gap-2">
               <Sparkles className="w-4 h-4 text-purple-500" />
@@ -713,8 +735,9 @@ Name: food_waste_behavior, dtype: int64`;
               )}
             </Button>
           </div>
-        </div>
-      </div>
+          </div>
+        </ResizablePanel>
+      </ResizablePanelGroup>
     </div>
   );
 };
