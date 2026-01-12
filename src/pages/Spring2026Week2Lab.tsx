@@ -372,9 +372,9 @@ Name: food_waste_behavior, dtype: int64`;
       <ResizablePanelGroup direction="horizontal" className="h-[calc(100vh-57px)]">
         {/* Left: Introduction + Notebook */}
         <ResizablePanel defaultSize={65} minSize={40}>
-          <div className="h-full flex flex-col overflow-hidden">
+          <div className="h-full flex flex-col overflow-auto">
           <ScrollArea className="flex-1" ref={notebookRef}>
-            <div className="max-w-4xl mx-auto p-6 space-y-6">
+            <div className="p-6 space-y-6">
               {/* Introduction */}
               <section className="space-y-4">
                 <div className="text-center">
@@ -569,7 +569,7 @@ Name: food_waste_behavior, dtype: int64`;
                         <Textarea
                           value={cell.content}
                           onChange={(e) => updateCell(cell.id, e.target.value)}
-                          className="flex-1 font-mono text-sm border-0 rounded-none resize-none min-h-[80px] focus-visible:ring-0 bg-slate-950 text-slate-100"
+                          className="flex-1 font-mono text-sm border-0 rounded-none resize-y min-h-[80px] focus-visible:ring-0 bg-slate-950 text-slate-100"
                           placeholder="# Write your Python code here..."
                         />
                       </div>
