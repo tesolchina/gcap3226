@@ -19,6 +19,7 @@ import Spring2026Home from "./pages/Spring2026Home";
 import Spring2026Week from "./pages/Spring2026Week";
 import Spring2026Week1 from "./pages/Spring2026Week1";
 import Spring2026Placeholder from "./pages/Spring2026Placeholder";
+import Spring2026Syllabus from "./pages/Spring2026Syllabus";
 import Spring2026AssessmentInClass1 from "./pages/Spring2026AssessmentInClass1";
 import Spring2026AssessmentInClass2 from "./pages/Spring2026AssessmentInClass2";
 import Spring2026ReflectiveEssay1 from "./pages/Spring2026ReflectiveEssay1";
@@ -99,7 +100,7 @@ const AppContent = () => {
               <Route path="/spring-2026/weeks/:weekId" element={<Spring2026Week />} />
               <Route path="/spring-2026/topics" element={<Spring2026TopicSelection />} />
               <Route path="/spring-2026/topics/:topicSlug" element={<Spring2026Topic />} />
-              <Route path="/spring-2026/syllabus" element={<Spring2026Placeholder />} />
+              <Route path="/spring-2026/syllabus" element={<Spring2026Syllabus />} />
               <Route path="/spring-2026/resources/government-info-requests" element={<Spring2026GovInfoRequests />} />
               <Route path="/spring-2026/resources/curating-public-data" element={<Spring2026CuratingPublicData />} />
               <Route path="/spring-2026/resources" element={<Spring2026Placeholder />} />
