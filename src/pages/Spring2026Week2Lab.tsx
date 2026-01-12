@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { 
   ArrowLeft, Play, Copy, Check, Download, ExternalLink, Sparkles, 
   Plus, Trash2, Code, BookOpen, Database, Lightbulb, FileCode, Send,
-  PanelLeftClose, PanelLeftOpen
+  PanelLeftClose, PanelLeftOpen, MessageSquare, FolderOpen, PanelRightClose, PanelRightOpen
 } from "lucide-react";
 import LabFileManager from "@/components/LabFileManager";
 import { Button } from "@/components/ui/button";
@@ -327,6 +327,10 @@ Name: food_waste_behavior, dtype: int64`;
 
   // Sidebar toggle
   const { toggleSidebar, state: sidebarState } = useSidebar();
+  
+  // Panel visibility toggles
+  const [showAIChat, setShowAIChat] = useState(true);
+  const [showFileManager, setShowFileManager] = useState(true);
 
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -353,6 +357,25 @@ Name: food_waste_behavior, dtype: int64`;
             </div>
           </div>
           <div className="flex items-center gap-2">
+            <Button 
+              variant={showAIChat ? "default" : "outline"} 
+              size="sm"
+              onClick={() => setShowAIChat(!showAIChat)}
+              title={showAIChat ? "Hide AI Assistant" : "Show AI Assistant"}
+            >
+              <MessageSquare className="w-4 h-4 mr-2" />
+              AI Chat
+            </Button>
+            <Button 
+              variant={showFileManager ? "default" : "outline"} 
+              size="sm"
+              onClick={() => setShowFileManager(!showFileManager)}
+              title={showFileManager ? "Hide File Manager" : "Show File Manager"}
+            >
+              <FolderOpen className="w-4 h-4 mr-2" />
+              Files
+            </Button>
+            <div className="w-px h-6 bg-border mx-1" />
             <a href="/data/GCAP3226_week2.csv" download>
               <Button variant="outline" size="sm">
                 <Download className="w-4 h-4 mr-2" />
@@ -636,115 +659,123 @@ Name: food_waste_behavior, dtype: int64`;
           </div>
         </ResizablePanel>
 
-        <ResizableHandle withHandle />
+        {showAIChat && (
+          <>
+            <ResizableHandle withHandle />
 
-        {/* Right: AI Chat */}
-        <ResizablePanel defaultSize={30} minSize={20}>
-          <div className="h-full flex flex-col bg-card border-l">
-          <div className="px-4 py-3 border-b">
-            <h2 className="font-semibold flex items-center gap-2">
-              <Sparkles className="w-4 h-4 text-purple-500" />
-              AI Assistant
-            </h2>
-            <p className="text-xs text-muted-foreground mt-1">
-              Describe what code you want, then add it to notebook
-            </p>
-          </div>
+            {/* Right: AI Chat */}
+            <ResizablePanel defaultSize={30} minSize={20}>
+              <div className="h-full flex flex-col bg-card border-l">
+              <div className="px-4 py-3 border-b">
+                <h2 className="font-semibold flex items-center gap-2">
+                  <Sparkles className="w-4 h-4 text-purple-500" />
+                  AI Assistant
+                </h2>
+                <p className="text-xs text-muted-foreground mt-1">
+                  Describe what code you want, then add it to notebook
+                </p>
+              </div>
 
-          {/* Chat Messages */}
-          <ScrollArea className="flex-1 p-4">
-            <div className="space-y-4">
-              {chatMessages.length === 0 ? (
-                <div className="text-sm text-muted-foreground space-y-3">
-                  <p>👋 Ask me to generate Python code!</p>
-                  <p className="text-xs">Try saying:</p>
-                  <ul className="text-xs space-y-1">
-                    <li className="p-2 bg-muted rounded cursor-pointer hover:bg-muted/80" onClick={() => setChatInput("Import pandas, matplotlib, and seaborn")}>
-                      "Import pandas, matplotlib, and seaborn"
-                    </li>
-                    <li className="p-2 bg-muted rounded cursor-pointer hover:bg-muted/80" onClick={() => setChatInput("Load the CSV file into a dataframe called df")}>
-                      "Load the CSV file into a dataframe called df"
-                    </li>
-                    <li className="p-2 bg-muted rounded cursor-pointer hover:bg-muted/80" onClick={() => setChatInput("Show the first 5 rows of df")}>
-                      "Show the first 5 rows of df"
-                    </li>
-                    <li className="p-2 bg-muted rounded cursor-pointer hover:bg-muted/80" onClick={() => setChatInput("Create a bar chart of food_waste_behavior")}>
-                      "Create a bar chart of food_waste_behavior"
-                    </li>
-                  </ul>
-                </div>
-              ) : (
-                chatMessages.map((msg, i) => (
-                  <div key={i} className="space-y-2">
-                    <div className={`text-xs font-medium ${msg.role === "user" ? "text-blue-500" : "text-purple-500"}`}>
-                      {msg.role === "user" ? "You" : "AI Assistant"}
+              {/* Chat Messages */}
+              <ScrollArea className="flex-1 p-4">
+                <div className="space-y-4">
+                  {chatMessages.length === 0 ? (
+                    <div className="text-sm text-muted-foreground space-y-3">
+                      <p>👋 Ask me to generate Python code!</p>
+                      <p className="text-xs">Try saying:</p>
+                      <ul className="text-xs space-y-1">
+                        <li className="p-2 bg-muted rounded cursor-pointer hover:bg-muted/80" onClick={() => setChatInput("Import pandas, matplotlib, and seaborn")}>
+                          "Import pandas, matplotlib, and seaborn"
+                        </li>
+                        <li className="p-2 bg-muted rounded cursor-pointer hover:bg-muted/80" onClick={() => setChatInput("Load the CSV file into a dataframe called df")}>
+                          "Load the CSV file into a dataframe called df"
+                        </li>
+                        <li className="p-2 bg-muted rounded cursor-pointer hover:bg-muted/80" onClick={() => setChatInput("Show the first 5 rows of df")}>
+                          "Show the first 5 rows of df"
+                        </li>
+                        <li className="p-2 bg-muted rounded cursor-pointer hover:bg-muted/80" onClick={() => setChatInput("Create a bar chart of food_waste_behavior")}>
+                          "Create a bar chart of food_waste_behavior"
+                        </li>
+                      </ul>
                     </div>
-                    <div className={`text-sm ${msg.role === "assistant" ? "bg-muted p-3 rounded-lg" : ""}`}>
-                      {msg.role === "assistant" ? (
-                        <div className="space-y-2">
-                          <pre className="font-mono text-xs whitespace-pre-wrap overflow-x-auto bg-slate-900 text-slate-100 p-2 rounded">
-                            {msg.content}
-                          </pre>
-                          <Button 
-                            size="sm" 
-                            onClick={() => addCodeToNotebook(msg.content)}
-                            className="w-full"
-                          >
-                            <Plus className="w-3 h-3 mr-1" />
-                            Add to Notebook
-                          </Button>
+                  ) : (
+                    chatMessages.map((msg, i) => (
+                      <div key={i} className="space-y-2">
+                        <div className={`text-xs font-medium ${msg.role === "user" ? "text-blue-500" : "text-purple-500"}`}>
+                          {msg.role === "user" ? "You" : "AI Assistant"}
                         </div>
-                      ) : (
-                        <p>{msg.content}</p>
-                      )}
-                    </div>
-                  </div>
-                ))
-              )}
-              <div ref={chatEndRef} />
-            </div>
-          </ScrollArea>
+                        <div className={`text-sm ${msg.role === "assistant" ? "bg-muted p-3 rounded-lg" : ""}`}>
+                          {msg.role === "assistant" ? (
+                            <div className="space-y-2">
+                              <pre className="font-mono text-xs whitespace-pre-wrap overflow-x-auto bg-slate-900 text-slate-100 p-2 rounded">
+                                {msg.content}
+                              </pre>
+                              <Button 
+                                size="sm" 
+                                onClick={() => addCodeToNotebook(msg.content)}
+                                className="w-full"
+                              >
+                                <Plus className="w-3 h-3 mr-1" />
+                                Add to Notebook
+                              </Button>
+                            </div>
+                          ) : (
+                            <p>{msg.content}</p>
+                          )}
+                        </div>
+                      </div>
+                    ))
+                  )}
+                  <div ref={chatEndRef} />
+                </div>
+              </ScrollArea>
 
-          {/* Chat Input */}
-          <div className="p-4 border-t">
-            <div className="flex gap-2">
-              <Textarea
-                value={chatInput}
-                onChange={(e) => setChatInput(e.target.value)}
-                onKeyDown={(e) => {
-                  if (e.key === "Enter" && !e.shiftKey) {
-                    e.preventDefault();
-                    handleChatSend();
-                  }
-                }}
-                placeholder="Describe the code you want..."
-                className="min-h-[60px] resize-none"
-              />
-            </div>
-            <Button
-              onClick={handleChatSend}
-              disabled={isChatting || !chatInput.trim()}
-              className="w-full mt-2"
-            >
-              {isChatting ? (
-                "Generating..."
-              ) : (
-                <>
-                  <Send className="w-4 h-4 mr-2" />
-                  Generate Code
-                </>
-              )}
-            </Button>
-          </div>
-          </div>
-        </ResizablePanel>
+              {/* Chat Input */}
+              <div className="p-4 border-t">
+                <div className="flex gap-2">
+                  <Textarea
+                    value={chatInput}
+                    onChange={(e) => setChatInput(e.target.value)}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter" && !e.shiftKey) {
+                        e.preventDefault();
+                        handleChatSend();
+                      }
+                    }}
+                    placeholder="Describe the code you want..."
+                    className="min-h-[60px] resize-none"
+                  />
+                </div>
+                <Button
+                  onClick={handleChatSend}
+                  disabled={isChatting || !chatInput.trim()}
+                  className="w-full mt-2"
+                >
+                  {isChatting ? (
+                    "Generating..."
+                  ) : (
+                    <>
+                      <Send className="w-4 h-4 mr-2" />
+                      Generate Code
+                    </>
+                  )}
+                </Button>
+              </div>
+              </div>
+            </ResizablePanel>
+          </>
+        )}
 
-        <ResizableHandle withHandle />
+        {showFileManager && (
+          <>
+            <ResizableHandle withHandle />
 
-        {/* Right: File Manager */}
-        <ResizablePanel defaultSize={20} minSize={15} maxSize={35}>
-          <LabFileManager basePath="week2-lab" />
-        </ResizablePanel>
+            {/* Right: File Manager */}
+            <ResizablePanel defaultSize={20} minSize={15} maxSize={35}>
+              <LabFileManager basePath="week2-lab" />
+            </ResizablePanel>
+          </>
+        )}
       </ResizablePanelGroup>
     </div>
   );
