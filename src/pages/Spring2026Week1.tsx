@@ -469,13 +469,13 @@ const Part2TechnologyMath = () => {
               </a>
             </Button>
           </div>
-          <div ref={slidesContainerRef} className="rounded-lg overflow-hidden border bg-muted/30">
+          <div ref={slidesContainerRef} className="rounded-lg overflow-hidden border bg-black [&:fullscreen]:border-0 [&:fullscreen]:rounded-none">
             <iframe
               src={embedUrl}
               width="100%"
               height="480"
               allowFullScreen
-              className="border-0"
+              className="border-0 [div:fullscreen_&]:h-screen [div:fullscreen_&]:w-screen"
               title="Week 1 Part 2 Slides"
             />
           </div>
