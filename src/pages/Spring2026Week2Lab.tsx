@@ -5,6 +5,7 @@ import {
   Plus, Trash2, Code, BookOpen, Database, Lightbulb, FileCode, Send,
   PanelLeftClose, PanelLeftOpen
 } from "lucide-react";
+import LabFileManager from "@/components/LabFileManager";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { streamChat } from "@/lib/ai-chat";
@@ -371,7 +372,7 @@ Name: food_waste_behavior, dtype: int64`;
       {/* Main Layout: Notebook + Chat with Resizable Panels */}
       <ResizablePanelGroup direction="horizontal" className="h-[calc(100vh-57px)]">
         {/* Left: Introduction + Notebook */}
-        <ResizablePanel defaultSize={65} minSize={40}>
+        <ResizablePanel defaultSize={50} minSize={30}>
           <div className="h-full flex flex-col overflow-auto">
           <ScrollArea className="flex-1" ref={notebookRef}>
             <div className="p-6 space-y-6">
@@ -638,8 +639,8 @@ Name: food_waste_behavior, dtype: int64`;
         <ResizableHandle withHandle />
 
         {/* Right: AI Chat */}
-        <ResizablePanel defaultSize={35} minSize={25}>
-          <div className="h-full flex flex-col bg-card">
+        <ResizablePanel defaultSize={30} minSize={20}>
+          <div className="h-full flex flex-col bg-card border-l">
           <div className="px-4 py-3 border-b">
             <h2 className="font-semibold flex items-center gap-2">
               <Sparkles className="w-4 h-4 text-purple-500" />
@@ -736,6 +737,13 @@ Name: food_waste_behavior, dtype: int64`;
             </Button>
           </div>
           </div>
+        </ResizablePanel>
+
+        <ResizableHandle withHandle />
+
+        {/* Right: File Manager */}
+        <ResizablePanel defaultSize={20} minSize={15} maxSize={35}>
+          <LabFileManager basePath="week2-lab" />
         </ResizablePanel>
       </ResizablePanelGroup>
     </div>
