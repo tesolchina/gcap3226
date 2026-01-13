@@ -1,12 +1,44 @@
+import { useState } from "react";
 import { Card } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 import CourseRoadmap from "@/components/CourseRoadmap";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, QrCode, X } from "lucide-react";
+import { QRCodeSVG } from "qrcode.react";
 import taliaPhoto from "@/assets/talia-wu.png";
 import simonPhoto from "@/assets/simon-wang.png";
 
 const Spring2026Home = () => {
+  const [showQR, setShowQR] = useState(false);
+  const siteUrl = "https://gcap3226.hkbu.tech/spring-2026";
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background via-accent/10 to-background p-8">
+    <div className="min-h-screen bg-gradient-to-br from-background via-accent/10 to-background p-8 relative">
+      {/* QR Code Toggle Button */}
+      <Button
+        variant="outline"
+        size="icon"
+        onClick={() => setShowQR(!showQR)}
+        className="fixed top-4 right-4 z-50 bg-background/80 backdrop-blur-sm shadow-lg"
+      >
+        {showQR ? <X className="h-5 w-5" /> : <QrCode className="h-5 w-5" />}
+      </Button>
+
+      {/* QR Code Overlay */}
+      {showQR && (
+        <div className="fixed top-16 right-4 z-40 bg-white p-6 rounded-xl shadow-2xl border-2 border-primary/20">
+          <div className="text-center space-y-3">
+            <QRCodeSVG 
+              value={siteUrl} 
+              size={200}
+              level="H"
+              includeMargin={true}
+            />
+            <p className="text-sm font-medium text-foreground">Scan to visit</p>
+            <p className="text-xs text-muted-foreground max-w-[200px] break-all">{siteUrl}</p>
+          </div>
+        </div>
+      )}
+
       <div className="max-w-5xl mx-auto space-y-10">
         {/* Hero Section */}
         <div className="text-center space-y-4 py-8">
