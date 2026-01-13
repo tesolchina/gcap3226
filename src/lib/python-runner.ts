@@ -59,13 +59,13 @@ class PythonRunner {
       });
 
       this.onProgressCallback?.("Installing pandas...");
-      await this.pyodide.loadPackagesFromImports("import pandas");
+      await (this.pyodide as unknown as { loadPackage: (pkg: string | string[]) => Promise<void> }).loadPackage("pandas");
 
       this.onProgressCallback?.("Installing matplotlib...");
-      await this.pyodide.loadPackagesFromImports("import matplotlib");
+      await (this.pyodide as unknown as { loadPackage: (pkg: string | string[]) => Promise<void> }).loadPackage("matplotlib");
 
       this.onProgressCallback?.("Installing seaborn...");
-      await this.pyodide.loadPackagesFromImports("import seaborn");
+      await (this.pyodide as unknown as { loadPackage: (pkg: string | string[]) => Promise<void> }).loadPackage("seaborn");
 
       // Configure matplotlib for non-interactive backend
       this.onProgressCallback?.("Configuring visualization...");
