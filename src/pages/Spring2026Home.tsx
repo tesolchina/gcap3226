@@ -12,55 +12,55 @@ const Spring2026Home = () => {
   const siteUrl = "https://gcap3226.hkbu.tech/spring-2026";
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background via-accent/10 to-background p-8 relative">
-      {/* QR Code Toggle Button */}
+    <div className="min-h-screen bg-gradient-to-br from-background via-accent/10 to-background p-4 sm:p-6 md:p-8 relative">
+      {/* QR Code Toggle Button - Hidden on mobile for cleaner UI */}
       <Button
         variant="outline"
         size="icon"
         onClick={() => setShowQR(!showQR)}
-        className="fixed top-4 right-4 z-50 bg-background/80 backdrop-blur-sm shadow-lg"
+        className="fixed top-4 right-4 z-50 bg-background/80 backdrop-blur-sm shadow-lg hidden sm:flex"
       >
         {showQR ? <X className="h-5 w-5" /> : <QrCode className="h-5 w-5" />}
       </Button>
 
       {/* QR Code Overlay */}
       {showQR && (
-        <div className="fixed top-16 right-4 z-40 bg-white p-6 rounded-xl shadow-2xl border-2 border-primary/20">
+        <div className="fixed top-16 right-4 z-40 bg-white p-4 sm:p-6 rounded-xl shadow-2xl border-2 border-primary/20">
           <div className="text-center space-y-3">
             <QRCodeSVG 
               value={siteUrl} 
-              size={200}
+              size={180}
               level="H"
               includeMargin={true}
             />
             <p className="text-sm font-medium text-foreground">Scan to visit</p>
-            <p className="text-xs text-muted-foreground max-w-[200px] break-all">{siteUrl}</p>
+            <p className="text-xs text-muted-foreground max-w-[180px] break-all">{siteUrl}</p>
           </div>
         </div>
       )}
 
-      <div className="max-w-5xl mx-auto space-y-10">
+      <div className="max-w-5xl mx-auto space-y-6 sm:space-y-8 md:space-y-10">
         {/* Hero Section */}
-        <div className="text-center space-y-4 py-8">
-          <h1 className="text-5xl md:text-6xl font-bold text-primary">
+        <div className="text-center space-y-3 sm:space-y-4 py-4 sm:py-6 md:py-8">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-primary">
             GCAP 3226
           </h1>
-          <p className="text-2xl text-foreground font-medium">
+          <p className="text-lg sm:text-xl md:text-2xl text-foreground font-medium px-2">
             Empowering Citizens Through Data: Participatory Policy Analysis for Hong Kong
           </p>
-          <p className="text-lg text-primary font-semibold">
+          <p className="text-base md:text-lg text-primary font-semibold">
             Spring 2026
           </p>
         </div>
 
         {/* Instructors Row */}
-        <div className="grid md:grid-cols-2 gap-6">
-          <Card className="p-6 bg-gradient-to-br from-card to-accent/20">
-            <div className="flex items-start gap-4">
+        <div className="grid gap-4 sm:gap-6 md:grid-cols-2">
+          <Card className="p-4 sm:p-6 bg-gradient-to-br from-card to-accent/20">
+            <div className="flex items-start gap-3 sm:gap-4">
               <img 
                 src={taliaPhoto} 
                 alt="Dr. Talia Wu" 
-                className="w-20 h-20 rounded-full object-cover object-top border-2 border-primary/20"
+                className="w-16 h-16 sm:w-20 sm:h-20 rounded-full object-cover object-top border-2 border-primary/20 flex-shrink-0"
               />
               <div>
                 <h3 className="text-sm font-medium text-muted-foreground uppercase tracking-wider">Co-ordinator</h3>
@@ -88,12 +88,12 @@ const Spring2026Home = () => {
             </div>
           </Card>
 
-          <Card className="p-6 bg-gradient-to-br from-card to-accent/20">
-            <div className="flex items-start gap-4">
+          <Card className="p-4 sm:p-6 bg-gradient-to-br from-card to-accent/20">
+            <div className="flex items-start gap-3 sm:gap-4">
               <img 
                 src={simonPhoto} 
                 alt="Dr. Simon Wang" 
-                className="w-20 h-20 rounded-full object-cover object-top border-2 border-primary/20"
+                className="w-16 h-16 sm:w-20 sm:h-20 rounded-full object-cover object-top border-2 border-primary/20 flex-shrink-0"
               />
               <div>
                 <h3 className="text-sm font-medium text-muted-foreground uppercase tracking-wider">Co-teacher</h3>

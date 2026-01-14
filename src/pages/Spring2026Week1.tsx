@@ -13,43 +13,43 @@ const Spring2026Week1 = () => {
   const [currentPart, setCurrentPart] = useState(1);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background via-accent/5 to-background p-8">
-      <div className="max-w-5xl mx-auto space-y-8">
+    <div className="min-h-screen bg-gradient-to-br from-background via-accent/5 to-background p-4 sm:p-6 md:p-8">
+      <div className="max-w-5xl mx-auto space-y-6 sm:space-y-8">
         {/* Header */}
-        <div className="space-y-4">
-          <div className="flex items-center gap-4">
-            <Button variant="ghost" size="icon" asChild>
+        <div className="space-y-3 sm:space-y-4">
+          <div className="flex items-start sm:items-center gap-3 sm:gap-4">
+            <Button variant="ghost" size="icon" asChild className="shrink-0 mt-1 sm:mt-0">
               <Link to="/spring-2026">
                 <ArrowLeft className="h-5 w-5" />
               </Link>
             </Button>
-            <div>
-              <p className="text-sm text-muted-foreground">Week 1</p>
-              <h1 className="text-4xl font-bold text-primary">Course Introduction & Overview</h1>
+            <div className="min-w-0">
+              <p className="text-xs sm:text-sm text-muted-foreground">Week 1</p>
+              <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-primary">Course Introduction & Overview</h1>
             </div>
           </div>
-          <p className="text-lg text-muted-foreground">
+          <p className="text-base md:text-lg text-muted-foreground">
             Welcome to GCAP3226! This week provides a gentle introduction to the course themes and the final project that will guide your learning journey.
           </p>
         </div>
 
         {/* Part Navigation */}
-        <div className="flex gap-4">
+        <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
           <Button
             variant={currentPart === 1 ? "default" : "outline"}
             onClick={() => setCurrentPart(1)}
-            className="flex-1"
+            className="flex-1 text-sm sm:text-base py-3"
           >
-            <Database className="h-4 w-4 mr-2" />
-            Part 1: Data Governance (Simon)
+            <Database className="h-4 w-4 mr-2 shrink-0" />
+            <span className="truncate">Part 1: Data Governance</span>
           </Button>
           <Button
             variant={currentPart === 2 ? "default" : "outline"}
             onClick={() => setCurrentPart(2)}
-            className="flex-1"
+            className="flex-1 text-sm sm:text-base py-3"
           >
-            <Code className="h-4 w-4 mr-2" />
-            Part 2: Technology & Math (Talia)
+            <Code className="h-4 w-4 mr-2 shrink-0" />
+            <span className="truncate">Part 2: Technology & Math</span>
           </Button>
         </div>
 
