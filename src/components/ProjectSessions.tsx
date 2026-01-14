@@ -322,66 +322,73 @@ const ProjectSessions = ({ projectGroupId, topicSlug, memberId, isTeacher }: Pro
         </>
       )}
 
-      {/* Active Session Chat */}
+      {/* Active Session Chat - Mobile Optimized */}
       {activeSession && (
-        <Card className="flex flex-col h-[500px]">
-          <div className="p-4 border-b flex items-center justify-between">
-            <div>
-              <Button variant="ghost" size="sm" onClick={() => setActiveSession(null)} className="mr-2">
-                ← Back
+        <Card className="flex flex-col h-[400px] sm:h-[500px]">
+          {/* Header - responsive padding */}
+          <div className="p-3 sm:p-4 border-b flex items-center justify-between gap-2">
+            <div className="flex items-center min-w-0">
+              <Button variant="ghost" size="sm" onClick={() => setActiveSession(null)} className="mr-1 sm:mr-2 px-2">
+                ←
               </Button>
-              <span className="font-semibold">{activeSession.title}</span>
+              <span className="font-semibold text-sm sm:text-base truncate">{activeSession.title}</span>
             </div>
           </div>
 
-          <div className="flex-1 overflow-y-auto p-4 space-y-4">
+          {/* Messages - adjusted padding for mobile */}
+          <div className="flex-1 overflow-y-auto p-3 sm:p-4 space-y-3 sm:space-y-4">
             {messages.length === 0 && (
-              <p className="text-center text-muted-foreground py-8">No messages yet. Start the discussion!</p>
+              <p className="text-center text-muted-foreground py-6 sm:py-8 text-sm">
+                No messages yet. Start the discussion!
+              </p>
             )}
             {messages.map((msg) => (
-              <div key={msg.id} className={`flex gap-3 ${msg.is_ai ? "bg-accent/50 -mx-4 px-4 py-3" : ""}`}>
-                <div className={`h-8 w-8 rounded-full flex items-center justify-center flex-shrink-0 ${
+              <div key={msg.id} className={`flex gap-2 sm:gap-3 ${msg.is_ai ? "bg-accent/50 -mx-3 sm:-mx-4 px-3 sm:px-4 py-2 sm:py-3" : ""}`}>
+                {/* Avatar - smaller on mobile */}
+                <div className={`h-7 w-7 sm:h-8 sm:w-8 rounded-full flex items-center justify-center flex-shrink-0 ${
                   msg.is_ai ? "bg-primary text-primary-foreground" : msg.is_teacher ? "bg-amber-500 text-white" : "bg-muted"
                 }`}>
-                  {msg.is_ai ? <Bot className="h-4 w-4" /> : msg.is_teacher ? <GraduationCap className="h-4 w-4" /> : <User className="h-4 w-4" />}
+                  {msg.is_ai ? <Bot className="h-3.5 w-3.5 sm:h-4 sm:w-4" /> : msg.is_teacher ? <GraduationCap className="h-3.5 w-3.5 sm:h-4 sm:w-4" /> : <User className="h-3.5 w-3.5 sm:h-4 sm:w-4" />}
                 </div>
-                <div className="flex-1">
-                  <div className="flex items-baseline gap-2 mb-1">
-                    <span className="font-medium text-sm">
-                      {msg.is_ai ? "AI Assistant" : msg.is_teacher ? "Teacher" : "Student"}
+                <div className="flex-1 min-w-0">
+                  <div className="flex items-baseline gap-1.5 sm:gap-2 mb-1 flex-wrap">
+                    <span className="font-medium text-xs sm:text-sm">
+                      {msg.is_ai ? "AI" : msg.is_teacher ? "Teacher" : "Student"}
                     </span>
-                    {msg.is_voice_transcription && <Badge variant="outline" className="text-xs">🎤 Voice</Badge>}
-                    <span className="text-xs text-muted-foreground">
+                    {msg.is_voice_transcription && <Badge variant="outline" className="text-[10px] sm:text-xs px-1">🎤</Badge>}
+                    <span className="text-[10px] sm:text-xs text-muted-foreground">
                       {format(new Date(msg.created_at), "h:mm a")}
                     </span>
                   </div>
-                  <p className="text-sm whitespace-pre-wrap">{msg.content}</p>
+                  <p className="text-xs sm:text-sm whitespace-pre-wrap break-words">{msg.content}</p>
                 </div>
               </div>
             ))}
             <div ref={messagesEndRef} />
           </div>
 
-          <div className="p-4 border-t space-y-2">
+          {/* Input area - mobile optimized */}
+          <div className="p-3 sm:p-4 border-t space-y-2">
             <Textarea
-              placeholder="Type your message or use voice..."
+              placeholder="Type your message..."
               value={newMessage}
               onChange={(e) => setNewMessage(e.target.value)}
-              className="min-h-[60px] resize-none"
+              className="min-h-[50px] sm:min-h-[60px] resize-none text-sm"
               disabled={isTranscribing}
             />
             <div className="flex gap-2">
               <Button
                 variant={isRecording ? "destructive" : "outline"}
                 size="icon"
+                className="h-9 w-9 sm:h-10 sm:w-10 flex-shrink-0"
                 onClick={isRecording ? stopRecording : startRecording}
                 disabled={isTranscribing}
               >
                 {isTranscribing ? <Loader2 className="h-4 w-4 animate-spin" /> : isRecording ? <MicOff className="h-4 w-4" /> : <Mic className="h-4 w-4" />}
               </Button>
-              <Button onClick={() => sendMessage(false)} disabled={!newMessage.trim() || isSending} className="flex-1">
-                {isSending ? <Loader2 className="h-4 w-4 mr-2 animate-spin" /> : <Send className="h-4 w-4 mr-2" />}
-                Send
+              <Button onClick={() => sendMessage(false)} disabled={!newMessage.trim() || isSending} className="flex-1 text-sm">
+                {isSending ? <Loader2 className="h-4 w-4 mr-1 sm:mr-2 animate-spin" /> : <Send className="h-4 w-4 mr-1 sm:mr-2" />}
+                <span className="hidden sm:inline">Send</span>
               </Button>
             </div>
           </div>
