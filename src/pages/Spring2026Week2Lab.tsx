@@ -342,13 +342,20 @@ Name: food_waste_behavior, dtype: int64
   const [showAIChat, setShowAIChat] = useState(true);
   const [showFileManager, setShowFileManager] = useState(true);
 
+  // Mobile detection for responsive layout
+  const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+  
+  // On mobile, default to single panel view
+  const [mobileView, setMobileView] = useState<'notebook' | 'chat'>('notebook');
+
   return (
     <div className="min-h-screen bg-background text-foreground">
-      {/* Header */}
-      <header className="border-b bg-card px-4 py-3 sticky top-0 z-10">
+      {/* Header - Mobile Optimized */}
+      <header className="border-b bg-card px-3 sm:px-4 py-2 sm:py-3 sticky top-0 z-10">
         <div className="flex items-center justify-between max-w-[1800px] mx-auto">
-          <div className="flex items-center gap-4">
-            <Button variant="ghost" size="sm" onClick={toggleSidebar}>
+          {/* Left side - condensed on mobile */}
+          <div className="flex items-center gap-2 sm:gap-4">
+            <Button variant="ghost" size="sm" onClick={toggleSidebar} className="hidden sm:flex">
               {sidebarState === "collapsed" ? (
                 <PanelLeftOpen className="w-4 h-4" />
               ) : (
@@ -356,47 +363,74 @@ Name: food_waste_behavior, dtype: int64
               )}
             </Button>
             <Link to="/spring-2026/weeks/2">
-              <Button variant="ghost" size="sm">
-                <ArrowLeft className="w-4 h-4 mr-2" />
-                Back to Week 2
+              <Button variant="ghost" size="sm" className="px-2 sm:px-3">
+                <ArrowLeft className="w-4 h-4 sm:mr-2" />
+                <span className="hidden sm:inline">Back to Week 2</span>
               </Button>
             </Link>
-            <div className="flex items-center gap-2">
-              <Sparkles className="w-5 h-5 text-purple-500" />
-              <h1 className="text-lg font-semibold">Vibe Coding Lab</h1>
-              <Badge variant="outline" className="ml-2 text-amber-600 border-amber-500/50 bg-amber-500/10">
+            <div className="flex items-center gap-1 sm:gap-2">
+              <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 text-purple-500" />
+              <h1 className="text-sm sm:text-lg font-semibold">Vibe Coding</h1>
+              <Badge variant="outline" className="hidden sm:flex ml-2 text-amber-600 border-amber-500/50 bg-amber-500/10">
                 <AlertTriangle className="w-3 h-3 mr-1" />
                 Simulation
               </Badge>
             </div>
           </div>
-          <div className="flex items-center gap-2">
-            <Button 
-              variant={showAIChat ? "default" : "outline"} 
-              size="sm"
-              onClick={() => setShowAIChat(!showAIChat)}
-              title={showAIChat ? "Hide AI Assistant" : "Show AI Assistant"}
-            >
-              <MessageSquare className="w-4 h-4 mr-2" />
-              AI Chat
-            </Button>
-            <Button 
-              variant={showFileManager ? "default" : "outline"} 
-              size="sm"
-              onClick={() => setShowFileManager(!showFileManager)}
-              title={showFileManager ? "Hide File Manager" : "Show File Manager"}
-            >
-              <FolderOpen className="w-4 h-4 mr-2" />
-              Files
-            </Button>
-            <div className="w-px h-6 bg-border mx-1" />
+          
+          {/* Right side - responsive buttons */}
+          <div className="flex items-center gap-1 sm:gap-2">
+            {/* Mobile: Toggle between notebook and chat */}
+            <div className="flex sm:hidden">
+              <Button 
+                variant={mobileView === 'notebook' ? "default" : "outline"} 
+                size="sm"
+                onClick={() => setMobileView('notebook')}
+                className="rounded-r-none px-2"
+              >
+                <Code className="w-4 h-4" />
+              </Button>
+              <Button 
+                variant={mobileView === 'chat' ? "default" : "outline"} 
+                size="sm"
+                onClick={() => setMobileView('chat')}
+                className="rounded-l-none px-2"
+              >
+                <MessageSquare className="w-4 h-4" />
+              </Button>
+            </div>
+            
+            {/* Desktop: Full button controls */}
+            <div className="hidden sm:flex items-center gap-2">
+              <Button 
+                variant={showAIChat ? "default" : "outline"} 
+                size="sm"
+                onClick={() => setShowAIChat(!showAIChat)}
+                title={showAIChat ? "Hide AI Assistant" : "Show AI Assistant"}
+              >
+                <MessageSquare className="w-4 h-4 mr-2" />
+                AI Chat
+              </Button>
+              <Button 
+                variant={showFileManager ? "default" : "outline"} 
+                size="sm"
+                onClick={() => setShowFileManager(!showFileManager)}
+                title={showFileManager ? "Hide File Manager" : "Show File Manager"}
+              >
+                <FolderOpen className="w-4 h-4 mr-2" />
+                Files
+              </Button>
+              <div className="w-px h-6 bg-border mx-1" />
+            </div>
+            
+            {/* Download buttons - icon only on mobile */}
             <a href="/data/GCAP3226_week2.csv" download>
-              <Button variant="outline" size="sm">
-                <Download className="w-4 h-4 mr-2" />
-                Dataset
+              <Button variant="outline" size="sm" className="px-2 sm:px-3">
+                <Download className="w-4 h-4 sm:mr-2" />
+                <span className="hidden sm:inline">Dataset</span>
               </Button>
             </a>
-            <a href="/assets/GCAP3226_week2_student.ipynb" download>
+            <a href="/assets/GCAP3226_week2_student.ipynb" download className="hidden sm:block">
               <Button variant="outline" size="sm">
                 <Download className="w-4 h-4 mr-2" />
                 Jupyter Notebook
@@ -406,7 +440,33 @@ Name: food_waste_behavior, dtype: int64
         </div>
       </header>
 
-      {/* Main Layout: Notebook + Chat with Resizable Panels */}
+      {/* Mobile Layout - Single View */}
+      <div className="sm:hidden h-[calc(100vh-53px)]">
+        {mobileView === 'notebook' ? (
+          <MobileNotebookView 
+            cells={cells}
+            updateCell={updateCell}
+            deleteCell={deleteCell}
+            runCell={runCell}
+            addCell={addCell}
+            copied={copied}
+            copyCode={copyCode}
+          />
+        ) : (
+          <MobileChatView
+            chatMessages={chatMessages}
+            chatInput={chatInput}
+            setChatInput={setChatInput}
+            handleChatSend={handleChatSend}
+            isChatting={isChatting}
+            addCodeToNotebook={addCodeToNotebook}
+            chatEndRef={chatEndRef}
+          />
+        )}
+      </div>
+
+      {/* Desktop Layout - Resizable Panels */}
+      <div className="hidden sm:block">
       <ResizablePanelGroup direction="horizontal" className="h-[calc(100vh-57px)]">
         {/* Left: Introduction + Notebook */}
         <ResizablePanel defaultSize={50} minSize={30}>
@@ -802,8 +862,152 @@ Name: food_waste_behavior, dtype: int64
           </>
         )}
       </ResizablePanelGroup>
+      </div>
     </div>
   );
 };
+
+/**
+ * MobileNotebookView - Condensed notebook interface for mobile
+ */
+interface MobileNotebookViewProps {
+  cells: NotebookCell[];
+  updateCell: (id: string, content: string) => void;
+  deleteCell: (id: string) => void;
+  runCell: (id: string) => void;
+  addCell: (content?: string, isFromAI?: boolean) => string;
+  copied: string | null;
+  copyCode: (code: string, id: string) => void;
+}
+
+const MobileNotebookView = ({ 
+  cells, updateCell, deleteCell, runCell, addCell, copied, copyCode 
+}: MobileNotebookViewProps) => (
+  <ScrollArea className="h-full">
+    <div className="p-3 space-y-3">
+      {/* Quick intro */}
+      <Alert className="border-amber-500/50 bg-amber-500/10">
+        <AlertTriangle className="h-4 w-4 text-amber-500" />
+        <AlertTitle className="text-sm text-amber-600">Simulation Mode</AlertTitle>
+        <AlertDescription className="text-xs">
+          This is a preview. Use the AI tab to generate code, then run it here.
+        </AlertDescription>
+      </Alert>
+
+      {/* Cells */}
+      {cells.map((cell, index) => (
+        <div key={cell.id} className="border rounded-lg overflow-hidden bg-card">
+          <div className="flex items-center justify-between px-2 py-1.5 bg-muted/50 border-b">
+            <Badge variant="outline" className="text-xs font-mono">[{index + 1}]</Badge>
+            <div className="flex items-center gap-1">
+              <Button size="sm" variant="ghost" className="h-7 w-7 p-0" onClick={() => runCell(cell.id)}>
+                {cell.isRunning ? (
+                  <div className="w-3 h-3 border-2 border-primary border-t-transparent rounded-full animate-spin" />
+                ) : (
+                  <Play className="w-3 h-3 text-green-600" />
+                )}
+              </Button>
+              <Button size="sm" variant="ghost" className="h-7 w-7 p-0" onClick={() => copyCode(cell.content, cell.id)}>
+                {copied === cell.id ? <Check className="w-3 h-3 text-green-500" /> : <Copy className="w-3 h-3" />}
+              </Button>
+              <Button size="sm" variant="ghost" className="h-7 w-7 p-0" onClick={() => deleteCell(cell.id)}>
+                <Trash2 className="w-3 h-3 text-destructive" />
+              </Button>
+            </div>
+          </div>
+          <Textarea
+            value={cell.content}
+            onChange={(e) => updateCell(cell.id, e.target.value)}
+            className="font-mono text-xs border-0 rounded-none min-h-[60px] focus-visible:ring-0 bg-slate-950 text-slate-100"
+            placeholder="# Python code..."
+          />
+          {cell.output && (
+            <div className="border-t bg-slate-900 p-2">
+              <pre className="font-mono text-xs text-slate-300 whitespace-pre-wrap">{cell.output}</pre>
+            </div>
+          )}
+        </div>
+      ))}
+
+      <Button variant="outline" className="w-full border-dashed" onClick={() => addCell()}>
+        <Plus className="w-4 h-4 mr-2" />
+        Add Cell
+      </Button>
+    </div>
+  </ScrollArea>
+);
+
+/**
+ * MobileChatView - AI chat interface for mobile
+ */
+interface MobileChatViewProps {
+  chatMessages: Array<{ role: "user" | "assistant"; content: string }>;
+  chatInput: string;
+  setChatInput: (value: string) => void;
+  handleChatSend: () => void;
+  isChatting: boolean;
+  addCodeToNotebook: (code: string) => void;
+  chatEndRef: React.RefObject<HTMLDivElement>;
+}
+
+const MobileChatView = ({ 
+  chatMessages, chatInput, setChatInput, handleChatSend, isChatting, addCodeToNotebook, chatEndRef 
+}: MobileChatViewProps) => (
+  <div className="h-full flex flex-col">
+    <ScrollArea className="flex-1 p-3">
+      <div className="space-y-3">
+        {chatMessages.length === 0 ? (
+          <div className="text-sm text-muted-foreground space-y-2">
+            <p>👋 Ask me to generate Python code!</p>
+            <div className="space-y-1">
+              {["Import pandas and matplotlib", "Load the CSV file", "Show first 5 rows", "Create a bar chart"].map((prompt, i) => (
+                <div 
+                  key={i}
+                  className="p-2 bg-muted rounded text-xs cursor-pointer hover:bg-muted/80"
+                  onClick={() => setChatInput(prompt)}
+                >
+                  {prompt}
+                </div>
+              ))}
+            </div>
+          </div>
+        ) : (
+          chatMessages.map((msg, i) => (
+            <div key={i} className="space-y-1">
+              <div className={`text-xs font-medium ${msg.role === "user" ? "text-blue-500" : "text-purple-500"}`}>
+                {msg.role === "user" ? "You" : "AI"}
+              </div>
+              {msg.role === "assistant" ? (
+                <div className="space-y-2">
+                  <pre className="font-mono text-xs whitespace-pre-wrap overflow-x-auto bg-slate-900 text-slate-100 p-2 rounded">
+                    {msg.content}
+                  </pre>
+                  <Button size="sm" onClick={() => addCodeToNotebook(msg.content)} className="w-full">
+                    <Plus className="w-3 h-3 mr-1" />
+                    Add to Notebook
+                  </Button>
+                </div>
+              ) : (
+                <p className="text-sm">{msg.content}</p>
+              )}
+            </div>
+          ))
+        )}
+        <div ref={chatEndRef} />
+      </div>
+    </ScrollArea>
+    <div className="p-3 border-t">
+      <Textarea
+        value={chatInput}
+        onChange={(e) => setChatInput(e.target.value)}
+        placeholder="Describe the code you want..."
+        className="min-h-[50px] resize-none text-sm"
+      />
+      <Button onClick={handleChatSend} disabled={isChatting || !chatInput.trim()} className="w-full mt-2">
+        {isChatting ? "Generating..." : <><Send className="w-4 h-4 mr-2" />Generate</>}
+      </Button>
+    </div>
+  </div>
+);
 
 export default Spring2026Week2Lab;
