@@ -217,22 +217,23 @@ const CourseRoadmap = () => {
   const row3 = [weeks[6], weeks[7], weeks[8]]; // Weeks 8, 9, 10
   const row4 = [weeks[9], weeks[10]]; // Weeks 11, 12
 
+  // Mobile-friendly week card with full width
   const WeekCard = ({ week, isLast = false }: { week: typeof weeks[0]; isLast?: boolean }) => (
-    <div className={`bg-card rounded-xl shadow-md p-5 w-72 border-l-4 ${week.borderColor} hover:shadow-lg transition-shadow`}>
+    <div className={`bg-card rounded-xl shadow-md p-4 sm:p-5 w-full sm:w-72 border-l-4 ${week.borderColor} hover:shadow-lg transition-shadow`}>
       <div className="flex items-center gap-3 mb-2">
-        <div className={`${week.badgeColor} text-white rounded-full w-9 h-9 flex items-center justify-center font-bold text-sm`}>
+        <div className={`${week.badgeColor} text-white rounded-full w-8 h-8 sm:w-9 sm:h-9 flex items-center justify-center font-bold text-sm flex-shrink-0`}>
           {week.week}
         </div>
-        <div>
-          <h3 className="font-bold text-foreground">{week.title}</h3>
+        <div className="min-w-0">
+          <h3 className="font-bold text-foreground text-sm sm:text-base truncate">{week.title}</h3>
           <p className="text-xs text-muted-foreground">📅 {week.date}</p>
         </div>
       </div>
-      <p className="text-sm text-muted-foreground mb-3">📚 {week.description}</p>
+      <p className="text-xs sm:text-sm text-muted-foreground mb-3 line-clamp-3 sm:line-clamp-none">📚 {week.description}</p>
       {week.warning && (
         <p className="text-xs text-orange-500 mb-2">⚠️ {week.warning}</p>
       )}
-      <p className={`text-sm ${week.assessment ? week.assessment.color : "text-muted-foreground"}`}>
+      <p className={`text-xs sm:text-sm ${week.assessment ? week.assessment.color : "text-muted-foreground"}`}>
         📝 {week.assessment ? week.assessment.text : "Assessment: None"}
       </p>
       <Link to={week.link} className="text-primary hover:underline text-sm mt-2 inline-block">
@@ -393,125 +394,135 @@ const CourseRoadmap = () => {
       {showRoadmap && (
         <div className="animate-in fade-in slide-in-from-top-2 duration-300 space-y-4">
           {/* Legend */}
-          <div className="flex justify-center flex-wrap gap-4 text-xs mb-8">
+          <div className="flex justify-center flex-wrap gap-2 sm:gap-4 text-xs mb-4 sm:mb-8">
             <div className="flex items-center">
-              <div className="w-3 h-3 bg-green-500 rounded mr-2"></div>
-              <span className="text-muted-foreground">In-class Exercises</span>
+              <div className="w-3 h-3 bg-green-500 rounded mr-1 sm:mr-2"></div>
+              <span className="text-muted-foreground">Exercises</span>
             </div>
             <div className="flex items-center">
-              <div className="w-3 h-3 bg-blue-500 rounded mr-2"></div>
-              <span className="text-muted-foreground">Reflective Essays</span>
+              <div className="w-3 h-3 bg-blue-500 rounded mr-1 sm:mr-2"></div>
+              <span className="text-muted-foreground">Essays</span>
             </div>
             <div className="flex items-center">
-              <div className="w-3 h-3 bg-purple-500 rounded mr-2"></div>
+              <div className="w-3 h-3 bg-purple-500 rounded mr-1 sm:mr-2"></div>
               <span className="text-muted-foreground">Presentations</span>
             </div>
             <div className="flex items-center">
-              <div className="w-3 h-3 bg-orange-500 rounded mr-2"></div>
+              <div className="w-3 h-3 bg-orange-500 rounded mr-1 sm:mr-2"></div>
               <span className="text-muted-foreground">Reports</span>
             </div>
             <div className="flex items-center">
-              <div className="w-3 h-3 bg-yellow-500 rounded mr-2"></div>
-              <span className="text-muted-foreground">Final Deliverables</span>
+              <div className="w-3 h-3 bg-yellow-500 rounded mr-1 sm:mr-2"></div>
+              <span className="text-muted-foreground">Final</span>
             </div>
           </div>
 
-          {/* Row 1: Left to Right (Weeks 1, 2, 3-4) */}
-          <div className="flex items-center justify-center gap-0">
-            <WeekCard week={row1[0]} />
-            <HorizontalConnector direction="right" />
-            <WeekCard week={row1[1]} />
-            <HorizontalConnector direction="right" />
-            <WeekCard week={row1[2]} />
+          {/* Mobile Layout: Simple stacked cards */}
+          <div className="block md:hidden space-y-3">
+            {weeks.map((week, index) => (
+              <WeekCard key={index} week={week} />
+            ))}
           </div>
 
-          {/* Connector: Row 1 to Row 2 */}
-          <RowConnector direction="down-left" />
+          {/* Desktop Layout: Zigzag with connectors */}
+          <div className="hidden md:block space-y-4">
+            {/* Row 1: Left to Right (Weeks 1, 2, 3-4) */}
+            <div className="flex items-center justify-center gap-0">
+              <WeekCard week={row1[0]} />
+              <HorizontalConnector direction="right" />
+              <WeekCard week={row1[1]} />
+              <HorizontalConnector direction="right" />
+              <WeekCard week={row1[2]} />
+            </div>
 
-          {/* Row 2: Right to Left (Weeks 7, 6, 5) */}
-          <div className="flex items-center justify-center gap-0">
-            <WeekCard week={row2[0]} />
-            <HorizontalConnector direction="left" />
-            <WeekCard week={row2[1]} />
-            <HorizontalConnector direction="left" />
-            <WeekCard week={row2[2]} />
-          </div>
+            {/* Connector: Row 1 to Row 2 */}
+            <RowConnector direction="down-left" />
 
-          {/* Connector: Row 2 to Row 3 */}
-          <RowConnector direction="down-right" />
+            {/* Row 2: Right to Left (Weeks 7, 6, 5) */}
+            <div className="flex items-center justify-center gap-0">
+              <WeekCard week={row2[0]} />
+              <HorizontalConnector direction="left" />
+              <WeekCard week={row2[1]} />
+              <HorizontalConnector direction="left" />
+              <WeekCard week={row2[2]} />
+            </div>
 
-          {/* Row 3: Left to Right (Weeks 8, 9, 10) */}
-          <div className="flex items-center justify-center gap-0">
-            <WeekCard week={row3[0]} />
-            <HorizontalConnector direction="right" />
-            <WeekCard week={row3[1]} />
-            <HorizontalConnector direction="right" />
-            <WeekCard week={row3[2]} />
-          </div>
+            {/* Connector: Row 2 to Row 3 */}
+            <RowConnector direction="down-right" />
 
-          {/* Connector: Row 3 to Row 4 */}
-          <RowConnector direction="down-left" />
+            {/* Row 3: Left to Right (Weeks 8, 9, 10) */}
+            <div className="flex items-center justify-center gap-0">
+              <WeekCard week={row3[0]} />
+              <HorizontalConnector direction="right" />
+              <WeekCard week={row3[1]} />
+              <HorizontalConnector direction="right" />
+              <WeekCard week={row3[2]} />
+            </div>
 
-          {/* Row 4: Weeks 11, 12 */}
-          <div className="flex items-center justify-center gap-0">
-            <WeekCard week={row4[0]} />
-            <HorizontalConnector direction="right" />
-            <WeekCard week={row4[1]} />
-          </div>
+            {/* Connector: Row 3 to Row 4 */}
+            <RowConnector direction="down-left" />
 
-          {/* Connector to Final Week */}
-          <div className="flex justify-center">
-            <svg className="w-8 h-16" viewBox="0 0 40 80">
-              <defs>
-                <marker
-                  id="arrow-down"
-                  markerWidth="8"
-                  markerHeight="8"
-                  refX="4"
-                  refY="6"
-                  orient="90"
-                >
-                  <path d="M0,0 L8,4 L0,8 Z" fill="hsl(var(--primary))" />
-                </marker>
-              </defs>
-              <path
-                d="M 20 5 L 20 65"
-                fill="none"
-                stroke="hsl(var(--primary))"
-                strokeWidth="2"
-                strokeDasharray="6 4"
-                markerEnd="url(#arrow-down)"
-              />
-            </svg>
-          </div>
+            {/* Row 4: Weeks 11, 12 */}
+            <div className="flex items-center justify-center gap-0">
+              <WeekCard week={row4[0]} />
+              <HorizontalConnector direction="right" />
+              <WeekCard week={row4[1]} />
+            </div>
 
-          {/* Final Week 13 */}
-          <div className="flex justify-center">
-            <div className="bg-gradient-to-r from-yellow-100 to-yellow-50 dark:from-yellow-900/30 dark:to-yellow-800/20 rounded-xl shadow-lg p-6 w-96 border-l-4 border-yellow-500">
-              <div className="flex items-center gap-3 mb-2">
-                <div className="bg-yellow-500 text-white rounded-full w-10 h-10 flex items-center justify-center font-bold ring-2 ring-yellow-300">
-                  13
+            {/* Connector to Final Week */}
+            <div className="flex justify-center">
+              <svg className="w-8 h-16" viewBox="0 0 40 80">
+                <defs>
+                  <marker
+                    id="arrow-down"
+                    markerWidth="8"
+                    markerHeight="8"
+                    refX="4"
+                    refY="6"
+                    orient="90"
+                  >
+                    <path d="M0,0 L8,4 L0,8 Z" fill="hsl(var(--primary))" />
+                  </marker>
+                </defs>
+                <path
+                  d="M 20 5 L 20 65"
+                  fill="none"
+                  stroke="hsl(var(--primary))"
+                  strokeWidth="2"
+                  strokeDasharray="6 4"
+                  markerEnd="url(#arrow-down)"
+                />
+              </svg>
+            </div>
+
+            {/* Final Week 13 */}
+            <div className="flex justify-center">
+              <div className="bg-gradient-to-r from-yellow-100 to-yellow-50 dark:from-yellow-900/30 dark:to-yellow-800/20 rounded-xl shadow-lg p-6 w-96 border-l-4 border-yellow-500">
+                <div className="flex items-center gap-3 mb-2">
+                  <div className="bg-yellow-500 text-white rounded-full w-10 h-10 flex items-center justify-center font-bold ring-2 ring-yellow-300">
+                    13
+                  </div>
+                  <div>
+                    <h3 className="font-bold text-foreground text-lg">🎯 Final Presentation & LegCo Submission</h3>
+                    <p className="text-xs text-muted-foreground">📅 22 Apr</p>
+                  </div>
                 </div>
-                <div>
-                  <h3 className="font-bold text-foreground text-lg">🎯 Final Presentation & LegCo Submission</h3>
-                  <p className="text-xs text-muted-foreground">📅 22 Apr</p>
+                <p className="text-sm text-muted-foreground mb-3">
+                  📚 Final presentations. Submit report to LegCo via redress system as a complaint about government data governance.
+                </p>
+                <div className="space-y-1 mb-3">
+                  <p className="text-sm text-purple-600">📝 Final Presentation (10%)</p>
+                  <p className="text-sm text-red-600">📝 Group Report & Poster (30%)</p>
                 </div>
+                <div className="text-center">
+                  <span className="bg-yellow-500 text-white text-sm px-4 py-1.5 rounded-full font-bold">
+                    40% FINAL
+                  </span>
+                </div>
+                <Link to="/spring-2026/weeks/13" className="text-primary hover:underline text-sm mt-3 inline-block">
+                  👉 Access Materials
+                </Link>
               </div>
-              <p className="text-sm text-muted-foreground mb-3">
-                📚 Final presentations. Submit report to LegCo via redress system as a complaint about government data governance.
-              </p>
-              <div className="space-y-1 mb-3">
-                <p className="text-sm text-purple-600">📝 Final Presentation (10%)</p>
-                <p className="text-sm text-red-600">📝 Group Report & Poster (30%)</p>
-              </div>
-              <div className="text-center">
-                <span className="bg-yellow-500 text-white text-sm px-4 py-1.5 rounded-full font-bold">
-                  40% FINAL
-                </span>
-              </div>
-              <Link to="/spring-2026/weeks/13" className="text-primary hover:underline text-sm mt-3 inline-block">
-                👉 Access Materials
-              </Link>
             </div>
           </div>
         </div>
