@@ -478,9 +478,8 @@ Name: food_waste_behavior, dtype: int64
                 <AlertTriangle className="h-4 w-4 text-amber-500" />
                 <AlertTitle className="text-amber-600 dark:text-amber-400">Simulation Mode</AlertTitle>
                 <AlertDescription className="text-sm">
-                  This is an <strong>interactive simulation</strong> to help you understand the Vibe Coding workflow. 
-                  Outputs are pre-programmed examples based on real data. For actual Python execution, 
-                  download the <a href="/assets/GCAP3226_week2_student.ipynb" download className="underline font-medium">Jupyter Notebook</a> and run it in Google Colab or locally.
+                  This is an <strong>interactive simulation</strong> to help you understand the Vibe Coding workflow before using real tools. 
+                  After practicing here, you'll use VS Code with GitHub Copilot for real AI-assisted coding.
                 </AlertDescription>
               </Alert>
 
@@ -489,31 +488,77 @@ Name: food_waste_behavior, dtype: int64
                 <div className="text-center">
                   <h2 className="text-2xl font-bold mb-2">Welcome to Vibe Coding! 🎉</h2>
                   <p className="text-muted-foreground">
-                    Describe what you want in plain English → AI generates Python code → Preview it!
+                    A new way to code: describe what you want in plain English, and AI writes the code for you.
                   </p>
                 </div>
 
+                {/* What is Vibe Coding */}
+                <Card className="bg-gradient-to-br from-purple-500/10 to-transparent border-purple-500/20">
+                  <CardContent className="p-4 sm:p-6">
+                    <div className="flex items-start gap-3 mb-4">
+                      <Sparkles className="w-6 h-6 text-purple-500 shrink-0 mt-1" />
+                      <div>
+                        <h3 className="font-semibold text-lg mb-1">What is Vibe Coding?</h3>
+                        <p className="text-sm text-muted-foreground">
+                          "Vibe Coding" is a term coined by Andrej Karpathy (former AI Director at Tesla) to describe 
+                          a new programming approach where you <strong>describe your intent</strong> and let AI generate the code. 
+                          You focus on <em>what</em> you want, not <em>how</em> to write it.
+                        </p>
+                      </div>
+                    </div>
+                    <div className="grid sm:grid-cols-3 gap-3 text-center">
+                      <div className="p-3 rounded-lg bg-background/50">
+                        <p className="text-2xl mb-1">💬</p>
+                        <p className="text-xs font-medium">1. Describe</p>
+                        <p className="text-xs text-muted-foreground">Tell AI what you need</p>
+                      </div>
+                      <div className="p-3 rounded-lg bg-background/50">
+                        <p className="text-2xl mb-1">🤖</p>
+                        <p className="text-xs font-medium">2. Generate</p>
+                        <p className="text-xs text-muted-foreground">AI writes the code</p>
+                      </div>
+                      <div className="p-3 rounded-lg bg-background/50">
+                        <p className="text-2xl mb-1">✨</p>
+                        <p className="text-xs font-medium">3. Refine</p>
+                        <p className="text-xs text-muted-foreground">Review and iterate</p>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+
+                {/* Setup Prompt */}
+                <Card className="border-primary/30 bg-primary/5">
+                  <CardContent className="p-4 sm:p-6">
+                    <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                      <div className="flex items-start gap-3">
+                        <Code className="w-6 h-6 text-primary shrink-0 mt-0.5" />
+                        <div>
+                          <h3 className="font-semibold">Ready to Set Up Your Tools?</h3>
+                          <p className="text-sm text-muted-foreground">
+                            After this simulation, you'll use VS Code with GitHub Copilot. Complete the setup guide to get ready!
+                          </p>
+                        </div>
+                      </div>
+                      <Link to="/spring-2026/weeks/2/setup" className="shrink-0">
+                        <Button variant="default" size="sm">
+                          <ExternalLink className="w-4 h-4 mr-2" />
+                          Setup Guide
+                        </Button>
+                      </Link>
+                    </div>
+                  </CardContent>
+                </Card>
+
                 {/* Info Cards */}
                 <div className="grid md:grid-cols-3 gap-3">
-                  <Card className="bg-gradient-to-br from-purple-500/10 to-purple-500/5 border-purple-500/20">
-                    <CardContent className="p-4">
-                      <div className="flex items-center gap-2 mb-2">
-                        <Sparkles className="w-4 h-4 text-purple-500" />
-                        <span className="font-medium text-sm">Vibe Coding</span>
-                      </div>
-                      <p className="text-xs text-muted-foreground">
-                        Describe what you want in plain English, AI writes the code for you.
-                      </p>
-                    </CardContent>
-                  </Card>
                   <Card className="bg-gradient-to-br from-blue-500/10 to-blue-500/5 border-blue-500/20">
                     <CardContent className="p-4">
                       <div className="flex items-center gap-2 mb-2">
                         <Code className="w-4 h-4 text-blue-500" />
-                        <span className="font-medium text-sm">Python</span>
+                        <span className="font-medium text-sm">Python & Pandas</span>
                       </div>
                       <p className="text-xs text-muted-foreground">
-                        Easy-to-read language for data science with pandas, matplotlib, seaborn.
+                        Industry-standard tools for data analysis. You'll learn the concepts, AI helps with syntax.
                       </p>
                     </CardContent>
                   </Card>
@@ -521,10 +566,21 @@ Name: food_waste_behavior, dtype: int64
                     <CardContent className="p-4">
                       <div className="flex items-center gap-2 mb-2">
                         <Database className="w-4 h-4 text-green-500" />
-                        <span className="font-medium text-sm">Dataset</span>
+                        <span className="font-medium text-sm">Real Dataset</span>
                       </div>
                       <p className="text-xs text-muted-foreground">
-                        97 survey responses about waste charging in Hong Kong (SDG 12).
+                        97 survey responses about waste charging in Hong Kong. Real policy research data!
+                      </p>
+                    </CardContent>
+                  </Card>
+                  <Card className="bg-gradient-to-br from-amber-500/10 to-amber-500/5 border-amber-500/20">
+                    <CardContent className="p-4">
+                      <div className="flex items-center gap-2 mb-2">
+                        <Sparkles className="w-4 h-4 text-amber-500" />
+                        <span className="font-medium text-sm">GitHub Copilot</span>
+                      </div>
+                      <p className="text-xs text-muted-foreground">
+                        Free for students! Complete the setup guide to get AI coding assistance in VS Code.
                       </p>
                     </CardContent>
                   </Card>
