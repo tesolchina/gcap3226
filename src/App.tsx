@@ -19,6 +19,7 @@ import Spring2026Home from "./pages/Spring2026Home";
 import Spring2026Week1 from "./pages/Spring2026Week1";
 import Spring2026Week2 from "./pages/Spring2026Week2";
 import Spring2026Week2Lab from "./pages/Spring2026Week2Lab";
+import Spring2026Week2Setup from "./pages/Spring2026Week2Setup";
 import Spring2026Week2Notebook from "./pages/Spring2026Week2Notebook";
 import Spring2026Week3 from "./pages/Spring2026Week3";
 import Spring2026Week4 from "./pages/Spring2026Week4";
@@ -118,6 +119,7 @@ const AppContent = () => {
               <Route path="/spring-2026/weeks/1" element={<Spring2026Week1 />} />
               <Route path="/spring-2026/weeks/2" element={<Spring2026Week2 />} />
               <Route path="/spring-2026/weeks/2/lab" element={<Spring2026Week2Lab />} />
+              <Route path="/spring-2026/weeks/2/setup" element={<Spring2026Week2Setup />} />
               <Route path="/spring-2026/weeks/2/notebook" element={<Spring2026Week2Notebook />} />
               <Route path="/spring-2026/weeks/3" element={<Spring2026Week3 />} />
               <Route path="/spring-2026/weeks/4" element={<Spring2026Week4 />} />
