@@ -37,7 +37,19 @@ const Spring2026Week2 = () => (
       ],
     }}
     customContent={
-      <div className="mt-8 space-y-4">
+      <div className="mt-8 space-y-6">
+        {/* Embedded Slides */}
+        <div className="rounded-lg overflow-hidden border border-border">
+          <div className="aspect-video w-full">
+            <iframe
+              src="https://docs.google.com/presentation/d/1yJw1aKwZQT6f9edp5B8OBppCVlGQ2wo0xG4ZZ6rPsw0/embed?start=false&loop=false&delayms=3000"
+              className="w-full h-full"
+              allowFullScreen
+              title="Week 2: Development Environment & Vibe Coding Slides"
+            />
+          </div>
+        </div>
+
         {/* Setup Guide - Primary CTA */}
         <div className="p-6 bg-gradient-to-r from-blue-500/10 to-purple-500/10 rounded-lg border border-blue-500/20">
           <div className="flex items-center gap-3 mb-3">
