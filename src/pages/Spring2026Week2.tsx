@@ -37,6 +37,24 @@ const Spring2026Week2 = () => {
           </p>
         </div>
 
+        {/* Moodle Download Link */}
+        <Card className="p-4 bg-blue-50 dark:bg-blue-950/30 border-blue-200 dark:border-blue-800">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-3">
+              <ExternalLink className="h-5 w-5 text-blue-600" />
+              <div>
+                <p className="text-sm font-medium text-blue-800 dark:text-blue-200">Download Lab Files from Moodle</p>
+                <p className="text-sm text-blue-600 dark:text-blue-400">Login required with your HKBU account</p>
+              </div>
+            </div>
+            <Button asChild size="sm" variant="outline" className="border-blue-300 hover:bg-blue-100 dark:border-blue-700 dark:hover:bg-blue-900">
+              <a href="https://buelearning.hkbu.edu.hk/course/section.php?id=1804532" target="_blank" rel="noopener noreferrer">
+                Open Moodle
+              </a>
+            </Button>
+          </div>
+        </Card>
+
         {/* Collapsible Overview Section */}
         <Collapsible open={isOverviewOpen} onOpenChange={setIsOverviewOpen}>
           <CollapsibleTrigger asChild>
