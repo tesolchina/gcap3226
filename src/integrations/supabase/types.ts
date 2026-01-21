@@ -605,6 +605,33 @@ export type Database = {
           },
         ]
       }
+      student_sessions: {
+        Row: {
+          created_at: string | null
+          first_name: string
+          id: string
+          last_name_initial: string
+          student_id_last4: string
+          unique_code: string
+        }
+        Insert: {
+          created_at?: string | null
+          first_name: string
+          id?: string
+          last_name_initial: string
+          student_id_last4: string
+          unique_code: string
+        }
+        Update: {
+          created_at?: string | null
+          first_name?: string
+          id?: string
+          last_name_initial?: string
+          student_id_last4?: string
+          unique_code?: string
+        }
+        Relationships: []
+      }
       student_submissions: {
         Row: {
           created_at: string | null
@@ -639,6 +666,42 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      teacher_registrations: {
+        Row: {
+          email: string
+          full_name: string
+          id: string
+          requested_at: string | null
+          reviewed_at: string | null
+          reviewed_by: string | null
+          section_numbers: string[] | null
+          status: string
+          user_id: string
+        }
+        Insert: {
+          email: string
+          full_name: string
+          id?: string
+          requested_at?: string | null
+          reviewed_at?: string | null
+          reviewed_by?: string | null
+          section_numbers?: string[] | null
+          status?: string
+          user_id: string
+        }
+        Update: {
+          email?: string
+          full_name?: string
+          id?: string
+          requested_at?: string | null
+          reviewed_at?: string | null
+          reviewed_by?: string | null
+          section_numbers?: string[] | null
+          status?: string
+          user_id?: string
+        }
+        Relationships: []
       }
       teams: {
         Row: {
