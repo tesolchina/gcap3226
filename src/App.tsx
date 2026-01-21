@@ -7,12 +7,14 @@ import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { ArchiveSidebar } from "@/components/ArchiveSidebar";
 import { Spring2026Sidebar } from "@/components/Spring2026Sidebar";
 import { AuthProvider } from "@/contexts/AuthContext";
+import { StudentProvider } from "@/contexts/StudentContext";
 import { UserMenu } from "@/components/UserMenu";
 import Home from "./pages/Home";
 import Fall2025Archive from "./pages/Fall2025Archive";
 import Week13 from "./pages/Week13";
 import TeamPage from "./pages/TeamPage";
 import Login from "./pages/Login";
+import StudentLogin from "./pages/StudentLogin";
 import TeacherDashboard from "./pages/TeacherDashboard";
 import NotFound from "./pages/NotFound";
 import Spring2026Home from "./pages/Spring2026Home";
@@ -160,6 +162,7 @@ const AppContent = () => {
         <Route path="/" element={<Home />} />
         <Route path="/teaser" element={<CourseTeaser />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/student-login" element={<StudentLogin />} />
         <Route path="/teacher-dashboard" element={<TeacherDashboard />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
@@ -171,11 +174,13 @@ const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
       <AuthProvider>
-        <Toaster />
-        <Sonner />
-        <BrowserRouter>
-          <AppContent />
-        </BrowserRouter>
+        <StudentProvider>
+          <Toaster />
+          <Sonner />
+          <BrowserRouter>
+            <AppContent />
+          </BrowserRouter>
+        </StudentProvider>
       </AuthProvider>
     </TooltipProvider>
   </QueryClientProvider>

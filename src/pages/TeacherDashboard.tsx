@@ -8,10 +8,11 @@ import { Textarea } from '@/components/ui/textarea';
 import { Switch } from '@/components/ui/switch';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Progress } from '@/components/ui/progress';
+import { Badge } from '@/components/ui/badge';
 import { supabase } from '@/integrations/supabase/client';
 import { useAuth } from '@/contexts/AuthContext';
 import { toast } from 'sonner';
-import { Plus, Trash2, BarChart3, LogOut, RefreshCw } from 'lucide-react';
+import { Plus, Trash2, BarChart3, LogOut, RefreshCw, Users, Check, X, Clock } from 'lucide-react';
 
 interface Question {
   id: string;
@@ -30,11 +31,22 @@ interface ResponseStats {
   options: string[];
 }
 
+interface TeacherRegistration {
+  id: string;
+  user_id: string;
+  email: string;
+  full_name: string;
+  section_numbers: string[];
+  status: 'pending' | 'approved' | 'rejected';
+  requested_at: string;
+}
+
 const TeacherDashboard = () => {
   const navigate = useNavigate();
   const { user, isTeacher, loading: authLoading } = useAuth();
   const [questions, setQuestions] = useState<Question[]>([]);
   const [responseStats, setResponseStats] = useState<ResponseStats[]>([]);
+  const [registrations, setRegistrations] = useState<TeacherRegistration[]>([]);
   const [loading, setLoading] = useState(true);
   const [newQuestion, setNewQuestion] = useState({
     page_slug: '',
@@ -57,37 +69,81 @@ const TeacherDashboard = () => {
     }
   }, [user, isTeacher, authLoading, navigate]);
 
+  // Realtime subscription for registrations
+  useEffect(() => {
+    const channel = supabase
+      .channel('teacher_registrations')
+      .on(
+        'postgres_changes',
+        { event: '*', schema: 'public', table: 'teacher_registrations' },
+        () => {
+          fetchRegistrations();
+        }
+      )
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(channel);
+    };
+  }, []);
+
   const fetchData = async () => {
     setLoading(true);
     try {
-      // Fetch all questions (including inactive for teachers)
-      const { data: questionsData, error: questionsError } = await supabase
-        .from('mc_questions')
-        .select('*')
-        .order('page_slug')
-        .order('display_order');
-
-      if (questionsError) throw questionsError;
-
-      const formattedQuestions: Question[] = (questionsData || []).map(q => ({
-        id: q.id,
-        page_slug: q.page_slug,
-        question_text: q.question_text,
-        is_active: q.is_active ?? true,
-        display_order: q.display_order ?? 0,
-        options: Array.isArray(q.options) ? (q.options as string[]) : []
-      }));
-
-      setQuestions(formattedQuestions);
-
-      // Fetch response statistics
-      await fetchResponseStats(formattedQuestions);
+      await Promise.all([
+        fetchQuestions(),
+        fetchRegistrations()
+      ]);
     } catch (error) {
       console.error('Error fetching data:', error);
       toast.error('Failed to load data');
     } finally {
       setLoading(false);
     }
+  };
+
+  const fetchQuestions = async () => {
+    const { data: questionsData, error: questionsError } = await supabase
+      .from('mc_questions')
+      .select('*')
+      .order('page_slug')
+      .order('display_order');
+
+    if (questionsError) throw questionsError;
+
+    const formattedQuestions: Question[] = (questionsData || []).map(q => ({
+      id: q.id,
+      page_slug: q.page_slug,
+      question_text: q.question_text,
+      is_active: q.is_active ?? true,
+      display_order: q.display_order ?? 0,
+      options: Array.isArray(q.options) ? (q.options as string[]) : []
+    }));
+
+    setQuestions(formattedQuestions);
+    await fetchResponseStats(formattedQuestions);
+  };
+
+  const fetchRegistrations = async () => {
+    const { data, error } = await supabase
+      .from('teacher_registrations')
+      .select('*')
+      .order('requested_at', { ascending: false });
+
+    if (error) {
+      console.error('Error fetching registrations:', error);
+      return;
+    }
+
+    setRegistrations((data || []).map(r => ({
+      id: r.id,
+      user_id: r.user_id,
+      email: r.email,
+      full_name: r.full_name,
+      section_numbers: r.section_numbers || [],
+      status: r.status as 'pending' | 'approved' | 'rejected',
+      requested_at: r.requested_at || ''
+    })));
   };
 
   const fetchResponseStats = async (questionsData: Question[]) => {
@@ -114,6 +170,57 @@ const TeacherDashboard = () => {
     }
 
     setResponseStats(stats);
+  };
+
+  const handleApproveRegistration = async (registration: TeacherRegistration) => {
+    try {
+      // Update registration status
+      const { error: updateError } = await supabase
+        .from('teacher_registrations')
+        .update({
+          status: 'approved',
+          reviewed_at: new Date().toISOString(),
+          reviewed_by: user?.id
+        })
+        .eq('id', registration.id);
+
+      if (updateError) throw updateError;
+
+      // Add to user_roles
+      const { error: roleError } = await supabase
+        .from('user_roles')
+        .insert({
+          user_id: registration.user_id,
+          role: 'teacher'
+        });
+
+      if (roleError) throw roleError;
+
+      toast.success(`Approved ${registration.full_name}`);
+    } catch (error) {
+      console.error('Error approving registration:', error);
+      toast.error('Failed to approve registration');
+    }
+  };
+
+  const handleRejectRegistration = async (registration: TeacherRegistration) => {
+    try {
+      const { error } = await supabase
+        .from('teacher_registrations')
+        .update({
+          status: 'rejected',
+          reviewed_at: new Date().toISOString(),
+          reviewed_by: user?.id
+        })
+        .eq('id', registration.id);
+
+      if (error) throw error;
+
+      toast.success(`Rejected ${registration.full_name}`);
+    } catch (error) {
+      console.error('Error rejecting registration:', error);
+      toast.error('Failed to reject registration');
+    }
   };
 
   const handleCreateQuestion = async () => {
@@ -191,6 +298,8 @@ const TeacherDashboard = () => {
     navigate('/');
   };
 
+  const pendingRegistrations = registrations.filter(r => r.status === 'pending');
+
   if (authLoading || loading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
@@ -219,6 +328,15 @@ const TeacherDashboard = () => {
             <TabsTrigger value="questions">
               <Plus className="h-4 w-4 mr-2" />
               Manage Questions
+            </TabsTrigger>
+            <TabsTrigger value="teachers" className="relative">
+              <Users className="h-4 w-4 mr-2" />
+              Manage Teachers
+              {pendingRegistrations.length > 0 && (
+                <Badge variant="destructive" className="ml-2 h-5 w-5 p-0 flex items-center justify-center text-xs">
+                  {pendingRegistrations.length}
+                </Badge>
+              )}
             </TabsTrigger>
           </TabsList>
 
@@ -351,6 +469,95 @@ const TeacherDashboard = () => {
                 </CardContent>
               </Card>
             ))}
+          </TabsContent>
+
+          <TabsContent value="teachers" className="space-y-4">
+            {/* Pending Registrations */}
+            <Card>
+              <CardHeader>
+                <CardTitle className="text-base flex items-center gap-2">
+                  <Clock className="h-4 w-4" />
+                  Pending Registrations
+                </CardTitle>
+                <CardDescription>
+                  {pendingRegistrations.length} pending approval
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                {pendingRegistrations.length === 0 ? (
+                  <p className="text-sm text-muted-foreground text-center py-4">
+                    No pending registrations
+                  </p>
+                ) : (
+                  <div className="space-y-3">
+                    {pendingRegistrations.map((reg) => (
+                      <div key={reg.id} className="flex items-center justify-between p-3 bg-muted rounded-lg">
+                        <div className="space-y-1">
+                          <p className="font-medium">{reg.full_name}</p>
+                          <p className="text-sm text-muted-foreground">{reg.email}</p>
+                          <p className="text-xs text-muted-foreground">
+                            Sections: {reg.section_numbers.join(', ') || 'None specified'}
+                          </p>
+                          <p className="text-xs text-muted-foreground">
+                            Requested: {new Date(reg.requested_at).toLocaleDateString()}
+                          </p>
+                        </div>
+                        <div className="flex gap-2">
+                          <Button
+                            size="sm"
+                            variant="outline"
+                            className="text-green-600 border-green-600 hover:bg-green-50"
+                            onClick={() => handleApproveRegistration(reg)}
+                          >
+                            <Check className="h-4 w-4 mr-1" />
+                            Approve
+                          </Button>
+                          <Button
+                            size="sm"
+                            variant="outline"
+                            className="text-destructive border-destructive hover:bg-destructive/10"
+                            onClick={() => handleRejectRegistration(reg)}
+                          >
+                            <X className="h-4 w-4 mr-1" />
+                            Reject
+                          </Button>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </CardContent>
+            </Card>
+
+            {/* All Registrations */}
+            <Card>
+              <CardHeader>
+                <CardTitle className="text-base">All Registrations</CardTitle>
+              </CardHeader>
+              <CardContent>
+                {registrations.length === 0 ? (
+                  <p className="text-sm text-muted-foreground text-center py-4">
+                    No registrations yet
+                  </p>
+                ) : (
+                  <div className="space-y-2">
+                    {registrations.filter(r => r.status !== 'pending').map((reg) => (
+                      <div key={reg.id} className="flex items-center justify-between p-3 border rounded-lg">
+                        <div>
+                          <p className="font-medium">{reg.full_name}</p>
+                          <p className="text-sm text-muted-foreground">{reg.email}</p>
+                        </div>
+                        <Badge 
+                          variant={reg.status === 'approved' ? 'default' : 'destructive'}
+                        >
+                          {reg.status}
+                        </Badge>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </CardContent>
+            </Card>
           </TabsContent>
         </Tabs>
       </div>
