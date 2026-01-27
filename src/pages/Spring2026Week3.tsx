@@ -18,7 +18,7 @@ import {
 } from "lucide-react";
 
 const SLIDES_URL = "https://docs.google.com/presentation/d/1PUmZZ7V7114P7pnDNwZ9EoaEZUwW33GwybwI-kNqINg";
-const MENTIMETER_URL = "https://www.menti.com/PLACEHOLDER"; // Replace with actual Mentimeter URL
+const MENTIMETER_URL = "https://www.menti.com/al3z33obk7eo";
 const MOODLE_URL = "#"; // Replace with actual Moodle section URL
 
 const Spring2026Week3 = () => {
@@ -166,33 +166,27 @@ const Spring2026Week3 = () => {
             </Button>
           </CollapsibleTrigger>
           <CollapsibleContent className="mt-4">
-            <Card className="p-6 bg-amber-50 dark:bg-amber-950/30 border-amber-200 dark:border-amber-800">
-              <div className="text-center space-y-4">
-                <div className="flex items-center justify-center gap-2 text-amber-700 dark:text-amber-300">
-                  <BarChart3 className="h-6 w-6" />
-                  <h3 className="text-lg font-semibold">Mentimeter Placeholder</h3>
-                </div>
-                <p className="text-sm text-amber-600 dark:text-amber-400">
-                  The live Mentimeter session will be embedded here during class.
-                </p>
-                <div className="aspect-video w-full bg-amber-100 dark:bg-amber-900/50 rounded-lg flex items-center justify-center border border-amber-200 dark:border-amber-700">
-                  <div className="text-center text-amber-600 dark:text-amber-400">
-                    <BarChart3 className="h-12 w-12 mx-auto mb-2 opacity-50" />
-                    <p className="text-sm">Mentimeter embed will appear here</p>
-                    <p className="text-xs mt-1 opacity-75">URL to be provided</p>
-                  </div>
-                </div>
+            <div className="rounded-lg overflow-hidden border border-amber-200 dark:border-amber-800">
+              <div className="flex items-center justify-between bg-amber-50 dark:bg-amber-950/30 px-4 py-2 border-b border-amber-200 dark:border-amber-800">
+                <span className="text-sm font-medium text-amber-700 dark:text-amber-300">Live Mentimeter Session</span>
                 <Button
-                  variant="outline"
-                  className="border-amber-300 hover:bg-amber-100 dark:border-amber-700 dark:hover:bg-amber-900"
+                  variant="ghost"
+                  size="sm"
                   onClick={() => window.open(MENTIMETER_URL, "_blank")}
-                  disabled={MENTIMETER_URL.includes("PLACEHOLDER")}
+                  className="h-8 px-2 text-amber-600 hover:text-amber-700 hover:bg-amber-100"
                 >
-                  <ExternalLink className="w-4 h-4 mr-2" />
+                  <ExternalLink className="w-4 h-4 mr-1" />
                   Open in New Tab
                 </Button>
               </div>
-            </Card>
+              <div className="aspect-video w-full">
+                <iframe
+                  src={MENTIMETER_URL}
+                  className="w-full h-full"
+                  title="Week 3: Live Mentimeter Session"
+                />
+              </div>
+            </div>
           </CollapsibleContent>
         </Collapsible>
 
