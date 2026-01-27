@@ -23,6 +23,7 @@ const MOODLE_URL = "#"; // Replace with actual Moodle section URL
 
 const Spring2026Week3 = () => {
   const iframeRef = useRef<HTMLIFrameElement>(null);
+  const mentimeterIframeRef = useRef<HTMLIFrameElement>(null);
   const [isOverviewOpen, setIsOverviewOpen] = useState(false);
   const [isSlidesOpen, setIsSlidesOpen] = useState(false);
   const [isMentimeterOpen, setIsMentimeterOpen] = useState(false);
@@ -31,6 +32,12 @@ const Spring2026Week3 = () => {
   const handleFullscreen = () => {
     if (iframeRef.current?.requestFullscreen) {
       iframeRef.current.requestFullscreen();
+    }
+  };
+
+  const handleMentimeterFullscreen = () => {
+    if (mentimeterIframeRef.current?.requestFullscreen) {
+      mentimeterIframeRef.current.requestFullscreen();
     }
   };
 
@@ -169,18 +176,30 @@ const Spring2026Week3 = () => {
             <div className="rounded-lg overflow-hidden border border-amber-200 dark:border-amber-800">
               <div className="flex items-center justify-between bg-amber-50 dark:bg-amber-950/30 px-4 py-2 border-b border-amber-200 dark:border-amber-800">
                 <span className="text-sm font-medium text-amber-700 dark:text-amber-300">Live Mentimeter Session</span>
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  onClick={() => window.open(MENTIMETER_URL, "_blank")}
-                  className="h-8 px-2 text-amber-600 hover:text-amber-700 hover:bg-amber-100"
-                >
-                  <ExternalLink className="w-4 h-4 mr-1" />
-                  Open in New Tab
-                </Button>
+                <div className="flex items-center gap-2">
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={handleMentimeterFullscreen}
+                    className="h-8 px-2 text-amber-600 hover:text-amber-700 hover:bg-amber-100"
+                  >
+                    <Maximize2 className="w-4 h-4 mr-1" />
+                    Fullscreen
+                  </Button>
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={() => window.open(MENTIMETER_URL, "_blank")}
+                    className="h-8 px-2 text-amber-600 hover:text-amber-700 hover:bg-amber-100"
+                  >
+                    <ExternalLink className="w-4 h-4 mr-1" />
+                    Open in New Tab
+                  </Button>
+                </div>
               </div>
               <div className="aspect-video w-full">
                 <iframe
+                  ref={mentimeterIframeRef}
                   src={MENTIMETER_URL}
                   className="w-full h-full"
                   title="Week 3: Live Mentimeter Session"
