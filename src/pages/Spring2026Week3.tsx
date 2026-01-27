@@ -229,20 +229,12 @@ const Spring2026Week3 = () => {
                   <ExternalLink className="h-5 w-5 text-blue-600" />
                   <div>
                     <p className="text-sm font-medium text-blue-800 dark:text-blue-200">Download Exercise Files from Moodle</p>
-                    <p className="text-sm text-blue-600 dark:text-blue-400">Login required with your HKBU account</p>
+                    <p className="text-sm text-blue-600 dark:text-blue-400">Link to be updated</p>
                   </div>
                 </div>
-                <Button 
-                  asChild 
-                  size="sm" 
-                  variant="outline" 
-                  className="border-blue-300 hover:bg-blue-100 dark:border-blue-700 dark:hover:bg-blue-900"
-                  disabled={MOODLE_URL === "#"}
-                >
-                  <a href={MOODLE_URL} target="_blank" rel="noopener noreferrer">
-                    Open Moodle
-                  </a>
-                </Button>
+                <Badge variant="outline" className="border-blue-300 text-blue-600">
+                  Coming Soon
+                </Badge>
               </div>
             </Card>
 
