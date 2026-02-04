@@ -161,50 +161,26 @@ const Spring2026Week4 = () => {
               <ChevronDown className={`h-4 w-4 transition-transform ${isExerciseOpen ? 'rotate-180' : ''}`} />
             </Button>
           </CollapsibleTrigger>
-          <CollapsibleContent className="mt-4 space-y-4">
+          <CollapsibleContent className="mt-4">
             {/* Moodle Link Card */}
             <Card className="p-4 bg-blue-50 dark:bg-blue-950/30 border-blue-200 dark:border-blue-800">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
                   <ExternalLink className="h-5 w-5 text-blue-600" />
                   <div>
-                    <p className="text-sm font-medium text-blue-800 dark:text-blue-200">Download Exercise Files from Moodle</p>
-                    <p className="text-sm text-blue-600 dark:text-blue-400">Link to be updated</p>
+                    <p className="text-sm font-medium text-blue-800 dark:text-blue-200">In-Class Exercise 2</p>
+                    <p className="text-sm text-blue-600 dark:text-blue-400">Submit your Jupyter Notebook to Moodle</p>
                   </div>
                 </div>
-                <Badge variant="outline" className="border-blue-300 text-blue-600">
-                  Coming Soon
-                </Badge>
-              </div>
-            </Card>
-
-            {/* Exercise Details */}
-            <Card className="p-6">
-              <h3 className="font-semibold mb-3 flex items-center gap-2">
-                <FileText className="h-4 w-4 text-primary" />
-                Simulation Modeling In-Class Exercise
-              </h3>
-              <p className="text-muted-foreground mb-4">
-                Build a bus transit simulation from Stop A to Stop B using SimPy. Generate passenger arrival data from Poisson distributions and analyze the impact on bus arrival times.
-              </p>
-              
-              <h4 className="font-medium mb-2 text-sm">Skills Practiced:</h4>
-              <ul className="space-y-1 text-sm text-muted-foreground mb-4">
-                <li className="flex items-start gap-2"><span className="text-primary">•</span>Random number generation from Poisson distribution</li>
-                <li className="flex items-start gap-2"><span className="text-primary">•</span>Discrete event simulation with SimPy</li>
-                <li className="flex items-start gap-2"><span className="text-primary">•</span>Modifying generator functions for dynamic inputs</li>
-                <li className="flex items-start gap-2"><span className="text-primary">•</span>Creating histograms and box-and-whisker plots</li>
-                <li className="flex items-start gap-2"><span className="text-primary">•</span>Interpreting simulation output distributions</li>
-              </ul>
-
-              <div className="p-4 bg-muted/50 rounded-lg">
-                <h4 className="font-medium mb-2 flex items-center gap-2">
-                  <Upload className="h-4 w-4" />
-                  Submission Instructions
-                </h4>
-                <p className="text-sm text-muted-foreground">
-                  Complete the exercise in Jupyter Notebook and upload your <code className="bg-muted px-1 rounded">.ipynb</code> file to Moodle before the end of class.
-                </p>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className="border-blue-300 text-blue-600 hover:bg-blue-100"
+                  onClick={() => window.open("https://buelearning.hkbu.edu.hk/mod/assign/view.php?id=1918676", "_blank")}
+                >
+                  <ExternalLink className="h-4 w-4 mr-1" />
+                  Open Moodle
+                </Button>
               </div>
             </Card>
           </CollapsibleContent>
