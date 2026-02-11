@@ -31,7 +31,7 @@ const Spring2026ReflectiveEssay1 = () => {
           </div>
           <div className="flex items-center gap-2 mt-4 text-sm">
             <Calendar className="h-4 w-4" />
-            <span>Due: October 5, 2025 at 11:00 PM</span>
+            <span>Due: February 27, 2026 at 11:00 PM</span>
           </div>
         </Card>
 
@@ -44,7 +44,7 @@ const Spring2026ReflectiveEssay1 = () => {
             <p><strong>📝 Length:</strong> Approximately 200 words</p>
             <p><strong>📍 Format:</strong> Plain text or link to GitHub file</p>
             <p><strong>🎓 Focus:</strong> Regression & Simulation models + group project</p>
-            <p><strong>📅 Deadline:</strong> October 5, 11:00 PM</p>
+            <p><strong>📅 Deadline:</strong> February 27, 11:00 PM</p>
           </div>
         </Card>
 
@@ -152,15 +152,13 @@ const Spring2026ReflectiveEssay1 = () => {
             <p>
               <strong>✍️ Submit via Moodle</strong> —{" "}
               <a href="https://buelearning.hkbu.edu.hk/mod/assign/view.php?id=1922859" target="_blank" rel="noopener noreferrer" className="underline">Reflective Essay 1 assignment</a>
-              {" "}(or reply to{" "}
-              <a href="https://buelearning.hkbu.edu.hk/mod/forum/discuss.php?d=332660" target="_blank" rel="noopener noreferrer" className="underline">this forum post</a>
-              ) with either:
+              {" "}with either:
             </p>
             <ul className="list-disc list-inside ml-4 space-y-2">
               <li><strong>Plain text essay</strong> — paste your ~200-word reflection directly in the forum reply</li>
               <li><strong>Link to GitHub repo file</strong> — if you work in your fork and push your essay file, submit the URL to the file (e.g. raw GitHub link or file path in your repo)</li>
             </ul>
-            <p><strong>📅 Deadline:</strong> Friday, October 5, 2025 at 11:00 PM</p>
+            <p><strong>📅 Deadline:</strong> Friday, February 27, 2026 at 11:00 PM</p>
             <p><strong>📏 Length:</strong> Approximately 200 words (180-220 words is acceptable)</p>
             <p><strong>⏰ Late Policy:</strong> 10% deduction per day late</p>
           </div>
