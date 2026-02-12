@@ -10,11 +10,11 @@ const STORAGE_KEY = "fall2025_archive_unlocked";
 
 export function useArchiveAccess() {
   const [unlocked, setUnlocked] = useState(() => {
-    return sessionStorage.getItem(STORAGE_KEY) === "true";
+    return localStorage.getItem(STORAGE_KEY) === "true";
   });
 
   const unlock = () => {
-    sessionStorage.setItem(STORAGE_KEY, "true");
+    localStorage.setItem(STORAGE_KEY, "true");
     setUnlocked(true);
   };
 
