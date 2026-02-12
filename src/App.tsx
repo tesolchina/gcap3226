@@ -58,6 +58,7 @@ import Spring2026GovInfoRequests from "./pages/Spring2026GovInfoRequests";
 import Spring2026CuratingPublicData from "./pages/Spring2026CuratingPublicData";
 import Spring2026LegCoSubmission from "./pages/Spring2026LegCoSubmission";
 import CourseTeaser from "./pages/CourseTeaser";
+import { ProtectedArchiveRoute } from "@/components/ProtectedArchiveRoute";
 
 const queryClient = new QueryClient();
 
@@ -83,7 +84,7 @@ const AppContent = () => {
             <Routes>
               <Route path="/fall-2025" element={<Fall2025Archive />} />
               <Route path="/fall-2025/week-13" element={<Week13 />} />
-              <Route path="/fall-2025/team/:slug" element={<TeamPage />} />
+              <Route path="/fall-2025/team/:slug" element={<ProtectedArchiveRoute><TeamPage /></ProtectedArchiveRoute>} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </main>
