@@ -21,7 +21,7 @@ export function useArchiveAccess() {
   return { unlocked, unlock };
 }
 
-export function PasswordGate({ onUnlock }: { onUnlock: () => void }) {
+export function PasswordGate({ onUnlock, message }: { onUnlock: () => void; message?: string }) {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -59,7 +59,7 @@ export function PasswordGate({ onUnlock }: { onUnlock: () => void }) {
         <div>
           <h2 className="text-xl font-bold mb-1">Protected Content</h2>
           <p className="text-sm text-muted-foreground">
-            Enter the password to access Fall 2025 team project pages.
+            {message || "Enter the password to access protected content."}
           </p>
         </div>
         <form onSubmit={handleSubmit} className="flex gap-2">
