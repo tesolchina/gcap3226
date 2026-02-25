@@ -3,7 +3,8 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-import { FileText, ExternalLink, Maximize2, ChevronDown, AlertCircle, Bot, Github } from "lucide-react";
+import { PasswordGate, useArchiveAccess } from "@/components/PasswordGate";
+import { FileText, ExternalLink, ChevronDown, AlertCircle, Bot, Github, Lock } from "lucide-react";
 import { useState } from "react";
 
 const teamDocs = [
@@ -64,7 +65,10 @@ const TeamDocEmbed = ({ doc }: { doc: typeof teamDocs[0] }) => {
   );
 };
 
-const Spring2026Week6 = () => (
+const Spring2026Week6 = () => {
+  const { unlocked, unlock } = useArchiveAccess();
+
+  return (
   <WeekLayout
     weekNumber={6}
     title="Field Work"
@@ -108,15 +112,20 @@ const Spring2026Week6 = () => (
           </AlertDescription>
         </Alert>
 
-        {/* Team Google Docs */}
+        {/* Team Google Docs - Password Protected */}
         <div className="space-y-4">
           <h2 className="text-xl font-semibold flex items-center gap-2">
             <FileText className="h-5 w-5 text-primary" />
             Team Fieldwork Documents
+            {!unlocked && <Lock className="h-4 w-4 text-muted-foreground" />}
           </h2>
-          {teamDocs.map((doc) => (
-            <TeamDocEmbed key={doc.team} doc={doc} />
-          ))}
+          {unlocked ? (
+            teamDocs.map((doc) => (
+              <TeamDocEmbed key={doc.team} doc={doc} />
+            ))
+          ) : (
+            <PasswordGate onUnlock={unlock} message="Enter the course password to access team documents." />
+          )}
         </div>
 
         {/* Agentic AI + GitHub Repo */}
@@ -139,6 +148,7 @@ const Spring2026Week6 = () => (
       </div>
     }
   />
-);
+  );
+};
 
 export default Spring2026Week6;
