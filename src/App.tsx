@@ -139,7 +139,7 @@ const AppContent = () => {
               <Route path="/spring-2026/weeks/13/team-1" element={<ProtectedPresentationRoute><Spring2026Team1 /></ProtectedPresentationRoute>} />
               <Route path="/spring-2026/weeks/13/team-2" element={<ProtectedPresentationRoute><Spring2026Team2 /></ProtectedPresentationRoute>} />
               <Route path="/spring-2026/weeks/12" element={<Spring2026Week12 />} />
-              <Route path="/spring-2026/weeks/13" element={<Spring2026Week13 />} />
+              <Route path="/spring-2026/weeks/13" element={<ProtectedPresentationRoute><Spring2026Week13 /></ProtectedPresentationRoute>} />
               <Route path="/spring-2026/topics" element={<Spring2026TopicSelection />} />
               <Route path="/spring-2026/topics/flu-shot" element={<Spring2026TopicFluShot />} />
               <Route path="/spring-2026/topics/colorectal-cancer-screening" element={<Spring2026TopicColorectalCancer />} />
