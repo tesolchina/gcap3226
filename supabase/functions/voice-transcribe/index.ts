@@ -5,16 +5,41 @@ const corsHeaders = {
   "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
 };
 
+// Max audio payload: 5MB base64 (~3.75MB raw audio)
+const MAX_AUDIO_LENGTH = 5 * 1024 * 1024;
+
 serve(async (req) => {
   if (req.method === "OPTIONS") {
     return new Response(null, { headers: corsHeaders });
   }
 
   try {
+    // Reject oversized payloads (6MB limit for the whole body)
+    const contentLength = req.headers.get("content-length");
+    if (contentLength && parseInt(contentLength) > 6_000_000) {
+      return new Response(JSON.stringify({ error: "Payload too large (max 6MB)" }), {
+        status: 413, headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
+
     const { audio } = await req.json();
     
     if (!audio) {
-      throw new Error("No audio data provided");
+      return new Response(JSON.stringify({ error: "No audio data provided" }), {
+        status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
+
+    if (typeof audio !== "string") {
+      return new Response(JSON.stringify({ error: "Audio must be a base64 string" }), {
+        status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
+
+    if (audio.length > MAX_AUDIO_LENGTH) {
+      return new Response(JSON.stringify({ error: "Audio data too large (max 5MB)" }), {
+        status: 413, headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
     }
 
     const GPT_BEST_API_KEY = Deno.env.get("GPT_BEST_API_KEY");

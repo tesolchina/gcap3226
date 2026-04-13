@@ -5,6 +5,8 @@ const corsHeaders = {
   "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
 };
 
+const MAX_QUERY_LENGTH = 2000;
+
 serve(async (req) => {
   if (req.method === "OPTIONS") {
     return new Response(null, { headers: corsHeaders });
@@ -13,9 +15,16 @@ serve(async (req) => {
   try {
     const { query } = await req.json();
     
-    if (!query) {
+    if (!query || typeof query !== "string") {
       return new Response(
-        JSON.stringify({ success: false, error: "Query is required" }),
+        JSON.stringify({ success: false, error: "Query string is required" }),
+        { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+      );
+    }
+
+    if (query.length > MAX_QUERY_LENGTH) {
+      return new Response(
+        JSON.stringify({ success: false, error: `Query too long (max ${MAX_QUERY_LENGTH} chars)` }),
         { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } }
       );
     }
@@ -29,7 +38,7 @@ serve(async (req) => {
       );
     }
 
-    console.log("Searching:", query);
+    console.log("Searching:", query.substring(0, 100));
 
     const response = await fetch("https://api.perplexity.ai/chat/completions", {
       method: "POST",
