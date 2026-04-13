@@ -1,6 +1,6 @@
 import WeekLayout from "@/components/WeekLayout";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Presentation, ExternalLink } from "lucide-react";
+import { Card, CardHeader, CardTitle } from "@/components/ui/card";
+import { Presentation } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 
