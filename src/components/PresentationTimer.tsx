@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Play, Pause, RotateCcw, Timer } from "lucide-react";
 
 export const PresentationTimer = () => {
-  const [timeLeft, setTimeLeft] = useState(15 * 60); // 15 minutes in seconds
+  const [timeLeft, setTimeLeft] = useState(8 * 60); // 8 minutes in seconds
   const [isRunning, setIsRunning] = useState(false);
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
@@ -42,7 +42,7 @@ export const PresentationTimer = () => {
 
   const handleReset = () => {
     setIsRunning(false);
-    setTimeLeft(15 * 60);
+    setTimeLeft(8 * 60);
   };
 
   const minutes = Math.floor(timeLeft / 60);
@@ -137,7 +137,7 @@ export const PresentationTimer = () => {
         {/* Info */}
         <div className="pt-4 border-t border-border/50">
           <p className="text-xs text-muted-foreground">
-            Total time: 15 minutes | Click Start to begin countdown
+            Total time: 8 minutes | Click Start to begin countdown
           </p>
         </div>
       </div>

@@ -10,7 +10,7 @@ interface TimeLeft {
 }
 
 export const CountdownTimer = () => {
-  const presentationDate = new Date("2025-11-25T11:00:00");
+  const presentationDate = new Date("2026-04-22T11:00:00");
   
   const calculateTimeLeft = (): TimeLeft => {
     const difference = +presentationDate - +new Date();
@@ -47,7 +47,7 @@ export const CountdownTimer = () => {
           <div className="flex items-center gap-2">
             <Clock className="h-5 w-5 text-primary" />
             <span className="font-semibold">
-              {isEventPassed ? "Presentations Today! - Nov 25" : "Time Until Presentations (Nov 25)"}
+              {isEventPassed ? "Presentations Today! - Apr 22" : "Time Until Presentations (Apr 22)"}
             </span>
           </div>
           
