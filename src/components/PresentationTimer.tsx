@@ -6,7 +6,7 @@ import { Play, Pause, RotateCcw, Timer } from "lucide-react";
 export const PresentationTimer = () => {
   const [timeLeft, setTimeLeft] = useState(15 * 60); // 15 minutes in seconds
   const [isRunning, setIsRunning] = useState(false);
-  const intervalRef = useRef<NodeJS.Timeout | null>(null);
+  const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
   useEffect(() => {
     if (isRunning && timeLeft > 0) {
