@@ -15,12 +15,12 @@ const Spring2026Team1 = () => {
         {/* Header */}
         <div className="flex items-center gap-4">
           <Button variant="ghost" size="icon" asChild>
-            <Link to="/spring-2026/weeks/11">
+            <Link to="/spring-2026/weeks/13">
               <ArrowLeft className="h-5 w-5" />
             </Link>
           </Button>
           <div>
-            <p className="text-sm text-muted-foreground">Team 1 • Week 11 Presentation</p>
+            <p className="text-sm text-muted-foreground">Team 1 • Final Presentation</p>
             <h1 className="text-3xl sm:text-4xl font-bold text-primary">Attracting Investment to HK</h1>
           </div>
         </div>
@@ -38,7 +38,7 @@ const Spring2026Team1 = () => {
           </CardHeader>
           <CardContent>
             <div className="bg-background/80 p-4 rounded-lg">
-              <p className="text-sm font-medium text-muted-foreground mb-1">📅 Week 11 - In-Class Presentation 1</p>
+              <p className="text-sm font-medium text-muted-foreground mb-1">📅 Week 13 - Final Presentation</p>
               <p className="text-lg font-semibold text-primary">8 minutes per team</p>
               <p className="text-xs text-muted-foreground mt-2">
                 ⏰ Please arrive 5 minutes early to set up
@@ -81,9 +81,9 @@ const Spring2026Team1 = () => {
         {/* Back */}
         <div className="flex justify-center">
           <Button asChild variant="outline">
-            <Link to="/spring-2026/weeks/11">
+            <Link to="/spring-2026/weeks/13">
               <ArrowLeft className="mr-2 h-4 w-4" />
-              Back to Week 11
+              Back to Week 13
             </Link>
           </Button>
         </div>
