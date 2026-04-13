@@ -1,6 +1,6 @@
 import WeekLayout from "@/components/WeekLayout";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Presentation, ExternalLink } from "lucide-react";
+import { Card, CardHeader, CardTitle } from "@/components/ui/card";
+import { Presentation } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 
@@ -22,45 +22,25 @@ const presentations = [
 ];
 
 const PresentationCards = () => (
-  <div className="space-y-8">
+  <div className="space-y-4">
     <h2 className="text-2xl font-bold flex items-center gap-2">
       <Presentation className="h-6 w-6 text-primary" />
       Final Presentations
     </h2>
 
     {presentations.map((p) => (
-      <Card key={p.team} className="overflow-hidden">
+      <Card key={p.team}>
         <CardHeader className="flex flex-row items-center justify-between">
           <CardTitle className="text-lg">
             {p.team}: {p.title}
           </CardTitle>
-          <div className="flex gap-2">
-            <Button variant="default" size="sm" asChild>
-              <Link to={p.pageUrl}>
-                <Presentation className="h-4 w-4 mr-1" />
-                Team Page
-              </Link>
-            </Button>
-            <Button variant="outline" size="sm" asChild>
-              <a href={p.canvaUrl} target="_blank" rel="noopener noreferrer">
-                <ExternalLink className="h-4 w-4 mr-1" />
-                Open in Canva
-              </a>
-            </Button>
-          </div>
+          <Button variant="default" size="sm" asChild>
+            <Link to={p.pageUrl}>
+              <Presentation className="h-4 w-4 mr-1" />
+              View Presentation
+            </Link>
+          </Button>
         </CardHeader>
-        <CardContent className="p-0">
-          <div className="relative w-full" style={{ paddingBottom: "56.25%" }}>
-            <iframe
-              src={p.embedUrl}
-              className="absolute inset-0 w-full h-full border-0"
-              loading="lazy"
-              allowFullScreen
-              allow="fullscreen"
-              title={`${p.team} - ${p.title}`}
-            />
-          </div>
-        </CardContent>
       </Card>
     ))}
   </div>
