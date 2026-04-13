@@ -21,7 +21,7 @@ export function useArchiveAccess() {
   return { unlocked, unlock };
 }
 
-export function PasswordGate({ onUnlock, message }: { onUnlock: () => void; message?: string }) {
+export function PasswordGate({ onUnlock, message, type }: { onUnlock: () => void; message?: string; type?: string }) {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -32,7 +32,7 @@ export function PasswordGate({ onUnlock, message }: { onUnlock: () => void; mess
     setLoading(true);
     try {
       const { data, error } = await supabase.functions.invoke("validate-secret-code", {
-        body: { code: password.trim() },
+        body: { code: password.trim(), type: type || "archive" },
       });
 
       if (error) throw error;

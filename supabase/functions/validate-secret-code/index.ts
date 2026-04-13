@@ -1,5 +1,3 @@
-import { createClient } from 'https://esm.sh/@supabase/supabase-js@2.39.3';
-
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
   'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
@@ -11,8 +9,11 @@ Deno.serve(async (req) => {
   }
 
   try {
-    const { code } = await req.json();
-    const storedSecret = Deno.env.get('secretCode');
+    const { code, type } = await req.json();
+
+    // Determine which secret to check based on type
+    const secretName = type === 'presentation' ? 'presentationCode' : 'secretCode';
+    const storedSecret = Deno.env.get(secretName);
 
     if (!storedSecret) {
       return new Response(
