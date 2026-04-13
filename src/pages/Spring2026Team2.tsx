@@ -1,6 +1,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { PresentationTimer } from "@/components/PresentationTimer";
+import { FullscreenPresentation } from "@/components/FullscreenPresentation";
 import { Presentation, ExternalLink, Clock, ArrowLeft } from "lucide-react";
 import { Link } from "react-router-dom";
 import { CountdownTimer } from "@/components/CountdownTimer";
@@ -64,17 +65,8 @@ const Spring2026Team2 = () => {
               </a>
             </Button>
           </CardHeader>
-          <CardContent className="p-0">
-            <div className="relative w-full" style={{ paddingBottom: "56.25%" }}>
-              <iframe
-                src={EMBED_URL}
-                className="absolute inset-0 w-full h-full border-0"
-                loading="lazy"
-                allowFullScreen
-                allow="fullscreen"
-                title="Team 2 - AI for Science"
-              />
-            </div>
+          <CardContent>
+            <FullscreenPresentation embedUrl={EMBED_URL} title="Team 2 - AI for Science" />
           </CardContent>
         </Card>
 
