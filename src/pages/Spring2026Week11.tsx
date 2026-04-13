@@ -2,6 +2,7 @@ import WeekLayout from "@/components/WeekLayout";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Presentation, ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 
 const presentations = [
   {
@@ -9,12 +10,14 @@ const presentations = [
     title: "Attracting Investment to HK",
     canvaUrl: "https://www.canva.com/design/DAHESfWZ-Ns/xBDJC7nJ6ta9GCRCSP8vqA/view",
     embedUrl: "https://www.canva.com/design/DAHESfWZ-Ns/xBDJC7nJ6ta9GCRCSP8vqA/view?embed",
+    pageUrl: "/spring-2026/weeks/11/team-1",
   },
   {
     team: "Team 2",
     title: "AI for Science",
     canvaUrl: "https://www.canva.com/design/DAHE2KyZd6s/q2HOrCv-3gDE4TrjpIvFvw/view",
     embedUrl: "https://www.canva.com/design/DAHE2KyZd6s/q2HOrCv-3gDE4TrjpIvFvw/view?embed",
+    pageUrl: "/spring-2026/weeks/11/team-2",
   },
 ];
 
@@ -31,12 +34,20 @@ const PresentationCards = () => (
           <CardTitle className="text-lg">
             {p.team}: {p.title}
           </CardTitle>
-          <Button variant="outline" size="sm" asChild>
-            <a href={p.canvaUrl} target="_blank" rel="noopener noreferrer">
-              <ExternalLink className="h-4 w-4 mr-1" />
-              Open in Canva
-            </a>
-          </Button>
+          <div className="flex gap-2">
+            <Button variant="default" size="sm" asChild>
+              <Link to={p.pageUrl}>
+                <Presentation className="h-4 w-4 mr-1" />
+                Team Page
+              </Link>
+            </Button>
+            <Button variant="outline" size="sm" asChild>
+              <a href={p.canvaUrl} target="_blank" rel="noopener noreferrer">
+                <ExternalLink className="h-4 w-4 mr-1" />
+                Open in Canva
+              </a>
+            </Button>
+          </div>
         </CardHeader>
         <CardContent className="p-0">
           <div className="relative w-full" style={{ paddingBottom: "56.25%" }}>
