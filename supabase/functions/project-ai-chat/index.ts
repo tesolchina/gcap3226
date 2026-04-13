@@ -6,6 +6,9 @@ const corsHeaders = {
   "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
 };
 
+const MAX_MESSAGES = 50;
+const MAX_MESSAGE_LENGTH = 10000;
+
 // Generate embedding using Lovable AI Gateway
 async function generateEmbedding(text: string): Promise<number[]> {
   const LOVABLE_API_KEY = Deno.env.get("LOVABLE_API_KEY");
@@ -21,7 +24,7 @@ async function generateEmbedding(text: string): Promise<number[]> {
     },
     body: JSON.stringify({
       model: "text-embedding-3-small",
-      input: text,
+      input: text.substring(0, 8000),
     }),
   });
 
@@ -92,11 +95,54 @@ serve(async (req) => {
   }
 
   try {
+    // Reject oversized payloads (100KB limit)
+    const contentLength = req.headers.get("content-length");
+    if (contentLength && parseInt(contentLength) > 100_000) {
+      return new Response(JSON.stringify({ error: "Payload too large" }), {
+        status: 413, headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
+
     const { messages, projectGroupId, topicTitle, enableRAG = true } = await req.json();
 
+    // Validate messages
     if (!messages || !Array.isArray(messages) || messages.length === 0) {
       return new Response(
         JSON.stringify({ error: "messages array required" }),
+        { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+      );
+    }
+    if (messages.length > MAX_MESSAGES) {
+      return new Response(
+        JSON.stringify({ error: `Too many messages (max ${MAX_MESSAGES})` }),
+        { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+      );
+    }
+    for (const msg of messages) {
+      if (!msg.role || !msg.content || typeof msg.content !== "string") {
+        return new Response(
+          JSON.stringify({ error: "Each message must have role and content strings" }),
+          { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+        );
+      }
+      if (msg.content.length > MAX_MESSAGE_LENGTH) {
+        return new Response(
+          JSON.stringify({ error: `Message too long (max ${MAX_MESSAGE_LENGTH} chars)` }),
+          { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+        );
+      }
+    }
+
+    // Validate optional params
+    if (projectGroupId && typeof projectGroupId !== "string") {
+      return new Response(
+        JSON.stringify({ error: "Invalid projectGroupId" }),
+        { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+      );
+    }
+    if (topicTitle && (typeof topicTitle !== "string" || topicTitle.length > 200)) {
+      return new Response(
+        JSON.stringify({ error: "Invalid topicTitle" }),
         { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } }
       );
     }

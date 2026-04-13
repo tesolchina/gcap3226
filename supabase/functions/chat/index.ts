@@ -5,6 +5,10 @@ const corsHeaders = {
   "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
 };
 
+const MAX_MESSAGES = 50;
+const MAX_MESSAGE_LENGTH = 10000;
+const MAX_SYSTEM_PROMPT_LENGTH = 5000;
+
 // Helper function to search the web using Perplexity
 async function searchWeb(query: string): Promise<string> {
   const apiKey = Deno.env.get("PERPLEXITY_API_KEY");
@@ -23,7 +27,7 @@ async function searchWeb(query: string): Promise<string> {
         model: "sonar",
         messages: [
           { role: "system", content: "You are a research assistant. Provide accurate, up-to-date information. Be concise." },
-          { role: "user", content: query }
+          { role: "user", content: query.substring(0, 2000) }
         ],
       }),
     });
@@ -53,9 +57,47 @@ serve(async (req) => {
   }
 
   try {
-    const { messages, systemPrompt, enableWebSearch } = await req.json();
+    // Reject oversized payloads (100KB limit)
+    const contentLength = req.headers.get("content-length");
+    if (contentLength && parseInt(contentLength) > 100_000) {
+      return new Response(JSON.stringify({ error: "Payload too large" }), {
+        status: 413, headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
+
+    const body = await req.json();
+    const { messages, systemPrompt, enableWebSearch } = body;
+
+    // Validate messages
+    if (!messages || !Array.isArray(messages) || messages.length === 0) {
+      return new Response(JSON.stringify({ error: "messages array is required" }), {
+        status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
+    if (messages.length > MAX_MESSAGES) {
+      return new Response(JSON.stringify({ error: `Too many messages (max ${MAX_MESSAGES})` }), {
+        status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
+    for (const msg of messages) {
+      if (!msg.role || !msg.content || typeof msg.content !== "string") {
+        return new Response(JSON.stringify({ error: "Each message must have role and content strings" }), {
+          status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" },
+        });
+      }
+      if (msg.content.length > MAX_MESSAGE_LENGTH) {
+        return new Response(JSON.stringify({ error: `Message too long (max ${MAX_MESSAGE_LENGTH} chars)` }), {
+          status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" },
+        });
+      }
+    }
+    if (systemPrompt && (typeof systemPrompt !== "string" || systemPrompt.length > MAX_SYSTEM_PROMPT_LENGTH)) {
+      return new Response(JSON.stringify({ error: "Invalid or too long system prompt" }), {
+        status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
+
     const LOVABLE_API_KEY = Deno.env.get("LOVABLE_API_KEY");
-    
     if (!LOVABLE_API_KEY) {
       throw new Error("LOVABLE_API_KEY is not configured");
     }
@@ -76,7 +118,7 @@ serve(async (req) => {
     let enhancedSystemPrompt = systemPrompt || "You are a helpful AI assistant for an educational course. Keep answers clear and concise.";
     
     if (shouldSearch) {
-      console.log("Web search triggered for:", lastMessage);
+      console.log("Web search triggered for:", lastMessage.substring(0, 100));
       const searchResult = await searchWeb(lastMessage);
       enhancedSystemPrompt += `\n\nHere is relevant information from a web search:\n${searchResult}\n\nUse this information to help answer the user's question. Cite sources when available.`;
     }
@@ -103,21 +145,18 @@ serve(async (req) => {
     if (!response.ok) {
       if (response.status === 429) {
         return new Response(JSON.stringify({ error: "Rate limit exceeded. Please try again later." }), {
-          status: 429,
-          headers: { ...corsHeaders, "Content-Type": "application/json" },
+          status: 429, headers: { ...corsHeaders, "Content-Type": "application/json" },
         });
       }
       if (response.status === 402) {
         return new Response(JSON.stringify({ error: "AI credits exhausted. Please add funds." }), {
-          status: 402,
-          headers: { ...corsHeaders, "Content-Type": "application/json" },
+          status: 402, headers: { ...corsHeaders, "Content-Type": "application/json" },
         });
       }
       const errorText = await response.text();
       console.error("AI gateway error:", response.status, errorText);
       return new Response(JSON.stringify({ error: "AI service error" }), {
-        status: 500,
-        headers: { ...corsHeaders, "Content-Type": "application/json" },
+        status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" },
       });
     }
 
@@ -127,8 +166,7 @@ serve(async (req) => {
   } catch (e) {
     console.error("Chat error:", e);
     return new Response(JSON.stringify({ error: e instanceof Error ? e.message : "Unknown error" }), {
-      status: 500,
-      headers: { ...corsHeaders, "Content-Type": "application/json" },
+      status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" },
     });
   }
 });

@@ -6,6 +6,9 @@ const corsHeaders = {
   "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
 };
 
+const MAX_QUERY_LENGTH = 5000;
+const MAX_LIMIT = 20;
+
 // Generate embedding using Lovable AI Gateway
 async function generateEmbedding(text: string): Promise<number[]> {
   const LOVABLE_API_KEY = Deno.env.get("LOVABLE_API_KEY");
@@ -21,7 +24,7 @@ async function generateEmbedding(text: string): Promise<number[]> {
     },
     body: JSON.stringify({
       model: "text-embedding-3-small",
-      input: text,
+      input: text.substring(0, 8000),
     }),
   });
 
@@ -43,9 +46,27 @@ serve(async (req) => {
   try {
     const { query, projectGroupId, contentType, limit = 5, threshold = 0.7 } = await req.json();
 
-    if (!query) {
+    // Validate query
+    if (!query || typeof query !== "string") {
       return new Response(
-        JSON.stringify({ error: "query required" }),
+        JSON.stringify({ error: "query string required" }),
+        { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+      );
+    }
+    if (query.length > MAX_QUERY_LENGTH) {
+      return new Response(
+        JSON.stringify({ error: `Query too long (max ${MAX_QUERY_LENGTH} chars)` }),
+        { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+      );
+    }
+
+    // Validate optional params
+    const safeLimit = Math.min(Math.max(1, Number(limit) || 5), MAX_LIMIT);
+    const safeThreshold = Math.min(Math.max(0, Number(threshold) || 0.7), 1);
+
+    if (projectGroupId && typeof projectGroupId !== "string") {
+      return new Response(
+        JSON.stringify({ error: "Invalid projectGroupId" }),
         { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } }
       );
     }
@@ -65,8 +86,8 @@ serve(async (req) => {
         "search_course_knowledge",
         {
           query_embedding: queryEmbedding,
-          match_threshold: threshold,
-          match_count: limit,
+          match_threshold: safeThreshold,
+          match_count: safeLimit,
           filter_content_type: contentType || null,
         }
       );
@@ -89,8 +110,8 @@ serve(async (req) => {
           {
             query_embedding: queryEmbedding,
             p_project_group_id: projectGroupId,
-            match_threshold: threshold,
-            match_count: limit,
+            match_threshold: safeThreshold,
+            match_count: safeLimit,
           }
         );
 
@@ -108,7 +129,7 @@ serve(async (req) => {
     const allResults = [
       ...courseResults.map(r => ({ ...r, source: "course" })),
       ...projectResults.map(r => ({ ...r, source: "project" })),
-    ].sort((a, b) => (b.similarity || 0) - (a.similarity || 0)).slice(0, limit);
+    ].sort((a, b) => (b.similarity || 0) - (a.similarity || 0)).slice(0, safeLimit);
 
     return new Response(
       JSON.stringify({
