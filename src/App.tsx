@@ -32,6 +32,8 @@ import Spring2026Week8 from "./pages/Spring2026Week8";
 import Spring2026Week9 from "./pages/Spring2026Week9";
 import Spring2026Week10 from "./pages/Spring2026Week10";
 import Spring2026Week11 from "./pages/Spring2026Week11";
+import Spring2026Team1 from "./pages/Spring2026Team1";
+import Spring2026Team2 from "./pages/Spring2026Team2";
 import Spring2026Week12 from "./pages/Spring2026Week12";
 import Spring2026Week13 from "./pages/Spring2026Week13";
 import Spring2026Placeholder from "./pages/Spring2026Placeholder";
@@ -133,6 +135,8 @@ const AppContent = () => {
               <Route path="/spring-2026/weeks/9" element={<Spring2026Week9 />} />
               <Route path="/spring-2026/weeks/10" element={<Spring2026Week10 />} />
               <Route path="/spring-2026/weeks/11" element={<Spring2026Week11 />} />
+              <Route path="/spring-2026/weeks/11/team-1" element={<Spring2026Team1 />} />
+              <Route path="/spring-2026/weeks/11/team-2" element={<Spring2026Team2 />} />
               <Route path="/spring-2026/weeks/12" element={<Spring2026Week12 />} />
               <Route path="/spring-2026/weeks/13" element={<Spring2026Week13 />} />
               <Route path="/spring-2026/topics" element={<Spring2026TopicSelection />} />
