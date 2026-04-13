@@ -18,6 +18,43 @@ const presentations = [
   },
 ];
 
+const PresentationCards = () => (
+  <div className="space-y-8">
+    <h2 className="text-2xl font-bold flex items-center gap-2">
+      <Presentation className="h-6 w-6 text-primary" />
+      Team Presentations
+    </h2>
+
+    {presentations.map((p) => (
+      <Card key={p.team} className="overflow-hidden">
+        <CardHeader className="flex flex-row items-center justify-between">
+          <CardTitle className="text-lg">
+            {p.team}: {p.title}
+          </CardTitle>
+          <Button variant="outline" size="sm" asChild>
+            <a href={p.canvaUrl} target="_blank" rel="noopener noreferrer">
+              <ExternalLink className="h-4 w-4 mr-1" />
+              Open in Canva
+            </a>
+          </Button>
+        </CardHeader>
+        <CardContent className="p-0">
+          <div className="relative w-full" style={{ paddingBottom: "56.25%" }}>
+            <iframe
+              src={p.embedUrl}
+              className="absolute inset-0 w-full h-full border-0"
+              loading="lazy"
+              allowFullScreen
+              allow="fullscreen"
+              title={`${p.team} - ${p.title}`}
+            />
+          </div>
+        </CardContent>
+      </Card>
+    ))}
+  </div>
+);
+
 const Spring2026Week11 = () => (
   <WeekLayout
     weekNumber={11}
@@ -35,42 +72,8 @@ const Spring2026Week11 = () => (
     ]}
     assessment="In-Class Presentation 1 (10%)"
     assessmentLink="/spring-2026/assessments/presentation-1"
-  >
-    <div className="space-y-8 mt-8">
-      <h2 className="text-2xl font-bold flex items-center gap-2">
-        <Presentation className="h-6 w-6 text-primary" />
-        Team Presentations
-      </h2>
-
-      {presentations.map((p) => (
-        <Card key={p.team} className="overflow-hidden">
-          <CardHeader className="flex flex-row items-center justify-between">
-            <CardTitle className="text-lg">
-              {p.team}: {p.title}
-            </CardTitle>
-            <Button variant="outline" size="sm" asChild>
-              <a href={p.canvaUrl} target="_blank" rel="noopener noreferrer">
-                <ExternalLink className="h-4 w-4 mr-1" />
-                Open in Canva
-              </a>
-            </Button>
-          </CardHeader>
-          <CardContent className="p-0">
-            <div className="relative w-full" style={{ paddingBottom: "56.25%" }}>
-              <iframe
-                src={p.embedUrl}
-                className="absolute inset-0 w-full h-full border-0"
-                loading="lazy"
-                allowFullScreen
-                allow="fullscreen"
-                title={`${p.team} - ${p.title}`}
-              />
-            </div>
-          </CardContent>
-        </Card>
-      ))}
-    </div>
-  </WeekLayout>
+    customContent={<PresentationCards />}
+  />
 );
 
 export default Spring2026Week11;
