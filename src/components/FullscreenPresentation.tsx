@@ -9,7 +9,7 @@ interface FullscreenPresentationProps {
 
 export const FullscreenPresentation = ({ embedUrl, title }: FullscreenPresentationProps) => {
   const [isFullscreen, setIsFullscreen] = useState(false);
-  const [timeLeft, setTimeLeft] = useState(8 * 60);
+  const [timeLeft, setTimeLeft] = useState(12 * 60);
   const [isRunning, setIsRunning] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
@@ -125,7 +125,7 @@ export const FullscreenPresentation = ({ embedUrl, title }: FullscreenPresentati
               </Button>
             )}
             <Button
-              onClick={() => { setIsRunning(false); setTimeLeft(8 * 60); }}
+              onClick={() => { setIsRunning(false); setTimeLeft(12 * 60); }}
               size="icon"
               variant="ghost"
               className="h-8 w-8 text-white hover:bg-white/20"
