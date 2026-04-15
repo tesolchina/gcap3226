@@ -40,7 +40,7 @@ const Spring2026Team1 = () => {
           <CardContent>
             <div className="bg-background/80 p-4 rounded-lg">
               <p className="text-sm font-medium text-muted-foreground mb-1">📅 Week 13 - Final Presentation</p>
-              <p className="text-lg font-semibold text-primary">8 minutes per team</p>
+              <p className="text-lg font-semibold text-primary">12 minutes per team</p>
               <p className="text-xs text-muted-foreground mt-2">
                 ⏰ Please arrive 5 minutes early to set up
               </p>
