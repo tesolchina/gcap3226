@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { ArrowLeft, Clock, Users, FileText, CheckCircle2, AlertTriangle, Image, Mail, Lightbulb, Bot } from "lucide-react";
+import { ArrowLeft, Clock, Users, FileText, CheckCircle2, AlertTriangle, Image, Lightbulb, Bot } from "lucide-react";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 
