@@ -77,31 +77,6 @@ const Spring2026FinalPresentationReport = () => {
           </CardContent>
         </Card>
 
-        {/* Example Letters Placeholder */}
-        <Card className="border-blue-500/30 bg-blue-500/5">
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2 text-blue-600">
-              <Mail className="h-5 w-5" />
-              Reference Materials: Letters & Correspondence
-            </CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            <p className="text-muted-foreground">
-              Examples of citizen engagement with government departments will be shared here to guide your own correspondence.
-            </p>
-            <div className="space-y-3">
-              <div className="p-4 border-2 border-dashed border-muted-foreground/30 rounded-lg">
-                <h4 className="font-semibold text-sm mb-1">📧 Letter to Transport Department Assistant Director</h4>
-                <p className="text-xs text-muted-foreground">Example of successful escalation on data governance issue – to be added</p>
-              </div>
-              <div className="p-4 border-2 border-dashed border-muted-foreground/30 rounded-lg">
-                <h4 className="font-semibold text-sm mb-1">📰 Letter to the Editor: Flu Shot Program</h4>
-                <p className="text-xs text-muted-foreground">Published letter on vaccination data governance – to be added</p>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-
         {/* Report Focus: Data Governance */}
         <Card className="border-primary/30 bg-primary/5">
           <CardHeader>
