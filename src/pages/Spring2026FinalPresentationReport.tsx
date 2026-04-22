@@ -55,101 +55,25 @@ const Spring2026FinalPresentationReport = () => {
 
         {/* Deadline Alert */}
         <Card className="border-amber-500/50 bg-amber-500/10">
-          <CardContent className="flex items-center gap-4 pt-6">
-            <div className="p-3 bg-amber-500/20 rounded-full">
-              <Clock className="h-6 w-6 text-amber-600" />
-            </div>
-            <div>
-              <p className="font-bold text-lg">Submission Deadline</p>
-              <p className="text-muted-foreground">Check course schedule for exact date • Submit via Moodle forum</p>
-            </div>
-          </CardContent>
-        </Card>
-
-        {/* Project Milestones */}
-        <Card className="border-primary/30">
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              <CheckCircle2 className="h-5 w-5 text-primary" />
-              Project Milestones
-            </CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            <p className="text-muted-foreground">
-              Your project journey is structured around key milestones. Completing these on time ensures steady progress toward your final submission.
-            </p>
-            <div className="space-y-3">
-              <div className="flex items-start gap-4 p-4 bg-muted/50 rounded-lg border-l-4 border-primary">
-                <div className="text-center">
-                  <p className="text-xs text-muted-foreground">Week 1-2</p>
-                </div>
-                <div className="flex-1">
-                  <h4 className="font-semibold">Topic Selection & Team Formation</h4>
-                  <p className="text-sm text-muted-foreground">Identify your policy issue and form your project team. Begin background research.</p>
-                </div>
-                <div className="text-muted-foreground text-sm">📋 To be updated</div>
+          <CardContent className="flex items-center justify-between gap-4 pt-6 flex-wrap">
+            <div className="flex items-center gap-4">
+              <div className="p-3 bg-amber-500/20 rounded-full">
+                <Clock className="h-6 w-6 text-amber-600" />
               </div>
-              
-              <div className="flex items-start gap-4 p-4 bg-muted/50 rounded-lg border-l-4 border-muted-foreground/30">
-                <div className="text-center">
-                  <p className="text-xs text-muted-foreground">Week 3-4</p>
-                </div>
-                <div className="flex-1">
-                  <h4 className="font-semibold">Government Information Requests</h4>
-                  <p className="text-sm text-muted-foreground">Submit formal requests to government departments. Learn about data availability.</p>
-                </div>
-                <div className="text-muted-foreground text-sm">📋 To be updated</div>
-              </div>
-              
-              <div className="flex items-start gap-4 p-4 bg-muted/50 rounded-lg border-l-4 border-muted-foreground/30">
-                <div className="text-center">
-                  <p className="text-xs text-muted-foreground">Week 5-6</p>
-                </div>
-                <div className="flex-1">
-                  <h4 className="font-semibold">Data Collection & Fieldwork</h4>
-                  <p className="text-sm text-muted-foreground">Collect primary data through fieldwork. Document government responses.</p>
-                </div>
-                <div className="text-muted-foreground text-sm">📋 To be updated</div>
-              </div>
-              
-              <div className="flex items-start gap-4 p-4 bg-muted/50 rounded-lg border-l-4 border-muted-foreground/30">
-                <div className="text-center">
-                  <p className="text-xs text-muted-foreground">Week 7-8</p>
-                </div>
-                <div className="flex-1">
-                  <h4 className="font-semibold">Mathematical Modeling</h4>
-                  <p className="text-sm text-muted-foreground">Apply mathematical models and AI tools to analyze your data.</p>
-                </div>
-                <div className="text-muted-foreground text-sm">📋 To be updated</div>
-              </div>
-              
-              <div className="flex items-start gap-4 p-4 bg-muted/50 rounded-lg border-l-4 border-muted-foreground/30">
-                <div className="text-center">
-                  <p className="text-xs text-muted-foreground">Week 9-10</p>
-                </div>
-                <div className="flex-1">
-                  <h4 className="font-semibold">Draft Report & Poster</h4>
-                  <p className="text-sm text-muted-foreground">Complete first draft of report and poster design. Get feedback from teachers.</p>
-                </div>
-                <div className="text-muted-foreground text-sm">📋 To be updated</div>
-              </div>
-              
-              <div className="flex items-start gap-4 p-4 bg-muted/50 rounded-lg border-l-4 border-muted-foreground/30">
-                <div className="text-center">
-                  <p className="text-xs text-muted-foreground">Week 11-12</p>
-                </div>
-                <div className="flex-1">
-                  <h4 className="font-semibold">Final Submission & LegCo Preparation</h4>
-                  <p className="text-sm text-muted-foreground">Submit final report and poster. Prepare materials for LegCo submission.</p>
-                </div>
-                <div className="text-muted-foreground text-sm">📋 To be updated</div>
+              <div>
+                <p className="font-bold text-lg">Submission Deadline: 11:00 PM, May 13, 2026</p>
+                <p className="text-muted-foreground">Submit via Moodle forum reply (HTML, plain text, or public GitHub link)</p>
               </div>
             </div>
-            <div className="p-4 border-2 border-dashed border-muted-foreground/30 rounded-lg">
-              <p className="text-sm text-muted-foreground italic">
-                📅 Specific dates and detailed milestone requirements will be added as the semester progresses.
-              </p>
-            </div>
+            <Button asChild variant="outline" size="sm">
+              <a
+                href="https://buelearning.hkbu.edu.hk/mod/forum/discuss.php?d=357793"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Open Moodle Forum →
+              </a>
+            </Button>
           </CardContent>
         </Card>
 
@@ -221,33 +145,33 @@ const Spring2026FinalPresentationReport = () => {
           <CardContent>
             <div className="space-y-6">
               <div className="p-4 bg-muted/50 rounded-lg">
-                <h4 className="font-semibold text-lg mb-2">1. Background & Policy Context</h4>
-                <p className="text-muted-foreground">Learn about the policy area and collect publicly available information. Provide context about the program, relevant existing policies, and the current state of data governance. Document what data is available publicly and what data you had to request.</p>
+                <h4 className="font-semibold text-lg mb-2">1. Introduction</h4>
+                <p className="text-muted-foreground">Clearly articulate the problem, your research questions, and the relevance to <strong>SDG 11 (Sustainable Cities and Communities)</strong>. Explain why this policy issue matters for Hong Kong and what gap your research addresses.</p>
               </div>
 
               <div className="p-4 bg-muted/50 rounded-lg">
-                <h4 className="font-semibold text-lg mb-2">2. Identifying Government Decisions</h4>
-                <p className="text-muted-foreground">Identify a specific decision or set of decisions made by government staff. This is critical – you must pinpoint concrete decisions that can be evaluated for their data-driven basis.</p>
+                <h4 className="font-semibold text-lg mb-2">2. Background</h4>
+                <p className="text-muted-foreground">Provide context about the policy issue, relevant existing policies and plans, and the current state of data governance related to this topic. Document what data is available and what data is missing.</p>
               </div>
 
               <div className="p-4 bg-muted/50 rounded-lg">
-                <h4 className="font-semibold text-lg mb-2">3. Data Availability Assessment</h4>
-                <p className="text-muted-foreground">Document what data the government has access to, what they shared with you, and what was unavailable. Evaluate the government's data governance practices: Are they collecting the right data? Are they using it effectively?</p>
+                <h4 className="font-semibold text-lg mb-2">3. Data Analysis</h4>
+                <p className="text-muted-foreground">Conduct quantitative analysis using appropriate mathematical models (simulation, regression, or other appropriate methods). Evaluate data governance issues — data availability, transparency, and how improved data collection could enhance decision-making. Include visualizations and clear interpretation of results.</p>
               </div>
 
               <div className="p-4 bg-muted/50 rounded-lg">
-                <h4 className="font-semibold text-lg mb-2">4. Mathematical Modeling & Analysis</h4>
-                <p className="text-muted-foreground">Apply mathematical models using AI tools to analyze the data. This includes your fieldwork data and any government data received. Use visualizations and clear interpretation to support your findings.</p>
+                <h4 className="font-semibold text-lg mb-2">4. Community Engagement</h4>
+                <p className="text-muted-foreground">Describe your community engagement activities, including interactions with stakeholders, government staff, or community members. Document your use of AI tools throughout the project and explain how they supported your work.</p>
               </div>
 
               <div className="p-4 bg-muted/50 rounded-lg">
-                <h4 className="font-semibold text-lg mb-2">5. Evidence-Based Recommendations</h4>
-                <p className="text-muted-foreground">Based on your modeling results, provide 2-3 specific, actionable recommendations for how the government can improve data governance and evidence-based decision making in this policy area.</p>
+                <h4 className="font-semibold text-lg mb-2">5. Recommendations</h4>
+                <p className="text-muted-foreground">Provide actionable solutions for relevant stakeholders (government, lawmakers, NGOs, community groups). Base recommendations on your data analysis and clearly explain how improved data governance could lead to better policy outcomes.</p>
               </div>
 
               <div className="p-4 bg-muted/50 rounded-lg">
-                <h4 className="font-semibold text-lg mb-2">6. Conclusion & LegCo Complaint Framing</h4>
-                <p className="text-muted-foreground">Frame your findings as a formal complaint to the Legislative Council's redress system. The complaint should argue that the government is not adequately using data to inform decision making, and lawmakers should follow up with the relevant department.</p>
+                <h4 className="font-semibold text-lg mb-2">6. Conclusion</h4>
+                <p className="text-muted-foreground">Summarize key findings, acknowledge limitations of your study, and suggest directions for future work. Reflect on what you learned about data-driven policymaking and data governance.</p>
               </div>
             </div>
           </CardContent>
@@ -350,23 +274,57 @@ const Spring2026FinalPresentationReport = () => {
           </CardContent>
         </Card>
 
-        {/* AI-Assisted Drafting Option */}
-        <Card className="border-green-500/30 bg-green-500/5">
+        {/* AI-Assisted Drafting Option — highlighted */}
+        <Card className="border-2 border-green-500/50 bg-gradient-to-br from-green-500/10 to-emerald-500/5 shadow-lg">
           <CardHeader>
-            <CardTitle className="flex items-center gap-2 text-green-600">
-              <Bot className="h-5 w-5" />
-              Option: AI-Assisted Report Drafting
+            <CardTitle className="flex items-center gap-2 text-green-700 dark:text-green-400 text-2xl">
+              <Bot className="h-6 w-6" />
+              ⭐ Recommended: Teacher-Assisted AI Drafting
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
-            <p className="text-muted-foreground">
-              Teams are strongly encouraged to share raw data, drafts, and outlines with the teachers, who will use AI agents to draft a report that your team can further revise and refine.
+            <p className="text-base">
+              Teams are <strong>strongly encouraged</strong> to work with the teachers, who can use AI agents to generate <strong>detailed outlines and full report drafts</strong> based on your team's input. This is a powerful way to get a well-structured starting point so you can focus your time on revising, refining, and adding your own analysis and insights.
             </p>
-            <div className="p-4 bg-amber-500/10 border border-amber-500/30 rounded-lg">
-              <h4 className="font-semibold text-amber-700 mb-2">⚠️ Important: 7-Day Advance Notice Required</h4>
+
+            <div className="grid md:grid-cols-2 gap-4">
+              <div className="p-4 bg-background/80 rounded-lg border border-green-500/30">
+                <h4 className="font-semibold mb-2 text-green-700 dark:text-green-400">📤 What You Share with Teachers</h4>
+                <ul className="text-sm text-muted-foreground space-y-1.5">
+                  <li>• Raw data you have collected (fieldwork, surveys, government responses)</li>
+                  <li>• Notes from community engagement and stakeholder interactions</li>
+                  <li>• Early drafts, bullet points, or rough outlines</li>
+                  <li>• Key findings and proposed recommendations</li>
+                  <li>• Your topic focus and research questions</li>
+                </ul>
+              </div>
+              <div className="p-4 bg-background/80 rounded-lg border border-green-500/30">
+                <h4 className="font-semibold mb-2 text-green-700 dark:text-green-400">📥 What Teachers Generate Back</h4>
+                <ul className="text-sm text-muted-foreground space-y-1.5">
+                  <li>• A detailed section-by-section outline aligned with the report rubric</li>
+                  <li>• A full first draft of the ~3,000-word report</li>
+                  <li>• Suggested data visualizations and analysis framings</li>
+                  <li>• Draft of the LegCo panel secretary email appendix</li>
+                </ul>
+              </div>
+            </div>
+
+            <div className="p-4 bg-background/60 rounded-lg border border-green-500/20">
+              <h4 className="font-semibold mb-2">🔁 Your Team's Role After Receiving the Draft</h4>
               <p className="text-sm text-muted-foreground">
-                If you wish to use this AI-assisted drafting option, you must approach the teacher at least 7 days in advance before the report deadline. This ensures adequate time for the AI agents to process your materials and generate a draft for your team to review and revise.
+                The AI-generated draft is a <strong>starting point, not a finished report</strong>. Your team must critically review, fact-check, revise, and add original analysis, voice, and insights. The final submission must reflect your team's own thinking and engagement with the data.
               </p>
+            </div>
+
+            <div className="p-4 bg-amber-500/10 border-2 border-amber-500/40 rounded-lg">
+              <h4 className="font-semibold text-amber-700 dark:text-amber-400 mb-2">⚠️ Important: 7-Day Advance Notice Required</h4>
+              <p className="text-sm">
+                If you wish to use this option, you <strong>must approach the teacher at least 7 days before the report deadline</strong> (i.e., by <strong>May 6, 2026</strong>). This ensures adequate time for the AI agents to process your materials and for your team to review and revise the draft.
+              </p>
+            </div>
+
+            <div className="p-3 bg-muted/50 rounded text-sm text-muted-foreground">
+              💡 <strong>How to request:</strong> Email Dr. Wang or Dr. Wu, or raise the request during a class session or office hours. Share your materials via Google Drive, GitHub, or directly through the project space on this site.
             </div>
           </CardContent>
         </Card>
