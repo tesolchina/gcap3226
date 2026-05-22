@@ -733,6 +733,30 @@ export type Database = {
         }
         Relationships: []
       }
+      traffic_safety_messages: {
+        Row: {
+          author_name: string | null
+          content: string
+          created_at: string
+          id: string
+          role: string
+        }
+        Insert: {
+          author_name?: string | null
+          content: string
+          created_at?: string
+          id?: string
+          role: string
+        }
+        Update: {
+          author_name?: string | null
+          content?: string
+          created_at?: string
+          id?: string
+          role?: string
+        }
+        Relationships: []
+      }
       user_roles: {
         Row: {
           id: string
