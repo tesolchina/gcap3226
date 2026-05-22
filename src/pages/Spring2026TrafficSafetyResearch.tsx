@@ -14,6 +14,7 @@ import {
   EyeOff,
   Mail,
 } from "lucide-react";
+import { TrafficSafetyChat } from "@/components/TrafficSafetyChat";
 
 const DOC_URL =
   "https://docs.google.com/document/d/1uSXKHkR-z-Z9xSkw12_bcVaWQr0GHmagts6mSmqPUxY/edit";
@@ -109,6 +110,9 @@ const Spring2026TrafficSafetyResearch = () => {
             </div>
           </CardContent>
         </Card>
+
+        {/* Shared AI-assisted discussion */}
+        <TrafficSafetyChat />
 
         {/* Open questions */}
         <Card>
