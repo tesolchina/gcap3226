@@ -12,6 +12,7 @@ import {
   MessageSquare,
   Sparkles,
   EyeOff,
+  Mail,
 } from "lucide-react";
 
 const DOC_URL =
