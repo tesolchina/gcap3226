@@ -60,6 +60,7 @@ import Spring2026GovInfoRequests from "./pages/Spring2026GovInfoRequests";
 import Spring2026CuratingPublicData from "./pages/Spring2026CuratingPublicData";
 import Spring2026LegCoSubmission from "./pages/Spring2026LegCoSubmission";
 import CourseTeaser from "./pages/CourseTeaser";
+import Spring2026TrafficSafetyResearch from "./pages/Spring2026TrafficSafetyResearch";
 import { ProtectedArchiveRoute } from "@/components/ProtectedArchiveRoute";
 import { ProtectedPresentationRoute } from "@/components/ProtectedPresentationRoute";
 
@@ -153,6 +154,8 @@ const AppContent = () => {
               <Route path="/spring-2026/resources/curating-public-data" element={<Spring2026CuratingPublicData />} />
               <Route path="/spring-2026/resources" element={<Spring2026Placeholder />} />
               <Route path="/spring-2026/legco-submission" element={<Spring2026LegCoSubmission />} />
+              {/* Unlisted research collaboration page — intentionally not in sidebar */}
+              <Route path="/spring-2026/projects/traffic-safety" element={<Spring2026TrafficSafetyResearch />} />
               <Route path="/spring-2026/feedback" element={<Spring2026Placeholder />} />
             </Routes>
           </main>
