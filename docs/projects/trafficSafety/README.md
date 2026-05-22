@@ -40,7 +40,23 @@ safety at these sites.
 3. Can we pursue a research project leading to practical insights and publishable papers?
 4. How to leverage an AI agent in the workflow
 
-## Gmail correspondence with Tian Wu
+## Gmail correspondence with Tian Wu (taliawu17@hkbu.edu.hk)
 
-Gmail is not yet connected to this project, so the email thread could not be pulled in
-automatically. To include it, connect the **Gmail** connector in Lovable and re-run.
+Recent threads relevant to this project:
+
+- **14 May 2026 — Folder shared: `GCAP3226_2526S2_RoadSafety`**
+  Tian Wu invited Simon to contribute to a shared Google Drive folder for
+  the road-safety strand of the course. This is the working folder for the
+  junction blacksite materials.
+- **14–15 May 2026 — "GCAP 3226 catch up"** (calendar invite, Fri 15 May
+  10:00–11:00 HKT). Sync meeting to align on next steps.
+- **13–14 Feb 2026 — "Recruiting Student Helpers for GCAP3226" / VTL
+  funding report.** Talia recruited student helpers; the helper job scope
+  explicitly includes **road safety** as a task area. Simon shared the
+  VTL funding application and a past report template; a written report is
+  due in May.
+
+> Other Tian Wu threads in the inbox are mostly Google Drive share
+> notifications for week-by-week course materials and meeting accept
+> replies — not project-substantive.
+
