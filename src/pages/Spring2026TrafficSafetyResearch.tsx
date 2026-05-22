@@ -184,6 +184,50 @@ const Spring2026TrafficSafetyResearch = () => {
           </CardContent>
         </Card>
 
+        {/* Email correspondence */}
+        <Card>
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <Mail className="h-5 w-5 text-primary" /> Recent Email with Tian Wu
+            </CardTitle>
+            <CardDescription>
+              taliawu17@hkbu.edu.hk · synthesised from Simon's Gmail
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <ul className="space-y-3 text-sm">
+              <li className="p-3 rounded-md bg-muted/40">
+                <div className="font-medium">
+                  14 May 2026 — Drive folder shared: <em>GCAP3226_2526S2_RoadSafety</em>
+                </div>
+                <div className="text-muted-foreground text-xs mt-1">
+                  Working folder for the road-safety strand; junction blacksite
+                  materials live here.
+                </div>
+              </li>
+              <li className="p-3 rounded-md bg-muted/40">
+                <div className="font-medium">
+                  15 May 2026 — "GCAP 3226 catch up" meeting (10:00–11:00 HKT)
+                </div>
+                <div className="text-muted-foreground text-xs mt-1">
+                  Sync to align on next steps for the collaboration.
+                </div>
+              </li>
+              <li className="p-3 rounded-md bg-muted/40">
+                <div className="font-medium">
+                  13–14 Feb 2026 — Student helpers &amp; VTL funding report
+                </div>
+                <div className="text-muted-foreground text-xs mt-1">
+                  Helper job scope explicitly lists <strong>road safety</strong> as a
+                  task area. VTL funding report due in May — keep deliverables
+                  aligned with what can be cited there.
+                </div>
+              </li>
+            </ul>
+          </CardContent>
+        </Card>
+
+
         {/* Next steps */}
         <Card className="border-primary/30">
           <CardHeader>
