@@ -233,6 +233,13 @@ export type Database = {
             referencedRelation: "mc_questions"
             referencedColumns: ["id"]
           },
+          {
+            foreignKeyName: "mc_responses_question_id_fkey"
+            columns: ["question_id"]
+            isOneToOne: false
+            referencedRelation: "mc_questions_teacher"
+            referencedColumns: ["id"]
+          },
         ]
       }
       messages: {
@@ -777,7 +784,39 @@ export type Database = {
       }
     }
     Views: {
-      [_ in never]: never
+      mc_questions_teacher: {
+        Row: {
+          correct_option: number | null
+          created_at: string | null
+          display_order: number | null
+          id: string | null
+          is_active: boolean | null
+          options: Json | null
+          page_slug: string | null
+          question_text: string | null
+        }
+        Insert: {
+          correct_option?: number | null
+          created_at?: string | null
+          display_order?: number | null
+          id?: string | null
+          is_active?: boolean | null
+          options?: Json | null
+          page_slug?: string | null
+          question_text?: string | null
+        }
+        Update: {
+          correct_option?: number | null
+          created_at?: string | null
+          display_order?: number | null
+          id?: string | null
+          is_active?: boolean | null
+          options?: Json | null
+          page_slug?: string | null
+          question_text?: string | null
+        }
+        Relationships: []
+      }
     }
     Functions: {
       has_role: {
