@@ -12,7 +12,12 @@ Deno.serve(async (req) => {
     const { code, type } = await req.json();
 
     // Determine which secret to check based on type
-    const secretName = type === 'presentation' ? 'presentationCode' : 'secretCode';
+    const secretName =
+      type === 'presentation'
+        ? 'presentationCode'
+        : type === 'traffic'
+        ? 'trafficCode'
+        : 'secretCode';
     const storedSecret = Deno.env.get(secretName);
 
     if (!storedSecret) {

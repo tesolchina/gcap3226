@@ -63,6 +63,7 @@ import CourseTeaser from "./pages/CourseTeaser";
 import Spring2026TrafficSafetyResearch from "./pages/Spring2026TrafficSafetyResearch";
 import { ProtectedArchiveRoute } from "@/components/ProtectedArchiveRoute";
 import { ProtectedPresentationRoute } from "@/components/ProtectedPresentationRoute";
+import { ProtectedTrafficRoute } from "@/components/ProtectedTrafficRoute";
 
 const queryClient = new QueryClient();
 
@@ -155,7 +156,7 @@ const AppContent = () => {
               <Route path="/spring-2026/resources" element={<Spring2026Placeholder />} />
               <Route path="/spring-2026/legco-submission" element={<Spring2026LegCoSubmission />} />
               {/* Unlisted research collaboration page — intentionally not in sidebar */}
-              <Route path="/spring-2026/projects/traffic-safety" element={<Spring2026TrafficSafetyResearch />} />
+              <Route path="/spring-2026/projects/traffic-safety" element={<ProtectedTrafficRoute><Spring2026TrafficSafetyResearch /></ProtectedTrafficRoute>} />
               <Route path="/spring-2026/feedback" element={<Spring2026Placeholder />} />
             </Routes>
           </main>
