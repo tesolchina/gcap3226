@@ -61,9 +61,16 @@ import Spring2026CuratingPublicData from "./pages/Spring2026CuratingPublicData";
 import Spring2026LegCoSubmission from "./pages/Spring2026LegCoSubmission";
 import CourseTeaser from "./pages/CourseTeaser";
 import Spring2026TrafficSafetyResearch from "./pages/Spring2026TrafficSafetyResearch";
+import Fall2026Home from "./pages/Fall2026Home";
+import Fall2026Topics from "./pages/Fall2026Topics";
+import Fall2026Topic from "./pages/Fall2026Topic";
+import Fall2026Tutor from "./pages/Fall2026Tutor";
+import Fall2026Placeholder from "./pages/Fall2026Placeholder";
+import { Fall2026Sidebar } from "@/components/Fall2026Sidebar";
 import { ProtectedArchiveRoute } from "@/components/ProtectedArchiveRoute";
 import { ProtectedPresentationRoute } from "@/components/ProtectedPresentationRoute";
 import { ProtectedTrafficRoute } from "@/components/ProtectedTrafficRoute";
+import { ProtectedSpringArchiveRoute } from "@/components/ProtectedSpringArchiveRoute";
 
 const queryClient = new QueryClient();
 
