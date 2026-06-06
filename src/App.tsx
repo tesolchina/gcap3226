@@ -144,10 +144,11 @@ const AppContent = () => {
             <header className="h-12 sm:h-14 flex items-center justify-between border-b bg-card/50 backdrop-blur-sm sticky top-0 z-10 px-3 sm:px-4">
               <div className="flex items-center min-w-0">
                 <SidebarTrigger className="shrink-0" />
-                <span className="ml-2 sm:ml-4 font-semibold text-primary text-sm sm:text-base truncate">GCAP 3226 - Spring 2026</span>
+                <span className="ml-2 sm:ml-4 font-semibold text-muted-foreground text-sm sm:text-base truncate">GCAP 3226 — Spring 2026 (Archive)</span>
               </div>
               <UserMenu />
             </header>
+            <ProtectedSpringArchiveRoute>
             <Routes>
               <Route path="/spring-2026" element={<Spring2026Home />} />
               <Route path="/spring-2026/assessments" element={<Spring2026Assessments />} />
