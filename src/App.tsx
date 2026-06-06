@@ -66,6 +66,9 @@ import Fall2026Topics from "./pages/Fall2026Topics";
 import Fall2026Topic from "./pages/Fall2026Topic";
 import Fall2026Tutor from "./pages/Fall2026Tutor";
 import Fall2026Placeholder from "./pages/Fall2026Placeholder";
+import Fall2026Week from "./pages/Fall2026Week";
+import Fall2026Weeks from "./pages/Fall2026Weeks";
+import Fall2026Syllabus from "./pages/Fall2026Syllabus";
 import { Fall2026Sidebar } from "@/components/Fall2026Sidebar";
 import { ProtectedArchiveRoute } from "@/components/ProtectedArchiveRoute";
 import { ProtectedPresentationRoute } from "@/components/ProtectedPresentationRoute";
@@ -98,8 +101,9 @@ const AppContent = () => {
               <Route path="/fall-2026/tutor" element={<Fall2026Tutor />} />
               <Route path="/fall-2026/topics" element={<Fall2026Topics />} />
               <Route path="/fall-2026/topics/:slug" element={<Fall2026Topic />} />
-              <Route path="/fall-2026/syllabus" element={<Fall2026Placeholder title="Syllabus" />} />
-              <Route path="/fall-2026/weeks" element={<Fall2026Placeholder title="Weekly Schedule" />} />
+              <Route path="/fall-2026/syllabus" element={<Fall2026Syllabus />} />
+              <Route path="/fall-2026/weeks" element={<Fall2026Weeks />} />
+              <Route path="/fall-2026/weeks/:week" element={<Fall2026Week />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </main>
