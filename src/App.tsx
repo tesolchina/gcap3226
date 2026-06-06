@@ -78,6 +78,35 @@ const AppContent = () => {
   const location = useLocation();
   const isArchiveRoute = location.pathname.startsWith('/fall-2025');
   const isSpring2026Route = location.pathname.startsWith('/spring-2026');
+  const isFall2026Route = location.pathname.startsWith('/fall-2026');
+
+  if (isFall2026Route) {
+    return (
+      <SidebarProvider>
+        <div className="flex min-h-screen w-full">
+          <Fall2026Sidebar />
+          <main className="flex-1">
+            <header className="h-12 sm:h-14 flex items-center justify-between border-b bg-card/50 backdrop-blur-sm sticky top-0 z-10 px-3 sm:px-4">
+              <div className="flex items-center min-w-0">
+                <SidebarTrigger className="shrink-0" />
+                <span className="ml-2 sm:ml-4 font-semibold text-primary text-sm sm:text-base truncate">GCAP 3226 - Fall 2026</span>
+              </div>
+              <UserMenu />
+            </header>
+            <Routes>
+              <Route path="/fall-2026" element={<Fall2026Home />} />
+              <Route path="/fall-2026/tutor" element={<Fall2026Tutor />} />
+              <Route path="/fall-2026/topics" element={<Fall2026Topics />} />
+              <Route path="/fall-2026/topics/:slug" element={<Fall2026Topic />} />
+              <Route path="/fall-2026/syllabus" element={<Fall2026Placeholder title="Syllabus" />} />
+              <Route path="/fall-2026/weeks" element={<Fall2026Placeholder title="Weekly Schedule" />} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </main>
+        </div>
+      </SidebarProvider>
+    );
+  }
 
   // Show sidebar for Fall 2025 archive routes
   if (isArchiveRoute) {
