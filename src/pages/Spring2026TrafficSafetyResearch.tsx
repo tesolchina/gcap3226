@@ -111,8 +111,66 @@ const Spring2026TrafficSafetyResearch = () => {
           </CardContent>
         </Card>
 
+        {/* Latest EDA findings — 5 June 2026 */}
+        <Card className="border-primary/40">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <Sparkles className="h-5 w-5 text-primary" /> Latest EDA Findings — 5 June 2026
+            </CardTitle>
+            <CardDescription>
+              From Yingxin's <em>Accident Blackspots Visualization &amp; Key Findings (0605).ipynb</em>
+              {" "}and <em>Data (0604).xlsx</em> (dropped into the shared Drive folder)
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="space-y-4 text-sm leading-relaxed">
+            <div>
+              <h3 className="font-semibold mb-1">Regional distribution (2015–2024)</h3>
+              <ul className="list-disc pl-5 space-y-1 text-muted-foreground">
+                <li><strong>Yau Tsim Mong</strong> tops Hong Kong with <strong>69</strong> blacksite junctions.</li>
+                <li>Sham Shui Po (47) and Kowloon City (27) follow — Kowloon dominates.</li>
+                <li>NT tier: Tsuen Wan 20, Kwun Tong 15, Sha Tin 14.</li>
+                <li>Outlying districts almost empty (Sai Kung &amp; North = 1 each).</li>
+              </ul>
+            </div>
+            <div>
+              <h3 className="font-semibold mb-1">Temporal pattern</h3>
+              <ul className="list-disc pl-5 space-y-1 text-muted-foreground">
+                <li>Yau Tsim Mong peak: <strong>30 blacksites in 2016</strong>; trough 7 in 2021.</li>
+                <li>All top-5 districts bottomed out in <strong>2021 (COVID effect)</strong>.</li>
+              </ul>
+            </div>
+            <div>
+              <h3 className="font-semibold mb-1">Worst individual junctions (cumulative all-accident)</h3>
+              <ol className="list-decimal pl-5 space-y-1 text-muted-foreground">
+                <li>Chatham Rd S × Austin Rd × Cheong Wan Rd — <strong>222</strong> (peak 39 in Q2 2024)</li>
+                <li>Tsuen Tsing Interchange × Tsuen Wan Rd — <strong>209</strong></li>
+                <li>Waterloo Rd × Argyle St × Princess Margaret Rd — <strong>161</strong></li>
+                <li>Nathan Rd × Mong Kok Rd — <strong>144</strong></li>
+              </ol>
+            </div>
+            <div>
+              <h3 className="font-semibold mb-1">Pedestrian-involved hotspot</h3>
+              <p className="text-muted-foreground">
+                <strong>Kweilin St × Tai Nan St</strong> (Sham Shui Po) — 12 pedestrian accidents
+                YTD by Q3 2015. 8 of top-10 pedestrian-accident junctions are in Kowloon.
+                <strong> Q4 accounts for ~40%</strong> of top-ranked severe accident records.
+              </p>
+            </div>
+            <div className="p-3 rounded-md bg-primary/5 border border-primary/20">
+              <h3 className="font-semibold mb-1">Implications</h3>
+              <ul className="list-disc pl-5 space-y-1 text-muted-foreground">
+                <li>Dataset is now ready for negative-binomial regression against 8 geometry covariates (being collected via Google Maps).</li>
+                <li>Strong Kowloon concentration → use region fixed-effects or hierarchical model.</li>
+                <li>2021 COVID dip is large enough to warrant an indicator or sensitivity check.</li>
+              </ul>
+            </div>
+          </CardContent>
+        </Card>
+
         {/* Shared AI-assisted discussion */}
         <TrafficSafetyChat />
+
+
 
         {/* Open questions */}
         <Card>
