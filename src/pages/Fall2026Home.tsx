@@ -5,6 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { ArrowRight, Sparkles, Users, ClipboardList, Calendar } from "lucide-react";
 import { FALL_2026_TOPICS } from "@/data/fall2026-topics";
 import { Fall2026Chat } from "@/components/Fall2026Chat";
+import Fall2026CourseRoadmap from "@/components/Fall2026CourseRoadmap";
 
 const Fall2026Home = () => {
   return (
@@ -51,6 +52,8 @@ const Fall2026Home = () => {
             </Card>
           </Link>
         </div>
+
+        <Fall2026CourseRoadmap />
 
         <section className="space-y-3">
           <div className="flex items-center justify-between">
