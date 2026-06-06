@@ -132,6 +132,36 @@ export type Database = {
           },
         ]
       }
+      fall2026_chat_messages: {
+        Row: {
+          author_name: string | null
+          content: string
+          created_at: string
+          id: string
+          role: string
+          scope: string
+          topic_slug: string | null
+        }
+        Insert: {
+          author_name?: string | null
+          content: string
+          created_at?: string
+          id?: string
+          role: string
+          scope: string
+          topic_slug?: string | null
+        }
+        Update: {
+          author_name?: string | null
+          content?: string
+          created_at?: string
+          id?: string
+          role?: string
+          scope?: string
+          topic_slug?: string | null
+        }
+        Relationships: []
+      }
       government_messages: {
         Row: {
           content: string

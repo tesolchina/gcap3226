@@ -61,9 +61,16 @@ import Spring2026CuratingPublicData from "./pages/Spring2026CuratingPublicData";
 import Spring2026LegCoSubmission from "./pages/Spring2026LegCoSubmission";
 import CourseTeaser from "./pages/CourseTeaser";
 import Spring2026TrafficSafetyResearch from "./pages/Spring2026TrafficSafetyResearch";
+import Fall2026Home from "./pages/Fall2026Home";
+import Fall2026Topics from "./pages/Fall2026Topics";
+import Fall2026Topic from "./pages/Fall2026Topic";
+import Fall2026Tutor from "./pages/Fall2026Tutor";
+import Fall2026Placeholder from "./pages/Fall2026Placeholder";
+import { Fall2026Sidebar } from "@/components/Fall2026Sidebar";
 import { ProtectedArchiveRoute } from "@/components/ProtectedArchiveRoute";
 import { ProtectedPresentationRoute } from "@/components/ProtectedPresentationRoute";
 import { ProtectedTrafficRoute } from "@/components/ProtectedTrafficRoute";
+import { ProtectedSpringArchiveRoute } from "@/components/ProtectedSpringArchiveRoute";
 
 const queryClient = new QueryClient();
 
@@ -71,6 +78,35 @@ const AppContent = () => {
   const location = useLocation();
   const isArchiveRoute = location.pathname.startsWith('/fall-2025');
   const isSpring2026Route = location.pathname.startsWith('/spring-2026');
+  const isFall2026Route = location.pathname.startsWith('/fall-2026');
+
+  if (isFall2026Route) {
+    return (
+      <SidebarProvider>
+        <div className="flex min-h-screen w-full">
+          <Fall2026Sidebar />
+          <main className="flex-1">
+            <header className="h-12 sm:h-14 flex items-center justify-between border-b bg-card/50 backdrop-blur-sm sticky top-0 z-10 px-3 sm:px-4">
+              <div className="flex items-center min-w-0">
+                <SidebarTrigger className="shrink-0" />
+                <span className="ml-2 sm:ml-4 font-semibold text-primary text-sm sm:text-base truncate">GCAP 3226 - Fall 2026</span>
+              </div>
+              <UserMenu />
+            </header>
+            <Routes>
+              <Route path="/fall-2026" element={<Fall2026Home />} />
+              <Route path="/fall-2026/tutor" element={<Fall2026Tutor />} />
+              <Route path="/fall-2026/topics" element={<Fall2026Topics />} />
+              <Route path="/fall-2026/topics/:slug" element={<Fall2026Topic />} />
+              <Route path="/fall-2026/syllabus" element={<Fall2026Placeholder title="Syllabus" />} />
+              <Route path="/fall-2026/weeks" element={<Fall2026Placeholder title="Weekly Schedule" />} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </main>
+        </div>
+      </SidebarProvider>
+    );
+  }
 
   // Show sidebar for Fall 2025 archive routes
   if (isArchiveRoute) {
@@ -108,10 +144,11 @@ const AppContent = () => {
             <header className="h-12 sm:h-14 flex items-center justify-between border-b bg-card/50 backdrop-blur-sm sticky top-0 z-10 px-3 sm:px-4">
               <div className="flex items-center min-w-0">
                 <SidebarTrigger className="shrink-0" />
-                <span className="ml-2 sm:ml-4 font-semibold text-primary text-sm sm:text-base truncate">GCAP 3226 - Spring 2026</span>
+                <span className="ml-2 sm:ml-4 font-semibold text-muted-foreground text-sm sm:text-base truncate">GCAP 3226 — Spring 2026 (Archive)</span>
               </div>
               <UserMenu />
             </header>
+            <ProtectedSpringArchiveRoute>
             <Routes>
               <Route path="/spring-2026" element={<Spring2026Home />} />
               <Route path="/spring-2026/assessments" element={<Spring2026Assessments />} />
@@ -159,6 +196,7 @@ const AppContent = () => {
               <Route path="/spring-2026/projects/traffic-safety" element={<ProtectedTrafficRoute><Spring2026TrafficSafetyResearch /></ProtectedTrafficRoute>} />
               <Route path="/spring-2026/feedback" element={<Spring2026Placeholder />} />
             </Routes>
+            </ProtectedSpringArchiveRoute>
           </main>
         </div>
       </SidebarProvider>
