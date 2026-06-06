@@ -196,6 +196,7 @@ const AppContent = () => {
               <Route path="/spring-2026/projects/traffic-safety" element={<ProtectedTrafficRoute><Spring2026TrafficSafetyResearch /></ProtectedTrafficRoute>} />
               <Route path="/spring-2026/feedback" element={<Spring2026Placeholder />} />
             </Routes>
+            </ProtectedSpringArchiveRoute>
           </main>
         </div>
       </SidebarProvider>
