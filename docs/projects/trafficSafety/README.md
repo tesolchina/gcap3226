@@ -60,6 +60,68 @@
 
   ---
 
+  ## Student Team Update — 5 June 2026 (EDA findings)
+
+  **Source:** `Accident Blackspots Visualization & Key Findings (0605).ipynb`
+  and `Data (0604).xlsx` uploaded to the shared Drive folder by Yingxin HUANG.
+  No accompanying email — files were dropped directly into the Drive folder
+  `GCAP3226_2526S2_RoadSafety`.
+
+  ### What's in the deliverable
+  - Cleaned 2015–2024 quarterly dataset, with site names normalised to uppercase
+    and missing values flagged.
+  - Two analysis tracks: **all traffic accidents** and **pedestrian-involved
+    accidents**, each split by severity (fatal / serious / slight / total).
+  - EDA notebook with regional breakdowns, top-junction rankings, an
+    interactive Folium map, and per-quarter trend plots.
+
+  ### Key findings (decade 2015–2024)
+
+  **Regional distribution**
+  - **Yau Tsim Mong** has by far the most blacksite junctions (69) — the worst
+    district in Hong Kong over the decade.
+  - **Sham Shui Po (47)** and **Kowloon City (27)** follow; the Kowloon
+    districts dominate the top of the ranking.
+  - NT tier: Tsuen Wan (20), Kwun Tong (15), Sha Tin (14).
+  - Outlying districts almost empty (Sai Kung & North have 1 each, Tuen Mun 2,
+    Tai Po 3) — extremely uneven spatial distribution.
+
+  **Temporal pattern**
+  - Yau Tsim Mong peaked at **30 blacksite junctions in 2016** (single-year
+    max) and bottomed at 7 in 2021.
+  - **All top-5 districts hit their lowest annual figures in 2021**,
+    consistent with COVID-19 traffic suppression.
+
+  **Worst individual junctions (all-accident, cumulative 2015–2024)**
+  1. Chatham Road South × Austin Road × Cheong Wan Road — **222 accidents**
+     (peaked at 39 in Q2 2024)
+  2. Tsuen Tsing Interchange × Tsuen Wan Road — **209** (peak 36 in Q2 2024)
+  3. Waterloo Road × Argyle Street × Princess Margaret Road — **161**
+  4. Nathan Road × Mong Kok Road — **144**
+
+  **Worst pedestrian-involved junctions**
+  - Top hotspot: **Kweilin Street × Tai Nan Street** (Sham Shui Po) — 12
+    pedestrian-involved accidents YTD by Q3 2015.
+  - 8 of the top-10 pedestrian-accident junctions are in Kowloon, 6 of those
+    in Sham Shui Po.
+
+  **Quarterly pattern**
+  - **Q4** accounts for ~40 % of top-ranked severe accident records
+    (both all-accident and pedestrian tracks) → year-end risk clustering.
+
+  ### Implications for next iteration
+  - Cleaned dataset is now ready for **negative binomial regression** against
+    intersection geometry covariates (still being collected via Google Maps
+    observation — 8 independent variables planned).
+  - Strong spatial concentration in Kowloon argues for a region-fixed-effect
+    or hierarchical model rather than a single pooled regression.
+  - The 2021 COVID dip is large enough to merit either an indicator variable
+    or exclusion as a sensitivity check.
+
+
+
+  ---
+
   ## Open Questions from Simon
 
   1. Summary of data-collection progress from government units, plus a timeline
