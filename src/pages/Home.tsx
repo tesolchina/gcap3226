@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 const Home = () => {
   return (
 <div className="min-h-screen bg-gradient-to-br from-background via-accent/10 to-background p-4 sm:p-6 md:p-8">
-      <div className="max-w-4xl mx-auto space-y-8 md:space-y-12">
+      <div className="max-w-6xl mx-auto space-y-8 md:space-y-12">
         {/* Hero Section */}
         <div className="text-center space-y-4 md:space-y-6 py-6 md:py-12">
           <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-primary">
