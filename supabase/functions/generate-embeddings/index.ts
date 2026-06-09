@@ -68,10 +68,41 @@ serve(async (req) => {
   }
 
   try {
-    const { action, content, pageData, projectKnowledgeId } = await req.json();
-    
     const supabaseUrl = Deno.env.get("SUPABASE_URL")!;
     const supabaseServiceKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
+    const supabaseAnonKey = Deno.env.get("SUPABASE_ANON_KEY")!;
+
+    // Require an authenticated teacher for any embedding/upsert action.
+    const authHeader = req.headers.get("Authorization") || "";
+    const jwt = authHeader.replace(/^Bearer\s+/i, "");
+    if (!jwt) {
+      return new Response(
+        JSON.stringify({ error: "Unauthorized" }),
+        { status: 401, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+      );
+    }
+    const userClient = createClient(supabaseUrl, supabaseAnonKey, {
+      global: { headers: { Authorization: `Bearer ${jwt}` } },
+    });
+    const { data: userData, error: userErr } = await userClient.auth.getUser();
+    if (userErr || !userData?.user) {
+      return new Response(
+        JSON.stringify({ error: "Unauthorized" }),
+        { status: 401, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+      );
+    }
+    const { data: isTeacher } = await userClient.rpc("has_role", {
+      _user_id: userData.user.id,
+      _role: "teacher",
+    });
+    if (!isTeacher) {
+      return new Response(
+        JSON.stringify({ error: "Forbidden — teacher role required" }),
+        { status: 403, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+      );
+    }
+
+    const { action, content, pageData, projectKnowledgeId } = await req.json();
     const supabase = createClient(supabaseUrl, supabaseServiceKey);
 
     if (action === "embed_course_content") {
