@@ -70,10 +70,12 @@ Deno.serve(async (req) => {
     if (!LOVABLE_API_KEY) throw new Error("LOVABLE_API_KEY not configured");
 
     let system = BASE_PROMPT;
-    if (scope === "topic" && topic_slug && TOPIC_PROMPTS[topic_slug]) {
+    // Only allow topic_slug from server-side allowlist — never interpolate caller input
+    // into the system prompt (prompt-injection defence).
+    if (scope === "topic" && typeof topic_slug === "string" && TOPIC_PROMPTS[topic_slug]) {
       system += "\n\n" + TOPIC_PROMPTS[topic_slug];
-    } else if (scope === "topic" && topic_slug) {
-      system += `\n\nTopic context: ${topic_slug} (Fall 2026 project topic).`;
+    } else if (scope === "topic") {
+      system += "\n\nTopic context: General Fall 2026 project.";
     }
 
     const resp = await fetch(
