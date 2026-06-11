@@ -3,14 +3,24 @@ import { Link } from "react-router-dom";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { ArrowLeft, ExternalLink, Info, Users, Calendar, Target, Sparkles, FolderOpen, AlertTriangle, MapPin, FileSpreadsheet } from "lucide-react";
+import { ArrowLeft, ExternalLink, AlertTriangle, MapPin, FileSpreadsheet, Users, Calendar, Target, FolderOpen, Sparkles } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import ProjectMembership from "@/components/ProjectMembership";
 import ProjectSessions from "@/components/ProjectSessions";
 import ProjectMilestones from "@/components/ProjectMilestones";
 import ProjectFileUpload from "@/components/ProjectFileUpload";
 import { Fall2026Chat } from "@/components/Fall2026Chat";
+
+function Section({ icon: Icon, title, children }: { icon: any; title: string; children: React.ReactNode }) {
+  return (
+    <Card className="p-4 sm:p-6">
+      <h2 className="text-lg font-semibold mb-3 flex items-center gap-2">
+        <Icon className="h-4 w-4 text-primary" /> {title}
+      </h2>
+      {children}
+    </Card>
+  );
+}
 
 const TOPIC_SLUG = "fall2026-road-safety";
 
