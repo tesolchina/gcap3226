@@ -24,8 +24,46 @@ Style:
 - If a student shares sensitive info, gently remind them this thread is publicly visible.`;
 
 const TOPIC_PROMPTS: Record<string, string> = {
-  "road-safety":
-    "Topic context: Road safety in Hong Kong — accident blackspots, junction geometry, Transport Department open data, negative-binomial regression. Build on the Spring 2026 cohort's findings where helpful.",
+  "road-safety": `Topic context: ROAD SAFETY — Hong Kong accident blackspots project.
+
+This project is HANDED DOWN from the Spring 2026 TA team (Yingxin HUANG, Zehua WANG) supervised by Dr Tian (Talia) WU. The dataset is already cleaned. Fall 2026 students push the analysis further.
+
+Datasets (in shared Drive folder "GCAP3226_2526S2_RoadSafety"):
+- Data (0604).xlsx — three sheets:
+  • total_X&Y: annual data for top 15 blackspots × 8 independent variables (regression-ready)
+  • Data Statistics: annual stats for all blackspots
+  • Original data: 40 consolidated Transport Department files 2015–2024, names UPPERCASED
+- Accident Blackspots Visualization & Key Findings (0605).ipynb — full EDA, runs standalone
+- Junction Blackspot list 2004–2024 (yearly source files)
+- psi-hkpf-ts-sc.json (HKPF signal-controlled junction data)
+- 2019 reference paper PDF to replicate methodology
+
+Key established facts students MUST know:
+1. Quarterly Transport Dept figures are CUMULATIVE-TO-DATE within the year (Q4 = full-year total), NOT single-quarter. Yingxin's "Rolling Window Explanation" sheet documents this.
+2. 21 junctions were selected (≥5 years as blackspot AND >50 pre-imputation accidents). Talia approved exploring relationships for these 21.
+3. Top 15 of those 21 were used in the latest regression sheet — Talia explicitly asked WHY top 15 instead of 21; this is an OPEN QUESTION for students to investigate.
+4. 8 independent variables were collected manually via Google Maps observation per junction (geometry attributes).
+5. Missing values currently zero-filled. Alternative: threshold-based imputation per HK Class A blackspot rule (≥6 pedestrian-injury or ≥9 injury accidents per year).
+6. Site names standardised to UPPERCASE to prevent duplicate matches.
+7. Models tried: negative binomial / Poisson regression on accident counts.
+8. 2021 shows a COVID dip — handle via indicator variable or sensitivity check.
+
+Anchor hotspots (2015–2024 cumulative):
+- Chatham Rd S × Austin Rd × Cheong Wan Rd (Yau Tsim Mong) — 222 accidents, RIGHT OUTSIDE PolyU. Talia specifically suggested this as a Fall 2026 sub-project: combine with traffic volume data.
+- Tsuen Tsing Interchange × Tsuen Wan Rd — 209
+- Waterloo Rd × Argyle St × Princess Margaret Rd — 161
+- Nathan Rd × Mong Kok Rd — 144
+- Kweilin St × Tai Nan St (Sham Shui Po) — worst PEDESTRIAN-involved hotspot, narrow one-way junction
+Regional: Yau Tsim Mong (69 blackspots), Sham Shui Po (47), Kowloon City (27) dominate.
+
+Suggested student sub-questions:
+(a) Extend negative-binomial model from top 15 to full 21 junctions — answer Talia's open question.
+(b) Chatham Rd South case study: add traffic-volume covariate.
+(c) Pedestrian-injury sub-model around Kweilin × Tai Nan.
+(d) Re-run sensitivity excluding 2020–2021 COVID years.
+(e) Test threshold-based imputation vs zero-fill.
+
+When students ask, be SPECIFIC about what data exists, which file it's in, and which earlier finding to build on. Cite Talia and the Spring 2026 TA team by name.`,
   typhoon:
     "Topic context: Typhoon warning signals and public response in Hong Kong — HKO signal history, school/work suspension policy, economic impact estimates.",
   "ev-charger":
