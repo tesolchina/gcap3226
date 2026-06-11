@@ -64,6 +64,7 @@ import Spring2026TrafficSafetyResearch from "./pages/Spring2026TrafficSafetyRese
 import Fall2026Home from "./pages/Fall2026Home";
 import Fall2026Topics from "./pages/Fall2026Topics";
 import Fall2026Topic from "./pages/Fall2026Topic";
+import Fall2026RoadSafetyProject from "./pages/Fall2026RoadSafetyProject";
 import Fall2026Tutor from "./pages/Fall2026Tutor";
 import Fall2026Placeholder from "./pages/Fall2026Placeholder";
 import Fall2026Week from "./pages/Fall2026Week";
@@ -100,6 +101,7 @@ const AppContent = () => {
               <Route path="/fall-2026" element={<Fall2026Home />} />
               <Route path="/fall-2026/tutor" element={<Fall2026Tutor />} />
               <Route path="/fall-2026/topics" element={<Fall2026Topics />} />
+              <Route path="/fall-2026/topics/road-safety" element={<Fall2026RoadSafetyProject />} />
               <Route path="/fall-2026/topics/:slug" element={<Fall2026Topic />} />
               <Route path="/fall-2026/syllabus" element={<Fall2026Syllabus />} />
               <Route path="/fall-2026/weeks" element={<Fall2026Weeks />} />
