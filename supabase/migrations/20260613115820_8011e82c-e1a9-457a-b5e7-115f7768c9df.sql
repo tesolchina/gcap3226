@@ -1,0 +1,2 @@
+DROP POLICY IF EXISTS "Anyone can insert user messages" ON public.fall2026_chat_messages;
+CREATE POLICY "Anyone can insert chat messages" ON public.fall2026_chat_messages FOR INSERT WITH CHECK (role IN ('user','assistant'));
