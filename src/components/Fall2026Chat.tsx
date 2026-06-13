@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Badge } from "@/components/ui/badge";
-import { MessageSquare, Send, Sparkles, User } from "lucide-react";
+import { MessageSquare, Send, Sparkles, User, Wand2 } from "lucide-react";
 import { toast } from "sonner";
 
 type Msg = {
@@ -93,7 +93,7 @@ export function Fall2026Chat({ scope, topicSlug, title, description }: Props) {
     setAuthorName(trimmed);
   };
 
-  const send = async () => {
+  const postMessage = async () => {
     const text = input.trim();
     if (!text || sending) return;
     if (text.length > MAX_LENGTH) {
@@ -106,8 +106,6 @@ export function Fall2026Chat({ scope, topicSlug, title, description }: Props) {
     }
 
     setSending(true);
-    setInput("");
-
     const { error: insertErr } = await supabase
       .from("fall2026_chat_messages")
       .insert({
@@ -117,15 +115,24 @@ export function Fall2026Chat({ scope, topicSlug, title, description }: Props) {
         author_name: authorName,
         content: text,
       });
+    setSending(false);
     if (insertErr) {
       toast.error(insertErr.message);
-      setSending(false);
       return;
     }
+    setInput("");
+  };
 
-    const history = [...messages, { role: "user", content: `${authorName}: ${text}` }]
+  const requestAI = async () => {
+    if (sending) return;
+    if (messages.length === 0) {
+      toast.error("Post a message first");
+      return;
+    }
+    setSending(true);
+    const history = messages
       .slice(-20)
-      .map((m: any) => ({
+      .map((m) => ({
         role: m.role,
         content:
           m.role === "user" && m.author_name && !m.content.startsWith(m.author_name)
@@ -302,11 +309,11 @@ export function Fall2026Chat({ scope, topicSlug, title, description }: Props) {
           <div ref={endRef} />
         </div>
 
-        <div className="flex gap-2">
+        <div className="space-y-2">
           <Textarea
             placeholder={
               authorName
-                ? "Ask the AI tutor anything…"
+                ? "Leave a message for the team…"
                 : "Set a display name above to start."
             }
             value={input}
@@ -314,16 +321,36 @@ export function Fall2026Chat({ scope, topicSlug, title, description }: Props) {
             onKeyDown={(e) => {
               if (e.key === "Enter" && !e.shiftKey) {
                 e.preventDefault();
-                send();
+                postMessage();
               }
             }}
             disabled={!authorName || sending}
             maxLength={MAX_LENGTH}
             className="text-base min-h-[60px]"
           />
-          <Button onClick={send} disabled={!authorName || sending || !input.trim()}>
-            <Send className="h-4 w-4" />
-          </Button>
+          <div className="flex flex-wrap gap-2 justify-between">
+            <p className="text-xs text-muted-foreground self-center">
+              Posting won't trigger the AI. Click "Ask AI" when you want a response.
+            </p>
+            <div className="flex gap-2 ml-auto">
+              <Button
+                onClick={postMessage}
+                disabled={!authorName || sending || !input.trim()}
+                variant="secondary"
+              >
+                <Send className="h-4 w-4" />
+                Post
+              </Button>
+              <Button
+                onClick={requestAI}
+                disabled={sending || messages.length === 0}
+                title="Ask the AI tutor to respond to the conversation so far"
+              >
+                <Wand2 className="h-4 w-4" />
+                Ask AI
+              </Button>
+            </div>
+          </div>
         </div>
       </CardContent>
     </Card>
