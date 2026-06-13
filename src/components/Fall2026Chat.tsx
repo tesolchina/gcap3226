@@ -93,7 +93,7 @@ export function Fall2026Chat({ scope, topicSlug, title, description }: Props) {
     setAuthorName(trimmed);
   };
 
-  const send = async () => {
+  const postMessage = async () => {
     const text = input.trim();
     if (!text || sending) return;
     if (text.length > MAX_LENGTH) {
@@ -106,8 +106,6 @@ export function Fall2026Chat({ scope, topicSlug, title, description }: Props) {
     }
 
     setSending(true);
-    setInput("");
-
     const { error: insertErr } = await supabase
       .from("fall2026_chat_messages")
       .insert({
@@ -117,15 +115,24 @@ export function Fall2026Chat({ scope, topicSlug, title, description }: Props) {
         author_name: authorName,
         content: text,
       });
+    setSending(false);
     if (insertErr) {
       toast.error(insertErr.message);
-      setSending(false);
       return;
     }
+    setInput("");
+  };
 
-    const history = [...messages, { role: "user", content: `${authorName}: ${text}` }]
+  const requestAI = async () => {
+    if (sending) return;
+    if (messages.length === 0) {
+      toast.error("Post a message first");
+      return;
+    }
+    setSending(true);
+    const history = messages
       .slice(-20)
-      .map((m: any) => ({
+      .map((m) => ({
         role: m.role,
         content:
           m.role === "user" && m.author_name && !m.content.startsWith(m.author_name)
