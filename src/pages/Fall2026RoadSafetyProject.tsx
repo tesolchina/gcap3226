@@ -181,12 +181,24 @@ export default function Fall2026RoadSafetyProject() {
               </li>
             ))}
           </ul>
-          <div className="pt-3">
-            <Button variant="outline" size="sm" asChild>
-              <a href="https://drive.google.com/drive/folders/131o-54qu9lQc2R3HzxUyBqD4p07F_jg9" target="_blank" rel="noreferrer">
-                Open shared Drive folder <ExternalLink className="h-3 w-3 ml-1" />
-              </a>
-            </Button>
+          <div className="pt-3 space-y-2">
+            <p className="text-xs font-medium text-foreground">Spring 2026 handover files (mirrored — direct download, no Drive login needed):</p>
+            <ul className="space-y-1.5 text-sm">
+              {HANDOVER_FILES.map((f) => (
+                <li key={f.path} className="flex items-start gap-2">
+                  <ExternalLink className="h-3.5 w-3.5 text-primary mt-0.5 flex-shrink-0" />
+                  <a
+                    href={`https://vyaltlvpzypolkqutkct.supabase.co/storage/v1/object/public/project-files/fall2026/road-safety/${f.path}`}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="text-primary hover:underline break-all"
+                  >
+                    {f.label}
+                  </a>
+                  <span className="text-xs text-muted-foreground whitespace-nowrap">· {f.size}</span>
+                </li>
+              ))}
+            </ul>
           </div>
         </SectionCard>
 
