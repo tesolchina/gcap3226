@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Badge } from "@/components/ui/badge";
-import { MessageSquare, Send, Sparkles, User } from "lucide-react";
+import { MessageSquare, Send, Sparkles, User, Wand2 } from "lucide-react";
 import { toast } from "sonner";
 
 type Msg = {
