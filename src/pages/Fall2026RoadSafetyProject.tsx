@@ -36,6 +36,19 @@ const DATA_SOURCES = [
   "2019 reference paper — Designs for Safer Signal-Controlled Intersections (PDF in Drive)",
 ];
 
+const HANDOVER_FILES = [
+  { path: "Data_0604.xlsx", label: "Data (0604).xlsx — regression-ready dataset", size: "831 KB" },
+  { path: "Accident_Blackspots_Visualization_and_Key_Findings_0605.ipynb", label: "Accident Blackspots Visualization & Key Findings (0605).ipynb", size: "1.3 MB" },
+  { path: "Annual_Accident_Statistics_2015_2024_0601.xlsx", label: "Annual Accident Statistics 2015–2024 (0601).xlsx", size: "764 KB" },
+  { path: "Data_top9_Junction_2015_2024.xlsx", label: "Data — top 9 junctions (2015–2024).xlsx", size: "733 KB" },
+  { path: "2014_2024_traffic_blackspots_stats.xlsx", label: "2014–2024 交通黑点数据统计.xlsx", size: "32 KB" },
+  { path: "Research_Progress_Summary_0605.md", label: "Research Progress Summary (0605).md", size: "2 KB" },
+  { path: "Project_Target.pdf", label: "Project Target (exported PDF)", size: "31 KB" },
+  { path: "2019_Designs_for_Safer_Signal-Controlled_Intersections.pdf", label: "2019 reference paper — Designs for Safer Signal-Controlled Intersections.pdf", size: "2.0 MB" },
+  { path: "psi-hkpf-ts-sc.json", label: "HKPF signal-controlled junction data (psi-hkpf-ts-sc.json)", size: "5 KB" },
+  { path: "existing_visualization.txt", label: "existing_visualization.txt", size: "<1 KB" },
+];
+
 function SectionCard({ icon: Icon, title, children }: { icon: any; title: string; children: React.ReactNode }) {
   return (
     <Card className="p-4 sm:p-6">
