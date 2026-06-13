@@ -36,6 +36,19 @@ const DATA_SOURCES = [
   "2019 reference paper — Designs for Safer Signal-Controlled Intersections (PDF in Drive)",
 ];
 
+const HANDOVER_FILES = [
+  { path: "Data_0604.xlsx", label: "Data (0604).xlsx — regression-ready dataset", size: "831 KB" },
+  { path: "Accident_Blackspots_Visualization_and_Key_Findings_0605.ipynb", label: "Accident Blackspots Visualization & Key Findings (0605).ipynb", size: "1.3 MB" },
+  { path: "Annual_Accident_Statistics_2015_2024_0601.xlsx", label: "Annual Accident Statistics 2015–2024 (0601).xlsx", size: "764 KB" },
+  { path: "Data_top9_Junction_2015_2024.xlsx", label: "Data — top 9 junctions (2015–2024).xlsx", size: "733 KB" },
+  { path: "2014_2024_traffic_blackspots_stats.xlsx", label: "2014–2024 交通黑点数据统计.xlsx", size: "32 KB" },
+  { path: "Research_Progress_Summary_0605.md", label: "Research Progress Summary (0605).md", size: "2 KB" },
+  { path: "Project_Target.pdf", label: "Project Target (exported PDF)", size: "31 KB" },
+  { path: "2019_Designs_for_Safer_Signal-Controlled_Intersections.pdf", label: "2019 reference paper — Designs for Safer Signal-Controlled Intersections.pdf", size: "2.0 MB" },
+  { path: "psi-hkpf-ts-sc.json", label: "HKPF signal-controlled junction data (psi-hkpf-ts-sc.json)", size: "5 KB" },
+  { path: "existing_visualization.txt", label: "existing_visualization.txt", size: "<1 KB" },
+];
+
 function SectionCard({ icon: Icon, title, children }: { icon: any; title: string; children: React.ReactNode }) {
   return (
     <Card className="p-4 sm:p-6">
@@ -181,12 +194,24 @@ export default function Fall2026RoadSafetyProject() {
               </li>
             ))}
           </ul>
-          <div className="pt-3">
-            <Button variant="outline" size="sm" asChild>
-              <a href="https://drive.google.com/drive/folders/131o-54qu9lQc2R3HzxUyBqD4p07F_jg9" target="_blank" rel="noreferrer">
-                Open shared Drive folder <ExternalLink className="h-3 w-3 ml-1" />
-              </a>
-            </Button>
+          <div className="pt-3 space-y-2">
+            <p className="text-xs font-medium text-foreground">Spring 2026 handover files (mirrored — direct download, no Drive login needed):</p>
+            <ul className="space-y-1.5 text-sm">
+              {HANDOVER_FILES.map((f) => (
+                <li key={f.path} className="flex items-start gap-2">
+                  <ExternalLink className="h-3.5 w-3.5 text-primary mt-0.5 flex-shrink-0" />
+                  <a
+                    href={`https://vyaltlvpzypolkqutkct.supabase.co/storage/v1/object/public/project-files/fall2026/road-safety/${f.path}`}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="text-primary hover:underline break-all"
+                  >
+                    {f.label}
+                  </a>
+                  <span className="text-xs text-muted-foreground whitespace-nowrap">· {f.size}</span>
+                </li>
+              ))}
+            </ul>
           </div>
         </SectionCard>
 
