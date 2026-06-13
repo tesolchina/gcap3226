@@ -58,12 +58,22 @@ Regional: Yau Tsim Mong (69 blackspots), Sham Shui Po (47), Kowloon City (27) do
 
 Suggested student sub-questions:
 (a) Extend negative-binomial model from top 15 to full 21 junctions — answer Talia's open question.
-(b) Chatham Rd South case study: add traffic-volume covariate.
+(b) Chatham Rd South case study: add traffic-volume covariate. (Talia explicitly hand-flagged this as a Fall 2026 student task.)
 (c) Pedestrian-injury sub-model around Kweilin × Tai Nan.
 (d) Re-run sensitivity excluding 2020–2021 COVID years.
 (e) Test threshold-based imputation vs zero-fill.
 
-When students ask, be SPECIFIC about what data exists, which file it's in, and which earlier finding to build on. Cite Talia and the Spring 2026 TA team by name.`,
+Email-thread timeline (May–Jun 2026, "Update on 2004–2024 Traffic Accident Blackspot Data from Transport Department, HKSAR"):
+- 8 May: Yingxin confirms TD released 2004–2024 data (district × intersection × severity × all-accidents vs pedestrian-involved). Team commits to NB regression per Wong (2019). Talia asks for Jupyter/R-Markdown writeup.
+- 13 May: Zehua flags TD only provides accident counts for years a junction was on the blacklist → continuity gap. Talia notes TD data comes as PDFs (2004–2009) and Excel (2010+), and that each calendar year has 4 rolling-window documents (Apr–Mar, Jul–Jun, Oct–Sep, Jan–Dec). Asks which window will be used and how time/region enter the model.
+- 14 May: Drive folder GCAP3226_2526S2_RoadSafety shared with Simon.
+- 22 May meeting: Talia's action list = (EDA: data-availability viz, 9-line chart, district frequency of blackspots) + (Core: replicate Wong 2019 with 10-yr total as y, NB regression) + (Further enquiry to TD for historical accidents).
+- 31 May: Zehua reports 10-year-total NB regression did NOT converge; used statsmodels GLM NegativeBinomial fallback.
+- 1 Jun: Talia diagnoses — only 9 data points when using 10-yr totals → pivot to ANNUAL data, more junctions, add region+year columns. Calls Wong (2019) "very unclear and thus suspicious" because it never states its sample size.
+- 2 Jun: Yingxin establishes the canonical interpretation — TD quarterly numbers are CUMULATIVE-TO-DATE within the year (Q4 = full annual total), not single-quarter; sees "Rolling Window Explanation" sheet. Selects 21 junctions (≥5 yrs blackspot, >50 accidents). Sets imputation + UPPERCASE normalisation rules.
+- 5–10 Jun: Talia approves the 21-junction scope; asks why regression sheet narrowed to top 15 (OPEN QUESTION). Hands modelling to Zehua. Explicitly hands Chatham Rd S × Austin Rd × Cheong Wan Rd (PolyU junction) + traffic-volume integration to "GCAP3226 students next semester".
+
+When students ask, be SPECIFIC about what data exists, which file it's in, which decision was already made, and which earlier finding to build on. Cite Talia, Yingxin (Kelly) and Zehua by name; remind students of the cumulative-quarter rule and the rolling-window caveat whenever they touch raw TD files.`,
   typhoon:
     "Topic context: Typhoon warning signals and public response in Hong Kong — HKO signal history, school/work suspension policy, economic impact estimates.",
   "ev-charger":
